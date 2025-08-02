@@ -1,6 +1,7 @@
 [project]
 name = "querynonomicon"
 version = "0.3.0"
+requires-python = ">=3.12"
 dependencies = [
     "adbc-driver-sqlite",
     "click",
@@ -17,11 +18,11 @@ dependencies = [
 ]
 
 [tool.mccole]
-skips = ["bin", "templates"]
-links = "links.md"
+skips = ["CONTRIBUTING.md", "bin", "db", "extras", "templates"]
 
 [tool.mccole.renames]
-"CODE_OF_CONDUCT.md" = "code_of_conduct.md"
-"CONTRIBUTING.md" = "contributing.md"
-"LICENSE.md" = "license.md"
-"README.md" = "index.md"
+"README.md" = ""
+"CODE_OF_CONDUCT.md" = "conduct"
+"LICENSE.md" = "license"
+"bibliography.md" = "bibliography"
+"glossary.md" = "glossary"

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Glossary</title>
+<link href="../static/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../static/page.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav>
+<a href="../">Home</a>
+      ·
+      <span class="dropdown">
+<a href="#">Lessons</a>
+<span class="dropdown-content">
+<a href="../01_intro/">Introduction</a>
+<a href="../02_core/">Core Features</a>
+<a href="../03_tools/">Tools</a>
+<a href="../04_python/">Python</a>
+<a href="../05_advanced/">Advanced Features</a>
+<a href="../06_r/">R</a>
+<a href="../07_psql/">PostgreSQL</a>
+<a href="../08_finale/">Conclusion</a>
+</span>
+</span>
+      ·
+      <span class="dropdown">
+<a href="#">Extras</a>
+<span class="dropdown-content">
+<a href="../license/">License</a>
+<a href="../conduct/">Code of Conduct</a>
+<a href="../bibliography/">Bibliography</a>
+<a href="../glossary/">Glossary</a>
+</span>
+</span>
+</nav>
+<main>
+<h1>Glossary</h1>
+<h2>1</h2>
+<dl>
+<dt><span id="1_to_1">1-to-1 relation</span></dt>
+<dd>A relationship between two tables in which each record from the first table
+matches exactly one record from the second and vice versa.</dd>
+<dt><span id="1_to_many">1-to-many relation</span></dt>
+<dd>A relationship between two tables in which each record from the first table
+matches zero or more records from the second,
+but each record from the second table matches exactly one record from the first.</dd>
+</dl>
+<h2>A</h2>
+<dl>
+<dt><span id="admin_command">administration command</span></dt>
+<dd>A command for managing a database that isn't part of the SQL standard.
+Each <a href="../glossary/#rdbms">RDBMS</a> has its own idiosyncratic admin commands.</dd>
+<dt><span id="aggregation">aggregation</span></dt>
+<dd>Combining several values to produce one.</dd>
+<dt><span id="aggregation_func">aggregation function</span></dt>
+<dd>A function used to produce one value from many,
+such as maximum or addition.</dd>
+<dt><span id="alias">alias</span></dt>
+<dd>An alternate name used temporarily for a table or column.</dd>
+<dt><span id="atomic">atomic</span></dt>
+<dd>An operation that cannot be broken into smaller operations.</dd>
+<dt><span id="autoincrement">autoincrement</span></dt>
+<dd>Automatically add one to a value.</dd>
+</dl>
+<h2>B</h2>
+<dl>
+<dt><span id="b_tree">B-tree</span></dt>
+<dd>A self-balancing tree data structure that allows search, insertion, and deletion
+in logarithmic time.</dd>
+<dt><span id="base_case">base case</span></dt>
+<dd>A starting point for recursion that does not depend on previous recursive calculations.</dd>
+</dl>
+<p><span id="blob">Binary Large Object (blob)</span>
+    Bytes that are handled as-is rather than being interpreted as numbers, text, or other data types.</p>
+<h2>C</h2>
+<dl>
+<dt><span id="client_server_db">client-server database</span></dt>
+<dd>A database that is managed by its own server process
+that clients interact with through network connections.
+The term is used in contrast to <a href="../glossary/#local_db">local database</a>.</dd>
+<dt><span id="cross_join">cross join</span></dt>
+<dd>A join that creates the cross-product of rows from two tables.</dd>
+</dl>
+<p><span id="cte">common table expression (CTE)</span>
+    A temporary table created at the start of a query,
+    usually to simplify writing the query.</p>
+<dl>
+<dt><span id="consistent">consistent</span></dt>
+<dd>A state in which all constraints are satisfied,
+e.g.,
+all columns contain allowed values
+and all foreign keys refer to primary keys.</dd>
+<dt><span id="correlated_subquery">correlated subquery</span></dt>
+<dd>A subquery that depends on a value or values from the enclosing query,
+and which must therefore be executed once for each of those values.</dd>
+</dl>
+<p><span id="csv">comma-separated values (CSV)</span>
+    A text format for tabular data that uses commas to separate columns.</p>
+<dl>
+<dt><span id="cursor">cursor</span></dt>
+<dd>A reference to the current location in the results of an ongoing query.</dd>
+</dl>
+<h2>D</h2>
+<dl>
+<dt><span id="data_migration">data migration</span></dt>
+<dd>To move data from one form to another,
+e.g.,
+from one set of tables to a new set
+or from one DBMS to another.</dd>
+<dt><span id="database">database</span></dt>
+<dd>A collection of data that can be searched and retrieved.</dd>
+</dl>
+<p><span id="dbms">database management system (DBMS)</span>
+    A program that manages a particular kind of database.</p>
+<dl>
+<dt><span id="denormalization">denormalization</span></dt>
+<dd>To deliberately introduce duplication or other violate normal forms,
+typically to improve query performance.</dd>
+<dt><span id="durable">durable</span></dt>
+<dd>Guaranteed to survive shutdown and restart.</dd>
+</dl>
+<h2>E</h2>
+<dl>
+<dt><span id="er_diagram">entity-relationship diagram</span></dt>
+<dd>A graphical depiction of the relationships between tables in a database.</dd>
+<dt><span id="exclusive_or">exclusive or</span></dt>
+<dd>A Boolean operation that is true if either but not both of its conditions are true.
+SQL does not provide an exclusive or operator,
+but the same result can be achieved using operators it has.</dd>
+<dt><span id="expression">expression</span></dt>
+<dd>A part of a program that produces a value, such as <code>1+2</code>.</dd>
+</dl>
+<h2>F</h2>
+<dl>
+<dt><span id="filter">filter</span></dt>
+<dd>To select records based on whether they pass some Boolean test.</dd>
+<dt><span id="foreign_key">foreign key</span></dt>
+<dd>A value in one table that identifies a primary key in another table.</dd>
+<dt><span id="full_outer_join">full outer join</span></dt>
+<dd>A join that produces the union of a left outer join and a right outer join.</dd>
+</dl>
+<h2>G</h2>
+<dl>
+<dt><span id="group">group</span></dt>
+<dd>A set of records that share a common property,
+such as having the same value in a particular column.</dd>
+</dl>
+<h2>H</h2>
+<h2>I</h2>
+<dl>
+<dt><span id="in_memory_db">in-memory database</span></dt>
+<dd>A database that is stored in memory rather than on disk.</dd>
+<dt><span id="inclusive_or">inclusive or</span></dt>
+<dd>A Boolean operator that is true if either or both of its conditions are true.
+SQL's <code>or</code> is inclusive.</dd>
+<dt><span id="index">index</span></dt>
+<dd>An auxiliary data structure that enables faster access to records.</dd>
+<dt><span id="infinite_recursion">infinite recursion</span></dt>
+<dd>See "infinite recursion".</dd>
+<dt><span id="isolated">isolated</span></dt>
+<dd>The appearance of having executed in an otherwise-idle system.</dd>
+</dl>
+<h2>J</h2>
+<dl>
+<dt><span id="join">join</span></dt>
+<dd>To combine records from two tables.</dd>
+<dt><span id="join_condition">join condition</span></dt>
+<dd>The criteria used to decide which rows from each table in a join are combined.</dd>
+<dt><span id="join_table">join table</span></dt>
+<dd>A table that exists solely to enable information from two tables to be connected.</dd>
+</dl>
+<p><span id="json">JavaScript Object Notation (JSON)</span>
+    A text format for representing numbers, strings, lists, and key-value maps.</p>
+<h2>K</h2>
+<h2>L</h2>
+<dl>
+<dt><span id="left_outer_join">left outer join</span></dt>
+<dd>A join that is guaranteed to keep all rows from the first (left) table.
+Columns from the right table are filled with actual values if available
+or with null otherwise.</dd>
+<dt><span id="local_db">local database</span></dt>
+<dd>A database that is stored on the same computer as the application using it
+and accessed directly through function calls.
+The term is used in contrast to <a href="../glossary/#client_server_db">client-server database</a>.</dd>
+</dl>
+<h2>M</h2>
+<dl>
+<dt><span id="many_to_many">many-to-many relation</span></dt>
+<dd>A relationship between two tables in which each record from the first table
+may match zero or more records from the second and vice versa.</dd>
+<dt><span id="materialized_view">materialized view</span></dt>
+<dd>A view that is stored on disk and updated on demand.</dd>
+</dl>
+<h2>N</h2>
+<dl>
+<dt><span id="normal_form">normal form</span></dt>
+<dd>One of several (loosely defined) rules for organizing data in tables.</dd>
+<dt><span id="nosql">NoSQL database</span></dt>
+<dd>Any database that doesn't use the relational model.</dd>
+<dt><span id="null">null</span></dt>
+<dd>A special value representing "not known".</dd>
+</dl>
+<h2>O</h2>
+<p><span id="orm">object-relational mapper (ORM)</span>
+    A library that translates objects in a program into database queries
+    and the results of those queries back into objects.</p>
+<h2>P</h2>
+<dl>
+<dt><span id="path_expression">path expression</span></dt>
+<dd>An expression identifying an element or a set of elements in a JSON structure.</dd>
+<dt><span id="primary_key">primary key</span></dt>
+<dd>A value or values in a database table that uniquely identifies each record in that table.</dd>
+<dt><span id="privilege">privilege</span></dt>
+<dd>The ability to take an action such as querying a table or deleting records.</dd>
+</dl>
+<h2>Q</h2>
+<dl>
+<dt><span id="query">query</span></dt>
+<dd>A command to perform some operation in a database (typically data retrieval).</dd>
+<dt><span id="query_builder">query builder</span></dt>
+<dd>A library that constructs objects representing the parts of a query
+and then translates those objects into a SQL string.</dd>
+</dl>
+<h2>R</h2>
+<dl>
+<dt><span id="recursive_cte">recursive CTE</span></dt>
+<dd>A common table expression that refers to itself.
+Every recursive CTE must have a base case and a recursive case.</dd>
+<dt><span id="recursive_case">recursive case</span></dt>
+<dd>The second or subsequent step in self-referential accumulation of data.</dd>
+</dl>
+<p><span id="rdbms">relational database management system (RDBMS)</span>
+    A database management system that stores data in tables with columns and rows.</p>
+<dl>
+<dt><span id="right_outer_join">right outer join</span></dt>
+<dd>A join that is guaranteed to keep all rows from the second (right) table.
+Columns from the left table are filled with actual values if available
+or with null otherwise.
+SQLite does not implement right outer join
+since its behavior can be reproduced by swapping the order of the tables
+and using a left outer join.</dd>
+<dt><span id="role">role</span></dt>
+<dd>A collection of <a href="../glossary/#privilege">privileges</a> in a database or other system
+that defines the set of operations a class of users can perform.</dd>
+</dl>
+<h2>S</h2>
+<dl>
+<dt><span id="statement">statement</span></dt>
+<dd>A part of a program that doesn't produce a value.</dd>
+<dt><span id="subquery">subquery</span></dt>
+<dd>A query used within another query.</dd>
+</dl>
+<h2>T</h2>
+<dl>
+<dt><span id="table">table</span></dt>
+<dd>A collection of related data in a <a href="../glossary/#database">database</a>
+stored in columns and rows.</dd>
+<dt><span id="table_valued_func">table-valued function</span></dt>
+<dd>A function that returns multiple values rather than a single value.</dd>
+<dt><span id="temporary_table">temporary table</span></dt>
+<dd>A table that is explicitly constructed in memory outside any particular query.</dd>
+<dt><span id="ternary_logic">ternary logic</span></dt>
+<dd>A logic based on three values: true, false, and "don't know" (represented as null).</dd>
+<dt><span id="tombstone">tombstone</span></dt>
+<dd>A marker value added to a record to show that it is no longer active.
+Tombstones are used as an alternative to deleting data.</dd>
+<dt><span id="trigger">trigger</span></dt>
+<dd>An action that runs automatically when something happens in a database,
+typically insertion or deletion.</dd>
+</dl>
+<h2>U</h2>
+<dl>
+<dt><span id="upsert">upsert</span></dt>
+<dd>To update a record if it exists
+or insert (create) a new record if it doesn't.</dd>
+</dl>
+<p><span id="uri">Uniform Resource Identifier (URI)</span>
+    A string that identifies a resource (such as a web page or database)
+    and the protocol used to access it.</p>
+<h2>V</h2>
+<dl>
+<dt><span id="vectorization">vectorization</span></dt>
+<dd>Performing the same operation on a stream of values
+rather than using a loop to operate on one value at a time.</dd>
+<dt><span id="view">view</span></dt>
+<dd>A rearrangement of data in a database that is regenerated on demand.</dd>
+</dl>
+<h2>W</h2>
+<dl>
+<dt><span id="window_func">window function</span></dt>
+<dd>A function that combines data from adjacent rows in a database query's result.</dd>
+</dl>
+<h2>X</h2>
+<h2>Y</h2>
+<h2>Z</h2>
+</main>
+<footer>
+<a href="../">The Querynomicon</a>
+      copyright © 2025
+      <a href="../01_intro/#acknowledgments">the authors</a>
+</footer>
+</body>
+</html>

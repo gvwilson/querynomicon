@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advanced Features</title>
+<link href="../static/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../static/page.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav>
+<a href="../">Home</a>
+      ·
+      <span class="dropdown">
+<a href="#">Lessons</a>
+<span class="dropdown-content">
+<a href="../01_intro/">Introduction</a>
+<a href="../02_core/">Core Features</a>
+<a href="../03_tools/">Tools</a>
+<a href="../04_python/">Python</a>
+<a href="../05_advanced/">Advanced Features</a>
+<a href="../06_r/">R</a>
+<a href="../07_psql/">PostgreSQL</a>
+<a href="../08_finale/">Conclusion</a>
+</span>
+</span>
+      ·
+      <span class="dropdown">
+<a href="#">Extras</a>
+<span class="dropdown-content">
+<a href="../license/">License</a>
+<a href="../conduct/">Code of Conduct</a>
+<a href="../bibliography/">Bibliography</a>
+<a href="../glossary/">Glossary</a>
+</span>
+</span>
+</nav>
+<main>
+<h1>Advanced Features</h1>
+<p id="terms">Terms defined: <a href="../glossary/#atomic">atomic</a>, <a href="../glossary/#base_case">base case</a>, <a href="../glossary/#blob">Binary Large Object (blob)</a>, <a href="../glossary/#csv">comma-separated values (CSV)</a>, <a href="../glossary/#consistent">consistent</a>, <a href="../glossary/#denormalization">denormalization</a>, <a href="../glossary/#durable">durable</a>, <a href="../glossary/#infinite_recursion">infinite recursion</a>, <a href="../glossary/#isolated">isolated</a>, <a href="../glossary/#json">JavaScript Object Notation (JSON)</a>, <a href="../glossary/#materialized_view">materialized view</a>, <a href="../glossary/#normal_form">normal form</a>, <a href="../glossary/#path_expression">path expression</a>, <a href="../glossary/#recursive_case">recursive case</a>, <a href="../glossary/#recursive_cte">recursive CTE</a>, <a href="../glossary/#temporary_table">temporary table</a>, <a href="../glossary/#trigger">trigger</a>, <a href="../glossary/#upsert">upsert</a>, <a href="../glossary/#view">view</a></p>
+<h2>Blobs</h2>
+<pre class="language-sql"><code class="language-sql" data-file="blob.memory.sql">create table images (
+    name text not null,
+    content blob
+);
+
+insert into images (name, content) values
+('biohazard', readfile('img/biohazard.png')),
+('crush', readfile('img/crush.png')),
+('fire', readfile('img/fire.png')),
+('radioactive', readfile('img/radioactive.png')),
+('tripping', readfile('img/tripping.png'));
+
+select
+    name,
+    length(content)
+from images;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="blob.memory.out">|    name     | length(content) |
+|-------------|-----------------|
+| biohazard   | 19629           |
+| crush       | 15967           |
+| fire        | 18699           |
+| radioactive | 16661           |
+| tripping    | 17208           |
+</code></pre>
+<ul>
+<li>A <a href="../glossary/#blob">blob</a> is a binary large object<ul>
+<li>Bytes in, bytes out…</li>
+</ul>
+</li>
+<li>If you think that's odd, check out [Fossil][fossil]</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Modify the query shown above to select the value of <code>content</code>
+rather than its length.
+How intelligible is the output?
+Does using SQLite's <code>hex()</code> function make it any more readable?</p>
+<h2 class="aside">Yet Another Database</h2>
+<pre class="language-sh"><code class="language-sh" data-file="lab_log_db.sh">sqlite3 db/lab_log.db
+</code></pre>
+<pre class="language-sql"><code class="language-sql" data-file="lab_log_schema.lab_log.sql">.schema
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="lab_log_schema.lab_log.out">CREATE TABLE sqlite_sequence(name,seq);
+CREATE TABLE person(
+       ident            integer primary key autoincrement,
+       details          text not null
+);
+CREATE TABLE machine(
+       ident            integer primary key autoincrement,
+       name             text not null,
+       details          text not null
+);
+CREATE TABLE usage(
+       ident            integer primary key autoincrement,
+       log              text not null
+);
+</code></pre>
+<h2>Storing JSON</h2>
+<pre class="language-sql"><code class="language-sql" data-file="json_in_table.lab_log.sql">select * from machine;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="json_in_table.lab_log.out">| ident |      name      |                         details                         |
+|-------|----------------|---------------------------------------------------------|
+| 1     | WY401          | {"acquired": "2023-05-01"}                              |
+| 2     | Inphormex      | {"acquired": "2021-07-15", "refurbished": "2023-10-22"} |
+| 3     | AutoPlate 9000 | {"note": "needs software update"}                       |
+</code></pre>
+<ul>
+<li>Store heterogeneous data as <a href="../glossary/#json">JSON</a>-formatted text
+    (with double-quoted strings)<ul>
+<li>Database parses the text each time it is queried,
+    so performance can be an issue</li>
+</ul>
+</li>
+<li>Can alternatively store as blob (<code>jsonb</code>)<ul>
+<li>Can't view it directly</li>
+<li>But more efficient</li>
+</ul>
+</li>
+</ul>
+<h2>Select Fields from JSON</h2>
+<pre class="language-sql"><code class="language-sql" data-file="json_field.lab_log.sql">select
+    details-&gt;'$.acquired' as single_arrow,
+    details-&gt;&gt;'$.acquired' as double_arrow
+from machine;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="json_field.lab_log.out">| single_arrow | double_arrow |
+|--------------|--------------|
+| "2023-05-01" | 2023-05-01   |
+| "2021-07-15" | 2021-07-15   |
+|              |              |
+</code></pre>
+<ul>
+<li>Single arrow <code>-&gt;</code> returns JSON representation of result</li>
+<li>Double arrow <code>-&gt;&gt;</code> returns SQL text, integer, real, or null</li>
+<li>Left side is column</li>
+<li>Right side is <a href="../glossary/#path_expression">path expression</a><ul>
+<li>Start with <code>$</code> (meaning "root")</li>
+<li>Fields separated by <code>.</code></li>
+</ul>
+</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Write a query that selects the year from the <code>"refurbished"</code> field
+of the JSON data associated with the Inphormex plate reader.</p>
+<h2>JSON Array Access</h2>
+<pre class="language-sql"><code class="language-sql" data-file="json_array.lab_log.sql">select
+    ident,
+    json_array_length(log-&gt;'$') as length,
+    log-&gt;'$[0]' as first
+from usage;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="json_array.lab_log.out">| ident | length |                            first                             |
+|-------|--------|--------------------------------------------------------------|
+| 1     | 4      | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
+| 2     | 5      | {"machine":"Inphormex","person":["Marianne","Richer"]}       |
+| 3     | 2      | {"machine":"sterilizer","person":["Josette","Villeneuve"]}   |
+| 4     | 1      | {"machine":"sterilizer","person":["Maude","Goulet"]}         |
+| 5     | 2      | {"machine":"AutoPlate 9000","person":["Brigitte","Michaud"]} |
+| 6     | 1      | {"machine":"sterilizer","person":["Marianne","Richer"]}      |
+| 7     | 3      | {"machine":"WY401","person":["Maude","Goulet"]}              |
+| 8     | 1      | {"machine":"AutoPlate 9000"}                                 |
+</code></pre>
+<ul>
+<li>SQLite and other database managers have many [JSON manipulation functions][sqlite_json]</li>
+<li><code>json_array_length</code> gives number of elements in selected array</li>
+<li>Subscripts start with 0</li>
+<li>Characters outside 7-bit ASCII represented as Unicode escapes</li>
+</ul>
+<h2>Unpacking JSON Arrays</h2>
+<pre class="language-sql"><code class="language-sql" data-file="json_unpack.lab_log.sql">select
+    ident,
+    json_each.key as key,
+    json_each.value as value
+from usage, json_each(usage.log)
+limit 10;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="json_unpack.lab_log.out">| ident | key |                            value                             |
+|-------|-----|--------------------------------------------------------------|
+| 1     | 0   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
+| 1     | 1   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
+| 1     | 2   | {"machine":"WY401","person":["Gabrielle","Dub\u00e9"]}       |
+| 1     | 3   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
+| 2     | 0   | {"machine":"Inphormex","person":["Marianne","Richer"]}       |
+| 2     | 1   | {"machine":"AutoPlate 9000","person":["Marianne","Richer"]}  |
+| 2     | 2   | {"machine":"sterilizer","person":["Marianne","Richer"]}      |
+| 2     | 3   | {"machine":"AutoPlate 9000","person":["Monique","Marcotte"]} |
+| 2     | 4   | {"machine":"sterilizer","person":["Marianne","Richer"]}      |
+| 3     | 0   | {"machine":"sterilizer","person":["Josette","Villeneuve"]}   |
+</code></pre>
+<ul>
+<li><code>json_each</code> is another table-valued function</li>
+<li>Use <code>json_each.<em>name</em></code> to get properties of unpacked array</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Write a query that counts how many times each person appears
+in the first log entry associated with any piece of equipment.</p>
+<h2>Selecting the Last Element of an  Array</h2>
+<pre class="language-sql"><code class="language-sql" data-file="json_array_last.lab_log.sql">select
+    ident,
+    log-&gt;'$[#-1].machine' as final
+from usage
+limit 5;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="json_array_last.lab_log.out">| ident |    final     |
+|-------|--------------|
+| 1     | "Inphormex"  |
+| 2     | "sterilizer" |
+| 3     | "Inphormex"  |
+| 4     | "sterilizer" |
+| 5     | "sterilizer" |
+</code></pre>
+<h2>Modifying JSON</h2>
+<pre class="language-sql"><code class="language-sql" data-file="json_modify.lab_log.sql">select
+    ident,
+    name,
+    json_set(details, '$.sold', json_quote('2024-01-25')) as updated
+from machine;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="json_modify.lab_log.out">| ident |      name      |                           updated                            |
+|-------|----------------|--------------------------------------------------------------|
+| 1     | WY401          | {"acquired":"2023-05-01","sold":"2024-01-25"}                |
+| 2     | Inphormex      | {"acquired":"2021-07-15","refurbished":"2023-10-22","sold":" |
+|       |                | 2024-01-25"}                                                 |
+| 3     | AutoPlate 9000 | {"note":"needs software update","sold":"2024-01-25"}         |
+</code></pre>
+<ul>
+<li>Updates the in-memory copy of the JSON, <em>not</em> the database record</li>
+<li>Please use <code>json_quote</code> rather than trying to format JSON with string operations</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>As part of cleaning up the lab log database,
+replace the machine names in the JSON records in <code>usage</code>
+with the corresopnding machine IDs from the <code>machine</code> table.</p>
+<h2 class="aside">Refreshing the Penguins Database</h2>
+<pre class="language-sql"><code class="language-sql" data-file="count_penguins.penguins.sql">select
+    species,
+    count(*) as num
+from penguins
+group by species;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="count_penguins.penguins.out">|  species  | num |
+|-----------|-----|
+| Adelie    | 152 |
+| Chinstrap | 68  |
+| Gentoo    | 124 |
+</code></pre>
+<ul>
+<li>We will restore full database after each example</li>
+</ul>
+<h2>Tombstones</h2>
+<pre class="language-sql"><code class="language-sql" data-file="make_active.sql">alter table penguins
+add active integer not null default 1;
+
+update penguins
+set active = iif(species = 'Adelie', 0, 1);
+</code></pre>
+<pre class="language-sql"><code class="language-sql" data-file="active_penguins.sql:keep">select
+    species,
+    count(*) as num
+from penguins
+where active
+group by species;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="active_penguins.out">|  species  | num |
+|-----------|-----|
+| Chinstrap | 68  |
+| Gentoo    | 124 |
+</code></pre>
+<ul>
+<li>Use a tombstone to mark (in)active records</li>
+<li>Every query must now include it</li>
+</ul>
+<h2 class="aside">Importing CSV Data</h2>
+<ul>
+<li>SQLite and most other database managers have tools for importing and exporting <a href="../glossary/#csv">CSV</a></li>
+<li>In SQLite:<ul>
+<li>Define table</li>
+<li>Import data</li>
+<li>Convert empty strings to nulls (if desired)</li>
+<li>Convert types from text to whatever (not shown below)</li>
+</ul>
+</li>
+</ul>
+<pre class="language-sql"><code class="language-sql" data-file="create_penguins.sql">drop table if exists penguins;
+.mode csv penguins
+.import misc/penguins.csv penguins
+update penguins set species = null where species = '';
+update penguins set island = null where island = '';
+update penguins set bill_length_mm = null where bill_length_mm = '';
+update penguins set bill_depth_mm = null where bill_depth_mm = '';
+update penguins set flipper_length_mm = null where flipper_length_mm = '';
+update penguins set body_mass_g = null where body_mass_g = '';
+update penguins set sex = null where sex = '';
+</code></pre>
+<h2 class="exercise">Exercise</h2>
+<p>What are the data types of the columns in the <code>penguins</code> table
+created by the CSV import shown above?
+How can you correct the ones that need correcting?</p>
+<h2>Views</h2>
+<pre class="language-sql"><code class="language-sql" data-file="views.sql:keep">create view if not exists
+active_penguins (
+    species,
+    island,
+    bill_length_mm,
+    bill_depth_mm,
+    flipper_length_mm,
+    body_mass_g,
+    sex
+) as
+select
+    species,
+    island,
+    bill_length_mm,
+    bill_depth_mm,
+    flipper_length_mm,
+    body_mass_g,
+    sex
+from penguins
+where active;
+
+select
+    species,
+    count(*) as num
+from active_penguins
+group by species;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="views.out">|  species  | num |
+|-----------|-----|
+| Chinstrap | 68  |
+| Gentoo    | 124 |
+</code></pre>
+<ul>
+<li>A <a href="../glossary/#view">view</a> is a saved query that other queries can invoke</li>
+<li>View is re-run each time it's used</li>
+<li>Like a CTE, but:<ul>
+<li>Can be shared between queries</li>
+<li>Views came first</li>
+</ul>
+</li>
+<li>Some databases offer <a href="../glossary/#materialized_view">materialized views</a><ul>
+<li>Update-on-demand temporary tables</li>
+</ul>
+</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Create a view in the lab log database called <code>busy</code> with two columns:
+<code>machine_id</code> and <code>total_log_length</code>.
+The first column records the numeric ID of each machine;
+the second shows the total number of log entries for that machine.</p>
+<h2 class="aside">Check Understanding</h2>
+<figure id="advanced_temp_concept_map">
+<img alt="box and arrow diagram showing different kinds of temporary 'tables' in SQL" src="advanced_temp_concept_map.svg"/>
+<figcaption>Figure 1: Temporary Tables</figcaption>
+</figure>
+<h2 class="aside">Hours Reminder</h2>
+<pre class="language-sql"><code class="language-sql" data-file="all_jobs.memory.sql">create table job (
+    name text not null,
+    billable real not null
+);
+insert into job values
+('calibrate', 1.5),
+('clean', 0.5);
+select * from job;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="all_jobs.memory.out">|   name    | billable |
+|-----------|----------|
+| calibrate | 1.5      |
+| clean     | 0.5      |
+</code></pre>
+<h2>Adding Checks</h2>
+<pre class="language-sql"><code class="language-sql" data-file="all_jobs_check.sql">create table job (
+    name text not null,
+    billable real not null,
+    check (billable &gt; 0.0)
+);
+insert into job values ('calibrate', 1.5);
+insert into job values ('reset', -0.5);
+select * from job;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="all_jobs_check.out">Runtime error near line 9: CHECK constraint failed: billable &gt; 0.0 (19)
+|   name    | billable |
+|-----------|----------|
+| calibrate | 1.5      |
+</code></pre>
+<ul>
+<li><code>check</code> adds constraint to table<ul>
+<li>Must produce a Boolean result</li>
+<li>Run each time values added or modified</li>
+</ul>
+</li>
+<li>But changes made before the error have taken effect</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Rewrite the definition of the <code>penguins</code> table to add the following constraints:</p>
+<ol>
+<li>
+<p><code>body_mass_g</code> must be null or non-negative.</p>
+</li>
+<li>
+<p><code>island</code> must be one of <code>"Biscoe"</code>, <code>"Dream"</code>, or <code>"Torgersen"</code>.
+    (Hint: the <code>in</code> operator will be useful here.)</p>
+</li>
+</ol>
+<h2 class="aside">ACID</h2>
+<ul>
+<li><a href="../glossary/#atomic">Atomic</a>: change cannot be broken down into smaller ones (i.e., all or nothing)</li>
+<li><a href="../glossary/#consistent">Consistent</a>: database goes from one consistent state to another</li>
+<li><a href="../glossary/#isolated">Isolated</a>: looks like changes happened one after another</li>
+<li><a href="../glossary/#durable">Durable</a>: if change takes place, it's still there after a restart</li>
+</ul>
+<h2>Transactions</h2>
+<pre class="language-sql"><code class="language-sql" data-file="transaction.memory.sql">create table job (
+    name text not null,
+    billable real not null,
+    check (billable &gt; 0.0)
+);
+
+insert into job values ('calibrate', 1.5);
+
+begin transaction;
+insert into job values ('clean', 0.5);
+rollback;
+
+select * from job;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="transaction.memory.out">|   name    | billable |
+|-----------|----------|
+| calibrate | 1.5      |
+</code></pre>
+<ul>
+<li>Statements outside transaction execute and are committed immediately</li>
+<li>Statement(s) inside transaction don't take effect until:<ul>
+<li><code>end transaction</code> (success)</li>
+<li><code>rollback</code> (undo)</li>
+</ul>
+</li>
+<li>Can have any number of statements inside a transaction</li>
+<li>But <em>cannot</em> nest transactions in SQLite<ul>
+<li>Other databases support this</li>
+</ul>
+</li>
+</ul>
+<h2>Rollback in Constraints</h2>
+<pre class="language-sql"><code class="language-sql" data-file="rollback_constraint.sql">create table job (
+    name text not null,
+    billable real not null,
+    check (billable &gt; 0.0) on conflict rollback
+);
+
+insert into job values
+    ('calibrate', 1.5);
+insert into job values
+    ('clean', 0.5),
+    ('reset', -0.5);
+
+select * from job;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="rollback_constraint.out">Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
+|   name    | billable |
+|-----------|----------|
+| calibrate | 1.5      |
+</code></pre>
+<ul>
+<li>All of second <code>insert</code> rolled back as soon as error occurred</li>
+<li>But first <code>insert</code> took effect</li>
+</ul>
+<h2>Rollback in Statements</h2>
+<pre class="language-sql"><code class="language-sql" data-file="rollback_statement.sql">create table job (
+    name text not null,
+    billable real not null,
+    check (billable &gt; 0.0)
+);
+
+insert or rollback into job values
+('calibrate', 1.5);
+insert or rollback into job values
+('clean', 0.5),
+('reset', -0.5);
+
+select * from job;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="rollback_statement.out">Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
+|   name    | billable |
+|-----------|----------|
+| calibrate | 1.5      |
+</code></pre>
+<ul>
+<li>Constraint is in table definition</li>
+<li>Action is in statement</li>
+</ul>
+<h2>Upsert</h2>
+<pre class="language-sql"><code class="language-sql" data-file="upsert.sql">create table jobs_done (
+    person text unique,
+    num integer default 0
+);
+
+insert into jobs_done values
+('zia', 1);
+.print 'after first'
+select * from jobs_done;
+.print
+
+
+insert into jobs_done values
+('zia', 1);
+.print 'after failed'
+select * from jobs_done;
+
+insert into jobs_done values
+('zia', 1)
+on conflict(person) do update set num = num + 1;
+.print 'after upsert'
+select * from jobs_done;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="upsert.out">after first
+| person | num |
+|--------|-----|
+| zia    | 1   |
+
+Runtime error near line 15: UNIQUE constraint failed: jobs_done.person (19)
+after failed
+| person | num |
+|--------|-----|
+| zia    | 1   |
+after upsert
+| person | num |
+|--------|-----|
+| zia    | 2   |
+</code></pre>
+<ul>
+<li><a href="../glossary/#upsert">upsert</a> stands for "update or insert"<ul>
+<li>Create if record doesn't exist</li>
+<li>Update if it does</li>
+</ul>
+</li>
+<li>Not standard SQL but widely implemented</li>
+<li>Example also shows use of SQLite <code>.print</code> command</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Using the assay database,
+write a query that adds or modifies people in the <code>staff</code> table as shown:</p>
+<table>
+<thead>
+<tr>
+<th>personal</th>
+<th>family</th>
+<th>dept</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pranay</td>
+<td>Khanna</td>
+<td>mb</td>
+<td>41</td>
+</tr>
+<tr>
+<td>Riaan</td>
+<td>Dua</td>
+<td>gen</td>
+<td>23</td>
+</tr>
+<tr>
+<td>Parth</td>
+<td>Johel</td>
+<td>gen</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<h2 class="aside">Normalization</h2>
+<ul>
+<li>First <a href="../glossary/#normal_form">normal form</a> (1NF):
+    every field of every record contains one indivisible value.</li>
+<li>Second normal form (2NF) and third normal form (3NF):
+    every value in a record that isn't a key depends solely on the key,
+    not on other values.</li>
+<li><a href="../glossary/#denormalization">Denormalization</a>: explicitly store values that could be calculated on the fly<ul>
+<li>To simplify queries and/or make processing faster</li>
+</ul>
+</li>
+</ul>
+<h2>Creating Triggers</h2>
+<pre class="language-sql"><code class="language-sql" data-file="trigger_setup.sql">-- Track hours of lab work.
+create table job (
+    person text not null,
+    reported real not null check (reported &gt;= 0.0)
+);
+
+-- Explicitly store per-person total rather than using sum().
+create table total (
+    person text unique not null,
+    hours real
+);
+
+-- Initialize totals.
+insert into total values
+('gene', 0.0),
+('august', 0.0);
+
+-- Define a trigger.
+create trigger total_trigger
+before insert on job
+begin
+    -- Check that the person exists.
+    select case
+        when not exists (select 1 from total where person = new.person)
+        then raise(rollback, 'Unknown person ')
+    end;
+    -- Update their total hours (or fail if non-negative constraint violated).
+    update total
+    set hours = hours + new.reported
+    where total.person = new.person;
+end;
+</code></pre>
+<ul>
+<li>A <a href="../glossary/#trigger">trigger</a> automatically runs before or after a specified operation</li>
+<li>Can have side effects (e.g., update some other table)</li>
+<li>And/or implement checks (e.g., make sure other records exist)</li>
+<li>Add processing overhead…</li>
+<li>…but data is either cheap or correct, never both</li>
+<li>Inside trigger, refer to old and new versions of record
+    as <code>old.<em>column</em></code> and <code>new.<em>column</em></code></li>
+</ul>
+<h2>Trigger Not Firing</h2>
+<pre class="language-sql"><code class="language-sql" data-file="trigger_successful.memory.sql:keep">insert into job values
+('gene', 1.5),
+('august', 0.5),
+('gene', 1.0);
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="trigger_successful.memory.out">| person | reported |
+|--------|----------|
+| gene   | 1.5      |
+| august | 0.5      |
+| gene   | 1.0      |
+
+| person | hours |
+|--------|-------|
+| gene   | 2.5   |
+| august | 0.5   |
+</code></pre>
+<h2>Trigger Firing</h2>
+<pre class="language-sql"><code class="language-sql" data-file="trigger_firing.sql:keep">insert into job values
+('gene', 1.0),
+('august', -1.0);
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="trigger_firing.out">Runtime error near line 6: CHECK constraint failed: reported &gt;= 0.0 (19)
+
+| person | hours |
+|--------|-------|
+| gene   | 0.0   |
+| august | 0.0   |
+</code></pre>
+<h2 class="exercise">Exercise</h2>
+<p>Using the penguins database:</p>
+<ol>
+<li>
+<p>create a table called <code>species</code> with columns <code>name</code> and <code>count</code>; and</p>
+</li>
+<li>
+<p>define a trigger that increments the count associated with each species
+    each time a new penguin is added to the <code>penguins</code> table.</p>
+</li>
+</ol>
+<p>Does your solution behave correctly when several penguins are added
+by a single <code>insert</code> statement?</p>
+<h2 class="aside">Representing Graphs</h2>
+<pre class="language-sql"><code class="language-sql" data-file="lineage_setup.sql">create table lineage (
+    parent text not null,
+    child text not null
+);
+insert into lineage values
+('Arturo', 'Clemente'),
+('Darío', 'Clemente'),
+('Clemente', 'Homero'),
+('Clemente', 'Ivonne'),
+('Ivonne', 'Lourdes'),
+('Soledad', 'Lourdes'),
+('Lourdes', 'Santiago');
+</code></pre>
+<pre class="language-sql"><code class="language-sql" data-file="represent_graph.memory.sql:keep">select * from lineage;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="represent_graph.memory.out">|  parent  |  child   |
+|----------|----------|
+| Arturo   | Clemente |
+| Darío    | Clemente |
+| Clemente | Homero   |
+| Clemente | Ivonne   |
+| Ivonne   | Lourdes  |
+| Soledad  | Lourdes  |
+| Lourdes  | Santiago |
+</code></pre>
+<figure id="advanced_recursive_lineage">
+<img alt="box and arrow diagram showing who is descended from whom in the lineage database" src="advanced_recursive_lineage.svg"/>
+<figcaption>Figure 2: Lineage Diagram</figcaption>
+</figure>
+<h2 class="exercise">Exercise</h2>
+<p>Write a query that uses a self join to find every person's grandchildren.</p>
+<h2>Recursive Queries</h2>
+<pre class="language-sql"><code class="language-sql" data-file="recursive_lineage.memory.sql:keep">with recursive descendent as (
+    select
+        'Clemente' as person,
+        0 as generations
+    union all
+    select
+        lineage.child as person,
+        descendent.generations + 1 as generations
+    from descendent inner join lineage
+        on descendent.person = lineage.parent
+)
+
+select
+    person,
+    generations
+from descendent;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="recursive_lineage.memory.out">|  person  | generations |
+|----------|-------------|
+| Clemente | 0           |
+| Homero   | 1           |
+| Ivonne   | 1           |
+| Lourdes  | 2           |
+| Santiago | 3           |
+</code></pre>
+<ul>
+<li>Use a <a href="../glossary/#recursive_cte">recursive CTE</a> to create a temporary table (<code>descendent</code>)</li>
+<li><a href="../glossary/#base_case">Base case</a> seeds this table</li>
+<li><a href="../glossary/#recursive_case">Recursive case</a> relies on value(s) already in that table and external table(s)</li>
+<li><code>union all</code> to combine rows<ul>
+<li>Can use <code>union</code> but that has lower performance (must check uniqueness each time)</li>
+</ul>
+</li>
+<li>Stops when the recursive case yields an empty row set (nothing new to add)</li>
+<li>Then select the desired values from the CTE</li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Modify the recursive query shown above to use <code>union</code> instead of <code>union all</code>.
+Does this affect the result?
+Why or why not?</p>
+<h2 class="aside">Contact Tracing Database</h2>
+<pre class="language-sql"><code class="language-sql" data-file="contact_person.contacts.sql">select * from person;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="contact_person.contacts.out">| ident |         name          |
+|-------|-----------------------|
+| 1     | Juana Baeza           |
+| 2     | Agustín Rodríquez     |
+| 3     | Ariadna Caraballo     |
+| 4     | Micaela Laboy         |
+| 5     | Verónica Altamirano   |
+| 6     | Reina Rivero          |
+| 7     | Elias Merino          |
+| 8     | Minerva Guerrero      |
+| 9     | Mauro Balderas        |
+| 10    | Pilar Alarcón         |
+| 11    | Daniela Menéndez      |
+| 12    | Marco Antonio Barrera |
+| 13    | Cristal Soliz         |
+| 14    | Bernardo Narváez      |
+| 15    | Óscar Barrios         |
+</code></pre>
+<pre class="language-sql"><code class="language-sql" data-file="contact_contacts.contacts.sql">select * from contact;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="contact_contacts.contacts.out">|       left        |         right         |
+|-------------------|-----------------------|
+| Agustín Rodríquez | Ariadna Caraballo     |
+| Agustín Rodríquez | Verónica Altamirano   |
+| Juana Baeza       | Verónica Altamirano   |
+| Juana Baeza       | Micaela Laboy         |
+| Pilar Alarcón     | Reina Rivero          |
+| Cristal Soliz     | Marco Antonio Barrera |
+| Cristal Soliz     | Daniela Menéndez      |
+| Daniela Menéndez  | Marco Antonio Barrera |
+</code></pre>
+<figure id="advanced_recursive_contacts">
+<img alt="box and line diagram showing who has had contact with whom" src="advanced_recursive_contacts.svg"/>
+<figcaption>Figure 3: Contact Diagram</figcaption>
+</figure>
+<h2>Bidirectional Contacts</h2>
+<pre class="language-sql"><code class="language-sql" data-file="bidirectional.sql:keep">create temporary table bi_contact (
+    left text,
+    right text
+);
+
+insert into bi_contact
+select
+    left, right from contact
+    union all
+    select right, left from contact
+;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="bidirectional.out">| original_count |
+|----------------|
+| 8              |
+
+| num_contact |
+|-------------|
+| 16          |
+</code></pre>
+<ul>
+<li>Create a <a href="../glossary/#temporary_table">temporary table</a> rather than using a long chain of CTEs<ul>
+<li>Only lasts as long as the session (not saved to disk)</li>
+</ul>
+</li>
+<li>Duplicate information rather than writing more complicated query</li>
+</ul>
+<h2>Updating Group Identifiers</h2>
+<pre class="language-sql"><code class="language-sql" data-file="update_group_ids.sql:keep">select
+    left.name as left_name,
+    left.ident as left_ident,
+    right.name as right_name,
+    right.ident as right_ident,
+    min(left.ident, right.ident) as new_ident
+from
+    (person as left join bi_contact on left.name = bi_contact.left)
+    join person as right on bi_contact.right = right.name;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="update_group_ids.out">|       left_name       | left_ident |      right_name       | right_ident | new_ident |
+|-----------------------|------------|-----------------------|-------------|-----------|
+| Juana Baeza           | 1          | Micaela Laboy         | 4           | 1         |
+| Juana Baeza           | 1          | Verónica Altamirano   | 5           | 1         |
+| Agustín Rodríquez     | 2          | Ariadna Caraballo     | 3           | 2         |
+| Agustín Rodríquez     | 2          | Verónica Altamirano   | 5           | 2         |
+| Ariadna Caraballo     | 3          | Agustín Rodríquez     | 2           | 2         |
+| Micaela Laboy         | 4          | Juana Baeza           | 1           | 1         |
+| Verónica Altamirano   | 5          | Agustín Rodríquez     | 2           | 2         |
+| Verónica Altamirano   | 5          | Juana Baeza           | 1           | 1         |
+| Reina Rivero          | 6          | Pilar Alarcón         | 10          | 6         |
+| Pilar Alarcón         | 10         | Reina Rivero          | 6           | 6         |
+| Daniela Menéndez      | 11         | Cristal Soliz         | 13          | 11        |
+| Daniela Menéndez      | 11         | Marco Antonio Barrera | 12          | 11        |
+| Marco Antonio Barrera | 12         | Cristal Soliz         | 13          | 12        |
+| Marco Antonio Barrera | 12         | Daniela Menéndez      | 11          | 11        |
+| Cristal Soliz         | 13         | Daniela Menéndez      | 11          | 11        |
+| Cristal Soliz         | 13         | Marco Antonio Barrera | 12          | 12        |
+</code></pre>
+<ul>
+<li><code>new_ident</code> is minimum of own identifier and identifiers one step away</li>
+<li>Doesn't keep people with no contacts</li>
+</ul>
+<h2>Recursive Labeling</h2>
+<pre class="language-sql"><code class="language-sql" data-file="recursive_labeling.contacts.sql:keep">with recursive labeled as (
+    select
+        person.name as name,
+        person.ident as label
+    from
+        person
+    union -- not 'union all'
+    select
+        person.name as name,
+        labeled.label as label
+    from
+        (person join bi_contact on person.name = bi_contact.left)
+        join labeled on bi_contact.right = labeled.name
+    where labeled.label &lt; person.ident
+)
+select name, min(label) as group_id
+from labeled
+group by name
+order by label, name;
+</code></pre>
+<pre class="language-out"><code class="language-out" data-file="recursive_labeling.contacts.out">|         name          | group_id |
+|-----------------------|----------|
+| Agustín Rodríquez     | 1        |
+| Ariadna Caraballo     | 1        |
+| Juana Baeza           | 1        |
+| Micaela Laboy         | 1        |
+| Verónica Altamirano   | 1        |
+| Pilar Alarcón         | 6        |
+| Reina Rivero          | 6        |
+| Elias Merino          | 7        |
+| Minerva Guerrero      | 8        |
+| Mauro Balderas        | 9        |
+| Cristal Soliz         | 11       |
+| Daniela Menéndez      | 11       |
+| Marco Antonio Barrera | 11       |
+| Bernardo Narváez      | 14       |
+| Óscar Barrios         | 15       |
+</code></pre>
+<ul>
+<li>Use <code>union</code> instead of <code>union all</code> to prevent <a href="../glossary/#infinite_recursion">infinite recursion</a></li>
+</ul>
+<h2 class="exercise">Exercise</h2>
+<p>Modify the query above to use <code>union all</code> instead of <code>union</code> to trigger infinite recursion.
+How can you modify the query so that it stops at a certain depth
+so that you can trace its output?</p>
+<h2 class="aside">Check Understanding</h2>
+<figure id="advanced_cte_concept_map">
+<img alt="box and arrow diagram showing concepts related to common table expressions in SQL" src="advanced_cte_concept_map.svg"/>
+<figcaption>Figure 4: Common Table Expression Concepts</figcaption>
+</figure>
+</main>
+<footer>
+<a href="../">The Querynomicon</a>
+      copyright © 2025
+      <a href="../01_intro/#acknowledgments">the authors</a>
+</footer>
+</body>
+</html>

@@ -2,35 +2,43 @@
 
 <html>
 <head>
-<title>The Querynomicon</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Querynomicon</title>
 <link href="./static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="./static/page.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav>
-<div class="row">
-<div class="col-2 left">
 <a href="./">Home</a>
-</div>
-<div class="col-10 right">
-<a href="./license.html">License</a>
-	  ·
-	  <a href="./bibliography.html">Bibliography</a>
-	  ·
-	  <a href="./glossary.html">Glossary</a>
-</div>
-</div>
+      ·
+      <span class="dropdown">
+<a href="#">Lessons</a>
+<span class="dropdown-content">
+<a href="./01_intro/">Introduction</a>
+<a href="./02_core/">Core Features</a>
+<a href="./03_tools/">Tools</a>
+<a href="./04_python/">Python</a>
+<a href="./05_advanced/">Advanced Features</a>
+<a href="./06_r/">R</a>
+<a href="./07_psql/">PostgreSQL</a>
+<a href="./08_finale/">Conclusion</a>
+</span>
+</span>
+      ·
+      <span class="dropdown">
+<a href="#">Extras</a>
+<span class="dropdown-content">
+<a href="./license/">License</a>
+<a href="./conduct/">Code of Conduct</a>
+<a href="./bibliography/">Bibliography</a>
+<a href="./glossary/">Glossary</a>
+</span>
+</span>
 </nav>
 <main>
 <h1>The Querynomicon</h1>
 <p class="subtitle">An Introduction to SQL for the Cautious and Weary</p>
-<div class="row">
-<div class="col-4 center">
-<img alt="Advent 215 by Danielle Navarro" src="./static/advent_04_215.png" style="width: 80%"/>
-</div>
-<div class="col-8">
 <p>Upon first encountering SQL after two decades of Fortran, C, Java, and Python,
 I thought I had stumbled into hell.
 I quickly realized that was optimistic:
@@ -43,19 +51,14 @@ To quote <a href="https://terrypratchett.com/">Terry Pratchett</a>,
 it is not mad, just differently sane.</p>
 <p>Welcome, then, to a world in which the strange will become familiar, and the familiar, strange.
 Welcome, thrice welcome, to SQL.</p>
-</div>
-</div>
 <ul>
 <li>
 <p>Please see <a href="https://third-bit.com/sql/">the website</a> to view the current version of this tutorial.</p>
 </li>
 <li>
-<p><a href="https://github.com/gvwilson/querynomicon/raw/main/querynomicon.zip">Download the SQLite databases used in these examples</a>.</p>
-</li>
-<li>
 <p>Contributions are very welcome:
-    please see the <a href="https://third-bit.com/sql/contributing/">contributors' guide</a> for background
-    and <a href="https://github.com/gvwilson/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted">these issues</a> for items where assistance would be most appreciated.
+    please see the contributors' guide for background
+    and the issues in for items where assistance would be most appreciated.
     Please also see our <a href="https://third-bit.com/sql/license/">license</a> for terms of use,
     and note that all contributors are required to abide by our <a href="https://third-bit.com/sql/conduct/">Code of Conduct</a>.</p>
 </li>
@@ -79,34 +82,28 @@ Please see <a href="https://teachtogether.tech/"><em>Teaching Tech Together</em>
   </em>
 </p>
 <h2>Syllabus</h2>
-<div class="chapters">
 <ol>
-<li><a href="./s01_intro/index.html">Introduction</a>: where we're going and why</li>
-<li><a href="./s02_core/index.html">Core Features</a>: getting values from tables</li>
-<li><a href="./s03_tools/index.html">Tools</a>: Miscellaneous things that make life easier</li>
-<li><a href="./s04_python/index.html">Python</a>: using databases from Python</li>
-<li><a href="./s05_advanced/index.html">Advanced Features</a>: when you need 'em, you need 'em</li>
-<li><a href="./s06_r/index.html">R</a>: using databases from R</li>
-<li><a href="./s07_psql/index.html">PostgreSQL</a>: client-server computing and permissions</li>
-<li><a href="./s08_finale/index.html">Conclusion</a>: where we've been and what comes next</li>
+<li><a href="./01_intro/">Introduction</a>: where we're going and why</li>
+<li><a href="./02_core/">Core Features</a>: getting values from tables</li>
+<li><a href="./03_tools/">Tools</a>: Miscellaneous things that make life easier</li>
+<li><a href="./04_python/">Python</a>: using databases from Python</li>
+<li><a href="./05_advanced/">Advanced Features</a>: when you need 'em, you need 'em</li>
+<li><a href="./06_r/">R</a>: using databases from R</li>
+<li><a href="./07_psql/">PostgreSQL</a>: client-server computing and permissions</li>
+<li><a href="./08_finale/">Conclusion</a>: where we've been and what comes next</li>
 </ol>
-</div>
 <h2>Appendices</h2>
-<div class="appendices">
 <ol>
-<li><a href="./bibliography.html">Bibliography</a></li>
-<li><a href="./glossary.html">Glossary</a></li>
-<li><a href="./license.html">License</a></li>
-<li><a href="./code_of_conduct.html">Code of Conduct</a></li>
-<li><a href="./contributing.html">Contributing</a></li>
-<li><a href="./links.html">Links</a></li>
+<li><a href="./license/">License</a></li>
+<li><a href="./conduct/">Code of Conduct</a></li>
+<li><a href="./bibliography/">Bibliography</a></li>
+<li><a href="./glossary/">Glossary</a></li>
 </ol>
-</div>
 </main>
 <footer>
 <a href="./">The Querynomicon</a>
-      copyright © 2024
-      <a href="./contributing.html#contributors">the authors</a>
+      copyright © 2025
+      <a href="./01_intro/#acknowledgments">the authors</a>
 </footer>
 </body>
 </html>

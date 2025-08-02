@@ -8,7 +8,7 @@ HTML_IGNORES =
 
 ## build: convert to HTML
 build:
-	mccole build
+	@mccole build
 	@touch docs/.nojekyll
 
 ## lint: check code and project
@@ -20,12 +20,8 @@ lint:
 
 ## profile: render with profiling
 profile:
-	mccole profile
+	@mccole profile
 	@touch docs/.nojekyll
-
-## refresh: refresh all file inclusions
-refresh:
-	mccole refresh --files *_*/index.md
 
 ## serve: serve generated HTML
 serve:

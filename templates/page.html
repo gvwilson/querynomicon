@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
     <link rel="icon" type="image/x-icon" href="@root/static/favicon.ico">
-    {% if css_file %}<link rel="stylesheet" href="@root/static/{{css_file}}" type="text/css">{% endif %}
     <link rel="stylesheet" href="@root/static/page.css" type="text/css">
   </head>
   <body>
     <nav>
-      <div class="row">
-	<div class="col-2 left">
-	  <a href="@root/">Home</a>
-	</div>
-	<div class="col-10 right">
-	  <a href="@root/license.html">License</a>
-	  &middot;
-	  <a href="@root/bibliography.html">Bibliography</a>
-	  &middot;
-	  <a href="@root/glossary.html">Glossary</a>
-	</div>
-      </div>
+      <a href="@root/">Home</a>
+      &middot;
+      <span class="dropdown">
+	<a href="#">Lessons</a>
+	<span class="dropdown-content">
+          <a href="@root/01_intro/">Introduction</a>
+          <a href="@root/02_core/">Core Features</a>
+          <a href="@root/03_tools/">Tools</a>
+          <a href="@root/04_python/">Python</a>
+          <a href="@root/05_advanced/">Advanced Features</a>
+          <a href="@root/06_r/">R</a>
+          <a href="@root/07_psql/">PostgreSQL</a>
+          <a href="@root/08_finale/">Conclusion</a>
+	</span>
+      </span>
+      &middot;
+      <span class="dropdown">
+        <a href="#">Extras</a>
+        <span class="dropdown-content">
+	  <a href="@root/license/">License</a>
+	  <a href="@root/conduct/">Code of Conduct</a>
+	  <a href="@root/bibliography/">Bibliography</a>
+	  <a href="@root/glossary/">Glossary</a>
+        </span>
+      </span>
     </nav>
     <main>
 {{content}}
     </main>
     <footer>
       <a href="@root/">The Querynomicon</a>
-      copyright &copy; 2024
-      <a href="@root/contributing.html#contributors">the authors</a>
+      copyright &copy; 2025
+      <a href="@root/01_intro/#acknowledgments">the authors</a>
     </footer>
   </body>
 </html>

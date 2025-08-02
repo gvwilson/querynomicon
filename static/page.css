@@ -1,54 +1,38 @@
-/* Style variables */
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
+/* Definitions */
 :root {
-    --border-thin: solid 1px;
-    --border-medium: solid 3px;
-    --color-border: gray;
-    --color-background: white;
-    --color-background-code: whitesmoke;
-    --color-link: #000060;
-    --color-text: black;
+    --color-decorate: #203080;
+    --color-highlight: #f0f0f8;
+    --color-page: #f8f8f8;
+    --color-link-unvisited: #0066ff;
+    --color-link-visited: #0000ff;
 
-    --expand: 120%;
+    --font-prose: "Atkinson Hyperlegible", Arial, sans-serif;
+    --font-code: "Source Code Pro", "Courier New", monospace;
 
-    --height-half-line: 0.75ex;
+    --len-thick: 4px;
+    --len-thick-double: 8px;
+    --len-thin: 1px;
+    --len-half: 0.5rem;
+    --len-one: 1rem;
+    --len-page: 60rem;
+    --len-dropdown: 200px;
 
-    --width-li-adjust: 1rem;
-    --width-ol-adjust: 0.5rem;
-    --width-ul-adjust: 0.2rem;
-    --width-padding: 5px;
-    --width-page: 72rem;
-    --width-page-margin: 1rem;
-
-    --stamp-blue-dark: #1B2A83;
-    --stamp-blue-light: #BABDD8;
-    --stamp-brown-dark: #5F483C;
-    --stamp-brown-light: #CEC7C3;
-    --stamp-green-dark: #7F9971;
-    --stamp-green-light: #A7E0A3;
-    --stamp-orange-dark: #AD7353;
-    --stamp-orange-light: #E5D4CB;
-    --stamp-purple-dark: #7D6E87;
-    --stamp-purple-light: #D6D2DA;
-    --stamp-red-dark: #8B000F;
-    --stamp-red-light: #DAB3B7;
+    --size-prose: 1.2rem;
+    --size-code: 1.1rem;
 }
-
-/* Generic coloring */
-.shaded {
-    background-color: var(--color-background-code);
-}
-
-/* Generic text alignment */
-.left { text-align: left; }
-.center { text-align: center; }
-.right { text-align: right; }
 
 /* Flex grid */
+
 .row {
     display: flex;
     flex-flow: row wrap;
     width: 100%
 }
+
 .row > * {
   flex: 1; /* allow children to grow when space available */
 }
@@ -66,197 +50,173 @@
 .col-11 { flex-basis: 91.66%; }
 .col-12 { flex-basis: 100%; }
 
-/* Hyperlinks */
+/* Dropdown menu */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown > a {
+    text-decoration: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-highlight);
+    min-width: var(--len-dropdown);
+    box-shadow: 0px var(--len-thick) var(--len-thick-double) 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: var(--len-thick);
+}
+
+.dropdown-content a {
+    padding-left: var(--len-thick);
+    padding-right: var(--len-thick);
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    color: var(--color-link-visited);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Generic positioning */
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Links */
 a {
-    color: var(--color-link);
+    color: var(--color-link-unvisited);
+}
+a:visited {
+    color: var(--color-link-visited);
+}
+a:hover {
+    color: var(--color-link-visited);
 }
 
-/* Block quotes */
+/* Quotes */
 blockquote {
-    border: var(--border-medium) var(--color-border);
-    padding-left: var(--width-page-margin);
-    padding-right: var(--width-page-margin);
+    border-left: solid var(--len-thick) var(--color-decorate);
+    margin-left: 0px;
+    padding-left: var(--len-half);
+    padding-top: var(--len-thick);
+    padding-bottom: var(--len-thick);
+    margin-top: var(--len-thick);
+    margin-bottom: var(--len-thick);
+    background-color: var(--color-highlight);
 }
 
-/* Page body */
+/* Whole document */
 body {
-    background-color: var(--color-background);
-    color: var(--color-text);
-    font-family: sans-serif;
-    font-size: var(--expand);
-    line-height: var(--expand);
-    margin: var(--width-page-margin);
-    max-width: var(--width-page);
+    font-family: var(--font-prose);
+    font-size: var(--size-prose);
+    max-width: var(--len-page);
+    background-color: var(--color-page);
+    margin: auto;
 }
 
-/* Code snippets */
+/* Code text */
 code {
-    background-color: var(--color-background-code);
-}
-
-/* Definitions in definition lists */
-dd {
-    margin-bottom: var(--height-half-line);
-}
-dd:last-of-type {
-    margin-bottom: 0px;
-}
-
-/* Figures */
-figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-figure img {
-  max-width: 100%;
-  height: auto;
+    font-size: var(--size-code);
 }
 
 /* Footer */
 footer {
-    border-top: var(--border-thin) var(--color-border);
-    margin-top: var(--height-half-line);
-    padding-top: var(--height-half-line);
+    border-top: solid var(--color-decorate) var(--len-thin);
+    margin-top: var(--len-half);
+    padding-top: var(--len-half);
     text-align: center;
 }
 
-/* Level-1 heading */
+/* Headings */
+h1, h2, h3 {
+    margin-bottom: var(--len-thick-double);
+}
+h2, h3 {
+    margin-top: var(--len-thick);
+}
+
+/* Page heading */
 h1 {
     text-align: center;
 }
-
-/* Other headings */
-h2, h3, h4, h5, h6 {
+p.subtitle {
+    text-align: center;
     font-style: italic;
-}
-
-/* Side remarks */
-h2.aside::after {
-    content: "\2606 ";
 }
 
 /* Navigation */
 nav {
-    background-color: var(--color-background-code);
+    border-bottom: solid var(--color-decorate) var(--len-thin);
+    margin-bottom: var(--len-half);
+    padding-bottom: var(--len-half);
 }
 
-/* Ordered lists */
-ol {
-    margin-left: var(--width-ol-adjust);
-    padding-left: var(--width-ol-adjust);
-}
-ol li {
-    margin-left: var(--width-li-adjust);
-}
-ol.appendices {
-    list-style-type: upper-alpha;
-}
-ol.chapters {
-}
-
-/* Subtitle */
-p.subtitle {
-    font-weight: bold;
-    font-style: italic;
-    text-align: center;
-}
-
-/* Code blocks */
+/* Code block */
 pre {
-    border: var(--border-thin) var(--color-border);
-    padding: var(--width-padding);
-    background-color: var(--color-background-code);
+    background-color: var(--color-highlight);
+    padding: var(--len-half);
 }
 
-/* Generic output */
-pre[class*='language'] {
-    border-left: var(--border-medium);
-    border-top: var(--border-thin);
-    border-bottom: var(--border-thin);
-    border-right: 0px;
-    padding-left: var(--width-padding);
-}
-
-/* Data files */
-pre.language-csv,
-pre.language-json,
-pre.language-md,
-pre.language-toml,
-pre.language-yml {
-    border-color: var(--stamp-orange-light);
-}
-
-/* JavaScript */
-pre.language-js {
-    border-color: var(--stamp-blue-light);
-}
-
-/* Output */
-pre.language-out {
-    border-color: var(--stamp-brown-light);
-}
-
-/* Python */
-pre.language-py {
-    border-color: var(--stamp-blue-light);
-}
-
-/* Shell */
-pre.language-sh {
-    border-color: var(--stamp-green-light);
-}
-
-/* SQL */
-pre.language-sql {
-    border-color: var(--stamp-red-light);
-}
-
-/* Transcripts */
-pre.language-text {
-    border-color: var(--stamp-purple-light);
-}
-
-
-/* Tables */
+/* Table */
 table {
-    border-collapse: collapse;
-    caption-side: bottom;
-    margin-left: auto;
-    margin-right: auto;
-}
-th, td {
-    padding: var(--width-padding);
-    vertical-align: top;
-    border: var(--border-thin);
-    min-width: 8rem;
+  text-align: justify;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Unordered lists */
+td, th {
+  padding: var(--len-half);
+  border: solid var(--len-thin) var(--color-decorate);
+}
+
+tr:hover {
+    background-color: var(--color-highlight);
+}
+
+thead {
+    background-color: var(--color-highlight);
+}
+
+/* Lists */
+ol {
+  padding-left: var(--len-one);
+  margin-top: 0px;
+}
 ul {
-    list-style-type: disc;
-    margin-left: var(--width-ul-adjust);
-    padding-left: var(--width-ul-adjust);
-}
-ul li {
-    margin-left: var(--width-li-adjust);
+  padding-left: var(--len-one);
+  margin-top: 0px;
+  list-style-type: disc;
 }
 
-.error-message {
-        color: red;
-        font-weight: bold;
+/* Exercise blocks */
+section.exercise {
+    background-color: #f1f1f1;
+    padding-left: 1em;
+    padding-right: 0.8em;
+}
+section.exercise h3 {
+    font-size: 1.5em;
 }
 
-/* Dark mode disabled for now */
-/*
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: #202020;
-	--color-background-code: #000060;
-        --color-text: white;
-	--color-link: lightgray;
-    }
+/* Definitions */
+
+dt {
+    font-weight: bold;
 }
-*/
