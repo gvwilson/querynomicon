@@ -136,6 +136,28 @@ code {
     font-size: var(--size-code);
 }
 
+/* Cards */
+div.card {
+    box-shadow: 0px var(--len-thick) var(--len-thick-double) 0px rgba(0,0,0,0.2);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: solid var(--color-background) var(--len-thick);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: var(--len-half);
+    padding-right: var(--len-half);
+    margin: var(--len-half);
+}
+
+div.card > h3 {
+    font-size: 1.3rem;
+}
+div.card > p {
+    margin-top: 0px;
+    margin-bottom: var(--len-half);
+}
+
 /* Footer */
 footer {
     border-top: solid var(--color-decorate) var(--len-thin);
