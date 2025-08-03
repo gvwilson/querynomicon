@@ -33,17 +33,9 @@ Welcome, thrice welcome, to SQL.
 > when delivering it.
 > Please see [*Teaching Tech Together*][t3] for background.
 
-<p class="center">
-  <em>
-    Start where you are
-    <br/>
-    Use what you have
-    <br/>
-    Help who you can
-  </em>
-</p>
-
 ## Syllabus
+
+<div id="syllabus" markdown="1">
 
 1.  [Introduction](./01_intro/): where we're going and why
 1.  [Core Features](./02_core/): getting values from tables
@@ -54,12 +46,28 @@ Welcome, thrice welcome, to SQL.
 1.  [PostgreSQL](./07_psql/): client-server computing and permissions
 1.  [Conclusion](./08_finale/): where we've been and what comes next
 
+</div>
+
 ##  Appendices
+
+<div id="appendices" markdown="1">
 
 1.  [License](./LICENSE.md)
 1.  [Code of Conduct](./CODE_OF_CONDUCT.md)
 1.  [Bibliography](./bibliography.md)
 1.  [Glossary](./glossary.md)
+
+</div>
+
+<p class="center">
+  <em>
+    Start where you are
+    <br/>
+    Use what you have
+    <br/>
+    Help who you can
+  </em>
+</p>
 
 [conduct]: https://third-bit.com/sql/conduct/
 [contribute]: https://third-bit.com/sql/contributing/
