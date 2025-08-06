@@ -31,6 +31,7 @@
 <span class="dropdown-content">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
+<a href="../contrib/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -38,11 +39,11 @@
 </nav>
 <main>
 <h1>Core Features</h1>
-<p id="terms">Terms defined: <a href="../glossary/#admin_command">administration command</a>, <a href="../glossary/#aggregation">aggregation</a>, <a href="../glossary/#aggregation_func">aggregation function</a>, <a href="../glossary/#cross_join">cross join</a>, <a href="../glossary/#exclusive_or">exclusive or</a>, <a href="../glossary/#filter">filter</a>, <a href="../glossary/#full_outer_join">full outer join</a>, <a href="../glossary/#group">group</a>, <a href="../glossary/#in_memory_db">in-memory database</a>, <a href="../glossary/#inclusive_or">inclusive or</a>, <a href="../glossary/#join">join</a>, <a href="../glossary/#join_condition">join condition</a>, <a href="../glossary/#left_outer_join">left outer join</a>, <a href="../glossary/#null">null</a>, <a href="../glossary/#query">query</a>, <a href="../glossary/#right_outer_join">right outer join</a>, <a href="../glossary/#ternary_logic">ternary logic</a>, <a href="../glossary/#tombstone">tombstone</a></p>
+<p id="terms"></p>
 <h2>Selecting Constant</h2>
-<pre class="language-sql"><code class="language-sql" data-file="select_1.sql">select 1;
+<pre class=""><code data-file="select_1.sql">select 1;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="select_1.out">1
+<pre class=""><code data-file="select_1.out">1
 </code></pre>
 <ul>
 <li><code>select</code> is a keyword</li>
@@ -51,9 +52,9 @@
 <li>Semi-colon terminator is required</li>
 </ul>
 <h2>Selecting All Values from Table</h2>
-<pre class="language-sql"><code class="language-sql" data-file="select_star.sql">select * from little_penguins;
+<pre class=""><code data-file="select_star.sql">select * from little_penguins;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="select_star.out">Gentoo|Biscoe|51.3|14.2|218.0|5300.0|MALE
+<pre class=""><code data-file="select_star.out">Gentoo|Biscoe|51.3|14.2|218.0|5300.0|MALE
 Adelie|Dream|35.7|18.0|202.0|3550.0|FEMALE
 Adelie|Torgersen|36.6|17.8|185.0|3700.0|FEMALE
 Chinstrap|Dream|55.8|19.8|207.0|4000.0|MALE
@@ -71,11 +72,11 @@ Adelie|Torgersen|36.7|18.8|187.0|3800.0|FEMALE
 <li>Output format is not particularly readable</li>
 </ul>
 <h2 class="aside">Administrative Commands</h2>
-<pre class="language-sql"><code class="language-sql" data-file="admin_commands.sql">.headers on
+<pre class=""><code data-file="admin_commands.sql">.headers on
 .mode markdown
 select * from little_penguins;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="admin_commands.out">|  species  |  island   | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g |  sex   |
+<pre class=""><code data-file="admin_commands.out">|  species  |  island   | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g |  sex   |
 |-----------|-----------|----------------|---------------|-------------------|-------------|--------|
 | Gentoo    | Biscoe    | 51.3           | 14.2          | 218.0             | 5300.0      | MALE   |
 | Adelie    | Dream     | 35.7           | 18.0          | 202.0             | 3550.0      | FEMALE |
@@ -100,13 +101,13 @@ select * from little_penguins;
 <li>And as mentioned earlier, use <code>.quit</code> to quit</li>
 </ul>
 <h2>Specifying Columns</h2>
-<pre class="language-sql"><code class="language-sql" data-file="specify_columns.penguins.sql">select
+<pre class=""><code data-file="specify_columns.penguins.sql">select
     species,
     island,
     sex
 from little_penguins;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="specify_columns.penguins.out">|  species  |  island   |  sex   |
+<pre class=""><code data-file="specify_columns.penguins.out">|  species  |  island   |  sex   |
 |-----------|-----------|--------|
 | Gentoo    | Biscoe    | MALE   |
 | Adelie    | Dream     | FEMALE |
@@ -128,14 +129,14 @@ from little_penguins;
 <li>Line breaks encouraged for readability</li>
 </ul>
 <h2>Sorting</h2>
-<pre class="language-sql"><code class="language-sql" data-file="sort.penguins.sql">select
+<pre class=""><code data-file="sort.penguins.sql">select
     species,
     sex,
     island
 from little_penguins
 order by island asc, sex desc;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="sort.penguins.out">|  species  |  sex   |  island   |
+<pre class=""><code data-file="sort.penguins.out">|  species  |  sex   |  island   |
 |-----------|--------|-----------|
 | Gentoo    | MALE   | Biscoe    |
 | Gentoo    | MALE   | Biscoe    |
@@ -162,7 +163,7 @@ sorted such that the largest body mass appears first.</p>
 <ul>
 <li>Full dataset has 344 rows</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="limit.penguins.sql">select
+<pre class=""><code data-file="limit.penguins.sql">select
     species,
     sex,
     island
@@ -170,7 +171,7 @@ from penguins
 order by species, sex, island
 limit 10;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="limit.penguins.out">| species |  sex   |  island   |
+<pre class=""><code data-file="limit.penguins.out">| species |  sex   |  island   |
 |---------|--------|-----------|
 | Adelie  |        | Dream     |
 | Adelie  |        | Torgersen |
@@ -188,7 +189,7 @@ limit 10;
 <li><code>limit <em>N</em></code> specifies maximum number of rows returned by query</li>
 </ul>
 <h2>Paging Output</h2>
-<pre class="language-sql"><code class="language-sql" data-file="page.penguins.sql">select
+<pre class=""><code data-file="page.penguins.sql">select
     species,
     sex,
     island
@@ -196,7 +197,7 @@ from penguins
 order by species, sex, island
 limit 10 offset 3;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="page.penguins.out">| species |  sex   |  island   |
+<pre class=""><code data-file="page.penguins.out">| species |  sex   |  island   |
 |---------|--------|-----------|
 | Adelie  |        | Torgersen |
 | Adelie  |        | Torgersen |
@@ -215,13 +216,13 @@ limit 10 offset 3;
 <li>So this query skips the first 3 and shows the next 10</li>
 </ul>
 <h2>Removing Duplicates</h2>
-<pre class="language-sql"><code class="language-sql" data-file="distinct.penguins.sql">select distinct
+<pre class=""><code data-file="distinct.penguins.sql">select distinct
     species,
     sex,
     island
 from penguins;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="distinct.penguins.out">|  species  |  sex   |  island   |
+<pre class=""><code data-file="distinct.penguins.out">|  species  |  sex   |  island   |
 |-----------|--------|-----------|
 | Adelie    | MALE   | Torgersen |
 | Adelie    | FEMALE | Torgersen |
@@ -262,14 +263,14 @@ from penguins;
 </li>
 </ol>
 <h2>Filtering Results</h2>
-<pre class="language-sql"><code class="language-sql" data-file="filter.penguins.sql">select distinct
+<pre class=""><code data-file="filter.penguins.sql">select distinct
     species,
     sex,
     island
 from penguins
 where island = 'Biscoe';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter.penguins.out">| species |  sex   | island |
+<pre class=""><code data-file="filter.penguins.out">| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Adelie  | MALE   | Biscoe |
@@ -297,14 +298,14 @@ where island = 'Biscoe';
 </li>
 </ol>
 <h2>Filtering with More Complex Conditions</h2>
-<pre class="language-sql"><code class="language-sql" data-file="filter_and.penguins.sql">select distinct
+<pre class=""><code data-file="filter_and.penguins.sql">select distinct
     species,
     sex,
     island
 from penguins
 where island = 'Biscoe' and sex != 'MALE';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter_and.penguins.out">| species |  sex   | island |
+<pre class=""><code data-file="filter_and.penguins.out">| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Gentoo  | FEMALE | Biscoe |
@@ -332,13 +333,13 @@ where island = 'Biscoe' and sex != 'MALE';
 </li>
 </ol>
 <h2>Doing Calculations</h2>
-<pre class="language-sql"><code class="language-sql" data-file="calculations.penguins.sql">select
+<pre class=""><code data-file="calculations.penguins.sql">select
     flipper_length_mm / 10.0,
     body_mass_g / 1000.0
 from penguins
 limit 3;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="calculations.penguins.out">| flipper_length_mm / 10.0 | body_mass_g / 1000.0 |
+<pre class=""><code data-file="calculations.penguins.out">| flipper_length_mm / 10.0 | body_mass_g / 1000.0 |
 |--------------------------|----------------------|
 | 18.1                     | 3.75                 |
 | 18.6                     | 3.8                  |
@@ -352,14 +353,14 @@ limit 3;
 <li>Column name shows the calculation done</li>
 </ul>
 <h2>Renaming Columns</h2>
-<pre class="language-sql"><code class="language-sql" data-file="rename_columns.penguins.sql">select
+<pre class=""><code data-file="rename_columns.penguins.sql">select
     flipper_length_mm / 10.0 as flipper_cm,
     body_mass_g / 1000.0 as weight_kg,
     island as where_found
 from penguins
 limit 3;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="rename_columns.penguins.out">| flipper_cm | weight_kg | where_found |
+<pre class=""><code data-file="rename_columns.penguins.out">| flipper_cm | weight_kg | where_found |
 |------------|-----------|-------------|
 | 18.1       | 3.75      | Torgersen   |
 | 18.6       | 3.8       | Torgersen   |
@@ -385,14 +386,14 @@ or look at [the documentation for SQLite's <code>format()</code> function][sqlit
 <figcaption>Figure 1: Selection Concepts</figcaption>
 </figure>
 <h2>Calculating with Missing Values</h2>
-<pre class="language-sql"><code class="language-sql" data-file="show_missing_values.penguins.sql">select
+<pre class=""><code data-file="show_missing_values.penguins.sql">select
     flipper_length_mm / 10.0 as flipper_cm,
     body_mass_g / 1000.0 as weight_kg,
     island as where_found
 from penguins
 limit 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="show_missing_values.penguins.out">| flipper_cm | weight_kg | where_found |
+<pre class=""><code data-file="show_missing_values.penguins.out">| flipper_cm | weight_kg | where_found |
 |------------|-----------|-------------|
 | 18.1       | 3.75      | Torgersen   |
 | 18.6       | 3.8       | Torgersen   |
@@ -418,14 +419,14 @@ When might it be misleading?</p>
 <ul>
 <li>Repeated from earlier</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="filter.penguins.sql">select distinct
+<pre class=""><code data-file="filter.penguins.sql">select distinct
     species,
     sex,
     island
 from penguins
 where island = 'Biscoe';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter.penguins.out">| species |  sex   | island |
+<pre class=""><code data-file="filter.penguins.out">| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Adelie  | MALE   | Biscoe |
@@ -436,14 +437,14 @@ where island = 'Biscoe';
 <ul>
 <li>If we ask for female penguins the row with the missing sex drops out</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="null_equality.penguins.sql">select distinct
+<pre class=""><code data-file="null_equality.penguins.sql">select distinct
     species,
     sex,
     island
 from penguins
 where island = 'Biscoe' and sex = 'FEMALE';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="null_equality.penguins.out">| species |  sex   | island |
+<pre class=""><code data-file="null_equality.penguins.out">| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Gentoo  | FEMALE | Biscoe |
@@ -452,22 +453,22 @@ where island = 'Biscoe' and sex = 'FEMALE';
 <ul>
 <li>But if we ask for penguins that <em>aren't</em> female it drops out as well</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="null_inequality.penguins.sql">select distinct
+<pre class=""><code data-file="null_inequality.penguins.sql">select distinct
     species,
     sex,
     island
 from penguins
 where island = 'Biscoe' and sex != 'FEMALE';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="null_inequality.penguins.out">| species | sex  | island |
+<pre class=""><code data-file="null_inequality.penguins.out">| species | sex  | island |
 |---------|------|--------|
 | Adelie  | MALE | Biscoe |
 | Gentoo  | MALE | Biscoe |
 </code></pre>
 <h2>Ternary Logic</h2>
-<pre class="language-sql"><code class="language-sql" data-file="ternary_logic.penguins.sql">select null = null;
+<pre class=""><code data-file="ternary_logic.penguins.sql">select null = null;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="ternary_logic.penguins.out">| null = null |
+<pre class=""><code data-file="ternary_logic.penguins.out">| null = null |
 |-------------|
 |             |
 </code></pre>
@@ -509,14 +510,14 @@ where island = 'Biscoe' and sex != 'FEMALE';
 </tbody>
 </table>
 <h2>Handling Null Safely</h2>
-<pre class="language-sql"><code class="language-sql" data-file="safe_null_equality.penguins.sql">select
+<pre class=""><code data-file="safe_null_equality.penguins.sql">select
     species,
     sex,
     island
 from penguins
 where sex is null;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="safe_null_equality.penguins.out">| species | sex |  island   |
+<pre class=""><code data-file="safe_null_equality.penguins.out">| species | sex |  island   |
 |---------|-----|-----------|
 | Adelie  |     | Torgersen |
 | Adelie  |     | Torgersen |
@@ -549,10 +550,10 @@ where sex is null;
 <figcaption>Figure 2: Missing Value Concepts</figcaption>
 </figure>
 <h2>Aggregating</h2>
-<pre class="language-sql"><code class="language-sql" data-file="simple_sum.penguins.sql">select sum(body_mass_g) as total_mass
+<pre class=""><code data-file="simple_sum.penguins.sql">select sum(body_mass_g) as total_mass
 from penguins;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="simple_sum.penguins.out">| total_mass |
+<pre class=""><code data-file="simple_sum.penguins.out">| total_mass |
 |------------|
 | 1437000.0  |
 </code></pre>
@@ -562,13 +563,13 @@ from penguins;
 <li>Combines corresponding values from multiple rows</li>
 </ul>
 <h2>Common Aggregation Functions</h2>
-<pre class="language-sql"><code class="language-sql" data-file="common_aggregations.penguins.sql">select
+<pre class=""><code data-file="common_aggregations.penguins.sql">select
     max(bill_length_mm) as longest_bill,
     min(flipper_length_mm) as shortest_flipper,
     avg(bill_length_mm) / avg(bill_depth_mm) as weird_ratio
 from penguins;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="common_aggregations.penguins.out">| longest_bill | shortest_flipper |   weird_ratio    |
+<pre class=""><code data-file="common_aggregations.penguins.out">| longest_bill | shortest_flipper |   weird_ratio    |
 |--------------|------------------|------------------|
 | 59.6         | 172.0            | 2.56087082530644 |
 </code></pre>
@@ -580,13 +581,13 @@ from penguins;
 <h2 class="exercise">Exercise</h2>
 <p>What is the average body mass of penguins that weight more than 3000.0 grams?</p>
 <h2>Counting</h2>
-<pre class="language-sql"><code class="language-sql" data-file="count_behavior.penguins.sql">select
+<pre class=""><code data-file="count_behavior.penguins.sql">select
     count(*) as count_star,
     count(sex) as count_specific,
     count(distinct sex) as count_distinct
 from penguins;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="count_behavior.penguins.out">| count_star | count_specific | count_distinct |
+<pre class=""><code data-file="count_behavior.penguins.out">| count_star | count_specific | count_distinct |
 |------------|----------------|----------------|
 | 344        | 333            | 2              |
 </code></pre>
@@ -598,11 +599,11 @@ from penguins;
 <h2 class="exercise">Exercise</h2>
 <p>How many different body masses are in the penguins dataset?</p>
 <h2>Grouping</h2>
-<pre class="language-sql"><code class="language-sql" data-file="simple_group.penguins.sql">select avg(body_mass_g) as average_mass_g
+<pre class=""><code data-file="simple_group.penguins.sql">select avg(body_mass_g) as average_mass_g
 from penguins
 group by sex;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="simple_group.penguins.out">|  average_mass_g  |
+<pre class=""><code data-file="simple_group.penguins.out">|  average_mass_g  |
 |------------------|
 | 4005.55555555556 |
 | 3862.27272727273 |
@@ -614,13 +615,13 @@ group by sex;
 <li>But which is which?</li>
 </ul>
 <h2>Behavior of Unaggregated Columns</h2>
-<pre class="language-sql"><code class="language-sql" data-file="unaggregated_columns.penguins.sql">select
+<pre class=""><code data-file="unaggregated_columns.penguins.sql">select
     sex,
     avg(body_mass_g) as average_mass_g
 from penguins
 group by sex;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="unaggregated_columns.penguins.out">|  sex   |  average_mass_g  |
+<pre class=""><code data-file="unaggregated_columns.penguins.out">|  sex   |  average_mass_g  |
 |--------|------------------|
 |        | 4005.55555555556 |
 | FEMALE | 3862.27272727273 |
@@ -630,13 +631,13 @@ group by sex;
 <li>All rows in each group have the same value for <code>sex</code>, so no need to aggregate</li>
 </ul>
 <h2>Arbitrary Choice in Aggregation</h2>
-<pre class="language-sql"><code class="language-sql" data-file="arbitrary_in_aggregation.penguins.sql">select
+<pre class=""><code data-file="arbitrary_in_aggregation.penguins.sql">select
     sex,
     body_mass_g                   
 from penguins
 group by sex;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="arbitrary_in_aggregation.penguins.out">|  sex   | body_mass_g |
+<pre class=""><code data-file="arbitrary_in_aggregation.penguins.out">|  sex   | body_mass_g |
 |--------|-------------|
 |        |             |
 | FEMALE | 3800.0      |
@@ -661,14 +662,14 @@ has a blank line before the rows for female and male penguins.</p>
 <p>Write a query that shows each distinct body mass in the penguin dataset
 and the number of penguins that weigh that much.</p>
 <h2>Filtering Aggregated Values</h2>
-<pre class="language-sql"><code class="language-sql" data-file="filter_aggregation.penguins.sql">select
+<pre class=""><code data-file="filter_aggregation.penguins.sql">select
     sex,
     avg(body_mass_g) as average_mass_g
 from penguins
 group by sex
 having average_mass_g &gt; 4000.0;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter_aggregation.penguins.out">| sex  |  average_mass_g  |
+<pre class=""><code data-file="filter_aggregation.penguins.out">| sex  |  average_mass_g  |
 |------|------------------|
 |      | 4005.55555555556 |
 | MALE | 4545.68452380952 |
@@ -677,14 +678,14 @@ having average_mass_g &gt; 4000.0;
 <li>Using <code>having <em>condition</em></code> instead of <code>where <em>condition</em></code> for aggregates</li>
 </ul>
 <h2>Readable Output</h2>
-<pre class="language-sql"><code class="language-sql" data-file="readable_aggregation.penguins.sql">select
+<pre class=""><code data-file="readable_aggregation.penguins.sql">select
     sex,
     round(avg(body_mass_g), 1) as average_mass_g
 from penguins
 group by sex
 having average_mass_g &gt; 4000.0;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="readable_aggregation.penguins.out">| sex  | average_mass_g |
+<pre class=""><code data-file="readable_aggregation.penguins.out">| sex  | average_mass_g |
 |------|----------------|
 |      | 4005.6         |
 | MALE | 4545.7         |
@@ -693,7 +694,7 @@ having average_mass_g &gt; 4000.0;
 <li>Use <code>round(<em>value</em>, <em>decimals</em>)</code> to round off a number</li>
 </ul>
 <h2>Filtering Aggregate Inputs</h2>
-<pre class="language-sql"><code class="language-sql" data-file="filter_aggregate_inputs.penguins.sql">select
+<pre class=""><code data-file="filter_aggregate_inputs.penguins.sql">select
     sex,
     round(
         avg(body_mass_g) filter (where body_mass_g &lt; 4000.0),
@@ -702,7 +703,7 @@ having average_mass_g &gt; 4000.0;
 from penguins
 group by sex;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter_aggregate_inputs.penguins.out">|  sex   | average_mass_g |
+<pre class=""><code data-file="filter_aggregate_inputs.penguins.out">|  sex   | average_mass_g |
 |--------|----------------|
 |        | 3362.5         |
 | FEMALE | 3417.3         |
@@ -723,7 +724,7 @@ Is it possible to do this using <code>where</code> instead of <code>filter</code
 <figcaption>Figure 3: Aggregation Conceps</figcaption>
 </figure>
 <h2 class="aside">Creating In-memory Database</h2>
-<pre class="language-sh"><code class="language-sh" data-file="in_memory_db.sh">sqlite3 :memory:
+<pre class=""><code data-file="in_memory_db.sh">sqlite3 :memory:
 </code></pre>
 <ul>
 <li>"Connect" to an <a href="../glossary/#in_memory_db">in-memory database</a><ul>
@@ -733,7 +734,7 @@ Is it possible to do this using <code>where</code> instead of <code>filter</code
 </li>
 </ul>
 <h2>Creating Tables</h2>
-<pre class="language-sql"><code class="language-sql" data-file="create_work_job.sql">create table job (
+<pre class=""><code data-file="create_work_job.sql">create table job (
     name text not null,
     billable real not null
 );
@@ -760,7 +761,7 @@ create table work (
 <li>Use <code>work_job.db</code> from the zip file</li>
 </ul>
 <h2>Inserting Data</h2>
-<pre class="language-sql"><code class="language-sql" data-file="populate_work_job.sql">insert into job values
+<pre class=""><code data-file="populate_work_job.sql">insert into job values
 ('calibrate', 1.5),
 ('clean', 0.5);
 insert into work values
@@ -771,7 +772,7 @@ insert into work values
 ('po', 'complain'),
 ('tay', 'complain');
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="show_work_job.memory.out">|   name    | billable |
+<pre class=""><code data-file="show_work_job.memory.out">|   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
 | clean     | 0.5      |
@@ -793,11 +794,11 @@ and that you can (for example) select by author name.</p>
 <p>What happens if you try to insert too many or too few values into <code>notes</code>?
 What happens if you insert a number instead of a string into the <code>note</code> field?</p>
 <h2>Updating Rows</h2>
-<pre class="language-sql"><code class="language-sql" data-file="update_work_job.sql">update work
+<pre class=""><code data-file="update_work_job.sql">update work
 set person = 'tae'
 where person = 'tay';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="show_after_update.memory.out">| person |    job    |
+<pre class=""><code data-file="show_after_update.memory.out">| person |    job    |
 |--------|-----------|
 | mik    | calibrate |
 | mik    | clean     |
@@ -813,12 +814,12 @@ where person = 'tay';
 </li>
 </ul>
 <h2>Deleting Rows</h2>
-<pre class="language-sql"><code class="language-sql" data-file="delete_rows.memory.sql:keep">delete from work
+<pre class=""><code data-file="delete_rows.memory.sql:keep">delete from work
 where person = 'tae';
 
 select * from work;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="delete_rows.memory.out">| person |    job    |
+<pre class=""><code data-file="delete_rows.memory.out">| person |    job    |
 |--------|-----------|
 | mik    | calibrate |
 | mik    | clean     |
@@ -833,7 +834,7 @@ select * from work;
 <p>What happens if you try to delete rows that don't exist
 (e.g., all entries in <code>work</code> that refer to <code>juna</code>)?</p>
 <h2>Backing Up</h2>
-<pre class="language-sql"><code class="language-sql" data-file="backing_up.memory.sql:keep">create table backup (
+<pre class=""><code data-file="backing_up.memory.sql:keep">create table backup (
     person text not null,
     job text not null
 );
@@ -850,7 +851,7 @@ where person = 'tae';
 
 select * from backup;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="backing_up.memory.out">| person |   job    |
+<pre class=""><code data-file="backing_up.memory.out">| person |   job    |
 |--------|----------|
 | tae    | complain |
 </code></pre>
@@ -895,10 +896,10 @@ select * from backup;
 <figcaption>Figure 4: Data Definition and Modification Concepts</figcaption>
 </figure>
 <h2>Combining Information</h2>
-<pre class="language-sql"><code class="language-sql" data-file="cross_join.memory.sql:keep">select *
+<pre class=""><code data-file="cross_join.memory.sql:keep">select *
 from work cross join job;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="cross_join.memory.out">| person |    job    |   name    | billable |
+<pre class=""><code data-file="cross_join.memory.out">| person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
 | mik    | calibrate | clean     | 0.5      |
@@ -925,11 +926,11 @@ from work cross join job;
 </li>
 </ul>
 <h2>Inner Join</h2>
-<pre class="language-sql"><code class="language-sql" data-file="inner_join.memory.sql:keep">select *
+<pre class=""><code data-file="inner_join.memory.sql:keep">select *
 from work inner join job
     on work.job = job.name;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="inner_join.memory.out">| person |    job    |   name    | billable |
+<pre class=""><code data-file="inner_join.memory.out">| person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
 | mik    | clean     | clean     | 0.5      |
@@ -948,14 +949,14 @@ from work inner join job
 Is the shortened form easier or harder to read
 and more or less likely to cause errors?</p>
 <h2>Aggregating Joined Data</h2>
-<pre class="language-sql"><code class="language-sql" data-file="aggregate_join.memory.sql:keep">select
+<pre class=""><code data-file="aggregate_join.memory.sql:keep">select
     work.person,
     sum(job.billable) as pay
 from work inner join job
     on work.job = job.name
 group by work.person;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="aggregate_join.memory.out">| person | pay |
+<pre class=""><code data-file="aggregate_join.memory.out">| person | pay |
 |--------|-----|
 | mik    | 2.0 |
 | po     | 0.5 |
@@ -969,11 +970,11 @@ group by work.person;
 </li>
 </ul>
 <h2>Left Join</h2>
-<pre class="language-sql"><code class="language-sql" data-file="left_join.memory.sql:keep">select *
+<pre class=""><code data-file="left_join.memory.sql:keep">select *
 from work left join job
     on work.job = job.name;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="left_join.memory.out">| person |    job    |   name    | billable |
+<pre class=""><code data-file="left_join.memory.out">| person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
 | mik    | clean     | clean     | 0.5      |
@@ -987,14 +988,14 @@ from work left join job
 <li>Fills missing values from right table with null</li>
 </ul>
 <h2>Aggregating Left Joins</h2>
-<pre class="language-sql"><code class="language-sql" data-file="aggregate_left_join.memory.sql:keep">select
+<pre class=""><code data-file="aggregate_left_join.memory.sql:keep">select
     work.person,
     sum(job.billable) as pay
 from work left join job
     on work.job = job.name
 group by work.person;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="aggregate_left_join.memory.out">| person | pay |
+<pre class=""><code data-file="aggregate_left_join.memory.out">| person | pay |
 |--------|-----|
 | mik    | 2.0 |
 | po     | 0.5 |
@@ -1004,14 +1005,14 @@ group by work.person;
 <li>That's better, but we'd like to see 0 rather than a blank</li>
 </ul>
 <h2>Coalescing Values</h2>
-<pre class="language-sql"><code class="language-sql" data-file="coalesce.memory.sql:keep">select
+<pre class=""><code data-file="coalesce.memory.sql:keep">select
     work.person,
     coalesce(sum(job.billable), 0.0) as pay
 from work left join job
     on work.job = job.name
 group by work.person;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="coalesce.memory.out">| person | pay |
+<pre class=""><code data-file="coalesce.memory.out">| person | pay |
 |--------|-----|
 | mik    | 2.0 |
 | po     | 0.5 |
@@ -1026,7 +1027,7 @@ group by work.person;
     left outer join and <a href="../glossary/#right_outer_join">right outer join</a></li>
 <li>Almost the same as cross join, but consider:</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="full_outer_join.memory.sql">create table size (
+<pre class=""><code data-file="full_outer_join.memory.sql">create table size (
     s text not null
 );
 insert into size values ('light'), ('heavy');
@@ -1037,7 +1038,7 @@ create table weight (
 
 select * from size full outer join weight;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="full_outer_join.memory.out">|   s   | w |
+<pre class=""><code data-file="full_outer_join.memory.out">|   s   | w |
 |-------|---|
 | light |   |
 | heavy |   |

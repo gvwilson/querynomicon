@@ -31,6 +31,7 @@
 <span class="dropdown-content">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
+<a href="../contrib/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -38,7 +39,7 @@
 </nav>
 <main>
 <h1>PostgreSQL</h1>
-<p id="terms">Terms defined: <a href="../glossary/#client_server_db">client-server database</a>, <a href="../glossary/#local_db">local database</a>, <a href="../glossary/#privilege">privilege</a>, <a href="../glossary/#role">role</a></p>
+<p id="terms"></p>
 <p><em>Contributed by [Konstantinos Kitsios][kitsios_konstantinos].</em></p>
 <h2>Why PostgreSQL?</h2>
 <ul>
@@ -138,18 +139,18 @@
 <p>Run the query to see the first entries of the <code>penguins</code> table.</p>
 </li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="select_penguins.sql">select * from penguins limit 10;
+<pre class=""><code data-file="select_penguins.sql">select * from penguins limit 10;
 </code></pre>
 <ul>
 <li>Count penguins:</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="count_penguins.sql">select count(*) from penguins;
+<pre class=""><code data-file="count_penguins.sql">select count(*) from penguins;
 </code></pre>
 <h2>Running Queries in the Terminal</h2>
 <ul>
 <li>Run the command-line PostgreSQL client and tell it what database to use:</li>
 </ul>
-<pre class="language-sh"><code class="language-sh" data-file="run_psql_penguins.sh">psql -d penguins 
+<pre class=""><code data-file="run_psql_penguins.sh">psql -d penguins 
 </code></pre>
 <ul>
 <li>Run the queries from the previous section</li>
@@ -206,13 +207,13 @@ but not modify or delete existing records.</li>
 <p>Create role in the terminal:</p>
 </li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="create_reader_writer.sql">create role penguin_reader_writer
+<pre class=""><code data-file="create_reader_writer.sql">create role penguin_reader_writer
 with login password 'reader_writer';
 </code></pre>
 <ul>
 <li>Grant permissions in the terminal:</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="grant_select_update.sql">grant select, update on penguins
+<pre class=""><code data-file="grant_select_update.sql">grant select, update on penguins
 to penguin_reader_writer;
 </code></pre>
 <h2>Verifying Privileges in PgAdmin</h2>
@@ -236,7 +237,7 @@ to penguin_reader_writer;
 </li>
 <li>Run a simple query that <em>reads</em> data:</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="select_penguins.sql">select * from penguins limit 10;
+<pre class=""><code data-file="select_penguins.sql">select * from penguins limit 10;
 </code></pre>
 <ul>
 <li>
@@ -246,7 +247,7 @@ to penguin_reader_writer;
 <p>Now try to <em>change</em> data:</p>
 </li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="update_penguins.sql">update penguins
+<pre class=""><code data-file="update_penguins.sql">update penguins
 set island = 'Antarctica'
 where sex = 'MALE' and island = 'Torgersen';
 </code></pre>
@@ -258,10 +259,10 @@ where sex = 'MALE' and island = 'Torgersen';
 <p>But now try to <em>delete</em> data:</p>
 </li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="delete_penguins.sql">delete from penguins
+<pre class=""><code data-file="delete_penguins.sql">delete from penguins
 where island='Antarctica' and sex='MALE';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="delete_penguins.out">psql:delete_penguins.sql:2: ERROR:  permission denied for table penguins
+<pre class=""><code data-file="delete_penguins.out">psql:delete_penguins.sql:2: ERROR:  permission denied for table penguins
 </code></pre>
 <ul>
 <li>Because the <code>penguin_reader_writer</code> role does not have <code>DELETE</code> privileges</li>
@@ -278,17 +279,17 @@ where island='Antarctica' and sex='MALE';
 </li>
 <li>In the terminal:</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="revoke_update.sql">revoke update on penguins
+<pre class=""><code data-file="revoke_update.sql">revoke update on penguins
 from penguin_reader_writer;
 </code></pre>
 <ul>
 <li>To verify:</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="update_penguins_again.sql">update penguins
+<pre class=""><code data-file="update_penguins_again.sql">update penguins
 set island = 'Atlantis'
 where sex = 'MALE' and island = 'Antarctica';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="update_penguins_again.out">psql:update_penguins_again.sql:3: ERROR:  permission denied for table penguins
+<pre class=""><code data-file="update_penguins_again.out">psql:update_penguins_again.sql:3: ERROR:  permission denied for table penguins
 </code></pre>
 </main>
 <footer>

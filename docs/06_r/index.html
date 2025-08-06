@@ -31,6 +31,7 @@
 <span class="dropdown-content">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
+<a href="../contrib/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -38,11 +39,11 @@
 </nav>
 <main>
 <h1>R</h1>
-
+<p id="terms"></p>
 <h2>Loading Libraries</h2>
-<pre class="language-r"><code class="language-r" data-file="load_connect.r">library(dplyr)
+<pre class=""><code data-file="load_connect.r">library(dplyr)
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="load_connect.out">## 
+<pre class=""><code data-file="load_connect.out">## 
 ## Attaching package: 'dplyr'
 
 ## The following objects are masked from 'package:stats':
@@ -63,16 +64,16 @@
 <ul>
 <li>List tables with <code>dbListTables</code></li>
 </ul>
-<pre class="language-r"><code class="language-r" data-file="list_tables.r">connection &lt;- DBI::dbConnect(RSQLite::SQLite(), 'data/penguins.db')
+<pre class=""><code data-file="list_tables.r">connection &lt;- DBI::dbConnect(RSQLite::SQLite(), 'data/penguins.db')
 DBI::dbListTables(connection)
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="list_tables.out">## [1] "little_penguins" "penguins"
+<pre class=""><code data-file="list_tables.out">## [1] "little_penguins" "penguins"
 </code></pre>
 <h2>Load Table as Dataframe</h2>
-<pre class="language-r"><code class="language-r" data-file="get_table.r">penguins &lt;- dplyr::tbl(connection, 'penguins')
+<pre class=""><code data-file="get_table.r">penguins &lt;- dplyr::tbl(connection, 'penguins')
 penguins
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="get_table.out">## # Source:   table&lt;`penguins`&gt; [?? x 7]
+<pre class=""><code data-file="get_table.out">## # Source:   table&lt;`penguins`&gt; [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -96,10 +97,10 @@ penguins
 </li>
 </ul>
 <h2>How Did We Get Here?</h2>
-<pre class="language-r"><code class="language-r" data-file="show_query.r">penguins |&gt; 
+<pre class=""><code data-file="show_query.r">penguins |&gt; 
   dplyr::show_query()
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="show_query.out">## &lt;SQL&gt;
+<pre class=""><code data-file="show_query.out">## &lt;SQL&gt;
 ## SELECT *
 ## FROM `penguins`
 </code></pre>
@@ -108,10 +109,10 @@ penguins
 <li><code>show_query()</code> runs the SQL <code>EXPLAIN</code> command to show the SQL query</li>
 </ul>
 <h2>Lazy Evaluation</h2>
-<pre class="language-r"><code class="language-r" data-file="filter_lazy.r">penguins |&gt; 
+<pre class=""><code data-file="filter_lazy.r">penguins |&gt; 
   filter(species == "Adelie")
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter_lazy.out">## # Source:   SQL [?? x 7]
+<pre class=""><code data-file="filter_lazy.out">## # Source:   SQL [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -134,11 +135,11 @@ penguins
 <li>The SQL query is only evaluated when it is sent to the database</li>
 <li>Running the <code>dplyr</code> call only returns a preview of the result</li>
 </ul>
-<pre class="language-r"><code class="language-r" data-file="filter_collect.r">penguins |&gt; 
+<pre class=""><code data-file="filter_collect.r">penguins |&gt; 
   filter(species == "Adelie") |&gt; 
   collect()
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter_collect.out">## # A tibble: 152 × 7
+<pre class=""><code data-file="filter_collect.out">## # A tibble: 152 × 7
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 Adelie  Torgersen           39.1          18.7               181        3750
@@ -161,10 +162,10 @@ penguins
 </li>
 </ul>
 <h2>Selecting Columns</h2>
-<pre class="language-r"><code class="language-r" data-file="select.r">penguins |&gt; 
+<pre class=""><code data-file="select.r">penguins |&gt; 
   select(species, island, contains('bill'))
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="select.out">## # Source:   SQL [?? x 4]
+<pre class=""><code data-file="select.out">## # Source:   SQL [?? x 4]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
@@ -185,11 +186,11 @@ penguins
 <li>Selection helpers from <code>dplyr</code> (like <code>contains</code>) work</li>
 </ul>
 <h2>Sorting</h2>
-<pre class="language-r"><code class="language-r" data-file="sort.r">penguins |&gt; 
+<pre class=""><code data-file="sort.r">penguins |&gt; 
   select(species, body_mass_g) |&gt; 
   arrange(body_mass_g)
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="sort.out">## # Source:     SQL [?? x 2]
+<pre class=""><code data-file="sort.out">## # Source:     SQL [?? x 2]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: body_mass_g
 ##    species   body_mass_g
@@ -214,12 +215,12 @@ penguins
 <p>Find the lightest penguin on Dream Island by arranging the table accordingly.
 Only show the species, island, and body mass.</p>
 <h3>Solution</h3>
-<pre class="language-r"><code class="language-r" data-file="ex_lightest_penguin.r">penguins |&gt; 
+<pre class=""><code data-file="ex_lightest_penguin.r">penguins |&gt; 
   select(species, island, body_mass_g) |&gt; 
   filter(island == 'Dream') |&gt; 
   arrange(desc(body_mass_g))
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="ex_lightest_penguin.out">## # Source:     SQL [?? x 3]
+<pre class=""><code data-file="ex_lightest_penguin.out">## # Source:     SQL [?? x 3]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: desc(body_mass_g)
 ##    species   island body_mass_g
@@ -237,10 +238,10 @@ Only show the species, island, and body mass.</p>
 ## # ℹ more rows
 </code></pre>
 <h2>Transforming Columns</h2>
-<pre class="language-r"><code class="language-r" data-file="mutate.r">penguins |&gt; 
+<pre class=""><code data-file="mutate.r">penguins |&gt; 
   mutate(weight_kg = body_mass_g/1000)
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="mutate.out">## # Source:   SQL [?? x 8]
+<pre class=""><code data-file="mutate.out">## # Source:   SQL [?? x 8]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -266,11 +267,11 @@ Only show the species, island, and body mass.</p>
 <li>If <code>select</code> it not present the query will return all the columns</li>
 </ul>
 <h2>Aggregating</h2>
-<pre class="language-r"><code class="language-r" data-file="aggregate.r">penguins |&gt; 
+<pre class=""><code data-file="aggregate.r">penguins |&gt; 
   group_by(species) |&gt; 
   summarise(avg_body_mas = mean(body_mass_g))
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="aggregate.out">## Warning: Missing values are always removed in SQL aggregation functions.
+<pre class=""><code data-file="aggregate.out">## Warning: Missing values are always removed in SQL aggregation functions.
 ## Use `na.rm = TRUE` to silence this warning
 ## This warning is displayed once every 8 hours.
 
@@ -292,7 +293,7 @@ Only show the species, island, and body mass.</p>
 <li>Using the previous result, calculate the average ratio for each species</li>
 </ul>
 <h2>Creating a Table</h2>
-<pre class="language-r"><code class="language-r" data-file="create_table.r">library(DBI)
+<pre class=""><code data-file="create_table.r">library(DBI)
 
 another_connection &lt;- dbConnect(RSQLite::SQLite(), ':memory:')
 
@@ -332,7 +333,7 @@ work &lt;- tbl(another_connection, "work")
 </tbody>
 </table>
 <h3>Solution</h3>
-<pre class="language-r"><code class="language-r" data-file="ex_job_table.r">table2 &lt;- tibble(
+<pre class=""><code data-file="ex_job_table.r">table2 &lt;- tibble(
   name = c('calibrate', 'clean'),
   billable = c(1.5, 0.5)
 )
@@ -345,11 +346,11 @@ job &lt;- tbl(another_connection, "job")
 <ul>
 <li>Who doesn't calibrate?</li>
 </ul>
-<pre class="language-r"><code class="language-r" data-file="negate_wrong.r">work |&gt; 
+<pre class=""><code data-file="negate_wrong.r">work |&gt; 
   filter(job != 'calibrate') |&gt; 
   distinct(person)
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="negate_wrong.out">## # Source:   SQL [3 x 1]
+<pre class=""><code data-file="negate_wrong.out">## # Source:   SQL [3 x 1]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person
 ##   &lt;chr&gt; 
@@ -364,7 +365,7 @@ job &lt;- tbl(another_connection, "job")
 </li>
 </ul>
 <h2>Literal SQL</h2>
-<pre class="language-r"><code class="language-r" data-file="literal_sql.r">work |&gt; 
+<pre class=""><code data-file="literal_sql.r">work |&gt; 
   filter(!person %in% sql(
     # subquery
     "(SELECT DISTINCT person FROM work
@@ -380,7 +381,7 @@ job &lt;- tbl(another_connection, "job")
 <li>Useful when R code is not enough to write a query</li>
 </ul>
 <h2>Joining Tables</h2>
-<pre class="language-r"><code class="language-r" data-file="join.r">does_calibrate &lt;- work |&gt; 
+<pre class=""><code data-file="join.r">does_calibrate &lt;- work |&gt; 
   filter(job == 'calibrate')
 
 work |&gt; 
@@ -388,7 +389,7 @@ work |&gt;
   distinct(person) |&gt; 
   collect() 
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="join.out">## # A tibble: 2 × 1
+<pre class=""><code data-file="join.out">## # A tibble: 2 × 1
 ##   person
 ##   &lt;chr&gt; 
 ## 1 po    
@@ -405,12 +406,12 @@ work |&gt;
 <h2 class="exercise">Exercise</h2>
 <p>Calculate how may hours each person worked by summing all jobs.</p>
 <h3>Solution</h3>
-<pre class="language-r"><code class="language-r" data-file="ex_join.r">work |&gt; 
+<pre class=""><code data-file="ex_join.r">work |&gt; 
   left_join(job, by = join_by(job == name)) |&gt; 
   group_by(person) |&gt; 
   summarise(total_hours = sum(billable))
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="ex_join.out">## # Source:   SQL [3 x 2]
+<pre class=""><code data-file="ex_join.out">## # Source:   SQL [3 x 2]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person total_hours
 ##   &lt;chr&gt;        &lt;dbl&gt;

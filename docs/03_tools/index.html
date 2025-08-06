@@ -31,6 +31,7 @@
 <span class="dropdown-content">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
+<a href="../contrib/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -38,16 +39,16 @@
 </nav>
 <main>
 <h1>Tools</h1>
-<p id="terms">Terms defined: <a href="../glossary/#1_to_1">1-to-1 relation</a>, <a href="../glossary/#1_to_many">1-to-many relation</a>, <a href="../glossary/#alias">alias</a>, <a href="../glossary/#autoincrement">autoincrement</a>, <a href="../glossary/#b_tree">B-tree</a>, <a href="../glossary/#cte">common table expression (CTE)</a>, <a href="../glossary/#correlated_subquery">correlated subquery</a>, <a href="../glossary/#data_migration">data migration</a>, <a href="../glossary/#er_diagram">entity-relationship diagram</a>, <a href="../glossary/#expression">expression</a>, <a href="../glossary/#foreign_key">foreign key</a>, <a href="../glossary/#index">index</a>, <a href="../glossary/#join_table">join table</a>, <a href="../glossary/#many_to_many">many-to-many relation</a>, <a href="../glossary/#primary_key">primary key</a>, <a href="../glossary/#statement">statement</a>, <a href="../glossary/#subquery">subquery</a>, <a href="../glossary/#table_valued_func">table-valued function</a>, <a href="../glossary/#vectorization">vectorization</a>, <a href="../glossary/#window_func">window function</a></p>
+<p id="terms"></p>
 <h2>Negating Incorrectly</h2>
 <ul>
 <li>Who doesn't calibrate?</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="negate_incorrectly.memory.sql:keep">select distinct person
+<pre class=""><code data-file="negate_incorrectly.memory.sql:keep">select distinct person
 from work
 where job != 'calibrate';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="negate_incorrectly.memory.out">| person |
+<pre class=""><code data-file="negate_incorrectly.memory.out">| person |
 |--------|
 | mik    |
 | po     |
@@ -60,11 +61,11 @@ where job != 'calibrate';
 <li>We need a different approach…</li>
 </ul>
 <h2>Set Membership</h2>
-<pre class="language-sql"><code class="language-sql" data-file="set_membership.sql:keep">select *
+<pre class=""><code data-file="set_membership.sql:keep">select *
 from work
 where person not in ('mik', 'tay');
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="set_membership.out">| person |   job    |
+<pre class=""><code data-file="set_membership.out">| person |   job    |
 |--------|----------|
 | po     | clean    |
 | po     | complain |
@@ -73,7 +74,7 @@ where person not in ('mik', 'tay');
 <li><code>in <em>values</em></code> and <code>not in <em>values</em></code> do exactly what you expect</li>
 </ul>
 <h2>Subqueries</h2>
-<pre class="language-sql"><code class="language-sql" data-file="subquery_set.sql:keep">select distinct person
+<pre class=""><code data-file="subquery_set.sql:keep">select distinct person
 from work
 where person not in (
     select distinct person
@@ -81,7 +82,7 @@ where person not in (
     where job = 'calibrate'
 );
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="subquery_set.out">| person |
+<pre class=""><code data-file="subquery_set.out">| person |
 |--------|
 | po     |
 | tay    |
@@ -97,7 +98,7 @@ where person not in (
     as long as value(s) unique for each record</li>
 <li>Uniquely identifies a particular record in a particular table</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="primary_key.sql">create table lab_equipment (
+<pre class=""><code data-file="primary_key.sql">create table lab_equipment (
     size real not null,
     color text not null,
     num integer not null,
@@ -114,7 +115,7 @@ select * from lab_equipment;
 insert into lab_equipment values
 (1.5, 'green', 2);
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="primary_key.out">| size | color | num |
+<pre class=""><code data-file="primary_key.out">| size | color | num |
 |------|-------|-----|
 | 1.5  | blue  | 2   |
 | 1.5  | green | 1   |
@@ -126,7 +127,7 @@ Runtime error near line 17: UNIQUE constraint failed: lab_equipment.size, lab_eq
 If so, what is it?
 What about the <code>work</code> and <code>job</code> tables?</p>
 <h2>Autoincrementing and Primary Keys</h2>
-<pre class="language-sql"><code class="language-sql" data-file="autoincrement.sql">create table person (
+<pre class=""><code data-file="autoincrement.sql">create table person (
     ident integer primary key autoincrement,
     name text not null
 );
@@ -137,7 +138,7 @@ insert into person values
 select * from person;
 insert into person values (1, 'prevented');
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="autoincrement.out">| ident | name |
+<pre class=""><code data-file="autoincrement.out">| ident | name |
 |-------|------|
 | 1     | mik  |
 | 2     | po   |
@@ -155,9 +156,9 @@ Runtime error near line 12: UNIQUE constraint failed: person.ident (19)
 <li>Downside: manual queries are harder to read (who is person 17?)</li>
 </ul>
 <h2 class="aside">Internal Tables</h2>
-<pre class="language-sql"><code class="language-sql" data-file="sequence_table.memory.sql:keep">select * from sqlite_sequence;
+<pre class=""><code data-file="sequence_table.memory.sql:keep">select * from sqlite_sequence;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="sequence_table.memory.out">|  name  | seq |
+<pre class=""><code data-file="sequence_table.memory.out">|  name  | seq |
 |--------|-----|
 | person | 3   |
 </code></pre>
@@ -173,7 +174,7 @@ In particular,
 are you able to reset the values so that
 the same sequence numbers are generated again?</p>
 <h2>Altering Tables</h2>
-<pre class="language-sql"><code class="language-sql" data-file="alter_tables.sql:keep">alter table job
+<pre class=""><code data-file="alter_tables.sql:keep">alter table job
 add ident integer not null default -1;
 
 update job
@@ -186,7 +187,7 @@ where name = 'clean';
 
 select * from job;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="alter_tables.out">|   name    | billable | ident |
+<pre class=""><code data-file="alter_tables.out">|   name    | billable | ident |
 |-----------|----------|-------|
 | calibrate | 1.5      | 1     |
 | clean     | 0.5      | 2     |
@@ -222,7 +223,7 @@ select * from job;
 </li>
 </ul>
 <h2>Creating New Tables from Old</h2>
-<pre class="language-sql"><code class="language-sql" data-file="insert_select.sql:keep">create table new_work (
+<pre class=""><code data-file="insert_select.sql:keep">create table new_work (
     person_id integer not null,
     job_id integer not null,
     foreign key (person_id) references person (ident),
@@ -238,7 +239,7 @@ from
     inner join job on job.name = work.job;
 select * from new_work;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="insert_select.out">| person_id | job_id |
+<pre class=""><code data-file="insert_select.out">| person_id | job_id |
 |-----------|--------|
 | 1         | 1      |
 | 1         | 2      |
@@ -249,10 +250,10 @@ select * from new_work;
 <li>Each column refers to a record in some other table</li>
 </ul>
 <h2>Removing Tables</h2>
-<pre class="language-sql"><code class="language-sql" data-file="drop_table.sql:keep">drop table work;
+<pre class=""><code data-file="drop_table.sql:keep">drop table work;
 alter table new_work rename to work;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="drop_table.out">CREATE TABLE job (
+<pre class=""><code data-file="drop_table.out">CREATE TABLE job (
     ident integer primary key autoincrement,
     name text not null,
     billable real not null
@@ -300,7 +301,7 @@ CREATE TABLE IF NOT EXISTS "work" (
 <ul>
 <li>Go back to the original penguins database</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="compare_individual_aggregate.penguins.sql">select body_mass_g
+<pre class=""><code data-file="compare_individual_aggregate.penguins.sql">select body_mass_g
 from penguins
 where
     body_mass_g &gt; (
@@ -309,7 +310,7 @@ where
     )
 limit 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="compare_individual_aggregate.penguins.out">| body_mass_g |
+<pre class=""><code data-file="compare_individual_aggregate.penguins.out">| body_mass_g |
 |-------------|
 | 4675.0      |
 | 4250.0      |
@@ -330,7 +331,7 @@ limit 5;
 <p>Use a subquery to find the number of penguins
 that weigh the same as the lightest penguin.</p>
 <h2>Comparing Individual Values to Aggregates Within Groups</h2>
-<pre class="language-sql"><code class="language-sql" data-file="compare_within_groups.penguins.sql">select
+<pre class=""><code data-file="compare_within_groups.penguins.sql">select
     penguins.species,
     penguins.body_mass_g,
     round(averaged.avg_mass_g, 1) as avg_mass_g
@@ -345,7 +346,7 @@ from penguins inner join (
 where penguins.body_mass_g &gt; averaged.avg_mass_g
 limit 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="compare_within_groups.penguins.out">| species | body_mass_g | avg_mass_g |
+<pre class=""><code data-file="compare_within_groups.penguins.out">| species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
@@ -362,7 +363,7 @@ limit 5;
 <p>Use a subquery to find the number of penguins
 that weigh the same as the lightest penguin of the same sex and species.</p>
 <h2>Common Table Expressions</h2>
-<pre class="language-sql"><code class="language-sql" data-file="common_table_expressions.penguins.sql">with grouped as (
+<pre class=""><code data-file="common_table_expressions.penguins.sql">with grouped as (
     select
         species,
         avg(body_mass_g) as avg_mass_g
@@ -378,7 +379,7 @@ from penguins inner join grouped
 where penguins.body_mass_g &gt; grouped.avg_mass_g
 limit 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="common_table_expressions.penguins.out">| species | body_mass_g | avg_mass_g |
+<pre class=""><code data-file="common_table_expressions.penguins.out">| species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
@@ -394,14 +395,14 @@ limit 5;
 <li>Database decides how to optimize</li>
 </ul>
 <h2 class="aside">Explaining Query Plans</h2>
-<pre class="language-sql"><code class="language-sql" data-file="explain_query_plan.penguins.sql">explain query plan
+<pre class=""><code data-file="explain_query_plan.penguins.sql">explain query plan
 select
     species,
     avg(body_mass_g)
 from penguins
 group by species;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="explain_query_plan.penguins.out">QUERY PLAN
+<pre class=""><code data-file="explain_query_plan.penguins.out">QUERY PLAN
 |--SCAN penguins
 `--USE TEMP B-TREE FOR GROUP BY
 </code></pre>
@@ -417,14 +418,14 @@ that weigh the same as the lightest penguin of the same sex and species.</p>
 <ul>
 <li>Every table has a special column called <code>rowid</code></li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="rowid.penguins.sql">select
+<pre class=""><code data-file="rowid.penguins.sql">select
     rowid,
     species,
     island
 from penguins
 limit 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="rowid.penguins.out">| rowid | species |  island   |
+<pre class=""><code data-file="rowid.penguins.out">| rowid | species |  island   |
 |-------|---------|-----------|
 | 1     | Adelie  | Torgersen |
 | 2     | Adelie  | Torgersen |
@@ -459,7 +460,7 @@ limit 5;
 </li>
 </ol>
 <h2>Conditionals</h2>
-<pre class="language-sql"><code class="language-sql" data-file="if_else.penguins.sql">with sized_penguins as (
+<pre class=""><code data-file="if_else.penguins.sql">with sized_penguins as (
     select
         species,
         iif(
@@ -479,7 +480,7 @@ from sized_penguins
 group by species, size
 order by species, num;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="if_else.penguins.out">|  species  | size  | num |
+<pre class=""><code data-file="if_else.penguins.out">|  species  | size  | num |
 |-----------|-------|-----|
 | Adelie    | small | 54  |
 | Adelie    | large | 97  |
@@ -512,7 +513,7 @@ Which ones do you think actually attempt to divide by zero?</p>
 <li>What if we want small, medium, and large?</li>
 <li>Can nest <code>iif</code>, but quickly becomes unreadable</li>
 </ul>
-<pre class="language-sql"><code class="language-sql" data-file="case_when.penguins.sql">with sized_penguins as (
+<pre class=""><code data-file="case_when.penguins.sql">with sized_penguins as (
     select
         species,
         case
@@ -532,7 +533,7 @@ from sized_penguins
 group by species, size
 order by species, num;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="case_when.penguins.out">|  species  |  size  | num |
+<pre class=""><code data-file="case_when.penguins.out">|  species  |  size  | num |
 |-----------|--------|-----|
 | Adelie    | small  | 54  |
 | Adelie    | medium | 97  |
@@ -554,7 +555,7 @@ rather than to the individual <code>when</code> branches.
 (This exercise shows that <code>case</code>/<code>when</code> is an <a href="../glossary/#expression">expression</a>
 rather than a <a href="../glossary/#statement">statement</a>.)</p>
 <h2>Checking a Range</h2>
-<pre class="language-sql"><code class="language-sql" data-file="check_range.penguins.sql">with sized_penguins as (
+<pre class=""><code data-file="check_range.penguins.sql">with sized_penguins as (
     select
         species,
         case
@@ -573,7 +574,7 @@ from sized_penguins
 group by species, size
 order by species, num;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="check_range.penguins.out">|  species  |   size   | num |
+<pre class=""><code data-file="check_range.penguins.out">|  species  |   size   | num |
 |-----------|----------|-----|
 | Adelie    | abnormal | 54  |
 | Adelie    | normal   | 97  |
@@ -650,9 +651,9 @@ so that it is true in both cases.</p>
 <img alt="entity-relationship diagram showing logical structure of assay database" src="tools_assays_er.svg"/>
 <figcaption>Figure 2: Assay ER Diagram</figcaption>
 </figure>
-<pre class="language-sql"><code class="language-sql" data-file="assay_staff.assays.sql">select * from staff;
+<pre class=""><code data-file="assay_staff.assays.sql">select * from staff;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="assay_staff.assays.out">| ident | personal |  family   | dept | age |
+<pre class=""><code data-file="assay_staff.assays.out">| ident | personal |  family   | dept | age |
 |-------|----------|-----------|------|-----|
 | 1     | Kartik   | Gupta     |      | 46  |
 | 2     | Divit    | Dhaliwal  | hist | 34  |
@@ -675,13 +676,13 @@ so that it is true in both cases.</p>
 <li><code>student</code> has <code>person_id</code>, <code>section_id</code>, and <code>status</code></li>
 </ul>
 <h2>Pattern Matching</h2>
-<pre class="language-sql"><code class="language-sql" data-file="like_glob.assays.sql">select
+<pre class=""><code data-file="like_glob.assays.sql">select
     personal,
     family
 from staff
 where personal like '%ya%';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="like_glob.assays.out">| personal | family |
+<pre class=""><code data-file="like_glob.assays.out">| personal | family |
 |----------|--------|
 | Nitya    | Lal    |
 </code></pre>
@@ -696,14 +697,14 @@ where personal like '%ya%';
 <h2 class="exercise">Exercise</h2>
 <p>Rewrite the pattern-matching query shown above using <code>glob</code>.</p>
 <h2>Selecting First and Last Rows</h2>
-<pre class="language-sql"><code class="language-sql" data-file="union_all.assays.sql">select * from (
+<pre class=""><code data-file="union_all.assays.sql">select * from (
     select * from (select * from experiment order by started asc limit 5)
     union all
     select * from (select * from experiment order by started desc limit 5)
 )
 order by started asc;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="union_all.assays.out">| ident |    kind     |  started   |   ended    |
+<pre class=""><code data-file="union_all.assays.out">| ident |    kind     |  started   |   ended    |
 |-------|-------------|------------|------------|
 | 17    | trial       | 2023-01-29 | 2023-01-30 |
 | 35    | calibration | 2023-01-30 | 2023-01-30 |
@@ -729,7 +730,7 @@ order by started asc;
 in the <code>penguins</code> database.
 How can you check that your query is working correctly?</p>
 <h2>Intersection</h2>
-<pre class="language-sql"><code class="language-sql" data-file="intersect.assays.sql">select
+<pre class=""><code data-file="intersect.assays.sql">select
     personal,
     family,
     dept,
@@ -744,7 +745,7 @@ select
     age from staff
 where age &lt; 50;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="intersect.assays.out">| personal |  family   | dept | age |
+<pre class=""><code data-file="intersect.assays.out">| personal |  family   | dept | age |
 |----------|-----------|------|-----|
 | Indrans  | Sridhar   | mb   | 47  |
 | Ishaan   | Ramaswamy | mb   | 35  |
@@ -764,7 +765,7 @@ with one that uses <code>where</code>.
 Which query looks like it will be more efficient?
 Why do you believe this?</p>
 <h2>Exclusion</h2>
-<pre class="language-sql"><code class="language-sql" data-file="except.assays.sql">select
+<pre class=""><code data-file="except.assays.sql">select
     personal,
     family,
     dept,
@@ -779,7 +780,7 @@ except
         age from staff
     where age &lt; 50;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="except.assays.out">| personal | family | dept | age |
+<pre class=""><code data-file="except.assays.out">| personal | family | dept | age |
 |----------|--------|------|-----|
 | Pranay   | Khanna | mb   | 51  |
 </code></pre>
@@ -794,7 +795,7 @@ except
 <p>Use <code>exclude</code> to find all Gentoo penguins that <em>aren't</em> male.
 How can you check that your query is working correctly?</p>
 <h2>Random Numbers and Why Not</h2>
-<pre class="language-sql"><code class="language-sql" data-file="random_numbers.assays.sql">with decorated as (
+<pre class=""><code data-file="random_numbers.assays.sql">with decorated as (
     select random() as rand,
     personal || ' ' || family as name
     from staff
@@ -807,7 +808,7 @@ select
 from decorated
 where selector &lt; 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="random_numbers.assays.out">|         rand         | selector |      name       |
+<pre class=""><code data-file="random_numbers.assays.out">|         rand         | selector |      name       |
 |----------------------|----------|-----------------|
 | -5088363674211922423 | 0        | Divit Dhaliwal  |
 | 6557666280550701355  | 1        | Indrans Sridhar |
@@ -840,7 +841,7 @@ where selector &lt; 5;
 </li>
 </ul>
 <h2>Creating an Index</h2>
-<pre class="language-sql"><code class="language-sql" data-file="create_use_index.sql">explain query plan
+<pre class=""><code data-file="create_use_index.sql">explain query plan
 select filename
 from plate
 where filename like '%07%';
@@ -852,7 +853,7 @@ select filename
 from plate
 where filename like '%07%';
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="create_use_index.out">QUERY PLAN
+<pre class=""><code data-file="create_use_index.out">QUERY PLAN
 `--SCAN plate USING COVERING INDEX sqlite_autoindex_plate_1
 QUERY PLAN
 `--SCAN plate USING COVERING INDEX plate_file
@@ -869,9 +870,9 @@ QUERY PLAN
 <li>Unlike primary keys, SQLite supports defining indexes after the fact</li>
 </ul>
 <h2>Generating Sequences</h2>
-<pre class="language-sql"><code class="language-sql" data-file="generate_sequence.assays.sql">select value from generate_series(1, 5);
+<pre class=""><code data-file="generate_sequence.assays.sql">select value from generate_series(1, 5);
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="generate_sequence.assays.out">| value |
+<pre class=""><code data-file="generate_sequence.assays.out">| value |
 |-------|
 | 1     |
 | 2     |
@@ -883,7 +884,7 @@ QUERY PLAN
 <li>A (non-standard) <a href="../glossary/#table_valued_func">table-valued function</a></li>
 </ul>
 <h2>Generating Sequences Based on Data</h2>
-<pre class="language-sql"><code class="language-sql" data-file="data_range_sequence.memory.sql">create table temp (
+<pre class=""><code data-file="data_range_sequence.memory.sql">create table temp (
     num integer not null
 );
 insert into temp values (1), (5);
@@ -892,7 +893,7 @@ select value from generate_series (
     (select max(num) from temp)
 );
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="data_range_sequence.memory.out">| value |
+<pre class=""><code data-file="data_range_sequence.memory.out">| value |
 |-------|
 | 1     |
 | 2     |
@@ -904,7 +905,7 @@ select value from generate_series (
 <li>Must have the parentheses around the <code>min</code> and <code>max</code> selections to keep SQLite happy</li>
 </ul>
 <h2>Generating Sequences of Dates</h2>
-<pre class="language-sql"><code class="language-sql" data-file="date_sequence.assays.sql">select date((select julianday(min(started)) from experiment) + value) as some_day
+<pre class=""><code data-file="date_sequence.assays.sql">select date((select julianday(min(started)) from experiment) + value) as some_day
 from (
     select value from generate_series(
         (select 0),
@@ -913,7 +914,7 @@ from (
 )
 limit 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="date_sequence.assays.out">|  some_day  |
+<pre class=""><code data-file="date_sequence.assays.out">|  some_day  |
 |------------|
 | 2023-01-29 |
 | 2023-01-30 |
@@ -934,7 +935,7 @@ limit 5;
 </li>
 </ul>
 <h2>Counting Experiments Started per Day Without Gaps</h2>
-<pre class="language-sql"><code class="language-sql" data-file="experiments_per_day.assays.sql">with
+<pre class=""><code data-file="experiments_per_day.assays.sql">with
 -- complete sequence of days with 0 as placeholder for number of experiments
 all_days as (
     select
@@ -965,7 +966,7 @@ from
     all_days left join actual_days on all_days.some_day = actual_days.started
 limit 5;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="experiments_per_day.assays.out">|    day     | num_exp |
+<pre class=""><code data-file="experiments_per_day.assays.out">|    day     | num_exp |
 |------------|---------|
 | 2023-01-29 | 1       |
 | 2023-01-30 | 1       |
@@ -977,7 +978,7 @@ limit 5;
 <p>What does the expression <code>date('now', 'start of month', '+1 month', '-1 day')</code> produce?
 (You may find [the documentation on SQLite's date and time functions][sqlite_datetime] helpful.)</p>
 <h2>Self Join</h2>
-<pre class="language-sql"><code class="language-sql" data-file="self_join.assays.sql">with person as (
+<pre class=""><code data-file="self_join.assays.sql">with person as (
     select
         ident,
         personal || ' ' || family as name
@@ -990,7 +991,7 @@ select
 from person as left_person inner join person as right_person
 limit 10;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="self_join.assays.out">|     name     |       name       |
+<pre class=""><code data-file="self_join.assays.out">|     name     |       name       |
 |--------------|------------------|
 | Kartik Gupta | Kartik Gupta     |
 | Kartik Gupta | Divit Dhaliwal   |
@@ -1012,7 +1013,7 @@ limit 10;
 <li>Get all n^2 pairs, including person with themself</li>
 </ul>
 <h2>Generating Unique Pairs</h2>
-<pre class="language-sql"><code class="language-sql" data-file="unique_pairs.assays.sql">with person as (
+<pre class=""><code data-file="unique_pairs.assays.sql">with person as (
     select
         ident,
         personal || ' ' || family as name
@@ -1026,7 +1027,7 @@ from person as left_person inner join person as right_person
 on left_person.ident &lt; right_person.ident
 where left_person.ident &lt;= 4 and right_person.ident &lt;= 4;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="unique_pairs.assays.out">|      name       |      name       |
+<pre class=""><code data-file="unique_pairs.assays.out">|      name       |      name       |
 |-----------------|-----------------|
 | Kartik Gupta    | Divit Dhaliwal  |
 | Kartik Gupta    | Indrans Sridhar |
@@ -1043,7 +1044,7 @@ where left_person.ident &lt;= 4 and right_person.ident &lt;= 4;
 <li>Quick check: n(n-1)/2 pairs</li>
 </ul>
 <h2>Filtering Pairs</h2>
-<pre class="language-sql"><code class="language-sql" data-file="filter_pairs.assays.sql">with
+<pre class=""><code data-file="filter_pairs.assays.sql">with
 person as (
     select
         ident,
@@ -1066,7 +1067,7 @@ select
 from person as left_person inner join person as right_person join together
     on left_person.ident = left_staff and right_person.ident = right_staff;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="filter_pairs.assays.out">|    person_1     |     person_2     |
+<pre class=""><code data-file="filter_pairs.assays.out">|    person_1     |     person_2     |
 |-----------------|------------------|
 | Kartik Gupta    | Vedika Rout      |
 | Pranay Khanna   | Vedika Rout      |
@@ -1085,7 +1086,7 @@ from person as left_person inner join person as right_person join together
 | Pranay Khanna   | Romil Kapoor     |
 </code></pre>
 <h2>Existence and Correlated Subqueries</h2>
-<pre class="language-sql"><code class="language-sql" data-file="correlated_subquery.assays.sql">select
+<pre class=""><code data-file="correlated_subquery.assays.sql">select
     name,
     building
 from department
@@ -1097,7 +1098,7 @@ where
     )
 order by name;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="correlated_subquery.assays.out">|       name        |     building     |
+<pre class=""><code data-file="correlated_subquery.assays.out">|       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
 | Histology         | Fashet Extension |
@@ -1112,7 +1113,7 @@ order by name;
 </li>
 </ul>
 <h2>Nonexistence</h2>
-<pre class="language-sql"><code class="language-sql" data-file="nonexistence.assays.sql">select
+<pre class=""><code data-file="nonexistence.assays.sql">select
     name,
     building
 from department
@@ -1124,7 +1125,7 @@ where
     )
 order by name;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="nonexistence.assays.out">|     name      | building |
+<pre class=""><code data-file="nonexistence.assays.out">|     name      | building |
 |---------------|----------|
 | Endocrinology | TGVH     |
 </code></pre>
@@ -1133,14 +1134,14 @@ order by name;
 If so, is your new query easier to understand?
 If the query cannot be rewritten, why not?</p>
 <h2 class="aside">Avoiding Correlated Subqueries</h2>
-<pre class="language-sql"><code class="language-sql" data-file="avoid_correlated_subqueries.assays.sql">select distinct
+<pre class=""><code data-file="avoid_correlated_subqueries.assays.sql">select distinct
     department.name as name,
     department.building as building
 from department inner join staff
     on department.ident = staff.dept
 order by name;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="avoid_correlated_subqueries.assays.out">|       name        |     building     |
+<pre class=""><code data-file="avoid_correlated_subqueries.assays.out">|       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
 | Histology         | Fashet Extension |
@@ -1151,7 +1152,7 @@ order by name;
 <li>Hard to find unstaffed departments without either <code>not exists</code> or <code>count</code> and a check for 0</li>
 </ul>
 <h2>Lead and Lag</h2>
-<pre class="language-sql"><code class="language-sql" data-file="lead_lag.assays.sql">with ym_num as (
+<pre class=""><code data-file="lead_lag.assays.sql">with ym_num as (
     select
         strftime('%Y-%m', started) as ym,
         count(*) as num
@@ -1167,7 +1168,7 @@ select
 from ym_num
 order by ym;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="lead_lag.assays.out">|   ym    | prev_num | num | next_num |
+<pre class=""><code data-file="lead_lag.assays.out">|   ym    | prev_num | num | next_num |
 |---------|----------|-----|----------|
 | 2023-01 |          | 2   | 5        |
 | 2023-02 | 2        | 5   | 5        |
@@ -1200,7 +1201,7 @@ order by ym;
 <li>It feels very ad hoc, but so does the real world</li>
 </ul>
 <h2>Windowing Functions</h2>
-<pre class="language-sql"><code class="language-sql" data-file="window_functions.assays.sql">with ym_num as (
+<pre class=""><code data-file="window_functions.assays.sql">with ym_num as (
     select
         strftime('%Y-%m', started) as ym,
         count(*) as num
@@ -1217,7 +1218,7 @@ select
 from ym_num
 order by ym;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="window_functions.assays.out">|   ym    | num | num_done | completed_progress |  linear_progress   |
+<pre class=""><code data-file="window_functions.assays.out">|   ym    | num | num_done | completed_progress |  linear_progress   |
 |---------|-----|----------|--------------------|--------------------|
 | 2023-01 | 2   | 2        | 0.04               | 0.0769230769230769 |
 | 2023-02 | 5   | 7        | 0.14               | 0.153846153846154  |
@@ -1241,7 +1242,7 @@ order by ym;
 <li>…and <code>linear_progress</code> is the fraction of time passed</li>
 </ul>
 <h2 class="aside">Explaining Another Query Plan</h2>
-<pre class="language-sql"><code class="language-sql" data-file="explain_window_function.assays.sql">explain query plan
+<pre class=""><code data-file="explain_window_function.assays.sql">explain query plan
 with ym_num as (
     select
         strftime('%Y-%m', started) as ym,
@@ -1257,7 +1258,7 @@ select
 from ym_num
 order by ym;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="explain_window_function.assays.out">QUERY PLAN
+<pre class=""><code data-file="explain_window_function.assays.out">QUERY PLAN
 |--CO-ROUTINE (subquery-3)
 |  |--CO-ROUTINE (subquery-4)
 |  |  |--CO-ROUTINE ym_num
@@ -1272,7 +1273,7 @@ order by ym;
 <li>Becomes useful…eventually</li>
 </ul>
 <h2>Partitioned Windows</h2>
-<pre class="language-sql"><code class="language-sql" data-file="partition_window.assays.sql">with y_m_num as (
+<pre class=""><code data-file="partition_window.assays.sql">with y_m_num as (
     select
         strftime('%Y', started) as year,
         strftime('%m', started) as month,
@@ -1289,7 +1290,7 @@ select
 from y_m_num
 order by year, month;
 </code></pre>
-<pre class="language-out"><code class="language-out" data-file="partition_window.assays.out">| year | month | num | num_done |
+<pre class=""><code data-file="partition_window.assays.out">| year | month | num | num_done |
 |------|-------|-----|----------|
 | 2023 | 01    | 2   | 2        |
 | 2023 | 02    | 5   | 7        |
