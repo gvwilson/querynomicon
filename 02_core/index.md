@@ -1,5 +1,7 @@
 # Core Features
 
+<p id="terms"></p>
+
 ## Selecting Constant
 
 ```{data-file="select_1.sql"}

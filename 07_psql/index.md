@@ -2,6 +2,8 @@
 
 *Contributed by [Konstantinos Kitsios][kitsios_konstantinos].*
 
+<p id="terms"></p>
+
 ## Why PostgreSQL?
 
 -   This is a valid question, especially if you are already familiar with other databases like SQLite

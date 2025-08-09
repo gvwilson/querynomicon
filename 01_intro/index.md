@@ -1,5 +1,7 @@
 # Introduction
 
+<p id="terms"></p>
+
 ## What This Is
 
 -   Notes and working examples that instructors can use to perform a lesson
