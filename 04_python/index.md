@@ -1,7 +1,5 @@
 # Python
 
-<p id="terms"></p>
-
 ## Querying from Python
 
 ```{data-file="basic_python_query.py"}

@@ -1,7 +1,5 @@
 # R
 
-<p id="terms"></p>
-
 ## Loading Libraries
 
 ```{data-file="load_connect.r"}

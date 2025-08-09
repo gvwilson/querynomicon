@@ -1,7 +1,5 @@
 # PostgreSQL
 
-<p id="terms"></p>
-
 *Contributed by [Konstantinos Kitsios][kitsios_konstantinos].*
 
 ## Why PostgreSQL?

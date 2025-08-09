@@ -1,7 +1,5 @@
 # Tools
 
-<p id="terms"></p>
-
 ## Negating Incorrectly
 
 -   Who doesn't calibrate?

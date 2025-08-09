@@ -1,7 +1,5 @@
 # Advanced Features
 
-<p id="terms"></p>
-
 ## Blobs
 
 ```{data-file="blob.memory.sql"}
