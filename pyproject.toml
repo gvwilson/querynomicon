@@ -18,7 +18,22 @@ dependencies = [
 ]
 
 [tool.mccole]
-skips = ["bin", "db", "extras", "templates", "uv.lock"]
+skips = [
+    "*.mk",
+    "*.out",
+    "*.py",
+    "*.r",
+    "*.Rmd",
+    "*.Rproj",
+    "*.sh",
+    "*.sql",
+    "*.tbl",
+    "*.text",
+    "bin/**",
+    "db/**",
+    "extras/**",
+    "uv.lock"
+]
 
 [tool.mccole.renames]
 "README.md" = ""
