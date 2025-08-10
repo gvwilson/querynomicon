@@ -4,7 +4,7 @@
 
 /* Definitions */
 :root {
-    --color-decorate: #203080;
+    --color-decorate: #808080;
     --color-highlight: #f0f0f8;
     --color-page: #f8f8f8;
     --color-link-unvisited: #0066ff;
@@ -13,13 +13,14 @@
     --font-prose: "Atkinson Hyperlegible", Arial, sans-serif;
     --font-code: "Source Code Pro", "Courier New", monospace;
 
-    --len-thick: 4px;
-    --len-thick-double: 8px;
-    --len-thin: 1px;
+    --len-dropdown: 200px;
     --len-half: 0.5rem;
     --len-one: 1rem;
     --len-page: 60rem;
-    --len-dropdown: 200px;
+    --len-quarter: 0.25rem;
+    --len-thick-double: 8px;
+    --len-thick: 4px;
+    --len-thin: 1px;
 
     --size-prose: 1.2rem;
     --size-code: 1.1rem;
@@ -49,6 +50,13 @@
 .col-10 { flex-basis: 83.33%; }
 .col-11 { flex-basis: 91.66%; }
 .col-12 { flex-basis: 100%; }
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .row > * {
+        flex-basis: 100% !important;
+    }
+}
 
 /* Dropdown menu */
 
@@ -115,8 +123,8 @@ blockquote {
     border-left: solid var(--len-thick) var(--color-decorate);
     margin-left: 0px;
     padding-left: var(--len-half);
-    padding-top: var(--len-thick);
-    padding-bottom: var(--len-thick);
+    padding-top: var(--len-half);
+    padding-bottom: var(--len-half);
     margin-top: var(--len-thick);
     margin-bottom: var(--len-thick);
     background-color: var(--color-highlight);
@@ -129,6 +137,8 @@ body {
     max-width: var(--len-page);
     background-color: var(--color-page);
     margin: auto;
+    padding-left: var(--len-half);
+    padding-right: var(--len-half);
 }
 
 /* Code text */
@@ -141,7 +151,7 @@ div.card {
     box-shadow: 0px var(--len-thick) var(--len-thick-double) 0px rgba(0,0,0,0.2);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border: solid var(--color-background) var(--len-thick);
+    border: solid var(--color-decorate) var(--len-thick);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -227,11 +237,24 @@ ul {
   list-style-type: disc;
 }
 
+/* Callouts */
+div.callout {
+    background-color: #f1f1f1;
+    font-style: italic;
+}
+div.callout > p {
+    padding: var(--len-thick);
+}
+
 /* Exercise blocks */
 section.exercise {
     background-color: #f1f1f1;
-    padding-left: 1em;
-    padding-right: 0.8em;
+    padding-left: var(--len-one);
+    padding-right: var(--len-half);
+    padding-top: var(--len-half);
+    margin-bottom: var(--len-half);
+    border: solid var(--len-thick) var(--color-decorate);
+    border-radius: var(--len-thick);
 }
 section.exercise h3 {
     font-size: 1.5em;

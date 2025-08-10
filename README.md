@@ -25,13 +25,17 @@ Welcome, thrice welcome, to SQL.
     Please also see our [license][license] for terms of use,
     and note that all contributors are required to abide by our [Code of Conduct][conduct].
 
-> This lesson notes and working examples for instructors to use as a starting point.
-> We do *not* expect novices with no prior SQL experience to be able to learn from this on their own.
-> As a musical analogy,
-> these notes are the chord changes and melody;
-> we expect instructors to create an arrangement and/or improvise over the material
-> when delivering it.
-> Please see [*Teaching Tech Together*][t3] for background.
+<div class="callout" markdown="1">
+
+This lesson notes and working examples for instructors to use as a starting point.
+We do *not* expect novices with no prior SQL experience to be able to learn from this on their own.
+As a musical analogy,
+these notes are the chord changes and melody;
+we expect instructors to create an arrangement and/or improvise over the material
+when delivering it.
+Please see [*Teaching Tech Together*][t3] for background.
+
+</div>
 
 ## Syllabus
 
