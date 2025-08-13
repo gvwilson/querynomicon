@@ -108,13 +108,13 @@
 }
 
 /* Links */
-a {
+a[href] {
     color: var(--color-link-unvisited);
 }
-a:visited {
+a[href]:visited {
     color: var(--color-link-visited);
 }
-a:hover {
+a[href]:hover {
     color: var(--color-link-visited);
 }
 
