@@ -45,7 +45,8 @@ ${DB}/contact_tracing.db: bin/create_contacts.py
 ${DB}/lab_log.db: bin/create_lab_log.py
 	python $< $@
 
-${DB}/penguins.db : bin/create_penguins.py misc/penguins.csv
+${DB}/penguins.db : bin/create_penguins_duckdb.py misc/penguins.csv
+	@mkdir -p ${DB}
 	python $< $@ misc/penguins.csv
 
 ## psql_db: create PostgreSQL penguins database
