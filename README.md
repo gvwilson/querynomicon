@@ -64,6 +64,21 @@ Please see [*Teaching Tech Together*][t3] for background.
 
 </div>
 
+## Acknowledgments {: #acknowledgments}
+
+-   *[Greg Wilson][wilson_greg]*
+    was the co-founder and first Executive Director of Software Carpentry
+    and received ACM SIGSOFT's Influential Educator Award in 2020.
+
+-   *[Konstantinos Kitsios][kitsios_konstantinos]*
+    is a PhD student at University of Zurich,
+    working on applications of machine learning to software engineering.
+    Previously he worked as a software engineer at Tesla.
+
+-   *[Pao Corrales][corrales_pao]*
+    has a PhD in Atmospheric Sciences and works on improving severe weather forecasts in Argentina.
+    She loves teaching science and programming using evidence-based techniques centered on the students and their context.
+
 <p class="center">
   <em>
     Start where you are
@@ -76,9 +91,12 @@ Please see [*Teaching Tech Together*][t3] for background.
 
 [conduct]: https://third-bit.com/sql/conduct/
 [contribute]: https://third-bit.com/sql/contributing/
+[corrales_pao]: https://paocorrales.github.io/
 [help_wanted]: https://github.com/gvwilson/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted
+[kitsios_konstantinos]: https://kitsiosk.github.io/
 [license]: https://third-bit.com/sql/license/
 [pratchett_terry]: https://terrypratchett.com/
 [repo]: https://github.com/gvwilson/querynomicon
 [site]: https://third-bit.com/sql/
 [t3]: https://teachtogether.tech/
+[wilson_greg]: https://third-bit.com/

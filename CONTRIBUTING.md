@@ -41,21 +41,6 @@ by using `change:`, `feature:`, `fix:`, or `task:` as the first word
 in the title of the commit message.
 You may also use `publish:` if the PR just rebuilds the HTML version of the lesson.
 
-## Contributors
-
-**[Greg Wilson][wilson_greg]**
-was the co-founder and first Executive Director of Software Carpentry
-and received ACM SIGSOFT's Influential Educator Award in 2020.
-
-**[Konstantinos Kitsios][kitsios_konstantinos]**
-is a PhD student at University of Zurich,
-working on applications of machine learning to software engineering.
-Previously he worked as a software engineer at Tesla.
-
-**[Pao Corrales][corrales_pao]**
-has a PhD in Atmospheric Sciences and works on improving severe weather forecasts in Argentina.
-She loves teaching science and programming using evidence-based techniques centered on the students and their context.
-
 ## FAQ
 
 Why SQL?
@@ -102,11 +87,6 @@ Why make this tutorial freely available?
 
 ## Colophon
 
--   The colors in this theme
-    are lightened versions of those used in [classic Canadian postage stamps][stamps].
-    The art in the title is by [Danielle Navarro][navarro_danielle]
-    and used with her gracious permission.
-
 -   The CSS files used to style code were obtained from [highlight-css][highlight_css];
     legibility was checked using [WebAIM WAVE][wave].
 
@@ -123,23 +103,18 @@ Why make this tutorial freely available?
 
 [bs4]: https://pypi.org/project/beautifulsoup4/
 [conventional]: https://www.conventionalcommits.org/
-[corrales_pao]: https://paocorrales.github.io/
 [draw_io]: https://www.drawio.com/
 [ghp]: https://pages.github.com/
 [highlight_css]: https://numist.github.io/highlight-css/
 [html5validator]: https://pypi.org/project/html5validator/
 [graphviz]: https://graphviz.org/
 [jekyll]: https://jekyllrb.com/
-[kitsios_konstantinos]: https://kitsiosk.github.io/
 [mccole]: https://pypi.org/project/mccole/
 [mermaid]: https://mermaid.js.org/
-[navarro_danielle]: https://art.djnavarro.net/
 [pandas]: https://pandas.pydata.org/
 [polars]: https://pola.rs/
 [postgresql]: https://www.postgresql.org/
 [ruff]: https://pypi.org/project/ruff/
-[stamps]: https://third-bit.com/colophon/
 [tidyverse]: https://www.tidyverse.org/
 [udell_jon]: https://blog.jonudell.net/
 [wave]: https://wave.webaim.org/
-[wilson_greg]: https://third-bit.com/
