@@ -119,14 +119,10 @@ for spotting issues, making suggestions, or submitting changes:
 
 [art_postgresql]: https://theartofpostgresql.com/
 [conduct]: https://third-bit.com/sql/conduct/
-[contribute]: https://third-bit.com/sql/contributing/
 [corrales_pao]: https://paocorrales.github.io/
-[help_wanted]: https://github.com/gvwilson/querynomicon/issues?q=is%3Aissue+is%3Aopen+label%3Ahelp-wanted
 [kitsios_konstantinos]: https://kitsiosk.github.io/
 [license]: https://third-bit.com/sql/license/
 [pratchett_terry]: https://terrypratchett.com/
-[repo]: https://github.com/gvwilson/querynomicon
 [site]: https://third-bit.com/sql/
-[sqlparse]: https://pypi.org/project/sqlparse/
 [t3]: https://teachtogether.tech/
 [wilson_greg]: https://third-bit.com/
