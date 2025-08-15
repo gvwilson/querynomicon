@@ -1,5 +1,6 @@
 [project]
 name = "querynonomicon"
+description = "databases and SQL for research programmers"
 version = "0.3.0"
 requires-python = ">=3.12"
 dependencies = [
