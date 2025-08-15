@@ -79,6 +79,34 @@ Please see [*Teaching Tech Together*][t3] for background.
     has a PhD in Atmospheric Sciences and works on improving severe weather forecasts in Argentina.
     She loves teaching science and programming using evidence-based techniques centered on the students and their context.
 
+This tutorial would not have been possible without:
+
+-   Andi Albrecht's [`sqlparse`][sqlparse] module
+-   Dimitri Fontaine's [*The Art of PostgreSQL*][art_postgresql]
+-   David Rozenshtein's *The Essence of SQL* (now sadly out of print)
+
+I would also like to thank the following people
+for spotting issues, making suggestions, or submitting changes:
+
+- Yanina Bellini Saibene
+- Phillip Cloud
+- Zoe Daniels
+- Conor Flynn
+- Andy Goldberg
+- Jay Graves
+- Sam Hames
+- Adam Hawkes
+- Robert Kern
+- Konstantinos Kitsios
+- Olivier Leroy
+- Kevin Marshall
+- Roy Pardee
+- Manos Pitsidianakis
+- Daniel Possenriede 
+- Adam Rosien
+- Thomas Sandmann
+- Simon Willison
+
 <p class="center">
   <em>
     Start where you are
@@ -89,6 +117,7 @@ Please see [*Teaching Tech Together*][t3] for background.
   </em>
 </p>
 
+[art_postgresql]: https://theartofpostgresql.com/
 [conduct]: https://third-bit.com/sql/conduct/
 [contribute]: https://third-bit.com/sql/contributing/
 [corrales_pao]: https://paocorrales.github.io/
@@ -98,5 +127,6 @@ Please see [*Teaching Tech Together*][t3] for background.
 [pratchett_terry]: https://terrypratchett.com/
 [repo]: https://github.com/gvwilson/querynomicon
 [site]: https://third-bit.com/sql/
+[sqlparse]: https://pypi.org/project/sqlparse/
 [t3]: https://teachtogether.tech/
 [wilson_greg]: https://third-bit.com/

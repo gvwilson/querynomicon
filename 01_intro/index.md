@@ -80,33 +80,3 @@ sqlite3 db/penguins.db
 > type Control-D or `.quit` on a line of its own.
 > You may need to type a semi-colon `;` to close any unfinished query
 > before SQLite will recognize your attempt to escape.
-
-## Acknowledgments {: #acknowledgments}
-
-This tutorial would not have been possible without:
-
--   [Andi Albrecht][albrecht_andi]'s [`sqlparse`][sqlparse] module
--   [Dimitri Fontaine][fontaine_dimitri]'s [*The Art of PostgreSQL*][art_postgresql]
--   David Rozenshtein's *The Essence of SQL* (now sadly out of print)
-
-I would also like to thank the following people
-for spotting issues, making suggestions, or submitting changes:
-
-- Yanina Bellini Saibene
-- Phillip Cloud
-- Zoe Daniels
-- Conor Flynn
-- Andy Goldberg
-- Jay Graves
-- Sam Hames
-- Adam Hawkes
-- Robert Kern
-- Konstantinos Kitsios
-- Olivier Leroy
-- Kevin Marshall
-- Roy Pardee
-- Manos Pitsidianakis
-- Daniel Possenriede 
-- Adam Rosien
-- Thomas Sandmann
-- Simon Willison
