@@ -84,6 +84,7 @@
     padding-right: var(--len-thick);
     text-decoration: none;
     display: block;
+    white-space: nowrap;
 }
 
 .dropdown-content a:hover {
