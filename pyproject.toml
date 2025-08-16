@@ -5,6 +5,7 @@ version = "0.3.0"
 requires-python = ">=3.12"
 dependencies = [
     "adbc-driver-sqlite",
+    "duckdb",
     "click",
     "faker",
     "jupysql",
