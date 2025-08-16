@@ -20,6 +20,7 @@ dependencies = [
 
 [tool.mccole]
 skips = [
+    "*~",
     "*.mk",
     "*.out",
     "*.py",

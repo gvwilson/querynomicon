@@ -448,7 +448,7 @@ building='TGVH' name='Endocrinology' ident='end'
 -   An [object-relational mapper](g:orm) (ORM) translates table columns to object properties and vice versa
 -   [SQLModel][sqlmodel] relies on Python type hints
 
-## Exercise {: .exericse}
+## Exercise {: .exercise}
 
 Write a command-line Python script that uses SQLModel to re-create the penguins database.
 

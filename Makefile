@@ -16,18 +16,13 @@ lint:
 	@ruff check --exclude docs .
 	@mccole lint --html
 
-## profile: render with profiling
-profile:
-	@mccole profile
-	@touch docs/.nojekyll
-
 ## serve: serve generated HTML
 serve:
 	@python -m http.server -d docs
 
-## stats: basic site statistics
-stats:
-	@mccole stats
+## spelling: check for unknown words
+spelling:
+	@cat *.md */*.md | aspell list | sort | uniq | diff - extras/words.txt
 
 ## databases: make required files
 databases : \

@@ -31,7 +31,7 @@
 
 ## Setup on MacOS: Direct Installer
 
-1.  Download the [latest version of PostgreSQL for macOS][postgresql_macos_latest].
+1.  Download the [latest version of PostgreSQL for MacOS][postgresql_macos_latest].
 2.  Double-click the downloaded file to run the installer
     1.  Click "Next".
         You might see a warning message because it was downloaded from the internet.
@@ -114,7 +114,7 @@ psql -d penguins
 ## Privileges and Roles
 
 -   PostgreSQL is commonly used for applications with a large user base.
--   For this reason, it has a [privilege managment system](g:privilege)
+-   For this reason, it has a [privilege management system](g:privilege)
     to control who has what kind of access to what data.
     -   You may want the users of your application to be able to read the SQL records,
         but not update or delete them.

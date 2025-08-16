@@ -221,7 +221,7 @@ from machine;
 
 As part of cleaning up the lab log database,
 replace the machine names in the JSON records in `usage`
-with the corresopnding machine IDs from the `machine` table.
+with the corresponding machine IDs from the `machine` table.
 
 ## Refreshing the Penguins Database {: .aside}
 

@@ -749,7 +749,7 @@ Is it possible to do this using `where` instead of `filter`?
 
 <figure id="core_aggregate_concept_map">
   <img src="core_aggregate_concept_map.svg" alt="box and arrow diagram of concepts related to aggregation in SQL"/>
-  <figcaption>Figure 3: Aggregation Conceps</figcaption>
+  <figcaption>Figure 3: Aggregation Concepts</figcaption>
 </figure>
 
 ## Creating In-memory Database {: .aside}
@@ -931,7 +931,7 @@ Saving and restoring data in binary format:
 ## Check Understanding {: .aside}
 
 <figure id="core_datamod_concept_map">
-  <img src="core_datamod_concept_map.svg" alt="box and arrow diagram of concepts relatd to defining and modifying data"/>
+  <img src="core_datamod_concept_map.svg" alt="box and arrow diagram of concepts related to defining and modifying data"/>
   <figcaption>Figure 4: Data Definition and Modification Concepts</figcaption>
 </figure>
 

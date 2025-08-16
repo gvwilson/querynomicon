@@ -79,7 +79,7 @@ Why hand-drawn figures rather than [Graphviz][graphviz] or [Mermaid][mermaid]?
     to try to tweak layout parameters for text-to-diagram systems.
     If you really want to make developers' lives better,
     build a diff-and-merge tool for SVG:
-    programmers shouldn't have to use punchard-compatible data formats in the 21st Century
+    programmers shouldn't have to use punchcard-compatible data formats in the 21st Century
     just to get the benefits of version control.
 
 Why make this tutorial freely available?
