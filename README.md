@@ -37,9 +37,9 @@ Please see [*Teaching Tech Together*][t3] for background.
 
 </div>
 
-## Syllabus
+## Lessons
 
-<div id="syllabus" markdown="1">
+<div id="lessons" markdown="1">
 
 1.  [Introduction](./01_intro/): where we're going and why
 1.  [Core Features](./02_core/): getting values from tables
