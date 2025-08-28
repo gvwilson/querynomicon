@@ -364,6 +364,9 @@
 .slide * + h2 {
     margin-top: 41px;
 }
+.slide h3 {
+    font: bold 35px/1 'Atkinson Hyperlegible', sans-serif;
+}
 .slide p {
     margin-top: 0;
     margin-bottom: 1em;
@@ -561,8 +564,24 @@
     margin: -0.15em 0 0 -0.43em;
     color: #cccccc;
     line-height: 1;
-    font-size: 8em;
+    font-size: 6em;
     content: '\201C';
+}
+.slide blockquote.question::before {
+    position: absolute;
+    margin: -0.25em 0 0 -0.55em;
+    color: #cccccc;
+    line-height: 1;
+    font-size: 4em;
+    content: '\003F';
+}
+.slide blockquote.exclamation::before {
+    position: absolute;
+    margin: -0.25em 0 0 -0.40em;
+    color: #cccccc;
+    line-height: 1;
+    font-size: 4em;
+    content: '\0021';
 }
 /* Author */
 .slide blockquote + figcaption {
@@ -585,6 +604,7 @@
 .slide td {
     padding-top: 0;
     padding-bottom: 0;
+    vertical-align: top;
 }
 .slide th {
     text-align: left;
