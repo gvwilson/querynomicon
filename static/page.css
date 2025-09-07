@@ -15,6 +15,7 @@
 
     --len-dropdown: 200px;
     --len-half: 0.5rem;
+    --len-line-height: 1.4; /* instead of standard 1.2 */
     --len-one: 1rem;
     --len-page: 60rem;
     --len-quarter: 0.25rem;
@@ -124,8 +125,8 @@ blockquote {
     border-left: solid var(--len-thick) var(--color-decorate);
     margin-left: 0px;
     padding-left: var(--len-half);
-    padding-top: var(--len-half);
-    padding-bottom: var(--len-half);
+    padding-top: 0;
+    padding-bottom: 0;
     margin-top: var(--len-thick);
     margin-bottom: var(--len-thick);
     background-color: var(--color-highlight);
@@ -135,6 +136,7 @@ blockquote {
 body {
     font-family: var(--font-prose);
     font-size: var(--size-prose);
+    line-height: var(--len-line-height);
     max-width: var(--len-page);
     background-color: var(--color-page);
     margin: auto;
@@ -171,9 +173,10 @@ div.card > p {
 
 /* Footer */
 footer {
-    border-top: solid var(--color-decorate) var(--len-thin);
     margin-top: var(--len-half);
+    border-top: solid var(--color-decorate) var(--len-thin);
     padding-top: var(--len-half);
+    margin-bottom: var(--len-half);
     text-align: center;
 }
 
@@ -196,6 +199,7 @@ p.subtitle {
 
 /* Navigation */
 nav {
+    margin-top: var(--len-half);
     border-bottom: solid var(--color-decorate) var(--len-thin);
     margin-bottom: var(--len-half);
     padding-bottom: var(--len-half);
@@ -212,6 +216,7 @@ table {
   text-align: justify;
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: var(--len-half);
 }
 
 td, th {
@@ -262,6 +267,10 @@ section.exercise h3 {
 }
 
 /* Definitions */
+
+dt:not(:first-child) {
+    margin-top: var(--len-quarter);
+}
 
 dt {
     font-weight: bold;
