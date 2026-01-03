@@ -27,11 +27,11 @@
 </span>
       ·
       <span class="dropdown">
-<a href="#">Extras</a>
-<span class="dropdown-content" id="nav-extras">
+<a href="#">Appendices</a>
+<span class="dropdown-content" id="nav-appendices">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
-<a href="../contrib/">Contributing</a>
+<a href="../contributing/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -39,7 +39,7 @@
 </nav>
 <main>
 <h1>Introduction</h1>
-<p id="terms">Terms defined: <a href="../glossary/#nosql">NoSQL database</a>, <a href="../glossary/#database">database</a>, <a href="../glossary/#dbms">database management system (DBMS)</a>, <a href="../glossary/#rdbms">relational database management system (RDBMS)</a>, <a href="../glossary/#table">table</a></p>
+<p id="terms">Terms defined: <a class="term-defined" href="../glossary/#rdbms">UNDEFINED</a>, <a class="term-defined" href="../glossary/#dbms">UNDEFINED</a>, <a class="term-defined" href="../glossary/#database">UNDEFINED</a>, <a class="term-defined" href="../glossary/#nosql">UNDEFINED</a>, <a class="term-defined" href="../glossary/#table">UNDEFINED</a></p>
 <h2>What This Is</h2>
 <ul>
 <li>Notes and working examples that instructors can use to perform a lesson<ul>
@@ -49,17 +49,17 @@
 <li>Musical analogy<ul>
 <li>This is the chord changes and melody</li>
 <li>We expect instructors to create an arrangement and/or improvise while delivering</li>
-<li>See [<em>Teaching Tech Together</em>][t3] for background</li>
+<li>See <a href="https://teachtogether.tech/"><em>Teaching Tech Together</em></a> for background</li>
 </ul>
 </li>
 </ul>
 <h2 class="aside">Scope</h2>
 <ul>
-<li>[intended audience][persona]<ul>
+<li><a href="http://teachtogether.tech/en/index.html#s:process-personas">intended audience</a><ul>
 <li>Rachel has a master's degree in cell biology
     and now works in a research hospital doing cell assays.</li>
 <li>She learned a bit of R in an undergrad biostatistics course
-    and has been through [the Carpentries lesson on the Unix shell][carpentries_shell].</li>
+    and has been through <a href="https://swcarpentry.github.io/shell-novice/">the Carpentries lesson on the Unix shell</a>.</li>
 <li>Rachel is thinking about becoming a data scientist
     and would like to understand how data is stored and managed.</li>
 <li>Her work schedule is unpredictable and highly variable,
@@ -88,7 +88,7 @@
 <ul>
 <li>Download the latest release</li>
 <li>Unzip the file in a temporary directory to create:<ul>
-<li><code>./db/*.db</code>: the [SQLite][sqlite] databases used in the examples</li>
+<li><code>./db/*.db</code>: the <a href="https://sqlite.org/">SQLite</a> databases used in the examples</li>
 <li><code>./src/*.*</code>: SQL queries, Python scripts, and other source code</li>
 <li><code>./out/*.*</code>: expected output for examples</li>
 </ul>
@@ -100,18 +100,18 @@
 <li>A <a href="../glossary/#dbms">database management system</a> (DBMS) is a program that manages a particular kind of database</li>
 <li>Each DBMS stores data in its own way<ul>
 <li>SQLite stores each database in a single file</li>
-<li>[PostgreSQL][postgresql] spreads information across many files for higher performance</li>
+<li><a href="https://www.postgresql.org/">PostgreSQL</a> spreads information across many files for higher performance</li>
 </ul>
 </li>
 <li>DBMS can be a library embedded in other programs (SQLite) or a server (PostgreSQL)</li>
 <li>A <a href="../glossary/#rdbms">relational database management system</a> (RDBMS) stores data in <a href="../glossary/#table">tables</a>
-    and uses [SQL][sql] for queries<ul>
+    and uses <a href="https://en.wikipedia.org/wiki/SQL">SQL</a> for queries<ul>
 <li>Unfortunately, every RDBMS has its own dialect of SQL</li>
 </ul>
 </li>
-<li>There are also <a href="../glossary/#nosql">NoSQL databases</a> like [MongoDB][mongodb] that don't use tables</li>
+<li>There are also <a href="../glossary/#nosql">NoSQL databases</a> like <a href="https://www.mongodb.com/">MongoDB</a> that don't use tables</li>
 </ul>
-<figure id="intro_concept_map">
+<figure id="f:intro_concept_map">
 <img alt="box and arrow concept map of major concepts related to databases" src="intro_concept_map.svg"/>
 <figcaption>Figure 1: Concepts</figcaption>
 </figure>
@@ -123,7 +123,7 @@
 <li>Alternative: provide a single query on the command line <code>sqlite3 <em>database</em> "<em>query</em>"</code></li>
 <li>Or put query in file and run <code>sqlite3 <em>database</em> &lt; <em>filename</em></code></li>
 <li>Note: the <code>penguins</code> database contains two tables<ul>
-<li><code>penguins</code> is all the [Palmer Penguins][palmer_penguins] data</li>
+<li><code>penguins</code> is all the <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a> data</li>
 <li><code>little_penguins</code> is a subset used in our first few queries
     to keep output readable</li>
 </ul>
@@ -137,9 +137,18 @@ before SQLite will recognize your attempt to escape.</p>
 </blockquote>
 </main>
 <footer>
-<a href="../">The Querynomicon</a>
-      copyright © 2025
-      <a href="../#acknowledgments">the authors</a>
+<div class="row">
+<div class="col-3 left">
+</div>
+<div class="col-6 center">
+<a href="../"></a>
+	  © 2025
+	  <a href="../#acknowledgments">the authors</a>
+</div>
+<div class="col-3 right">
+<a href="../02_core/">Core Features</a> ⇒
+	</div>
+</div>
 </footer>
 </body>
 </html>

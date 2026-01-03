@@ -23,8 +23,8 @@
     --len-thick: 4px;
     --len-thin: 1px;
 
-    --size-prose: 1.2rem;
-    --size-code: 1.1rem;
+    --size-prose: 1.1rem;
+    --size-code: 0.9rem;
 }
 
 /* Flex grid */
@@ -144,9 +144,19 @@ body {
     padding-right: var(--len-half);
 }
 
+/* Table captions */
+caption {
+    caption-side: bottom;
+}
+
 /* Code text */
 code {
     font-size: var(--size-code);
+}
+
+/* Appendices */
+div#appendices ol {
+    list-style-type: upper-alpha;
 }
 
 /* Cards */
@@ -169,6 +179,11 @@ div.card > h3 {
 div.card > p {
     margin-top: 0px;
     margin-bottom: var(--len-half);
+}
+
+/* Figures */
+figure {
+    text-align: center;
 }
 
 /* Footer */
@@ -197,6 +212,11 @@ p.subtitle {
     font-style: italic;
 }
 
+/* Image sizing */
+img.img-90 {
+    width: 90%;
+}
+
 /* Navigation */
 nav {
     margin-top: var(--len-half);
@@ -214,7 +234,6 @@ pre {
 /* Table */
 table {
   text-align: justify;
-  width: 100%;
   border-collapse: collapse;
   margin-bottom: var(--len-half);
 }
@@ -263,7 +282,7 @@ section.exercise {
     border-radius: var(--len-thick);
 }
 section.exercise h3 {
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 /* Definitions */

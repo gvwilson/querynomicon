@@ -41,14 +41,14 @@ Please see [*Teaching Tech Together*][t3] for background.
 
 <div id="lessons" markdown="1">
 
-1.  [Introduction](./01_intro/): where we're going and why
-1.  [Core Features](./02_core/): getting values from tables
-1.  [Tools](./03_tools/): Miscellaneous things that make life easier
-1.  [Python](./04_python/): using databases from Python
-1.  [Advanced Features](./05_advanced/): when you need 'em, you need 'em
-1.  [R](./06_r/): using databases from R
-1.  [PostgreSQL](./07_psql/): client-server computing and permissions
-1.  [Conclusion](./08_finale/): where we've been and what comes next
+1.  [Introduction](@/01_intro/): where we're going and why
+1.  [Core Features](@/02_core/): getting values from tables
+1.  [Tools](@/03_tools/): Miscellaneous things that make life easier
+1.  [Python](@/04_python/): using databases from Python
+1.  [Advanced Features](@/05_advanced/): when you need 'em, you need 'em
+1.  [R](@/06_r/): using databases from R
+1.  [PostgreSQL](@/07_psql/): client-server computing and permissions
+1.  [Conclusion](@/08_finale/): where we've been and what comes next
 
 </div>
 
@@ -56,11 +56,11 @@ Please see [*Teaching Tech Together*][t3] for background.
 
 <div id="appendices" markdown="1">
 
-1.  [License](./LICENSE.md)
-1.  [Code of Conduct](./CODE_OF_CONDUCT.md)
-1.  [Contributing](./CONTRIBUTING.md)
-1.  [Bibliography](./bibliography/)
-1.  [Glossary](./glossary/)
+1.  [License](@/license/)
+1.  [Code of Conduct](@/conduct/)
+1.  [Contributing](@/contributing/)
+1.  [Bibliography](@/bibliography/)
+1.  [Glossary](@/glossary/)
 
 </div>
 

@@ -27,11 +27,11 @@
 </span>
       ·
       <span class="dropdown">
-<a href="#">Extras</a>
-<span class="dropdown-content" id="nav-extras">
+<a href="#">Appendices</a>
+<span class="dropdown-content" id="nav-appendices">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
-<a href="../contrib/">Contributing</a>
+<a href="../contributing/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -39,7 +39,7 @@
 </nav>
 <main>
 <h1>Python</h1>
-<p id="terms">Terms defined: <a href="../glossary/#uri">Uniform Resource Identifier (URI)</a>, <a href="../glossary/#cursor">cursor</a>, <a href="../glossary/#orm">object-relational mapper (ORM)</a>, <a href="../glossary/#query_builder">query builder</a></p>
+<p id="terms">Terms defined: <a class="term-defined" href="../glossary/#cursor">UNDEFINED</a>, <a class="term-defined" href="../glossary/#orm">UNDEFINED</a>, <a class="term-defined" href="../glossary/#uri">UNDEFINED</a>, <a class="term-defined" href="../glossary/#query_builder">UNDEFINED</a></p>
 <h2>Querying from Python</h2>
 <pre class=""><code data-file="basic_python_query.py">import sqlite3
 import sys
@@ -114,9 +114,9 @@ print("after insertion", cursor.execute("select * from example;").fetchall())
 <pre class=""><code data-file="interpolate.out">after insertion [(10,), (20,)]
 </code></pre>
 <ul>
-<li>From [XKCD][xkcd_tables]</li>
+<li>From <a href="https://xkcd.com/327/">XKCD</a></li>
 </ul>
-<figure id="python_xkcd">
+<figure id="f:python_xkcd">
 <img alt="XKCD cartoon showing a mother scolding a school for not being more careful about SQL injection attacks" src="xkcd_327_exploits_of_a_mom.png"/>
 <figcaption>Figure 1: XKCD "Exploits of a Mom"</figcaption>
 </figure>
@@ -318,7 +318,7 @@ print(df)
 2     Gentoo  124
 </code></pre>
 <ul>
-<li>Be careful about datatype conversion when using [Pandas][pandas]</li>
+<li>Be careful about datatype conversion when using <a href="https://pandas.pydata.org/">Pandas</a></li>
 </ul>
 <h2 class="exercise">Exercise</h2>
 <p>Write a command-line Python script that uses Pandas to re-create the penguins database.</p>
@@ -348,13 +348,13 @@ print(df)
 <ul>
 <li>The <a href="../glossary/#uri">Uniform Resource Identifier</a> (URI) specifies the database</li>
 <li>The query is the query</li>
-<li>Use the ADBC engine instead of the default ConnectorX with [Polars][polars]</li>
+<li>Use the ADBC engine instead of the default ConnectorX with <a href="https://pola.rs/">Polars</a></li>
 </ul>
 <h2 class="exercise">Exercise</h2>
 <p>Write a command-line Python script that uses Polars to re-create the penguins database.</p>
 <h2>Query Builders</h2>
 <ul>
-<li>Use [PyPika][pypika] to build queries</li>
+<li>Use <a href="https://pypika.readthedocs.io/">PyPika</a> to build queries</li>
 </ul>
 <pre class=""><code data-file="builder.py">from pypika import Query, Table
 import sqlite3
@@ -434,7 +434,7 @@ building='TGVH' name='Endocrinology' ident='end'
 </code></pre>
 <ul>
 <li>An <a href="../glossary/#orm">object-relational mapper</a> (ORM) translates table columns to object properties and vice versa</li>
-<li>[SQLModel][sqlmodel] relies on Python type hints</li>
+<li><a href="https://sqlmodel.tiangolo.com/">SQLModel</a> relies on Python type hints</li>
 </ul>
 <h2 class="exercise">Exercise</h2>
 <p>Write a command-line Python script that uses SQLModel to re-create the penguins database.</p>
@@ -473,9 +473,19 @@ Genetics: Nitya Lal
 </ul>
 </main>
 <footer>
-<a href="../">The Querynomicon</a>
-      copyright © 2025
-      <a href="../#acknowledgments">the authors</a>
+<div class="row">
+<div class="col-3 left">
+	  ⇐ <a href="../03_tools/">Tools</a>
+</div>
+<div class="col-6 center">
+<a href="../"></a>
+	  © 2025
+	  <a href="../#acknowledgments">the authors</a>
+</div>
+<div class="col-3 right">
+<a href="../05_advanced/">Advanced Features</a> ⇒
+	</div>
+</div>
 </footer>
 </body>
 </html>

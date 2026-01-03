@@ -27,11 +27,11 @@
 </span>
       ·
       <span class="dropdown">
-<a href="#">Extras</a>
-<span class="dropdown-content" id="nav-extras">
+<a href="#">Appendices</a>
+<span class="dropdown-content" id="nav-appendices">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
-<a href="../contrib/">Contributing</a>
+<a href="../contributing/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -39,7 +39,7 @@
 </nav>
 <main>
 <h1>Core Features</h1>
-<p id="terms">Terms defined: <a href="../glossary/#admin_command">administration command</a>, <a href="../glossary/#aggregation">aggregation</a>, <a href="../glossary/#aggregation_func">aggregation function</a>, <a href="../glossary/#cross_join">cross join</a>, <a href="../glossary/#exclusive_or">exclusive or</a>, <a href="../glossary/#filter">filter</a>, <a href="../glossary/#full_outer_join">full outer join</a>, <a href="../glossary/#group">group</a>, <a href="../glossary/#in_memory_db">in-memory database</a>, <a href="../glossary/#inclusive_or">inclusive or</a>, <a href="../glossary/#join">join</a>, <a href="../glossary/#join_condition">join condition</a>, <a href="../glossary/#left_outer_join">left outer join</a>, <a href="../glossary/#null">null</a>, <a href="../glossary/#query">query</a>, <a href="../glossary/#right_outer_join">right outer join</a>, <a href="../glossary/#ternary_logic">ternary logic</a>, <a href="../glossary/#tombstone">tombstone</a></p>
+<p id="terms">Terms defined: <a class="term-defined" href="../glossary/#cross_join">UNDEFINED</a>, <a class="term-defined" href="../glossary/#in_memory_db">UNDEFINED</a>, <a class="term-defined" href="../glossary/#right_outer_join">UNDEFINED</a>, <a class="term-defined" href="../glossary/#aggregation_func">UNDEFINED</a>, <a class="term-defined" href="../glossary/#inclusive_or">UNDEFINED</a>, <a class="term-defined" href="../glossary/#join">UNDEFINED</a>, <a class="term-defined" href="../glossary/#query">UNDEFINED</a>, <a class="term-defined" href="../glossary/#filter">UNDEFINED</a>, <a class="term-defined" href="../glossary/#exclusive_or">UNDEFINED</a>, <a class="term-defined" href="../glossary/#ternary_logic">UNDEFINED</a>, <a class="term-defined" href="../glossary/#tombstone">UNDEFINED</a>, <a class="term-defined" href="../glossary/#admin_command">UNDEFINED</a>, <a class="term-defined" href="../glossary/#null">UNDEFINED</a>, <a class="term-defined" href="../glossary/#full_outer_join">UNDEFINED</a>, <a class="term-defined" href="../glossary/#join_condition">UNDEFINED</a>, <a class="term-defined" href="../glossary/#left_outer_join">UNDEFINED</a>, <a class="term-defined" href="../glossary/#aggregation">UNDEFINED</a>, <a class="term-defined" href="../glossary/#group">UNDEFINED</a></p>
 <h2>Selecting Constant</h2>
 <pre class=""><code data-file="select_1.sql">select 1;
 </code></pre>
@@ -283,7 +283,7 @@ where island = 'Biscoe';
 <li>Condition is evaluated independently for each row</li>
 <li>Only rows that pass the test appear in results</li>
 <li>Use single quotes for <code>'text data'</code> and double quotes for <code>"weird column names"</code><ul>
-<li>SQLite will accept double-quoted text data but [SQLFluff][sqlfluff] will complain</li>
+<li>SQLite will accept double-quoted text data but <a href="https://sqlfluff.com/">SQLFluff</a> will complain</li>
 </ul>
 </li>
 </ul>
@@ -379,9 +379,9 @@ limit 3;
 <li>A column called <code>bill_ratio</code> that has the ratio of bill length to bill depth.</li>
 </ol>
 <p>You can use the <code>||</code> operator to concatenate text to solve part 1,
-or look at [the documentation for SQLite's <code>format()</code> function][sqlite_format].</p>
+or look at <a href="https://sqlite.org/printf.html">the documentation for SQLite's <code>format()</code> function</a>.</p>
 <h2 class="aside">Check Understanding</h2>
-<figure id="core_select_concept_map">
+<figure id="f:core_select_concept_map">
 <img alt="box and arrow diagram of concepts related to selection" src="core_select_concept_map.svg"/>
 <figcaption>Figure 1: Selection Concepts</figcaption>
 </figure>
@@ -545,7 +545,7 @@ where sex is null;
 </li>
 </ol>
 <h2 class="aside">Check Understanding</h2>
-<figure id="core_missing_concept_map">
+<figure id="f:core_missing_concept_map">
 <img alt="box and arrow diagram of concepts related to null values in SQL" src="core_missing_concept_map.svg"/>
 <figcaption>Figure 2: Missing Value Concepts</figcaption>
 </figure>
@@ -719,7 +719,7 @@ and light penguins (those under 3500 grams)
 simultaneously.
 Is it possible to do this using <code>where</code> instead of <code>filter</code>?</p>
 <h2 class="aside">Check Understanding</h2>
-<figure id="core_aggregate_concept_map">
+<figure id="f:core_aggregate_concept_map">
 <img alt="box and arrow diagram of concepts related to aggregation in SQL" src="core_aggregate_concept_map.svg"/>
 <figcaption>Figure 3: Aggregation Concepts</figcaption>
 </figure>
@@ -891,7 +891,7 @@ select * from backup;
 </li>
 </ol>
 <h2 class="aside">Check Understanding</h2>
-<figure id="core_datamod_concept_map">
+<figure id="f:core_datamod_concept_map">
 <img alt="box and arrow diagram of concepts related to defining and modifying data" src="core_datamod_concept_map.svg"/>
 <figcaption>Figure 4: Data Definition and Modification Concepts</figcaption>
 </figure>
@@ -1052,15 +1052,25 @@ Your output should show that <code>mik</code> and <code>po</code> each spent 0.5
 Can you find a way to show the name of the job as well
 using the SQL you have seen so far?</p>
 <h2 class="aside">Check Understanding</h2>
-<figure id="core_join_concept_map">
+<figure id="f:core_join_concept_map">
 <img alt="box and arrow diagram of concepts related to joining tables" src="core_join_concept_map.svg"/>
 <figcaption>Figure 5: Join Concepts</figcaption>
 </figure>
 </main>
 <footer>
-<a href="../">The Querynomicon</a>
-      copyright © 2025
-      <a href="../#acknowledgments">the authors</a>
+<div class="row">
+<div class="col-3 left">
+	  ⇐ <a href="../01_intro/">Introduction</a>
+</div>
+<div class="col-6 center">
+<a href="../"></a>
+	  © 2025
+	  <a href="../#acknowledgments">the authors</a>
+</div>
+<div class="col-3 right">
+<a href="../03_tools/">Tools</a> ⇒
+	</div>
+</div>
 </footer>
 </body>
 </html>

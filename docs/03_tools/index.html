@@ -27,11 +27,11 @@
 </span>
       ·
       <span class="dropdown">
-<a href="#">Extras</a>
-<span class="dropdown-content" id="nav-extras">
+<a href="#">Appendices</a>
+<span class="dropdown-content" id="nav-appendices">
 <a href="../license/">License</a>
 <a href="../conduct/">Code of Conduct</a>
-<a href="../contrib/">Contributing</a>
+<a href="../contributing/">Contributing</a>
 <a href="../bibliography/">Bibliography</a>
 <a href="../glossary/">Glossary</a>
 </span>
@@ -39,7 +39,7 @@
 </nav>
 <main>
 <h1>Tools</h1>
-<p id="terms">Terms defined: <a href="../glossary/#1_to_1">1-to-1 relation</a>, <a href="../glossary/#1_to_many">1-to-many relation</a>, <a href="../glossary/#b_tree">B-tree</a>, <a href="../glossary/#alias">alias</a>, <a href="../glossary/#autoincrement">autoincrement</a>, <a href="../glossary/#cte">common table expression (CTE)</a>, <a href="../glossary/#correlated_subquery">correlated subquery</a>, <a href="../glossary/#data_migration">data migration</a>, <a href="../glossary/#er_diagram">entity-relationship diagram</a>, <a href="../glossary/#expression">expression</a>, <a href="../glossary/#foreign_key">foreign key</a>, <a href="../glossary/#index">index</a>, <a href="../glossary/#join_table">join table</a>, <a href="../glossary/#many_to_many">many-to-many relation</a>, <a href="../glossary/#primary_key">primary key</a>, <a href="../glossary/#statement">statement</a>, <a href="../glossary/#subquery">subquery</a>, <a href="../glossary/#table_valued_func">table-valued function</a>, <a href="../glossary/#vectorization">vectorization</a>, <a href="../glossary/#window_func">window function</a></p>
+<p id="terms">Terms defined: <a class="term-defined" href="../glossary/#er_diagram">UNDEFINED</a>, <a class="term-defined" href="../glossary/#alias">UNDEFINED</a>, <a class="term-defined" href="../glossary/#many_to_many">UNDEFINED</a>, <a class="term-defined" href="../glossary/#join_table">UNDEFINED</a>, <a class="term-defined" href="../glossary/#subquery">UNDEFINED</a>, <a class="term-defined" href="../glossary/#data_migration">UNDEFINED</a>, <a class="term-defined" href="../glossary/#table_valued_func">UNDEFINED</a>, <a class="term-defined" href="../glossary/#1_to_many">UNDEFINED</a>, <a class="term-defined" href="../glossary/#foreign_key">UNDEFINED</a>, <a class="term-defined" href="../glossary/#b_tree">UNDEFINED</a>, <a class="term-defined" href="../glossary/#statement">UNDEFINED</a>, <a class="term-defined" href="../glossary/#autoincrement">UNDEFINED</a>, <a class="term-defined" href="../glossary/#1_to_1">UNDEFINED</a>, <a class="term-defined" href="../glossary/#window_func">UNDEFINED</a>, <a class="term-defined" href="../glossary/#primary_key">UNDEFINED</a>, <a class="term-defined" href="../glossary/#correlated_subquery">UNDEFINED</a>, <a class="term-defined" href="../glossary/#index">UNDEFINED</a>, <a class="term-defined" href="../glossary/#cte">UNDEFINED</a>, <a class="term-defined" href="../glossary/#vectorization">UNDEFINED</a>, <a class="term-defined" href="../glossary/#expression">UNDEFINED</a></p>
 <h2>Negating Incorrectly</h2>
 <ul>
 <li>Who doesn't calibrate?</li>
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS "work" (
 </ol>
 </li>
 <li>
-<p>Tools like [Sqitch][sqitch] can manage changes to database schemas and data
+<p>Tools like <a href="https://sqitch.org/">Sqitch</a> can manage changes to database schemas and data
     so that they can be saved in version control
     and rolled back if they are unsuccessful.
     Translate the changes made by the scripts above into Sqitch.
@@ -590,7 +590,7 @@ order by species, num;
 <h2 class="exercise">Exercise</h2>
 <p>The expression <code>val between 'A' and 'Z'</code> is true if <code>val</code> is <code>'M'</code> (upper case)
 but false if <code>val</code> is <code>'m'</code> (lower case).
-Rewrite the expression using [SQLite's built-in scalar functions][sqlite_function]
+Rewrite the expression using <a href="https://www.sqlite.org/lang_corefunc.html">SQLite's built-in scalar functions</a>
 so that it is true in both cases.</p>
 <table>
 <thead>
@@ -643,11 +643,11 @@ so that it is true in both cases.</p>
 <li><a href="../glossary/#er_diagram">Entity-relationship diagram</a> (ER diagram) shows relationships between tables</li>
 <li>Like everything to do with databases, there are lots of variations</li>
 </ul>
-<figure id="tools_assays_tables">
+<figure id="f:tools_assays_tables">
 <img alt="table-level diagram of assay database showing primary and foreign key relationships" src="tools_assays_tables.svg"/>
 <figcaption>Figure 1: Assay Database Table Diagram</figcaption>
 </figure>
-<figure id="assays_er">
+<figure id="f:assays_er">
 <img alt="entity-relationship diagram showing logical structure of assay database" src="tools_assays_er.svg"/>
 <figcaption>Figure 2: Assay ER Diagram</figcaption>
 </figure>
@@ -836,7 +836,7 @@ where selector &lt; 5;
 <p>uses a second CTE to calculate their mean; and</p>
 </li>
 <li>
-<p>uses a third CTE and [SQLite's built-in math functions][sqlite_math]
+<p>uses a third CTE and <a href="https://www.sqlite.org/lang_mathfunc.html">SQLite's built-in math functions</a>
     to calculate their standard deviation.</p>
 </li>
 </ul>
@@ -976,7 +976,7 @@ limit 5;
 </code></pre>
 <h2 class="exercise">Exercise</h2>
 <p>What does the expression <code>date('now', 'start of month', '+1 month', '-1 day')</code> produce?
-(You may find [the documentation on SQLite's date and time functions][sqlite_datetime] helpful.)</p>
+(You may find <a href="https://www.sqlite.org/lang_datefunc.html">the documentation on SQLite's date and time functions</a> helpful.)</p>
 <h2>Self Join</h2>
 <pre class=""><code data-file="self_join.assays.sql">with person as (
     select
@@ -1196,7 +1196,7 @@ order by ym;
 </ul>
 <h2 class="aside">Boundaries</h2>
 <ul>
-<li>[Documentation on SQLite's window functions][sqlite_window] describes
+<li><a href="https://sqlite.org/windowfunctions.html">Documentation on SQLite's window functions</a> describes
     three frame types and five kinds of frame boundary</li>
 <li>It feels very ad hoc, but so does the real world</li>
 </ul>
@@ -1328,9 +1328,19 @@ order by year, month;
 </ol>
 </main>
 <footer>
-<a href="../">The Querynomicon</a>
-      copyright © 2025
-      <a href="../#acknowledgments">the authors</a>
+<div class="row">
+<div class="col-3 left">
+	  ⇐ <a href="../02_core/">Core Features</a>
+</div>
+<div class="col-6 center">
+<a href="../"></a>
+	  © 2025
+	  <a href="../#acknowledgments">the authors</a>
+</div>
+<div class="col-3 right">
+<a href="../04_python/">Python</a> ⇒
+	</div>
+</div>
 </footer>
 </body>
 </html>

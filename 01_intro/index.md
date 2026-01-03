@@ -57,9 +57,9 @@
     -   Unfortunately, every RDBMS has its own dialect of SQL
 -   There are also [NoSQL databases](g:nosql) like [MongoDB][mongodb] that don't use tables
 
-<figure id="intro_concept_map">
+<figure id="f:intro_concept_map">
   <img src="intro_concept_map.svg" alt="box and arrow concept map of major concepts related to databases"/>
-  <figcaption>Figure 1: Concepts</figcaption>
+  <figcaption>Concepts</figcaption>
 </figure>
 
 ## Connecting to Database {: .aside}

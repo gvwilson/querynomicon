@@ -15,6 +15,7 @@
 
     --len-dropdown: 200px;
     --len-half: 0.5rem;
+    --len-line-height: 1.4; /* instead of standard 1.2 */
     --len-one: 1rem;
     --len-page: 60rem;
     --len-quarter: 0.25rem;
@@ -22,8 +23,8 @@
     --len-thick: 4px;
     --len-thin: 1px;
 
-    --size-prose: 1.2rem;
-    --size-code: 1.1rem;
+    --size-prose: 1.1rem;
+    --size-code: 0.9rem;
 }
 
 /* Flex grid */
@@ -124,8 +125,8 @@ blockquote {
     border-left: solid var(--len-thick) var(--color-decorate);
     margin-left: 0px;
     padding-left: var(--len-half);
-    padding-top: var(--len-half);
-    padding-bottom: var(--len-half);
+    padding-top: 0;
+    padding-bottom: 0;
     margin-top: var(--len-thick);
     margin-bottom: var(--len-thick);
     background-color: var(--color-highlight);
@@ -135,6 +136,7 @@ blockquote {
 body {
     font-family: var(--font-prose);
     font-size: var(--size-prose);
+    line-height: var(--len-line-height);
     max-width: var(--len-page);
     background-color: var(--color-page);
     margin: auto;
@@ -142,9 +144,19 @@ body {
     padding-right: var(--len-half);
 }
 
+/* Table captions */
+caption {
+    caption-side: bottom;
+}
+
 /* Code text */
 code {
     font-size: var(--size-code);
+}
+
+/* Appendices */
+div#appendices ol {
+    list-style-type: upper-alpha;
 }
 
 /* Cards */
@@ -169,11 +181,17 @@ div.card > p {
     margin-bottom: var(--len-half);
 }
 
+/* Figures */
+figure {
+    text-align: center;
+}
+
 /* Footer */
 footer {
-    border-top: solid var(--color-decorate) var(--len-thin);
     margin-top: var(--len-half);
+    border-top: solid var(--color-decorate) var(--len-thin);
     padding-top: var(--len-half);
+    margin-bottom: var(--len-half);
     text-align: center;
 }
 
@@ -194,8 +212,14 @@ p.subtitle {
     font-style: italic;
 }
 
+/* Image sizing */
+img.img-90 {
+    width: 90%;
+}
+
 /* Navigation */
 nav {
+    margin-top: var(--len-half);
     border-bottom: solid var(--color-decorate) var(--len-thin);
     margin-bottom: var(--len-half);
     padding-bottom: var(--len-half);
@@ -210,8 +234,8 @@ pre {
 /* Table */
 table {
   text-align: justify;
-  width: 100%;
   border-collapse: collapse;
+  margin-bottom: var(--len-half);
 }
 
 td, th {
@@ -258,10 +282,14 @@ section.exercise {
     border-radius: var(--len-thick);
 }
 section.exercise h3 {
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 /* Definitions */
+
+dt:not(:first-child) {
+    margin-top: var(--len-quarter);
+}
 
 dt {
     font-weight: bold;

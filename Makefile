@@ -46,18 +46,18 @@ ${DB}/contact_tracing.db: bin/create_contacts.py
 ${DB}/lab_log.db: bin/create_lab_log.py
 	python $< $@
 
-${DB}/penguins.db : bin/create_penguins.py misc/penguins.csv
-	python $< $@ misc/penguins.csv
+${DB}/penguins.db : bin/create_penguins.py extras/penguins.csv
+	python $< $@ extras/penguins.csv
 
 ## psql_db: create PostgreSQL penguins database
 psql_db: bin/create_penguins_psql.py
-	python $< penguins misc/penguins.csv
+	python $< penguins extras/penguins.csv
 
 ## release: create a release
 release:
 	@rm -rf sql-tutorial.zip
 	@zip -r sql-tutorial.zip \
 	db \
-	misc/penguins.csv \
+	extras/penguins.csv \
 	src \
 	-x \*~

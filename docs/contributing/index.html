@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contributing</title>
+<link href="../static/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../static/page.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav>
+<a href="../">Home</a>
+      ·
+      <span class="dropdown">
+<a href="#">Lessons</a>
+<span class="dropdown-content" id="nav-lessons">
+<a href="../01_intro/">Introduction</a>
+<a href="../02_core/">Core Features</a>
+<a href="../03_tools/">Tools</a>
+<a href="../04_python/">Python</a>
+<a href="../05_advanced/">Advanced Features</a>
+<a href="../06_r/">R</a>
+<a href="../07_psql/">PostgreSQL</a>
+<a href="../08_finale/">Conclusion</a>
+</span>
+</span>
+      ·
+      <span class="dropdown">
+<a href="#">Appendices</a>
+<span class="dropdown-content" id="nav-appendices">
+<a href="../license/">License</a>
+<a href="../conduct/">Code of Conduct</a>
+<a href="../contributing/">Contributing</a>
+<a href="../bibliography/">Bibliography</a>
+<a href="../glossary/">Glossary</a>
+</span>
+</span>
+</nav>
+<main>
+<h1>Contributing</h1>
+<p>Contributions are very welcome.
+Please file issues or submit pull requests in our GitHub repository.
+All contributors will be acknowledged.</p>
+<h2>In Brief</h2>
+<ul>
+<li>
+<p>Use <code>uv venv</code> and <code>uv pip install -r pyproject.toml</code>
+    to install the packages required by the helper tools and Python examples.</p>
+</li>
+<li>
+<p>The source files for examples are in their section directories
+    along with captured output in <code>.out</code> files.</p>
+</li>
+<li>
+<p><code>Makefile</code> contains the commands used to re-run each example.
+    If you add a new example,
+    please add a corresponding rule in <code>Makefile</code>.</p>
+</li>
+<li>
+<p>Use a level-2 heading for each sub-topic.
+    Use <code>{: .aside}</code> for an aside
+    or <code>{: .exercise}</code> for exercise.</p>
+</li>
+<li>
+<p>Please create SVG diagrams using <a href="https://www.drawio.com/">draw.io</a>.
+    Please use 14-point Helvetica for text,
+    solid 1-point black lines,
+    and unfilled objects.</p>
+</li>
+</ul>
+<h2>Labels</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>change</td>
+<td>something different</td>
+<td>#FBCA04</td>
+</tr>
+<tr>
+<td>feature</td>
+<td>new feature</td>
+<td>#B60205</td>
+</tr>
+<tr>
+<td>fix</td>
+<td>something broken</td>
+<td>#5319E7</td>
+</tr>
+<tr>
+<td>good first issue</td>
+<td>newcomers are always welcome</td>
+<td>#D4C5F9</td>
+</tr>
+<tr>
+<td>talk</td>
+<td>question or discussion</td>
+<td>#0E8A16</td>
+</tr>
+<tr>
+<td>task</td>
+<td>one-off task</td>
+<td>#1D76DB</td>
+</tr>
+</tbody>
+</table>
+<p>Please use <a href="https://www.conventionalcommits.org/">Conventional Commits</a> style for pull requests
+by using <code>change:</code>, <code>feature:</code>, <code>fix:</code>, or <code>task:</code> as the first word
+in the title of the commit message.
+You may also use <code>publish:</code> if the PR just rebuilds the HTML version of the lesson.</p>
+<h2>FAQ</h2>
+<dl>
+<dt>Why SQL?</dt>
+<dd>Because if you dig down far enough,
+almost every data science project sits on top of a relational database.
+(<a href="https://blog.jonudell.net/">Jon Udell</a> once called <a href="https://www.postgresql.org/">PostgreSQL</a>
+"an operating system for data science".)
+SQL's relational model has also been a powerful influence
+on dataframe libraries like <a href="https://www.tidyverse.org/">the tidyverse</a>,
+<a href="https://pandas.pydata.org/">Pandas</a>,
+and <a href="https://pola.rs/">Polars</a>;
+understanding the former therefore helps people understand the latter.</dd>
+<dt>Why <a href="https://pypi.org/project/mccole/">McCole</a>?</dt>
+<dd>The first version of this tutorial used <a href="https://jekyllrb.com/">Jekyll</a>
+because it is the default for <a href="https://pages.github.com/">GitHub Pages</a>
+and because its frustrating limitations would discourage contributors
+from messing around with the template instead of writing content.
+However,
+those limitations proved more frustrating than anticipated:
+in particular,
+very few data scientists speak Ruby,
+so previewing changes locally required them to install and use
+yet another language framework.</dd>
+<dt>Why Make?</dt>
+<dd>It runs everywhere,
+no other build tool is a clear successor,
+and,
+like Jekyll,
+it's uncomfortable enough to use that people won't be tempted to fiddle with it
+when they could be writing.</dd>
+<dt>Why hand-drawn figures rather than <a href="https://graphviz.org/">Graphviz</a> or <a href="https://mermaid.js.org/">Mermaid</a>?</dt>
+<dd>Because it's faster to Just Effing Draw than it is
+to try to tweak layout parameters for text-to-diagram systems.
+If you really want to make developers' lives better,
+build a diff-and-merge tool for SVG:
+programmers shouldn't have to use punchcard-compatible data formats in the 21st Century
+just to get the benefits of version control.</dd>
+<dt>Why make this tutorial freely available?</dt>
+<dd>Because if we all give a little, we all get a lot.</dd>
+</dl>
+<h2>Colophon</h2>
+<ul>
+<li>
+<p>The CSS files used to style code were obtained from <a href="https://numist.github.io/highlight-css/">highlight-css</a>;
+    legibility was checked using <a href="https://wave.webaim.org/">WebAIM WAVE</a>.</p>
+</li>
+<li>
+<p>Diagrams were created with the desktop version of <a href="https://www.drawio.com/">draw.io</a>.</p>
+</li>
+<li>
+<p>The site is hosted on <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+</li>
+<li>
+<p>Thanks to the authors of <a href="https://pypi.org/project/beautifulsoup4/">BeautifulSoup</a>,
+    <a href="https://pypi.org/project/html5validator/">html5validator</a>,
+    <a href="https://pypi.org/project/ruff/">ruff</a>,
+    and all the other software used in this project.
+    If we all give a little,
+    we all get a lot.</p>
+</li>
+</ul>
+</main>
+<footer>
+<div class="row">
+<div class="col-3 left">
+	  ⇐ <a href="../conduct/">Code of Conduct</a>
+</div>
+<div class="col-6 center">
+<a href="../"></a>
+	  © 2025
+	  <a href="../#acknowledgments">the authors</a>
+</div>
+<div class="col-3 right">
+<a href="../bibliography/">Bibliography</a> ⇒
+	</div>
+</div>
+</footer>
+</body>
+</html>

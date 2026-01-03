@@ -15,17 +15,17 @@
       <span class="dropdown">
 	<a href="#">Lessons</a>
 	<span id="nav-lessons" class="dropdown-content">
-{% for key in lessons %}
-          <a href="{{key}}">{{lessons[key]}}</a>
+{% for slug, title in lessons %}
+          <a href="@/{{slug}}/">{{title}}</a>
 {% endfor %}
 	</span>
       </span>
       &middot;
       <span class="dropdown">
-        <a href="#">Extras</a>
-        <span id="nav-extras" class="dropdown-content">
-{% for key in appendices %}
-          <a href="{{key}}">{{appendices[key]}}</a>
+        <a href="#">Appendices</a>
+        <span id="nav-appendices" class="dropdown-content">
+{% for slug, title in appendices %}
+          <a href="@/{{slug}}/">{{title}}</a>
 {% endfor %}
         </span>
       </span>
@@ -34,9 +34,19 @@
 {{content}}
     </main>
     <footer>
-      <a href="@/">{{title}}</a>
-      copyright &copy; 2025
-      <a href="@/#acknowledgments">the authors</a>
+      <div class="row">
+	<div class="col-3 left">
+	  {% if prev[0] %}&#8656; <a href="@/{{prev[0]}}/">{{prev[1]}}</a>{% endif %}
+	</div>
+	<div class="col-6 center">
+	  <a href="@/">{{title}}</a>
+	  &copy; 2025
+	  <a href="@/#acknowledgments">the authors</a>
+	</div>
+	<div class="col-3 right">
+	  {% if next[0] %}<a href="@/{{next[0]}}/">{{next[1]}}</a> &#8658;{% endif %}
+	</div>
+      </div>
     </footer>
   </body>
 </html>

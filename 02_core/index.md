@@ -358,9 +358,9 @@ or look at [the documentation for SQLite's `format()` function][sqlite_format].
 
 ## Check Understanding {: .aside}
 
-<figure id="core_select_concept_map">
+<figure id="f:core_select_concept_map">
   <img src="core_select_concept_map.svg" alt="box and arrow diagram of concepts related to selection"/>
-  <figcaption>Figure 1: Selection Concepts</figcaption>
+  <figcaption>Selection Concepts</figcaption>
 </figure>
 
 ## Calculating with Missing Values
@@ -539,9 +539,9 @@ where sex is null;
 
 ## Check Understanding {: .aside}
 
-<figure id="core_missing_concept_map">
+<figure id="f:core_missing_concept_map">
   <img src="core_missing_concept_map.svg" alt="box and arrow diagram of concepts related to null values in SQL"/>
-  <figcaption>Figure 2: Missing Value Concepts</figcaption>
+  <figcaption>Missing Value Concepts</figcaption>
 </figure>
 
 ## Aggregating
@@ -747,9 +747,9 @@ Is it possible to do this using `where` instead of `filter`?
 
 ## Check Understanding {: .aside}
 
-<figure id="core_aggregate_concept_map">
+<figure id="f:core_aggregate_concept_map">
   <img src="core_aggregate_concept_map.svg" alt="box and arrow diagram of concepts related to aggregation in SQL"/>
-  <figcaption>Figure 3: Aggregation Concepts</figcaption>
+  <figcaption>Aggregation Concepts</figcaption>
 </figure>
 
 ## Creating In-memory Database {: .aside}
@@ -930,9 +930,9 @@ Saving and restoring data in binary format:
 
 ## Check Understanding {: .aside}
 
-<figure id="core_datamod_concept_map">
+<figure id="f:core_datamod_concept_map">
   <img src="core_datamod_concept_map.svg" alt="box and arrow diagram of concepts related to defining and modifying data"/>
-  <figcaption>Figure 4: Data Definition and Modification Concepts</figcaption>
+  <figcaption>Data Definition and Modification Concepts</figcaption>
 </figure>
 
 ## Combining Information
@@ -1109,7 +1109,7 @@ using the SQL you have seen so far?
 
 ## Check Understanding {: .aside}
 
-<figure id="core_join_concept_map">
+<figure id="f:core_join_concept_map">
   <img src="core_join_concept_map.svg" alt="box and arrow diagram of concepts related to joining tables"/>
-  <figcaption>Figure 5: Join Concepts</figcaption>
+  <figcaption>Join Concepts</figcaption>
 </figure>
