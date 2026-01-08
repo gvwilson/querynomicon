@@ -2,40 +2,10 @@
 
 <p class="subtitle">An Introduction to SQL for the Cautious and Weary</p>
 
-Upon first encountering SQL after two decades of Fortran, C, Java, and Python,
-I thought I had stumbled into hell.
-I quickly realized that was optimistic:
-after all,
-hell has rules.
+## Setup
 
-I have since realized that SQL does too,
-and that they are no more confusing or contradictory than those of most other programming languages.
-They only appear so because it draws on a tradition unfamiliar to those of us raised with derivatives of C.
-To quote [Terry Pratchett][pratchett_terry],
-it is not mad, just differently sane.
-
-Welcome, then, to a world in which the strange will become familiar, and the familiar, strange.
-Welcome, thrice welcome, to SQL.
-
--   Please see [the website][site] to view the current version of this tutorial.
-
--   Contributions are very welcome:
-    please see the contributors' guide for background
-    and the issues in for items where assistance would be most appreciated.
-    Please also see our [license][license] for terms of use,
-    and note that all contributors are required to abide by our [Code of Conduct][conduct].
-
-<div class="callout" markdown="1">
-
-This lesson notes and working examples for instructors to use as a starting point.
-We do *not* expect novices with no prior SQL experience to be able to learn from this on their own.
-As a musical analogy,
-these notes are the chord changes and melody;
-we expect instructors to create an arrangement and/or improvise over the material
-when delivering it.
-Please see [*Teaching Tech Together*][t3] for background.
-
-</div>
+-   Download [the databases used in the examples](@/databases.zip)
+-   Download [DB Browser for SQLite](https://sqlitebrowser.org/)
 
 ## Lessons
 
@@ -69,15 +39,14 @@ Please see [*Teaching Tech Together*][t3] for background.
 -   *[Greg Wilson][wilson_greg]*
     was the co-founder and first Executive Director of Software Carpentry
     and received ACM SIGSOFT's Influential Educator Award in 2020.
-
 -   *[Konstantinos Kitsios][kitsios_konstantinos]*
     is a PhD student at University of Zurich,
     working on applications of machine learning to software engineering.
     Previously he worked as a software engineer at Tesla.
-
 -   *[Pao Corrales][corrales_pao]*
     has a PhD in Atmospheric Sciences and works on improving severe weather forecasts in Argentina.
-    She loves teaching science and programming using evidence-based techniques centered on the students and their context.
+    She loves teaching science and programming using evidence-based techniques
+    centered on the students and their context.
 
 This tutorial would not have been possible without:
 
@@ -85,8 +54,11 @@ This tutorial would not have been possible without:
 -   Dimitri Fontaine's [*The Art of PostgreSQL*][art_postgresql]
 -   David Rozenshtein's *The Essence of SQL* (now sadly out of print)
 
-I would also like to thank the following people
+We also thank the following people
 for spotting issues, making suggestions, or submitting changes:
+
+<div class="row" markdown="1">
+  <div class="col-4" markdown="1">
 
 - Yanina Bellini Saibene
 - Phillip Cloud
@@ -94,26 +66,34 @@ for spotting issues, making suggestions, or submitting changes:
 - Conor Flynn
 - Andy Goldberg
 - Jay Graves
+
+  </div>
+  <div class="col-4" markdown="1">
+
 - Sam Hames
 - Adam Hawkes
 - Robert Kern
-- Konstantinos Kitsios
 - Olivier Leroy
 - Kevin Marshall
 - Roy Pardee
+
+  </div>
+  <div class="col-4" markdown="1">
+
 - Manos Pitsidianakis
 - Daniel Possenriede 
 - Adam Rosien
 - Thomas Sandmann
 - Simon Willison
 
+  </div>
+</div>
+
 <p class="center">
   <em>
-    Start where you are
-    <br/>
-    Use what you have
-    <br/>
-    Help who you can
+    start where you are &middot;
+    use what you have &middot;
+    help who you can
   </em>
 </p>
 

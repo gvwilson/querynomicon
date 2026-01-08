@@ -7,6 +7,7 @@
 <title>Tools</title>
 <link href="../static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../static/pygments.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav>
@@ -44,16 +45,16 @@
 <ul>
 <li>Who doesn't calibrate?</li>
 </ul>
-<pre class=""><code data-file="negate_incorrectly.memory.sql:keep">select distinct person
-from work
-where job != 'calibrate';
-</code></pre>
-<pre class=""><code data-file="negate_incorrectly.memory.out">| person |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
+<span class="k">from</span><span class="w"> </span><span class="k">work</span>
+<span class="k">where</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">'calibrate'</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| person |
 |--------|
 | mik    |
 | po     |
 | tay    |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>But Mik <em>does</em> calibrate</li>
 <li>Problem is that there's an entry for Mik cleaning</li>
@@ -61,32 +62,32 @@ where job != 'calibrate';
 <li>We need a different approach…</li>
 </ul>
 <h2>Set Membership</h2>
-<pre class=""><code data-file="set_membership.sql:keep">select *
-from work
-where person not in ('mik', 'tay');
-</code></pre>
-<pre class=""><code data-file="set_membership.out">| person |   job    |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
+<span class="k">from</span><span class="w"> </span><span class="k">work</span>
+<span class="k">where</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">'mik'</span><span class="p">,</span><span class="w"> </span><span class="s1">'tay'</span><span class="p">);</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| person |   job    |
 |--------|----------|
 | po     | clean    |
 | po     | complain |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>in <em>values</em></code> and <code>not in <em>values</em></code> do exactly what you expect</li>
 </ul>
 <h2>Subqueries</h2>
-<pre class=""><code data-file="subquery_set.sql:keep">select distinct person
-from work
-where person not in (
-    select distinct person
-    from work
-    where job = 'calibrate'
-);
-</code></pre>
-<pre class=""><code data-file="subquery_set.out">| person |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
+<span class="k">from</span><span class="w"> </span><span class="k">work</span>
+<span class="k">where</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="k">work</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'calibrate'</span>
+<span class="p">);</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| person |
 |--------|
 | po     |
 | tay    |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Use a <a href="../glossary/#subquery">subquery</a> to select the people who <em>do</em> calibrate</li>
 <li>Then select all the people who <em>aren't</em> in that set</li>
@@ -98,53 +99,53 @@ where person not in (
     as long as value(s) unique for each record</li>
 <li>Uniquely identifies a particular record in a particular table</li>
 </ul>
-<pre class=""><code data-file="primary_key.sql">create table lab_equipment (
-    size real not null,
-    color text not null,
-    num integer not null,
-    primary key (size, color)
-);
+<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">lab_equipment</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">size</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">color</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">num</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="k">size</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="p">);</span>
 
-insert into lab_equipment values
-(1.5, 'blue', 2),
-(1.5, 'green', 1),
-(2.5, 'blue', 1);
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">lab_equipment</span><span class="w"> </span><span class="k">values</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">'blue'</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">'green'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">'blue'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 
-select * from lab_equipment;
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">lab_equipment</span><span class="p">;</span>
 
-insert into lab_equipment values
-(1.5, 'green', 2);
-</code></pre>
-<pre class=""><code data-file="primary_key.out">| size | color | num |
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">lab_equipment</span><span class="w"> </span><span class="k">values</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">'green'</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| size | color | num |
 |------|-------|-----|
 | 1.5  | blue  | 2   |
 | 1.5  | green | 1   |
 | 2.5  | blue  | 1   |
 Runtime error near line 17: UNIQUE constraint failed: lab_equipment.size, lab_equipment.color (19)
-</code></pre>
+</code></pre></div>
 <h2 class="exercise">Exercise</h2>
 <p>Does the <code>penguins</code> table have a primary key?
 If so, what is it?
 What about the <code>work</code> and <code>job</code> tables?</p>
 <h2>Autoincrementing and Primary Keys</h2>
-<pre class=""><code data-file="autoincrement.sql">create table person (
-    ident integer primary key autoincrement,
-    name text not null
-);
-insert into person values
-(null, 'mik'),
-(null, 'po'),
-(null, 'tay');
-select * from person;
-insert into person values (1, 'prevented');
-</code></pre>
-<pre class=""><code data-file="autoincrement.out">| ident | name |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">ident</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="n">autoincrement</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<span class="p">);</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">values</span>
+<span class="p">(</span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="s1">'mik'</span><span class="p">),</span>
+<span class="p">(</span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="s1">'po'</span><span class="p">),</span>
+<span class="p">(</span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="s1">'tay'</span><span class="p">);</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'prevented'</span><span class="p">);</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| ident | name |
 |-------|------|
 | 1     | mik  |
 | 2     | po   |
 | 3     | tay  |
 Runtime error near line 12: UNIQUE constraint failed: person.ident (19)
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Database <a href="../glossary/#autoincrement">autoincrements</a> <code>ident</code> each time a new record is added</li>
 <li>Common to use that field as the primary key<ul>
@@ -156,12 +157,12 @@ Runtime error near line 12: UNIQUE constraint failed: person.ident (19)
 <li>Downside: manual queries are harder to read (who is person 17?)</li>
 </ul>
 <h2 class="aside">Internal Tables</h2>
-<pre class=""><code data-file="sequence_table.memory.sql:keep">select * from sqlite_sequence;
-</code></pre>
-<pre class=""><code data-file="sequence_table.memory.out">|  name  | seq |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">sqlite_sequence</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|  name  | seq |
 |--------|-----|
 | person | 3   |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Sequence numbers are <em>not</em> reset when rows are deleted<ul>
 <li>In part so that they can be used as primary keys</li>
@@ -174,24 +175,24 @@ In particular,
 are you able to reset the values so that
 the same sequence numbers are generated again?</p>
 <h2>Altering Tables</h2>
-<pre class=""><code data-file="alter_tables.sql:keep">alter table job
-add ident integer not null default -1;
+<div class="codehilite"><pre class=""><span></span><code><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span>
+<span class="k">add</span><span class="w"> </span><span class="n">ident</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 
-update job
-set ident = 1
-where name = 'calibrate';
+<span class="k">update</span><span class="w"> </span><span class="n">job</span>
+<span class="k">set</span><span class="w"> </span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'calibrate'</span><span class="p">;</span>
 
-update job
-set ident = 2
-where name = 'clean';
+<span class="k">update</span><span class="w"> </span><span class="n">job</span>
+<span class="k">set</span><span class="w"> </span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'clean'</span><span class="p">;</span>
 
-select * from job;
-</code></pre>
-<pre class=""><code data-file="alter_tables.out">|   name    | billable | ident |
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|   name    | billable | ident |
 |-----------|----------|-------|
 | calibrate | 1.5      | 1     |
 | clean     | 0.5      | 2     |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Add a column after the fact</li>
 <li>Since it can't be null, we have to provide a default value<ul>
@@ -223,37 +224,37 @@ select * from job;
 </li>
 </ul>
 <h2>Creating New Tables from Old</h2>
-<pre class=""><code data-file="insert_select.sql:keep">create table new_work (
-    person_id integer not null,
-    job_id integer not null,
-    foreign key (person_id) references person (ident),
-    foreign key (job_id) references job (ident)
-);
+<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">new_work</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">person_id</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">job_id</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span><span class="n">ident</span><span class="p">),</span>
+<span class="w">    </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span><span class="n">ident</span><span class="p">)</span>
+<span class="p">);</span>
 
-insert into new_work
-select
-    person.ident as person_id,
-    job.ident as job_id
-from
-    (person inner join work on person.name = work.person)
-    inner join job on job.name = work.job;
-select * from new_work;
-</code></pre>
-<pre class=""><code data-file="insert_select.out">| person_id | job_id |
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">new_work</span>
+<span class="k">select</span>
+<span class="w">    </span><span class="n">person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">person_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">job</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">job_id</span>
+<span class="k">from</span>
+<span class="w">    </span><span class="p">(</span><span class="n">person</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">person</span><span class="p">)</span>
+<span class="w">    </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">job</span><span class="p">;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">new_work</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| person_id | job_id |
 |-----------|--------|
 | 1         | 1      |
 | 1         | 2      |
 | 2         | 2      |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>new_work</code> is our join table</li>
 <li>Each column refers to a record in some other table</li>
 </ul>
 <h2>Removing Tables</h2>
-<pre class=""><code data-file="drop_table.sql:keep">drop table work;
-alter table new_work rename to work;
-</code></pre>
-<pre class=""><code data-file="drop_table.out">CREATE TABLE job (
+<div class="codehilite"><pre class=""><span></span><code><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">work</span><span class="p">;</span>
+<span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">new_work</span><span class="w"> </span><span class="k">rename</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">work</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>CREATE TABLE job (
     ident integer primary key autoincrement,
     name text not null,
     billable real not null
@@ -269,7 +270,7 @@ CREATE TABLE IF NOT EXISTS "work" (
     foreign key(person_id) references person(ident),
     foreign key(job_id) references job(ident)
 );
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Remove the old table and rename the new one to take its place<ul>
 <li>Note <code>if exists</code></li>
@@ -301,23 +302,23 @@ CREATE TABLE IF NOT EXISTS "work" (
 <ul>
 <li>Go back to the original penguins database</li>
 </ul>
-<pre class=""><code data-file="compare_individual_aggregate.penguins.sql">select body_mass_g
-from penguins
-where
-    body_mass_g &gt; (
-        select avg(body_mass_g)
-        from penguins
-    )
-limit 5;
-</code></pre>
-<pre class=""><code data-file="compare_individual_aggregate.penguins.out">| body_mass_g |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">body_mass_g</span>
+<span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="k">where</span>
+<span class="w">    </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k">select</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span>
+<span class="w">        </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| body_mass_g |
 |-------------|
 | 4675.0      |
 | 4250.0      |
 | 4400.0      |
 | 4500.0      |
 | 4650.0      |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Get average body mass in subquery</li>
 <li>Compare each row against that</li>
@@ -331,29 +332,29 @@ limit 5;
 <p>Use a subquery to find the number of penguins
 that weigh the same as the lightest penguin.</p>
 <h2>Comparing Individual Values to Aggregates Within Groups</h2>
-<pre class=""><code data-file="compare_within_groups.penguins.sql">select
-    penguins.species,
-    penguins.body_mass_g,
-    round(averaged.avg_mass_g, 1) as avg_mass_g
-from penguins inner join (
-    select
-        species,
-        avg(body_mass_g) as avg_mass_g
-    from penguins
-    group by species
-) as averaged
-    on penguins.species = averaged.species
-where penguins.body_mass_g &gt; averaged.avg_mass_g
-limit 5;
-</code></pre>
-<pre class=""><code data-file="compare_within_groups.penguins.out">| species | body_mass_g | avg_mass_g |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<span class="w">    </span><span class="n">penguins</span><span class="p">.</span><span class="n">species</span><span class="p">,</span>
+<span class="w">    </span><span class="n">penguins</span><span class="p">.</span><span class="n">body_mass_g</span><span class="p">,</span>
+<span class="w">    </span><span class="n">round</span><span class="p">(</span><span class="n">averaged</span><span class="p">.</span><span class="n">avg_mass_g</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_mass_g</span>
+<span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">species</span><span class="p">,</span>
+<span class="w">        </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_mass_g</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span>
+<span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">averaged</span>
+<span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="n">penguins</span><span class="p">.</span><span class="n">species</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">averaged</span><span class="p">.</span><span class="n">species</span>
+<span class="k">where</span><span class="w"> </span><span class="n">penguins</span><span class="p">.</span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">averaged</span><span class="p">.</span><span class="n">avg_mass_g</span>
+<span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
 | Adelie  | 4675.0      | 3700.7     |
 | Adelie  | 4250.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Subquery runs first to create temporary table <code>averaged</code> with average mass per species</li>
 <li>Join that with <code>penguins</code></li>
@@ -363,30 +364,30 @@ limit 5;
 <p>Use a subquery to find the number of penguins
 that weigh the same as the lightest penguin of the same sex and species.</p>
 <h2>Common Table Expressions</h2>
-<pre class=""><code data-file="common_table_expressions.penguins.sql">with grouped as (
-    select
-        species,
-        avg(body_mass_g) as avg_mass_g
-    from penguins
-    group by species
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">grouped</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">species</span><span class="p">,</span>
+<span class="w">        </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_mass_g</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span>
+<span class="p">)</span>
 
-select
-    penguins.species,
-    penguins.body_mass_g,
-    round(grouped.avg_mass_g, 1) as avg_mass_g
-from penguins inner join grouped
-where penguins.body_mass_g &gt; grouped.avg_mass_g
-limit 5;
-</code></pre>
-<pre class=""><code data-file="common_table_expressions.penguins.out">| species | body_mass_g | avg_mass_g |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">penguins</span><span class="p">.</span><span class="n">species</span><span class="p">,</span>
+<span class="w">    </span><span class="n">penguins</span><span class="p">.</span><span class="n">body_mass_g</span><span class="p">,</span>
+<span class="w">    </span><span class="n">round</span><span class="p">(</span><span class="n">grouped</span><span class="p">.</span><span class="n">avg_mass_g</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_mass_g</span>
+<span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">grouped</span>
+<span class="k">where</span><span class="w"> </span><span class="n">penguins</span><span class="p">.</span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">grouped</span><span class="p">.</span><span class="n">avg_mass_g</span>
+<span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
 | Adelie  | 4675.0      | 3700.7     |
 | Adelie  | 4250.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Use <a href="../glossary/#cte">common table expression</a> (CTE) to make queries clearer<ul>
 <li>Nested subqueries quickly become difficult to understand</li>
@@ -395,17 +396,17 @@ limit 5;
 <li>Database decides how to optimize</li>
 </ul>
 <h2 class="aside">Explaining Query Plans</h2>
-<pre class=""><code data-file="explain_query_plan.penguins.sql">explain query plan
-select
-    species,
-    avg(body_mass_g)
-from penguins
-group by species;
-</code></pre>
-<pre class=""><code data-file="explain_query_plan.penguins.out">QUERY PLAN
+<div class="codehilite"><pre class=""><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
+<span class="k">select</span>
+<span class="w">    </span><span class="n">species</span><span class="p">,</span>
+<span class="w">    </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span>
+<span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>QUERY PLAN
 |--SCAN penguins
 `--USE TEMP B-TREE FOR GROUP BY
-</code></pre>
+</code></pre></div>
 <ul>
 <li>SQLite plans to scan every row of the table</li>
 <li>It will build a temporary <a href="../glossary/#b_tree">B-tree data structure</a> to group rows</li>
@@ -418,21 +419,21 @@ that weigh the same as the lightest penguin of the same sex and species.</p>
 <ul>
 <li>Every table has a special column called <code>rowid</code></li>
 </ul>
-<pre class=""><code data-file="rowid.penguins.sql">select
-    rowid,
-    species,
-    island
-from penguins
-limit 5;
-</code></pre>
-<pre class=""><code data-file="rowid.penguins.out">| rowid | species |  island   |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<span class="w">    </span><span class="n">rowid</span><span class="p">,</span>
+<span class="w">    </span><span class="n">species</span><span class="p">,</span>
+<span class="w">    </span><span class="n">island</span>
+<span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| rowid | species |  island   |
 |-------|---------|-----------|
 | 1     | Adelie  | Torgersen |
 | 2     | Adelie  | Torgersen |
 | 3     | Adelie  | Torgersen |
 | 4     | Adelie  | Torgersen |
 | 5     | Adelie  | Torgersen |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>rowid</code> is persistent within a session<ul>
 <li>I.e., if we delete the first 5 rows we now have row IDs 6…N</li>
@@ -460,34 +461,34 @@ limit 5;
 </li>
 </ol>
 <h2>Conditionals</h2>
-<pre class=""><code data-file="if_else.penguins.sql">with sized_penguins as (
-    select
-        species,
-        iif(
-            body_mass_g &lt; 3500,
-            'small',
-            'large'
-        ) as size
-    from penguins
-    where body_mass_g is not null
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">species</span><span class="p">,</span>
+<span class="w">        </span><span class="n">iif</span><span class="p">(</span>
+<span class="w">            </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3500</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">'small'</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">'large'</span>
+<span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">size</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<span class="p">)</span>
 
-select
-    species,
-    size,
-    count(*) as num
-from sized_penguins
-group by species, size
-order by species, num;
-</code></pre>
-<pre class=""><code data-file="if_else.penguins.out">|  species  | size  | num |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">species</span><span class="p">,</span>
+<span class="w">    </span><span class="k">size</span><span class="p">,</span>
+<span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
+<span class="k">from</span><span class="w"> </span><span class="n">sized_penguins</span>
+<span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="k">size</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|  species  | size  | num |
 |-----------|-------|-----|
 | Adelie    | small | 54  |
 | Adelie    | large | 97  |
 | Chinstrap | small | 17  |
 | Chinstrap | large | 51  |
 | Gentoo    | large | 123 |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>iif(<em>condition</em>, <em>true_result</em>, <em>false_result</em>)</code><ul>
 <li>Note: <code>iif</code> with two i's</li>
@@ -513,27 +514,27 @@ Which ones do you think actually attempt to divide by zero?</p>
 <li>What if we want small, medium, and large?</li>
 <li>Can nest <code>iif</code>, but quickly becomes unreadable</li>
 </ul>
-<pre class=""><code data-file="case_when.penguins.sql">with sized_penguins as (
-    select
-        species,
-        case
-            when body_mass_g &lt; 3500 then 'small'
-            when body_mass_g &lt; 5000 then 'medium'
-            else 'large'
-        end as size
-    from penguins
-    where body_mass_g is not null
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">species</span><span class="p">,</span>
+<span class="w">        </span><span class="k">case</span>
+<span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3500</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="s1">'small'</span>
+<span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5000</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="s1">'medium'</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="s1">'large'</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">size</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<span class="p">)</span>
 
-select
-    species,
-    size,
-    count(*) as num
-from sized_penguins
-group by species, size
-order by species, num;
-</code></pre>
-<pre class=""><code data-file="case_when.penguins.out">|  species  |  size  | num |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">species</span><span class="p">,</span>
+<span class="w">    </span><span class="k">size</span><span class="p">,</span>
+<span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
+<span class="k">from</span><span class="w"> </span><span class="n">sized_penguins</span>
+<span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="k">size</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|  species  |  size  | num |
 |-----------|--------|-----|
 | Adelie    | small  | 54  |
 | Adelie    | medium | 97  |
@@ -541,7 +542,7 @@ order by species, num;
 | Chinstrap | medium | 51  |
 | Gentoo    | medium | 56  |
 | Gentoo    | large  | 67  |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Evaluate <code>when</code> options in order and take first</li>
 <li>Result of <code>case</code> is null if no condition is true</li>
@@ -555,26 +556,26 @@ rather than to the individual <code>when</code> branches.
 (This exercise shows that <code>case</code>/<code>when</code> is an <a href="../glossary/#expression">expression</a>
 rather than a <a href="../glossary/#statement">statement</a>.)</p>
 <h2>Checking a Range</h2>
-<pre class=""><code data-file="check_range.penguins.sql">with sized_penguins as (
-    select
-        species,
-        case
-            when body_mass_g between 3500 and 5000 then 'normal'
-            else 'abnormal'
-        end as size
-    from penguins
-    where body_mass_g is not null
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">species</span><span class="p">,</span>
+<span class="w">        </span><span class="k">case</span>
+<span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="mi">3500</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">5000</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="s1">'normal'</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="s1">'abnormal'</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">size</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<span class="p">)</span>
 
-select
-    species,
-    size,
-    count(*) as num
-from sized_penguins
-group by species, size
-order by species, num;
-</code></pre>
-<pre class=""><code data-file="check_range.penguins.out">|  species  |   size   | num |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">species</span><span class="p">,</span>
+<span class="w">    </span><span class="k">size</span><span class="p">,</span>
+<span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
+<span class="k">from</span><span class="w"> </span><span class="n">sized_penguins</span>
+<span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="k">size</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|  species  |   size   | num |
 |-----------|----------|-----|
 | Adelie    | abnormal | 54  |
 | Adelie    | normal   | 97  |
@@ -582,7 +583,7 @@ order by species, num;
 | Chinstrap | normal   | 51  |
 | Gentoo    | abnormal | 61  |
 | Gentoo    | normal   | 62  |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>between</code> can make queries easier to read</li>
 <li>But be careful of the <code>and</code> in the middle</li>
@@ -651,9 +652,9 @@ so that it is true in both cases.</p>
 <img alt="entity-relationship diagram showing logical structure of assay database" src="tools_assays_er.svg"/>
 <figcaption>Figure 2: Assay ER Diagram</figcaption>
 </figure>
-<pre class=""><code data-file="assay_staff.assays.sql">select * from staff;
-</code></pre>
-<pre class=""><code data-file="assay_staff.assays.out">| ident | personal |  family   | dept | age |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| ident | personal |  family   | dept | age |
 |-------|----------|-----------|------|-----|
 | 1     | Kartik   | Gupta     |      | 46  |
 | 2     | Divit    | Dhaliwal  | hist | 34  |
@@ -665,7 +666,7 @@ so that it is true in both cases.</p>
 | 8     | Romil    | Kapoor    | hist | 38  |
 | 9     | Ishaan   | Ramaswamy | mb   | 35  |
 | 10    | Nitya    | Lal       | gen  | 52  |
-</code></pre>
+</code></pre></div>
 <h2 class="exercise">Exercise</h2>
 <p>Draw a table diagram and an ER diagram to represent the following database:</p>
 <ul>
@@ -676,16 +677,16 @@ so that it is true in both cases.</p>
 <li><code>student</code> has <code>person_id</code>, <code>section_id</code>, and <code>status</code></li>
 </ul>
 <h2>Pattern Matching</h2>
-<pre class=""><code data-file="like_glob.assays.sql">select
-    personal,
-    family
-from staff
-where personal like '%ya%';
-</code></pre>
-<pre class=""><code data-file="like_glob.assays.out">| personal | family |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<span class="w">    </span><span class="n">personal</span><span class="p">,</span>
+<span class="w">    </span><span class="n">family</span>
+<span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="k">where</span><span class="w"> </span><span class="n">personal</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%ya%'</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| personal | family |
 |----------|--------|
 | Nitya    | Lal    |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>like</code> is the original SQL pattern matcher<ul>
 <li><code>%</code> matches zero or more characters at the start or end of a string</li>
@@ -697,14 +698,14 @@ where personal like '%ya%';
 <h2 class="exercise">Exercise</h2>
 <p>Rewrite the pattern-matching query shown above using <code>glob</code>.</p>
 <h2>Selecting First and Last Rows</h2>
-<pre class=""><code data-file="union_all.assays.sql">select * from (
-    select * from (select * from experiment order by started asc limit 5)
-    union all
-    select * from (select * from experiment order by started desc limit 5)
-)
-order by started asc;
-</code></pre>
-<pre class=""><code data-file="union_all.assays.out">| ident |    kind     |  started   |   ended    |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="k">all</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="k">asc</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| ident |    kind     |  started   |   ended    |
 |-------|-------------|------------|------------|
 | 17    | trial       | 2023-01-29 | 2023-01-30 |
 | 35    | calibration | 2023-01-30 | 2023-01-30 |
@@ -716,7 +717,7 @@ order by started asc;
 | 44    | trial       | 2024-01-27 | 2024-01-29 |
 | 34    | trial       | 2024-02-01 | 2024-02-02 |
 | 14    | calibration | 2024-02-03 | 2024-02-03 |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>union all</code> combines records<ul>
 <li>Keeps duplicates: <code>union</code> on its own only keeps unique records</li>
@@ -730,26 +731,26 @@ order by started asc;
 in the <code>penguins</code> database.
 How can you check that your query is working correctly?</p>
 <h2>Intersection</h2>
-<pre class=""><code data-file="intersect.assays.sql">select
-    personal,
-    family,
-    dept,
-    age
-from staff
-where dept = 'mb'
-intersect
-select
-    personal,
-    family,
-    dept,
-    age from staff
-where age &lt; 50;
-</code></pre>
-<pre class=""><code data-file="intersect.assays.out">| personal |  family   | dept | age |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<span class="w">    </span><span class="n">personal</span><span class="p">,</span>
+<span class="w">    </span><span class="n">family</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dept</span><span class="p">,</span>
+<span class="w">    </span><span class="n">age</span>
+<span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="k">where</span><span class="w"> </span><span class="n">dept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mb'</span>
+<span class="k">intersect</span>
+<span class="k">select</span>
+<span class="w">    </span><span class="n">personal</span><span class="p">,</span>
+<span class="w">    </span><span class="n">family</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dept</span><span class="p">,</span>
+<span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| personal |  family   | dept | age |
 |----------|-----------|------|-----|
 | Indrans  | Sridhar   | mb   | 47  |
 | Ishaan   | Ramaswamy | mb   | 35  |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Rows involved must have the same structure</li>
 <li>Intersection usually used when pulling values from different sources<ul>
@@ -765,25 +766,25 @@ with one that uses <code>where</code>.
 Which query looks like it will be more efficient?
 Why do you believe this?</p>
 <h2>Exclusion</h2>
-<pre class=""><code data-file="except.assays.sql">select
-    personal,
-    family,
-    dept,
-    age
-from staff
-where dept = 'mb'
-except
-    select
-        personal,
-        family,
-        dept,
-        age from staff
-    where age &lt; 50;
-</code></pre>
-<pre class=""><code data-file="except.assays.out">| personal | family | dept | age |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<span class="w">    </span><span class="n">personal</span><span class="p">,</span>
+<span class="w">    </span><span class="n">family</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dept</span><span class="p">,</span>
+<span class="w">    </span><span class="n">age</span>
+<span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="k">where</span><span class="w"> </span><span class="n">dept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mb'</span>
+<span class="k">except</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">personal</span><span class="p">,</span>
+<span class="w">        </span><span class="n">family</span><span class="p">,</span>
+<span class="w">        </span><span class="n">dept</span><span class="p">,</span>
+<span class="w">        </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| personal | family | dept | age |
 |----------|--------|------|-----|
 | Pranay   | Khanna | mb   | 51  |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Again, tables must have same structure<ul>
 <li>And this would be clearer with <code>where</code></li>
@@ -795,20 +796,20 @@ except
 <p>Use <code>exclude</code> to find all Gentoo penguins that <em>aren't</em> male.
 How can you check that your query is working correctly?</p>
 <h2>Random Numbers and Why Not</h2>
-<pre class=""><code data-file="random_numbers.assays.sql">with decorated as (
-    select random() as rand,
-    personal || ' ' || family as name
-    from staff
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">random</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rand</span><span class="p">,</span>
+<span class="w">    </span><span class="n">personal</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' '</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="p">)</span>
 
-select
-    rand,
-    abs(rand) % 10 as selector,
-    name
-from decorated
-where selector &lt; 5;
-</code></pre>
-<pre class=""><code data-file="random_numbers.assays.out">|         rand         | selector |      name       |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">rand</span><span class="p">,</span>
+<span class="w">    </span><span class="k">abs</span><span class="p">(</span><span class="n">rand</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">selector</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span>
+<span class="k">from</span><span class="w"> </span><span class="n">decorated</span>
+<span class="k">where</span><span class="w"> </span><span class="n">selector</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|         rand         | selector |      name       |
 |----------------------|----------|-----------------|
 | -5088363674211922423 | 0        | Divit Dhaliwal  |
 | 6557666280550701355  | 1        | Indrans Sridhar |
@@ -817,7 +818,7 @@ where selector &lt; 5;
 | -3101076015498625604 | 5        | Vedika Rout     |
 | -7884339441528700576 | 4        | Abram Chokshi   |
 | -2718521057113461678 | 4        | Romil Kapoor    |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>There is no way to seed SQLite's random number generator</li>
 <li>Which means there is no way to reproduce its pseudo-random sequences</li>
@@ -841,23 +842,23 @@ where selector &lt; 5;
 </li>
 </ul>
 <h2>Creating an Index</h2>
-<pre class=""><code data-file="create_use_index.sql">explain query plan
-select filename
-from plate
-where filename like '%07%';
+<div class="codehilite"><pre class=""><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
+<span class="k">select</span><span class="w"> </span><span class="n">filename</span>
+<span class="k">from</span><span class="w"> </span><span class="n">plate</span>
+<span class="k">where</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%07%'</span><span class="p">;</span>
 
-create index plate_file on plate(filename);
+<span class="k">create</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="n">plate_file</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">plate</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
 
-explain query plan
-select filename
-from plate
-where filename like '%07%';
-</code></pre>
-<pre class=""><code data-file="create_use_index.out">QUERY PLAN
+<span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
+<span class="k">select</span><span class="w"> </span><span class="n">filename</span>
+<span class="k">from</span><span class="w"> </span><span class="n">plate</span>
+<span class="k">where</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%07%'</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>QUERY PLAN
 `--SCAN plate USING COVERING INDEX sqlite_autoindex_plate_1
 QUERY PLAN
 `--SCAN plate USING COVERING INDEX plate_file
-</code></pre>
+</code></pre></div>
 <ul>
 <li>An <a href="../glossary/#index">index</a> is an auxiliary data structure that enables faster access to records<ul>
 <li>Spend storage space to buy speed</li>
@@ -870,58 +871,58 @@ QUERY PLAN
 <li>Unlike primary keys, SQLite supports defining indexes after the fact</li>
 </ul>
 <h2>Generating Sequences</h2>
-<pre class=""><code data-file="generate_sequence.assays.sql">select value from generate_series(1, 5);
-</code></pre>
-<pre class=""><code data-file="generate_sequence.assays.out">| value |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| value |
 |-------|
 | 1     |
 | 2     |
 | 3     |
 | 4     |
 | 5     |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>A (non-standard) <a href="../glossary/#table_valued_func">table-valued function</a></li>
 </ul>
 <h2>Generating Sequences Based on Data</h2>
-<pre class=""><code data-file="data_range_sequence.memory.sql">create table temp (
-    num integer not null
-);
-insert into temp values (1), (5);
-select value from generate_series (
-    (select min(num) from temp),
-    (select max(num) from temp)
-);
-</code></pre>
-<pre class=""><code data-file="data_range_sequence.memory.out">| value |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">num</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<span class="p">);</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">generate_series</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">min</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">temp</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">max</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">temp</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| value |
 |-------|
 | 1     |
 | 2     |
 | 3     |
 | 4     |
 | 5     |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Must have the parentheses around the <code>min</code> and <code>max</code> selections to keep SQLite happy</li>
 </ul>
 <h2>Generating Sequences of Dates</h2>
-<pre class=""><code data-file="date_sequence.assays.sql">select date((select julianday(min(started)) from experiment) + value) as some_day
-from (
-    select value from generate_series(
-        (select 0),
-        (select julianday(max(started)) - julianday(min(started)) from experiment)
-    )
-)
-limit 5;
-</code></pre>
-<pre class=""><code data-file="date_sequence.assays.out">|  some_day  |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="nb">date</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">julianday</span><span class="p">(</span><span class="k">min</span><span class="p">(</span><span class="n">started</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">some_day</span>
+<span class="k">from</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span>
+<span class="w">        </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">julianday</span><span class="p">(</span><span class="k">max</span><span class="p">(</span><span class="n">started</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">julianday</span><span class="p">(</span><span class="k">min</span><span class="p">(</span><span class="n">started</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|  some_day  |
 |------------|
 | 2023-01-29 |
 | 2023-01-30 |
 | 2023-01-31 |
 | 2023-02-01 |
 | 2023-02-02 |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>SQLite represents dates as YYYY-MM-DD strings
     or as Julian days or as Unix milliseconds or…<ul>
@@ -935,63 +936,63 @@ limit 5;
 </li>
 </ul>
 <h2>Counting Experiments Started per Day Without Gaps</h2>
-<pre class=""><code data-file="experiments_per_day.assays.sql">with
--- complete sequence of days with 0 as placeholder for number of experiments
-all_days as (
-    select
-        date((select julianday(min(started)) from experiment) + value) as some_day,
-        0 as zeroes
-    from (
-        select value from generate_series(
-            (select 0),
-            (select count(*) - 1 from experiment)
-        )
-    )
-),
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span>
+<span class="c1">-- complete sequence of days with 0 as placeholder for number of experiments</span>
+<span class="n">all_days</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="nb">date</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">julianday</span><span class="p">(</span><span class="k">min</span><span class="p">(</span><span class="n">started</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">some_day</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">0</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">zeroes</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span>
+<span class="w">            </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">            </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="p">)</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">),</span>
 
--- sequence of actual days with actual number of experiments started
-actual_days as (
-    select
-        started,
-        count(started) as num_exp
-    from experiment
-    group by started
-)
+<span class="c1">-- sequence of actual days with actual number of experiments started</span>
+<span class="n">actual_days</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">started</span><span class="p">,</span>
+<span class="w">        </span><span class="k">count</span><span class="p">(</span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_exp</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span>
+<span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">started</span>
+<span class="p">)</span>
 
--- combined by joining on day and taking actual number (if available) or zero
-select
-    all_days.some_day as day,
-    coalesce(actual_days.num_exp, all_days.zeroes) as num_exp
-from
-    all_days left join actual_days on all_days.some_day = actual_days.started
-limit 5;
-</code></pre>
-<pre class=""><code data-file="experiments_per_day.assays.out">|    day     | num_exp |
+<span class="c1">-- combined by joining on day and taking actual number (if available) or zero</span>
+<span class="k">select</span>
+<span class="w">    </span><span class="n">all_days</span><span class="p">.</span><span class="n">some_day</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">day</span><span class="p">,</span>
+<span class="w">    </span><span class="k">coalesce</span><span class="p">(</span><span class="n">actual_days</span><span class="p">.</span><span class="n">num_exp</span><span class="p">,</span><span class="w"> </span><span class="n">all_days</span><span class="p">.</span><span class="n">zeroes</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_exp</span>
+<span class="k">from</span>
+<span class="w">    </span><span class="n">all_days</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">actual_days</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">all_days</span><span class="p">.</span><span class="n">some_day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual_days</span><span class="p">.</span><span class="n">started</span>
+<span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|    day     | num_exp |
 |------------|---------|
 | 2023-01-29 | 1       |
 | 2023-01-30 | 1       |
 | 2023-01-31 | 0       |
 | 2023-02-01 | 0       |
 | 2023-02-02 | 1       |
-</code></pre>
+</code></pre></div>
 <h2 class="exercise">Exercise</h2>
 <p>What does the expression <code>date('now', 'start of month', '+1 month', '-1 day')</code> produce?
 (You may find <a href="https://www.sqlite.org/lang_datefunc.html">the documentation on SQLite's date and time functions</a> helpful.)</p>
 <h2>Self Join</h2>
-<pre class=""><code data-file="self_join.assays.sql">with person as (
-    select
-        ident,
-        personal || ' ' || family as name
-    from staff
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">ident</span><span class="p">,</span>
+<span class="w">        </span><span class="n">personal</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' '</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="p">)</span>
 
-select
-    left_person.name,
-    right_person.name
-from person as left_person inner join person as right_person
-limit 10;
-</code></pre>
-<pre class=""><code data-file="self_join.assays.out">|     name     |       name       |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">left_person</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">right_person</span><span class="p">.</span><span class="n">name</span>
+<span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_person</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_person</span>
+<span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|     name     |       name       |
 |--------------|------------------|
 | Kartik Gupta | Kartik Gupta     |
 | Kartik Gupta | Divit Dhaliwal   |
@@ -1003,7 +1004,7 @@ limit 10;
 | Kartik Gupta | Romil Kapoor     |
 | Kartik Gupta | Ishaan Ramaswamy |
 | Kartik Gupta | Nitya Lal        |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Join a table to itself<ul>
 <li>Use <code>as</code> to create <a href="../glossary/#alias">aliases</a> for copies of tables to distinguish them</li>
@@ -1013,21 +1014,21 @@ limit 10;
 <li>Get all n^2 pairs, including person with themself</li>
 </ul>
 <h2>Generating Unique Pairs</h2>
-<pre class=""><code data-file="unique_pairs.assays.sql">with person as (
-    select
-        ident,
-        personal || ' ' || family as name
-    from staff
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">ident</span><span class="p">,</span>
+<span class="w">        </span><span class="n">personal</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' '</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="p">)</span>
 
-select
-    left_person.name,
-    right_person.name
-from person as left_person inner join person as right_person
-on left_person.ident &lt; right_person.ident
-where left_person.ident &lt;= 4 and right_person.ident &lt;= 4;
-</code></pre>
-<pre class=""><code data-file="unique_pairs.assays.out">|      name       |      name       |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">left_person</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">right_person</span><span class="p">.</span><span class="n">name</span>
+<span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_person</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_person</span>
+<span class="k">on</span><span class="w"> </span><span class="n">left_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">right_person</span><span class="p">.</span><span class="n">ident</span>
+<span class="k">where</span><span class="w"> </span><span class="n">left_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">right_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|      name       |      name       |
 |-----------------|-----------------|
 | Kartik Gupta    | Divit Dhaliwal  |
 | Kartik Gupta    | Indrans Sridhar |
@@ -1035,7 +1036,7 @@ where left_person.ident &lt;= 4 and right_person.ident &lt;= 4;
 | Divit Dhaliwal  | Indrans Sridhar |
 | Divit Dhaliwal  | Pranay Khanna   |
 | Indrans Sridhar | Pranay Khanna   |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>left.ident &lt; right.ident</code> ensures distinct pairs without duplicates<ul>
 <li>Query uses <code>left.ident &lt;= 4 and right.ident &lt;= 4</code> to shorten output</li>
@@ -1044,30 +1045,30 @@ where left_person.ident &lt;= 4 and right_person.ident &lt;= 4;
 <li>Quick check: n(n-1)/2 pairs</li>
 </ul>
 <h2>Filtering Pairs</h2>
-<pre class=""><code data-file="filter_pairs.assays.sql">with
-person as (
-    select
-        ident,
-        personal || ' ' || family as name
-    from staff
-),
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span>
+<span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">ident</span><span class="p">,</span>
+<span class="w">        </span><span class="n">personal</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' '</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="p">),</span>
 
-together as (
-    select
-        left_perf.staff as left_staff,
-        right_perf.staff as right_staff
-    from performed as left_perf inner join performed as right_perf
-        on left_perf.experiment = right_perf.experiment
-    where left_staff &lt; right_staff
-)
+<span class="n">together</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">left_perf</span><span class="p">.</span><span class="n">staff</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_staff</span><span class="p">,</span>
+<span class="w">        </span><span class="n">right_perf</span><span class="p">.</span><span class="n">staff</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_staff</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">performed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_perf</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">performed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_perf</span>
+<span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">left_perf</span><span class="p">.</span><span class="n">experiment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right_perf</span><span class="p">.</span><span class="n">experiment</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">left_staff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">right_staff</span>
+<span class="p">)</span>
 
-select
-    left_person.name as person_1,
-    right_person.name as person_2
-from person as left_person inner join person as right_person join together
-    on left_person.ident = left_staff and right_person.ident = right_staff;
-</code></pre>
-<pre class=""><code data-file="filter_pairs.assays.out">|    person_1     |     person_2     |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">left_person</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">person_1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">right_person</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">person_2</span>
+<span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_person</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_person</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">together</span>
+<span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="n">left_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left_staff</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">right_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right_staff</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|    person_1     |     person_2     |
 |-----------------|------------------|
 | Kartik Gupta    | Vedika Rout      |
 | Pranay Khanna   | Vedika Rout      |
@@ -1084,26 +1085,26 @@ from person as left_person inner join person as right_person join together
 | Kartik Gupta    | Nitya Lal        |
 | Kartik Gupta    | Abram Chokshi    |
 | Pranay Khanna   | Romil Kapoor     |
-</code></pre>
+</code></pre></div>
 <h2>Existence and Correlated Subqueries</h2>
-<pre class=""><code data-file="correlated_subquery.assays.sql">select
-    name,
-    building
-from department
-where
-    exists (
-        select 1
-        from staff
-        where dept = department.ident
-    )
-order by name;
-</code></pre>
-<pre class=""><code data-file="correlated_subquery.assays.out">|       name        |     building     |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<span class="w">    </span><span class="n">name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">building</span>
+<span class="k">from</span><span class="w"> </span><span class="n">department</span>
+<span class="k">where</span>
+<span class="w">    </span><span class="k">exists</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k">select</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="w">        </span><span class="k">where</span><span class="w"> </span><span class="n">dept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">department</span><span class="p">.</span><span class="n">ident</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
 | Histology         | Fashet Extension |
 | Molecular Biology | Chesson          |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Endocrinology is missing from the list</li>
 <li><code>select 1</code> could equally be <code>select true</code> or any other value</li>
@@ -1113,62 +1114,62 @@ order by name;
 </li>
 </ul>
 <h2>Nonexistence</h2>
-<pre class=""><code data-file="nonexistence.assays.sql">select
-    name,
-    building
-from department
-where
-    not exists (
-        select 1
-        from staff
-        where dept = department.ident
-    )
-order by name;
-</code></pre>
-<pre class=""><code data-file="nonexistence.assays.out">|     name      | building |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<span class="w">    </span><span class="n">name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">building</span>
+<span class="k">from</span><span class="w"> </span><span class="n">department</span>
+<span class="k">where</span>
+<span class="w">    </span><span class="k">not</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k">select</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
+<span class="w">        </span><span class="k">where</span><span class="w"> </span><span class="n">dept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">department</span><span class="p">.</span><span class="n">ident</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|     name      | building |
 |---------------|----------|
 | Endocrinology | TGVH     |
-</code></pre>
+</code></pre></div>
 <h2 class="exercise">Exercise</h2>
 <p>Can you rewrite the previous query using <code>exclude</code>?
 If so, is your new query easier to understand?
 If the query cannot be rewritten, why not?</p>
 <h2 class="aside">Avoiding Correlated Subqueries</h2>
-<pre class=""><code data-file="avoid_correlated_subqueries.assays.sql">select distinct
-    department.name as name,
-    department.building as building
-from department inner join staff
-    on department.ident = staff.dept
-order by name;
-</code></pre>
-<pre class=""><code data-file="avoid_correlated_subqueries.assays.out">|       name        |     building     |
+<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<span class="w">    </span><span class="n">department</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">department</span><span class="p">.</span><span class="n">building</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">building</span>
+<span class="k">from</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">staff</span>
+<span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="n">department</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">staff</span><span class="p">.</span><span class="n">dept</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
 | Histology         | Fashet Extension |
 | Molecular Biology | Chesson          |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>The join might or might not be faster than the correlated subquery</li>
 <li>Hard to find unstaffed departments without either <code>not exists</code> or <code>count</code> and a check for 0</li>
 </ul>
 <h2>Lead and Lag</h2>
-<pre class=""><code data-file="lead_lag.assays.sql">with ym_num as (
-    select
-        strftime('%Y-%m', started) as ym,
-        count(*) as num
-    from experiment
-    group by ym
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ym</span><span class="p">,</span>
+<span class="w">        </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span>
+<span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span>
+<span class="p">)</span>
 
-select
-    ym,
-    lag(num) over (order by ym) as prev_num,
-    num,
-    lead(num) over (order by ym) as next_num
-from ym_num
-order by ym;
-</code></pre>
-<pre class=""><code data-file="lead_lag.assays.out">|   ym    | prev_num | num | next_num |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">ym</span><span class="p">,</span>
+<span class="w">    </span><span class="n">lag</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">prev_num</span><span class="p">,</span>
+<span class="w">    </span><span class="n">num</span><span class="p">,</span>
+<span class="w">    </span><span class="n">lead</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">next_num</span>
+<span class="k">from</span><span class="w"> </span><span class="n">ym_num</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|   ym    | prev_num | num | next_num |
 |---------|----------|-----|----------|
 | 2023-01 |          | 2   | 5        |
 | 2023-02 | 2        | 5   | 5        |
@@ -1183,7 +1184,7 @@ order by ym;
 | 2023-12 | 6        | 4   | 5        |
 | 2024-01 | 4        | 5   | 2        |
 | 2024-02 | 5        | 2   |          |
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Use <code>strftime</code> to extract year and month<ul>
 <li>Clumsy, but date/time handling is not SQLite's strong point</li>
@@ -1201,24 +1202,24 @@ order by ym;
 <li>It feels very ad hoc, but so does the real world</li>
 </ul>
 <h2>Windowing Functions</h2>
-<pre class=""><code data-file="window_functions.assays.sql">with ym_num as (
-    select
-        strftime('%Y-%m', started) as ym,
-        count(*) as num
-    from experiment
-    group by ym
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ym</span><span class="p">,</span>
+<span class="w">        </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span>
+<span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span>
+<span class="p">)</span>
 
-select
-    ym,
-    num,
-    sum(num) over (order by ym) as num_done,
-    (sum(num) over (order by ym) * 1.00) / (select sum(num) from ym_num) as completed_progress, 
-    cume_dist() over (order by ym) as linear_progress
-from ym_num
-order by ym;
-</code></pre>
-<pre class=""><code data-file="window_functions.assays.out">|   ym    | num | num_done | completed_progress |  linear_progress   |
+<span class="k">select</span>
+<span class="w">    </span><span class="n">ym</span><span class="p">,</span>
+<span class="w">    </span><span class="n">num</span><span class="p">,</span>
+<span class="w">    </span><span class="k">sum</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_done</span><span class="p">,</span>
+<span class="w">    </span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">00</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">ym_num</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">completed_progress</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">cume_dist</span><span class="p">()</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">linear_progress</span>
+<span class="k">from</span><span class="w"> </span><span class="n">ym_num</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>|   ym    | num | num_done | completed_progress |  linear_progress   |
 |---------|-----|----------|--------------------|--------------------|
 | 2023-01 | 2   | 2        | 0.04               | 0.0769230769230769 |
 | 2023-02 | 5   | 7        | 0.14               | 0.153846153846154  |
@@ -1233,7 +1234,7 @@ order by ym;
 | 2023-12 | 4   | 43       | 0.86               | 0.846153846153846  |
 | 2024-01 | 5   | 48       | 0.96               | 0.923076923076923  |
 | 2024-02 | 2   | 50       | 1.0                | 1.0                |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>sum() over</code> does a running total</li>
 <li><code>cume_dist()</code> is fraction <em>of rows seen so far</em></li>
@@ -1242,23 +1243,23 @@ order by ym;
 <li>…and <code>linear_progress</code> is the fraction of time passed</li>
 </ul>
 <h2 class="aside">Explaining Another Query Plan</h2>
-<pre class=""><code data-file="explain_window_function.assays.sql">explain query plan
-with ym_num as (
-    select
-        strftime('%Y-%m', started) as ym,
-        count(*) as num
-    from experiment
-    group by ym
-)
-select
-    ym,
-    num,
-    sum(num) over (order by ym) as num_done,
-    cume_dist() over (order by ym) as progress
-from ym_num
-order by ym;
-</code></pre>
-<pre class=""><code data-file="explain_window_function.assays.out">QUERY PLAN
+<div class="codehilite"><pre class=""><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
+<span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ym</span><span class="p">,</span>
+<span class="w">        </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span>
+<span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span>
+<span class="p">)</span>
+<span class="k">select</span>
+<span class="w">    </span><span class="n">ym</span><span class="p">,</span>
+<span class="w">    </span><span class="n">num</span><span class="p">,</span>
+<span class="w">    </span><span class="k">sum</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_done</span><span class="p">,</span>
+<span class="w">    </span><span class="n">cume_dist</span><span class="p">()</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">progress</span>
+<span class="k">from</span><span class="w"> </span><span class="n">ym_num</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>QUERY PLAN
 |--CO-ROUTINE (subquery-3)
 |  |--CO-ROUTINE (subquery-4)
 |  |  |--CO-ROUTINE ym_num
@@ -1268,29 +1269,29 @@ order by ym;
 |  |  `--USE TEMP B-TREE FOR ORDER BY
 |  `--SCAN (subquery-4)
 `--SCAN (subquery-3)
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Becomes useful…eventually</li>
 </ul>
 <h2>Partitioned Windows</h2>
-<pre class=""><code data-file="partition_window.assays.sql">with y_m_num as (
-    select
-        strftime('%Y', started) as year,
-        strftime('%m', started) as month,
-        count(*) as num
-    from experiment
-    group by year, month
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">y_m_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span>
+<span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">year</span><span class="p">,</span>
+<span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">month</span><span class="p">,</span>
+<span class="w">        </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span>
+<span class="w">    </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">month</span>
+<span class="p">)</span>
 
-select
-    year,
-    month,
-    num,
-    sum(num) over (partition by year order by month) as num_done
-from y_m_num
-order by year, month;
-</code></pre>
-<pre class=""><code data-file="partition_window.assays.out">| year | month | num | num_done |
+<span class="k">select</span>
+<span class="w">    </span><span class="k">year</span><span class="p">,</span>
+<span class="w">    </span><span class="k">month</span><span class="p">,</span>
+<span class="w">    </span><span class="n">num</span><span class="p">,</span>
+<span class="w">    </span><span class="k">sum</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="p">(</span><span class="n">partition</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">month</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_done</span>
+<span class="k">from</span><span class="w"> </span><span class="n">y_m_num</span>
+<span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">;</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>| year | month | num | num_done |
 |------|-------|-----|----------|
 | 2023 | 01    | 2   | 2        |
 | 2023 | 02    | 5   | 7        |
@@ -1305,7 +1306,7 @@ order by year, month;
 | 2023 | 12    | 4   | 43       |
 | 2024 | 01    | 5   | 5        |
 | 2024 | 02    | 2   | 7        |
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>partition by</code> creates groups</li>
 <li>So this counts experiments started since the beginning of each year</li>
@@ -1313,18 +1314,10 @@ order by year, month;
 <h2 class="exercise">Exercise</h2>
 <p>Create a query that:</p>
 <ol>
-<li>
-<p>finds the unique weights of the penguins in the <code>penguins</code> database;</p>
-</li>
-<li>
-<p>sorts them;</p>
-</li>
-<li>
-<p>finds the difference between each successive distinct weight; and</p>
-</li>
-<li>
-<p>counts how many times each unique difference appears.</p>
-</li>
+<li>finds the unique weights of the penguins in the <code>penguins</code> database;</li>
+<li>sorts them;</li>
+<li>finds the difference between each successive distinct weight; and</li>
+<li>counts how many times each unique difference appears.</li>
 </ol>
 </main>
 <footer>

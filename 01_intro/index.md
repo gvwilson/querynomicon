@@ -64,12 +64,13 @@
 
 ## Connecting to Database {: .aside}
 
-```{data-file="connect_penguins.sh"}
+```{.sh data-file="connect_penguins.sh"}
 sqlite3 db/penguins.db
 ```
 
 -   Not actually a query: starts an interactive session with the database in `db/penguins.db`
--   Alternative: provide a single query on the command line <code>sqlite3 <em>database</em> "<em>query</em>"</code>
+-   Alternative: provide a single query on the command line
+    <code>sqlite3 <em>database</em> "<em>query</em>"</code>
 -   Or put query in file and run <code>sqlite3 <em>database</em> < <em>filename</em></code>
 -   Note: the `penguins` database contains two tables
     -   `penguins` is all the [Palmer Penguins][palmer_penguins] data

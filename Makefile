@@ -12,6 +12,7 @@ HTML_IGNORES =
 build:
 	@mccole build
 	@touch docs/.nojekyll
+	@cd ./db && zip -r ../docs/databases.zip *.db
 
 ## links: check links in published site
 links:

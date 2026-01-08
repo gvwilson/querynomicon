@@ -4,10 +4,10 @@
 
 ## Loading Libraries
 
-```{data-file="load_connect.r"}
+```{.r data-file="load_connect.r"}
 library(dplyr)
 ```
-```{data-file="load_connect.out"}
+```{.text data-file="load_connect.out"}
 ## 
 ## Attaching package: 'dplyr'
 
@@ -29,21 +29,21 @@ library(dplyr)
 
 -  List tables with `dbListTables`
 
-```{data-file="list_tables.r"}
+```{.r data-file="list_tables.r"}
 connection <- DBI::dbConnect(RSQLite::SQLite(), 'data/penguins.db')
 DBI::dbListTables(connection)
 ```
-```{data-file="list_tables.out"}
+```{.text data-file="list_tables.out"}
 ## [1] "little_penguins" "penguins"
 ```
 
 ## Load Table as Dataframe
 
-```{data-file="get_table.r"}
+```{.r data-file="get_table.r"}
 penguins <- dplyr::tbl(connection, 'penguins')
 penguins
 ```
-```{data-file="get_table.out"}
+```{.text data-file="get_table.out"}
 ## # Source:   table<`penguins`> [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -67,11 +67,11 @@ penguins
 
 ## How Did We Get Here?
 
-```{data-file="show_query.r"}
+```{.r data-file="show_query.r"}
 penguins |> 
   dplyr::show_query()
 ```
-```{data-file="show_query.out"}
+```{.text data-file="show_query.out"}
 ## <SQL>
 ## SELECT *
 ## FROM `penguins`
@@ -82,11 +82,11 @@ penguins |>
 
 ## Lazy Evaluation
 
-```{data-file="filter_lazy.r"}
+```{.r data-file="filter_lazy.r"}
 penguins |> 
   filter(species == "Adelie")
 ```
-```{data-file="filter_lazy.out"}
+```{.text data-file="filter_lazy.out"}
 ## # Source:   SQL [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -110,12 +110,12 @@ penguins |>
 -   The SQL query is only evaluated when it is sent to the database
 -   Running the `dplyr` call only returns a preview of the result
 
-```{data-file="filter_collect.r"}
+```{.r data-file="filter_collect.r"}
 penguins |> 
   filter(species == "Adelie") |> 
   collect()
 ```
-```{data-file="filter_collect.out"}
+```{.text data-file="filter_collect.out"}
 ## # A tibble: 152 × 7
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
@@ -138,11 +138,11 @@ penguins |>
 
 ## Selecting Columns
 
-```{data-file="select.r"}
+```{.r data-file="select.r"}
 penguins |> 
   select(species, island, contains('bill'))
 ```
-```{data-file="select.out"}
+```{.text data-file="select.out"}
 ## # Source:   SQL [?? x 4]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm
@@ -165,12 +165,12 @@ penguins |>
 
 ## Sorting
 
-```{data-file="sort.r"}
+```{.r data-file="sort.r"}
 penguins |> 
   select(species, body_mass_g) |> 
   arrange(body_mass_g)
 ```
-```{data-file="sort.out"}
+```{.text data-file="sort.out"}
 ## # Source:     SQL [?? x 2]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: body_mass_g
@@ -199,13 +199,13 @@ Only show the species, island, and body mass.
 
 ### Solution
 
-```{data-file="ex_lightest_penguin.r"}
+```{.r data-file="ex_lightest_penguin.r"}
 penguins |> 
   select(species, island, body_mass_g) |> 
   filter(island == 'Dream') |> 
   arrange(desc(body_mass_g))
 ```
-```{data-file="ex_lightest_penguin.out"}
+```{.text data-file="ex_lightest_penguin.out"}
 ## # Source:     SQL [?? x 3]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: desc(body_mass_g)
@@ -226,11 +226,11 @@ penguins |>
 
 ## Transforming Columns 
 
-```{data-file="mutate.r"}
+```{.r data-file="mutate.r"}
 penguins |> 
   mutate(weight_kg = body_mass_g/1000)
 ```
-```{data-file="mutate.out"}
+```{.text data-file="mutate.out"}
 ## # Source:   SQL [?? x 8]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -256,12 +256,12 @@ penguins |>
 
 ## Aggregating 
 
-```{data-file="aggregate.r"}
+```{.r data-file="aggregate.r"}
 penguins |> 
   group_by(species) |> 
   summarise(avg_body_mas = mean(body_mass_g))
 ```
-```{data-file="aggregate.out"}
+```{.text data-file="aggregate.out"}
 ## Warning: Missing values are always removed in SQL aggregation functions.
 ## Use `na.rm = TRUE` to silence this warning
 ## This warning is displayed once every 8 hours.
@@ -285,7 +285,7 @@ penguins |>
 
 ## Creating a Table
 
-```{data-file="create_table.r"}
+```{.r data-file="create_table.r"}
 library(DBI)
 
 another_connection <- dbConnect(RSQLite::SQLite(), ':memory:')
@@ -314,7 +314,7 @@ Create the table `job` with the values shown in the table below.
 
 ### Solution
 
-```{data-file="ex_job_table.r"}
+```{.r data-file="ex_job_table.r"}
 table2 <- tibble(
   name = c('calibrate', 'clean'),
   billable = c(1.5, 0.5)
@@ -329,12 +329,12 @@ job <- tbl(another_connection, "job")
 
 -   Who doesn't calibrate?
 
-```{data-file="negate_wrong.r"}
+```{.r data-file="negate_wrong.r"}
 work |> 
   filter(job != 'calibrate') |> 
   distinct(person)
 ```
-```{data-file="negate_wrong.out"}
+```{.text data-file="negate_wrong.out"}
 ## # Source:   SQL [3 x 1]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person
@@ -349,7 +349,7 @@ work |>
 
 ## Literal SQL
 
-```{data-file="literal_sql.r"}
+```{.r data-file="literal_sql.r"}
 work |> 
   filter(!person %in% sql(
     # subquery
@@ -365,7 +365,7 @@ work |>
 
 ## Joining Tables
 
-```{data-file="join.r"}
+```{.r data-file="join.r"}
 does_calibrate <- work |> 
   filter(job == 'calibrate')
 
@@ -374,7 +374,7 @@ work |>
   distinct(person) |> 
   collect() 
 ```
-```{data-file="join.out"}
+```{.text data-file="join.out"}
 ## # A tibble: 2 × 1
 ##   person
 ##   <chr> 
@@ -393,13 +393,13 @@ Calculate how may hours each person worked by summing all jobs.
 
 ### Solution
 
-```{data-file="ex_join.r"}
+```{.r data-file="ex_join.r"}
 work |> 
   left_join(job, by = join_by(job == name)) |> 
   group_by(person) |> 
   summarise(total_hours = sum(billable))
 ```
-```{data-file="ex_join.out"}
+```{.text data-file="ex_join.out"}
 ## # Source:   SQL [3 x 2]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person total_hours

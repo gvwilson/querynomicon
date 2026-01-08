@@ -91,13 +91,13 @@
 
 -   Run the query to see the first entries of the `penguins` table.
 
-```{data-file="select_penguins.sql"}
+```{.sql data-file="select_penguins.sql"}
 select * from penguins limit 10;
 ```
 
 -   Count penguins:
 
-```{data-file="count_penguins.sql"}
+```{.sql data-file="count_penguins.sql"}
 select count(*) from penguins;
 ```
 
@@ -105,7 +105,7 @@ select count(*) from penguins;
 
 -   Run the command-line PostgreSQL client and tell it what database to use:
 
-```{data-file="run_psql_penguins.sh"}
+```{.sh data-file="run_psql_penguins.sh"}
 psql -d penguins 
 ```
 
@@ -148,14 +148,14 @@ psql -d penguins
 
 -   Create role in the terminal:
 
-```{data-file="create_reader_writer.sql"}
+```{.sql data-file="create_reader_writer.sql"}
 create role penguin_reader_writer
 with login password 'reader_writer';
 ```
 
 -   Grant permissions in the terminal:
 
-```{data-file="grant_select_update.sql"}
+```{.sql data-file="grant_select_update.sql"}
 grant select, update on penguins
 to penguin_reader_writer;
 ```
@@ -176,7 +176,7 @@ to penguin_reader_writer;
     but instead of "PostgreSQL", select the "Penguin Reader Writer" as the user ID.
 -   Run a simple query that *reads* data:
 
-```{data-file="select_penguins.sql"}
+```{.sql data-file="select_penguins.sql"}
 select * from penguins limit 10;
 ```
 
@@ -184,7 +184,7 @@ select * from penguins limit 10;
 
 -   Now try to *change* data:
 
-```{data-file="update_penguins.sql"}
+```{.sql data-file="update_penguins.sql"}
 update penguins
 set island = 'Antarctica'
 where sex = 'MALE' and island = 'Torgersen';
@@ -194,11 +194,11 @@ where sex = 'MALE' and island = 'Torgersen';
 
 -   But now try to *delete* data:
 
-```{data-file="delete_penguins.sql"}
+```{.sql data-file="delete_penguins.sql"}
 delete from penguins
 where island='Antarctica' and sex='MALE';
 ```
-```{data-file="delete_penguins.out"}
+```{.text data-file="delete_penguins.out"}
 psql:delete_penguins.sql:2: ERROR:  permission denied for table penguins
 ```
 
@@ -214,18 +214,18 @@ psql:delete_penguins.sql:2: ERROR:  permission denied for table penguins
     4.  Click "Save".
 -   In the terminal:
 
-```{data-file="revoke_update.sql"}
+```{.sql data-file="revoke_update.sql"}
 revoke update on penguins
 from penguin_reader_writer;
 ```
 
 -   To verify:
 
-```{data-file="update_penguins_again.sql"}
+```{.sql data-file="update_penguins_again.sql"}
 update penguins
 set island = 'Atlantis'
 where sex = 'MALE' and island = 'Antarctica';
 ```
-```{data-file="update_penguins_again.out"}
+```{.text data-file="update_penguins_again.out"}
 psql:update_penguins_again.sql:3: ERROR:  permission denied for table penguins
 ```

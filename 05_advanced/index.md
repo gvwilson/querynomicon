@@ -4,7 +4,7 @@
 
 ## Blobs
 
-```{data-file="blob.memory.sql"}
+```{.sql data-file="blob.memory.sql"}
 create table images (
     name text not null,
     content blob
@@ -22,7 +22,7 @@ select
     length(content)
 from images;
 ```
-```{data-file="blob.memory.out"}
+```{.text data-file="blob.memory.out"}
 |    name     | length(content) |
 |-------------|-----------------|
 | biohazard   | 19629           |
@@ -45,13 +45,13 @@ Does using SQLite's `hex()` function make it any more readable?
 
 ## Yet Another Database {: .aside}
 
-```{data-file="lab_log_db.sh"}
+```{.sh data-file="lab_log_db.sh"}
 sqlite3 db/lab_log.db
 ```
-```{data-file="lab_log_schema.lab_log.sql"}
+```{.sql data-file="lab_log_schema.lab_log.sql"}
 .schema
 ```
-```{data-file="lab_log_schema.lab_log.out"}
+```{.text data-file="lab_log_schema.lab_log.out"}
 CREATE TABLE sqlite_sequence(name,seq);
 CREATE TABLE person(
        ident            integer primary key autoincrement,
@@ -70,10 +70,10 @@ CREATE TABLE usage(
 
 ## Storing JSON
 
-```{data-file="json_in_table.lab_log.sql"}
+```{.sql data-file="json_in_table.lab_log.sql"}
 select * from machine;
 ```
-```{data-file="json_in_table.lab_log.out"}
+```{.text data-file="json_in_table.lab_log.out"}
 | ident |      name      |                         details                         |
 |-------|----------------|---------------------------------------------------------|
 | 1     | WY401          | {"acquired": "2023-05-01"}                              |
@@ -91,13 +91,13 @@ select * from machine;
 
 ## Select Fields from JSON
 
-```{data-file="json_field.lab_log.sql"}
+```{.sql data-file="json_field.lab_log.sql"}
 select
     details->'$.acquired' as single_arrow,
     details->>'$.acquired' as double_arrow
 from machine;
 ```
-```{data-file="json_field.lab_log.out"}
+```{.text data-file="json_field.lab_log.out"}
 | single_arrow | double_arrow |
 |--------------|--------------|
 | "2023-05-01" | 2023-05-01   |
@@ -119,14 +119,14 @@ of the JSON data associated with the Inphormex plate reader.
 
 ## JSON Array Access
 
-```{data-file="json_array.lab_log.sql"}
+```{.sql data-file="json_array.lab_log.sql"}
 select
     ident,
     json_array_length(log->'$') as length,
     log->'$[0]' as first
 from usage;
 ```
-```{data-file="json_array.lab_log.out"}
+```{.text data-file="json_array.lab_log.out"}
 | ident | length |                            first                             |
 |-------|--------|--------------------------------------------------------------|
 | 1     | 4      | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
@@ -146,7 +146,7 @@ from usage;
 
 ## Unpacking JSON Arrays
 
-```{data-file="json_unpack.lab_log.sql"}
+```{.sql data-file="json_unpack.lab_log.sql"}
 select
     ident,
     json_each.key as key,
@@ -154,7 +154,7 @@ select
 from usage, json_each(usage.log)
 limit 10;
 ```
-```{data-file="json_unpack.lab_log.out"}
+```{.text data-file="json_unpack.lab_log.out"}
 | ident | key |                            value                             |
 |-------|-----|--------------------------------------------------------------|
 | 1     | 0   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
@@ -179,14 +179,14 @@ in the first log entry associated with any piece of equipment.
 
 ## Selecting the Last Element of an  Array
 
-```{data-file="json_array_last.lab_log.sql"}
+```{.sql data-file="json_array_last.lab_log.sql"}
 select
     ident,
     log->'$[#-1].machine' as final
 from usage
 limit 5;
 ```
-```{data-file="json_array_last.lab_log.out"}
+```{.text data-file="json_array_last.lab_log.out"}
 | ident |    final     |
 |-------|--------------|
 | 1     | "Inphormex"  |
@@ -198,14 +198,14 @@ limit 5;
 
 ## Modifying JSON
 
-```{data-file="json_modify.lab_log.sql"}
+```{.sql data-file="json_modify.lab_log.sql"}
 select
     ident,
     name,
     json_set(details, '$.sold', json_quote('2024-01-25')) as updated
 from machine;
 ```
-```{data-file="json_modify.lab_log.out"}
+```{.text data-file="json_modify.lab_log.out"}
 | ident |      name      |                           updated                            |
 |-------|----------------|--------------------------------------------------------------|
 | 1     | WY401          | {"acquired":"2023-05-01","sold":"2024-01-25"}                |
@@ -225,14 +225,14 @@ with the corresponding machine IDs from the `machine` table.
 
 ## Refreshing the Penguins Database {: .aside}
 
-```{data-file="count_penguins.penguins.sql"}
+```{.sql data-file="count_penguins.penguins.sql"}
 select
     species,
     count(*) as num
 from penguins
 group by species;
 ```
-```{data-file="count_penguins.penguins.out"}
+```{.text data-file="count_penguins.penguins.out"}
 |  species  | num |
 |-----------|-----|
 | Adelie    | 152 |
@@ -244,14 +244,14 @@ group by species;
 
 ## Tombstones
 
-```{data-file="make_active.sql"}
+```{.sql data-file="make_active.sql"}
 alter table penguins
 add active integer not null default 1;
 
 update penguins
 set active = iif(species = 'Adelie', 0, 1);
 ```
-```{data-file="active_penguins.sql:keep"}
+```{.sql data-file="active_penguins.sql:keep"}
 select
     species,
     count(*) as num
@@ -259,7 +259,7 @@ from penguins
 where active
 group by species;
 ```
-```{data-file="active_penguins.out"}
+```{.text data-file="active_penguins.out"}
 |  species  | num |
 |-----------|-----|
 | Chinstrap | 68  |
@@ -278,7 +278,7 @@ group by species;
     -   Convert empty strings to nulls (if desired)
     -   Convert types from text to whatever (not shown below)
 
-```{data-file="create_penguins.sql"}
+```{.sql data-file="create_penguins.sql"}
 drop table if exists penguins;
 .mode csv penguins
 .import misc/penguins.csv penguins
@@ -299,7 +299,7 @@ How can you correct the ones that need correcting?
 
 ## Views
 
-```{data-file="views.sql:keep"}
+```{.sql data-file="views.sql:keep"}
 create view if not exists
 active_penguins (
     species,
@@ -327,7 +327,7 @@ select
 from active_penguins
 group by species;
 ```
-```{data-file="views.out"}
+```{.text data-file="views.out"}
 |  species  | num |
 |-----------|-----|
 | Chinstrap | 68  |
@@ -358,7 +358,7 @@ the second shows the total number of log entries for that machine.
 
 ## Hours Reminder {: .aside}
 
-```{data-file="all_jobs.memory.sql"}
+```{.sql data-file="all_jobs.memory.sql"}
 create table job (
     name text not null,
     billable real not null
@@ -368,7 +368,7 @@ insert into job values
 ('clean', 0.5);
 select * from job;
 ```
-```{data-file="all_jobs.memory.out"}
+```{.text data-file="all_jobs.memory.out"}
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -377,7 +377,7 @@ select * from job;
 
 ## Adding Checks
 
-```{data-file="all_jobs_check.sql"}
+```{.sql data-file="all_jobs_check.sql"}
 create table job (
     name text not null,
     billable real not null,
@@ -387,7 +387,7 @@ insert into job values ('calibrate', 1.5);
 insert into job values ('reset', -0.5);
 select * from job;
 ```
-```{data-file="all_jobs_check.out"}
+```{.text data-file="all_jobs_check.out"}
 Runtime error near line 9: CHECK constraint failed: billable > 0.0 (19)
 |   name    | billable |
 |-----------|----------|
@@ -417,7 +417,7 @@ Rewrite the definition of the `penguins` table to add the following constraints:
 
 ## Transactions
 
-```{data-file="transaction.memory.sql"}
+```{.sql data-file="transaction.memory.sql"}
 create table job (
     name text not null,
     billable real not null,
@@ -432,7 +432,7 @@ rollback;
 
 select * from job;
 ```
-```{data-file="transaction.memory.out"}
+```{.text data-file="transaction.memory.out"}
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -448,7 +448,7 @@ select * from job;
 
 ## Rollback in Constraints
 
-```{data-file="rollback_constraint.sql"}
+```{.sql data-file="rollback_constraint.sql"}
 create table job (
     name text not null,
     billable real not null,
@@ -463,7 +463,7 @@ insert into job values
 
 select * from job;
 ```
-```{data-file="rollback_constraint.out"}
+```{.text data-file="rollback_constraint.out"}
 Runtime error near line 11: CHECK constraint failed: billable > 0.0 (19)
 |   name    | billable |
 |-----------|----------|
@@ -475,7 +475,7 @@ Runtime error near line 11: CHECK constraint failed: billable > 0.0 (19)
 
 ## Rollback in Statements
 
-```{data-file="rollback_statement.sql"}
+```{.sql data-file="rollback_statement.sql"}
 create table job (
     name text not null,
     billable real not null,
@@ -490,7 +490,7 @@ insert or rollback into job values
 
 select * from job;
 ```
-```{data-file="rollback_statement.out"}
+```{.text data-file="rollback_statement.out"}
 Runtime error near line 11: CHECK constraint failed: billable > 0.0 (19)
 |   name    | billable |
 |-----------|----------|
@@ -502,7 +502,7 @@ Runtime error near line 11: CHECK constraint failed: billable > 0.0 (19)
 
 ## Upsert
 
-```{data-file="upsert.sql"}
+```{.sql data-file="upsert.sql"}
 create table jobs_done (
     person text unique,
     num integer default 0
@@ -526,7 +526,7 @@ on conflict(person) do update set num = num + 1;
 .print 'after upsert'
 select * from jobs_done;
 ```
-```{data-file="upsert.out"}
+```{.text data-file="upsert.out"}
 after first
 | person | num |
 |--------|-----|
@@ -572,7 +572,7 @@ write a query that adds or modifies people in the `staff` table as shown:
 
 ## Creating Triggers
 
-```{data-file="trigger_setup.sql"}
+```{.sql data-file="trigger_setup.sql"}
 -- Track hours of lab work.
 create table job (
     person text not null,
@@ -616,13 +616,13 @@ end;
 
 ## Trigger Not Firing
 
-```{data-file="trigger_successful.memory.sql:keep"}
+```{.sql data-file="trigger_successful.memory.sql:keep"}
 insert into job values
 ('gene', 1.5),
 ('august', 0.5),
 ('gene', 1.0);
 ```
-```{data-file="trigger_successful.memory.out"}
+```{.text data-file="trigger_successful.memory.out"}
 | person | reported |
 |--------|----------|
 | gene   | 1.5      |
@@ -637,12 +637,12 @@ insert into job values
 
 ## Trigger Firing
 
-```{data-file="trigger_firing.sql:keep"}
+```{.sql data-file="trigger_firing.sql:keep"}
 insert into job values
 ('gene', 1.0),
 ('august', -1.0);
 ```
-```{data-file="trigger_firing.out"}
+```{.text data-file="trigger_firing.out"}
 Runtime error near line 6: CHECK constraint failed: reported >= 0.0 (19)
 
 | person | hours |
@@ -665,7 +665,7 @@ by a single `insert` statement?
 
 ## Representing Graphs {: .aside}
 
-```{data-file="lineage_setup.sql"}
+```{.sql data-file="lineage_setup.sql"}
 create table lineage (
     parent text not null,
     child text not null
@@ -679,10 +679,10 @@ insert into lineage values
 ('Soledad', 'Lourdes'),
 ('Lourdes', 'Santiago');
 ```
-```{data-file="represent_graph.memory.sql:keep"}
+```{.sql data-file="represent_graph.memory.sql:keep"}
 select * from lineage;
 ```
-```{data-file="represent_graph.memory.out"}
+```{.text data-file="represent_graph.memory.out"}
 |  parent  |  child   |
 |----------|----------|
 | Arturo   | Clemente |
@@ -705,7 +705,7 @@ Write a query that uses a self join to find every person's grandchildren.
 
 ## Recursive Queries
 
-```{data-file="recursive_lineage.memory.sql:keep"}
+```{.sql data-file="recursive_lineage.memory.sql:keep"}
 with recursive descendent as (
     select
         'Clemente' as person,
@@ -723,7 +723,7 @@ select
     generations
 from descendent;
 ```
-```{data-file="recursive_lineage.memory.out"}
+```{.text data-file="recursive_lineage.memory.out"}
 |  person  | generations |
 |----------|-------------|
 | Clemente | 0           |
@@ -749,10 +749,10 @@ Why or why not?
 
 ## Contact Tracing Database {: .aside}
 
-```{data-file="contact_person.contacts.sql"}
+```{.sql data-file="contact_person.contacts.sql"}
 select * from person;
 ```
-```{data-file="contact_person.contacts.out"}
+```{.text data-file="contact_person.contacts.out"}
 | ident |         name          |
 |-------|-----------------------|
 | 1     | Juana Baeza           |
@@ -771,10 +771,10 @@ select * from person;
 | 14    | Bernardo Narváez      |
 | 15    | Óscar Barrios         |
 ```
-```{data-file="contact_contacts.contacts.sql"}
+```{.sql data-file="contact_contacts.contacts.sql"}
 select * from contact;
 ```
-```{data-file="contact_contacts.contacts.out"}
+```{.text data-file="contact_contacts.contacts.out"}
 |       left        |         right         |
 |-------------------|-----------------------|
 | Agustín Rodríquez | Ariadna Caraballo     |
@@ -794,7 +794,7 @@ select * from contact;
 
 ## Bidirectional Contacts
 
-```{data-file="bidirectional.sql:keep"}
+```{.sql data-file="bidirectional.sql:keep"}
 create temporary table bi_contact (
     left text,
     right text
@@ -807,7 +807,7 @@ select
     select right, left from contact
 ;
 ```
-```{data-file="bidirectional.out"}
+```{.text data-file="bidirectional.out"}
 | original_count |
 |----------------|
 | 8              |
@@ -823,7 +823,7 @@ select
 
 ## Updating Group Identifiers
 
-```{data-file="update_group_ids.sql:keep"}
+```{.sql data-file="update_group_ids.sql:keep"}
 select
     left.name as left_name,
     left.ident as left_ident,
@@ -834,7 +834,7 @@ from
     (person as left join bi_contact on left.name = bi_contact.left)
     join person as right on bi_contact.right = right.name;
 ```
-```{data-file="update_group_ids.out"}
+```{.text data-file="update_group_ids.out"}
 |       left_name       | left_ident |      right_name       | right_ident | new_ident |
 |-----------------------|------------|-----------------------|-------------|-----------|
 | Juana Baeza           | 1          | Micaela Laboy         | 4           | 1         |
@@ -860,7 +860,7 @@ from
 
 ## Recursive Labeling
 
-```{data-file="recursive_labeling.contacts.sql:keep"}
+```{.sql data-file="recursive_labeling.contacts.sql:keep"}
 with recursive labeled as (
     select
         person.name as name,
@@ -881,7 +881,7 @@ from labeled
 group by name
 order by label, name;
 ```
-```{data-file="recursive_labeling.contacts.out"}
+```{.text data-file="recursive_labeling.contacts.out"}
 |         name          | group_id |
 |-----------------------|----------|
 | Agustín Rodríquez     | 1        |

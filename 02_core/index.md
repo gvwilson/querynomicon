@@ -4,10 +4,10 @@
 
 ## Selecting Constant
 
-```{data-file="select_1.sql"}
+```{.sql data-file="select_1.sql"}
 select 1;
 ```
-```{data-file="select_1.out"}
+```{.text data-file="select_1.out"}
 1
 ```
 
@@ -18,10 +18,10 @@ select 1;
 
 ## Selecting All Values from Table
 
-```{data-file="select_star.sql"}
+```{.sql data-file="select_star.sql"}
 select * from little_penguins;
 ```
-```{data-file="select_star.out"}
+```{.text data-file="select_star.out"}
 Gentoo|Biscoe|51.3|14.2|218.0|5300.0|MALE
 Adelie|Dream|35.7|18.0|202.0|3550.0|FEMALE
 Adelie|Torgersen|36.6|17.8|185.0|3700.0|FEMALE
@@ -41,12 +41,12 @@ Adelie|Torgersen|36.7|18.8|187.0|3800.0|FEMALE
 
 ## Administrative Commands {: .aside}
 
-```{data-file="admin_commands.sql"}
+```{.sql data-file="admin_commands.sql"}
 .headers on
 .mode markdown
 select * from little_penguins;
 ```
-```{data-file="admin_commands.out"}
+```{.text data-file="admin_commands.out"}
 |  species  |  island   | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g |  sex   |
 |-----------|-----------|----------------|---------------|-------------------|-------------|--------|
 | Gentoo    | Biscoe    | 51.3           | 14.2          | 218.0             | 5300.0      | MALE   |
@@ -71,14 +71,14 @@ select * from little_penguins;
 
 ## Specifying Columns
 
-```{data-file="specify_columns.penguins.sql"}
+```{.sql data-file="specify_columns.penguins.sql"}
 select
     species,
     island,
     sex
 from little_penguins;
 ```
-```{data-file="specify_columns.penguins.out"}
+```{.text data-file="specify_columns.penguins.out"}
 |  species  |  island   |  sex   |
 |-----------|-----------|--------|
 | Gentoo    | Biscoe    | MALE   |
@@ -100,7 +100,7 @@ from little_penguins;
 
 ## Sorting
 
-```{data-file="sort.penguins.sql"}
+```{.sql data-file="sort.penguins.sql"}
 select
     species,
     sex,
@@ -108,7 +108,7 @@ select
 from little_penguins
 order by island asc, sex desc;
 ```
-```{data-file="sort.penguins.out"}
+```{.text data-file="sort.penguins.out"}
 |  species  |  sex   |  island   |
 |-----------|--------|-----------|
 | Gentoo    | MALE   | Biscoe    |
@@ -136,7 +136,7 @@ sorted such that the largest body mass appears first.
 
 -   Full dataset has 344 rows
 
-```{data-file="limit.penguins.sql"}
+```{.sql data-file="limit.penguins.sql"}
 select
     species,
     sex,
@@ -145,7 +145,7 @@ from penguins
 order by species, sex, island
 limit 10;
 ```
-```{data-file="limit.penguins.out"}
+```{.text data-file="limit.penguins.out"}
 | species |  sex   |  island   |
 |---------|--------|-----------|
 | Adelie  |        | Dream     |
@@ -165,7 +165,7 @@ limit 10;
 
 ## Paging Output
 
-```{data-file="page.penguins.sql"}
+```{.sql data-file="page.penguins.sql"}
 select
     species,
     sex,
@@ -174,7 +174,7 @@ from penguins
 order by species, sex, island
 limit 10 offset 3;
 ```
-```{data-file="page.penguins.out"}
+```{.text data-file="page.penguins.out"}
 | species |  sex   |  island   |
 |---------|--------|-----------|
 | Adelie  |        | Torgersen |
@@ -195,14 +195,14 @@ limit 10 offset 3;
 
 ## Removing Duplicates
 
-```{data-file="distinct.penguins.sql"}
+```{.sql data-file="distinct.penguins.sql"}
 select distinct
     species,
     sex,
     island
 from penguins;
 ```
-```{data-file="distinct.penguins.out"}
+```{.text data-file="distinct.penguins.out"}
 |  species  |  sex   |  island   |
 |-----------|--------|-----------|
 | Adelie    | MALE   | Torgersen |
@@ -238,7 +238,7 @@ from penguins;
 
 ## Filtering Results
 
-```{data-file="filter.penguins.sql"}
+```{.sql data-file="filter.penguins.sql"}
 select distinct
     species,
     sex,
@@ -246,7 +246,7 @@ select distinct
 from penguins
 where island = 'Biscoe';
 ```
-```{data-file="filter.penguins.out"}
+```{.text data-file="filter.penguins.out"}
 | species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
@@ -271,7 +271,7 @@ where island = 'Biscoe';
 
 ## Filtering with More Complex Conditions
 
-```{data-file="filter_and.penguins.sql"}
+```{.sql data-file="filter_and.penguins.sql"}
 select distinct
     species,
     sex,
@@ -279,7 +279,7 @@ select distinct
 from penguins
 where island = 'Biscoe' and sex != 'MALE';
 ```
-```{data-file="filter_and.penguins.out"}
+```{.text data-file="filter_and.penguins.out"}
 | species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
@@ -304,14 +304,14 @@ where island = 'Biscoe' and sex != 'MALE';
 
 ## Doing Calculations
 
-```{data-file="calculations.penguins.sql"}
+```{.sql data-file="calculations.penguins.sql"}
 select
     flipper_length_mm / 10.0,
     body_mass_g / 1000.0
 from penguins
 limit 3;
 ```
-```{data-file="calculations.penguins.out"}
+```{.text data-file="calculations.penguins.out"}
 | flipper_length_mm / 10.0 | body_mass_g / 1000.0 |
 |--------------------------|----------------------|
 | 18.1                     | 3.75                 |
@@ -325,7 +325,7 @@ limit 3;
 
 ## Renaming Columns
 
-```{data-file="rename_columns.penguins.sql"}
+```{.sql data-file="rename_columns.penguins.sql"}
 select
     flipper_length_mm / 10.0 as flipper_cm,
     body_mass_g / 1000.0 as weight_kg,
@@ -333,7 +333,7 @@ select
 from penguins
 limit 3;
 ```
-```{data-file="rename_columns.penguins.out"}
+```{.text data-file="rename_columns.penguins.out"}
 | flipper_cm | weight_kg | where_found |
 |------------|-----------|-------------|
 | 18.1       | 3.75      | Torgersen   |
@@ -365,7 +365,7 @@ or look at [the documentation for SQLite's `format()` function][sqlite_format].
 
 ## Calculating with Missing Values
 
-```{data-file="show_missing_values.penguins.sql"}
+```{.sql data-file="show_missing_values.penguins.sql"}
 select
     flipper_length_mm / 10.0 as flipper_cm,
     body_mass_g / 1000.0 as weight_kg,
@@ -373,7 +373,7 @@ select
 from penguins
 limit 5;
 ```
-```{data-file="show_missing_values.penguins.out"}
+```{.text data-file="show_missing_values.penguins.out"}
 | flipper_cm | weight_kg | where_found |
 |------------|-----------|-------------|
 | 18.1       | 3.75      | Torgersen   |
@@ -400,7 +400,7 @@ When might it be misleading?
 
 -   Repeated from earlier
 
-```{data-file="filter.penguins.sql"}
+```{.sql data-file="filter.penguins.sql"}
 select distinct
     species,
     sex,
@@ -408,7 +408,7 @@ select distinct
 from penguins
 where island = 'Biscoe';
 ```
-```{data-file="filter.penguins.out"}
+```{.text data-file="filter.penguins.out"}
 | species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
@@ -420,7 +420,7 @@ where island = 'Biscoe';
 
 -   If we ask for female penguins the row with the missing sex drops out
 
-```{data-file="null_equality.penguins.sql"}
+```{.sql data-file="null_equality.penguins.sql"}
 select distinct
     species,
     sex,
@@ -428,7 +428,7 @@ select distinct
 from penguins
 where island = 'Biscoe' and sex = 'FEMALE';
 ```
-```{data-file="null_equality.penguins.out"}
+```{.text data-file="null_equality.penguins.out"}
 | species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
@@ -439,7 +439,7 @@ where island = 'Biscoe' and sex = 'FEMALE';
 
 -   But if we ask for penguins that *aren't* female it drops out as well
 
-```{data-file="null_inequality.penguins.sql"}
+```{.sql data-file="null_inequality.penguins.sql"}
 select distinct
     species,
     sex,
@@ -447,7 +447,7 @@ select distinct
 from penguins
 where island = 'Biscoe' and sex != 'FEMALE';
 ```
-```{data-file="null_inequality.penguins.out"}
+```{.text data-file="null_inequality.penguins.out"}
 | species | sex  | island |
 |---------|------|--------|
 | Adelie  | MALE | Biscoe |
@@ -456,10 +456,10 @@ where island = 'Biscoe' and sex != 'FEMALE';
 
 ## Ternary Logic
 
-```{data-file="ternary_logic.penguins.sql"}
+```{.sql data-file="ternary_logic.penguins.sql"}
 select null = null;
 ```
-```{data-file="ternary_logic.penguins.out"}
+```{.text data-file="ternary_logic.penguins.out"}
 | null = null |
 |-------------|
 |             |
@@ -504,7 +504,7 @@ select null = null;
 
 ## Handling Null Safely
 
-```{data-file="safe_null_equality.penguins.sql"}
+```{.sql data-file="safe_null_equality.penguins.sql"}
 select
     species,
     sex,
@@ -512,7 +512,7 @@ select
 from penguins
 where sex is null;
 ```
-```{data-file="safe_null_equality.penguins.out"}
+```{.text data-file="safe_null_equality.penguins.out"}
 | species | sex |  island   |
 |---------|-----|-----------|
 | Adelie  |     | Torgersen |
@@ -546,11 +546,11 @@ where sex is null;
 
 ## Aggregating
 
-```{data-file="simple_sum.penguins.sql"}
+```{.sql data-file="simple_sum.penguins.sql"}
 select sum(body_mass_g) as total_mass
 from penguins;
 ```
-```{data-file="simple_sum.penguins.out"}
+```{.text data-file="simple_sum.penguins.out"}
 | total_mass |
 |------------|
 | 1437000.0  |
@@ -562,14 +562,14 @@ from penguins;
 
 ## Common Aggregation Functions
 
-```{data-file="common_aggregations.penguins.sql"}
+```{.sql data-file="common_aggregations.penguins.sql"}
 select
     max(bill_length_mm) as longest_bill,
     min(flipper_length_mm) as shortest_flipper,
     avg(bill_length_mm) / avg(bill_depth_mm) as weird_ratio
 from penguins;
 ```
-```{data-file="common_aggregations.penguins.out"}
+```{.text data-file="common_aggregations.penguins.out"}
 | longest_bill | shortest_flipper |   weird_ratio    |
 |--------------|------------------|------------------|
 | 59.6         | 172.0            | 2.56087082530644 |
@@ -585,14 +585,14 @@ What is the average body mass of penguins that weight more than 3000.0 grams?
 
 ## Counting
 
-```{data-file="count_behavior.penguins.sql"}
+```{.sql data-file="count_behavior.penguins.sql"}
 select
     count(*) as count_star,
     count(sex) as count_specific,
     count(distinct sex) as count_distinct
 from penguins;
 ```
-```{data-file="count_behavior.penguins.out"}
+```{.text data-file="count_behavior.penguins.out"}
 | count_star | count_specific | count_distinct |
 |------------|----------------|----------------|
 | 344        | 333            | 2              |
@@ -608,12 +608,12 @@ How many different body masses are in the penguins dataset?
 
 ## Grouping
 
-```{data-file="simple_group.penguins.sql"}
+```{.sql data-file="simple_group.penguins.sql"}
 select avg(body_mass_g) as average_mass_g
 from penguins
 group by sex;
 ```
-```{data-file="simple_group.penguins.out"}
+```{.text data-file="simple_group.penguins.out"}
 |  average_mass_g  |
 |------------------|
 | 4005.55555555556 |
@@ -627,14 +627,14 @@ group by sex;
 
 ## Behavior of Unaggregated Columns
 
-```{data-file="unaggregated_columns.penguins.sql"}
+```{.sql data-file="unaggregated_columns.penguins.sql"}
 select
     sex,
     avg(body_mass_g) as average_mass_g
 from penguins
 group by sex;
 ```
-```{data-file="unaggregated_columns.penguins.out"}
+```{.text data-file="unaggregated_columns.penguins.out"}
 |  sex   |  average_mass_g  |
 |--------|------------------|
 |        | 4005.55555555556 |
@@ -646,14 +646,14 @@ group by sex;
 
 ## Arbitrary Choice in Aggregation
 
-```{data-file="arbitrary_in_aggregation.penguins.sql"}
+```{.sql data-file="arbitrary_in_aggregation.penguins.sql"}
 select
     sex,
     body_mass_g                   
 from penguins
 group by sex;
 ```
-```{data-file="arbitrary_in_aggregation.penguins.out"}
+```{.text data-file="arbitrary_in_aggregation.penguins.out"}
 |  sex   | body_mass_g |
 |--------|-------------|
 |        |             |
@@ -679,7 +679,7 @@ and the number of penguins that weigh that much.
 
 ## Filtering Aggregated Values
 
-```{data-file="filter_aggregation.penguins.sql"}
+```{.sql data-file="filter_aggregation.penguins.sql"}
 select
     sex,
     avg(body_mass_g) as average_mass_g
@@ -687,7 +687,7 @@ from penguins
 group by sex
 having average_mass_g > 4000.0;
 ```
-```{data-file="filter_aggregation.penguins.out"}
+```{.text data-file="filter_aggregation.penguins.out"}
 | sex  |  average_mass_g  |
 |------|------------------|
 |      | 4005.55555555556 |
@@ -698,7 +698,7 @@ having average_mass_g > 4000.0;
 
 ## Readable Output
 
-```{data-file="readable_aggregation.penguins.sql"}
+```{.sql data-file="readable_aggregation.penguins.sql"}
 select
     sex,
     round(avg(body_mass_g), 1) as average_mass_g
@@ -706,7 +706,7 @@ from penguins
 group by sex
 having average_mass_g > 4000.0;
 ```
-```{data-file="readable_aggregation.penguins.out"}
+```{.text data-file="readable_aggregation.penguins.out"}
 | sex  | average_mass_g |
 |------|----------------|
 |      | 4005.6         |
@@ -717,7 +717,7 @@ having average_mass_g > 4000.0;
 
 ## Filtering Aggregate Inputs
 
-```{data-file="filter_aggregate_inputs.penguins.sql"}
+```{.sql data-file="filter_aggregate_inputs.penguins.sql"}
 select
     sex,
     round(
@@ -727,7 +727,7 @@ select
 from penguins
 group by sex;
 ```
-```{data-file="filter_aggregate_inputs.penguins.out"}
+```{.text data-file="filter_aggregate_inputs.penguins.out"}
 |  sex   | average_mass_g |
 |--------|----------------|
 |        | 3362.5         |
@@ -754,7 +754,7 @@ Is it possible to do this using `where` instead of `filter`?
 
 ## Creating In-memory Database {: .aside}
 
-```{data-file="in_memory_db.sh"}
+```{.sh data-file="in_memory_db.sh"}
 sqlite3 :memory:
 ```
 
@@ -764,7 +764,7 @@ sqlite3 :memory:
 
 ## Creating Tables
 
-```{data-file="create_work_job.sql"}
+```{.sql data-file="create_work_job.sql"}
 create table job (
     name text not null,
     billable real not null
@@ -789,7 +789,7 @@ create table work (
 
 ## Inserting Data
 
-```{data-file="populate_work_job.sql"}
+```{.sql data-file="populate_work_job.sql"}
 insert into job values
 ('calibrate', 1.5),
 ('clean', 0.5);
@@ -801,7 +801,7 @@ insert into work values
 ('po', 'complain'),
 ('tay', 'complain');
 ```
-```{data-file="show_work_job.memory.out"}
+```{.text data-file="show_work_job.memory.out"}
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -829,12 +829,12 @@ What happens if you insert a number instead of a string into the `note` field?
 
 ## Updating Rows
 
-```{data-file="update_work_job.sql"}
+```{.sql data-file="update_work_job.sql"}
 update work
 set person = 'tae'
 where person = 'tay';
 ```
-```{data-file="show_after_update.memory.out"}
+```{.text data-file="show_after_update.memory.out"}
 | person |    job    |
 |--------|-----------|
 | mik    | calibrate |
@@ -850,13 +850,13 @@ where person = 'tay';
 
 ## Deleting Rows
 
-```{data-file="delete_rows.memory.sql:keep"}
+```{.sql data-file="delete_rows.memory.sql:keep"}
 delete from work
 where person = 'tae';
 
 select * from work;
 ```
-```{data-file="delete_rows.memory.out"}
+```{.text data-file="delete_rows.memory.out"}
 | person |    job    |
 |--------|-----------|
 | mik    | calibrate |
@@ -875,7 +875,7 @@ What happens if you try to delete rows that don't exist
 
 ## Backing Up
 
-```{data-file="backing_up.memory.sql:keep"}
+```{.sql data-file="backing_up.memory.sql:keep"}
 create table backup (
     person text not null,
     job text not null
@@ -893,7 +893,7 @@ where person = 'tae';
 
 select * from backup;
 ```
-```{data-file="backing_up.memory.out"}
+```{.text data-file="backing_up.memory.out"}
 | person |   job    |
 |--------|----------|
 | tae    | complain |
@@ -937,11 +937,11 @@ Saving and restoring data in binary format:
 
 ## Combining Information
 
-```{data-file="cross_join.memory.sql:keep"}
+```{.sql data-file="cross_join.memory.sql:keep"}
 select *
 from work cross join job;
 ```
-```{data-file="cross_join.memory.out"}
+```{.text data-file="cross_join.memory.out"}
 | person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
@@ -966,12 +966,12 @@ from work cross join job;
 
 ## Inner Join
 
-```{data-file="inner_join.memory.sql:keep"}
+```{.sql data-file="inner_join.memory.sql:keep"}
 select *
 from work inner join job
     on work.job = job.name;
 ```
-```{data-file="inner_join.memory.out"}
+```{.text data-file="inner_join.memory.out"}
 | person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
@@ -992,7 +992,7 @@ and more or less likely to cause errors?
 
 ## Aggregating Joined Data
 
-```{data-file="aggregate_join.memory.sql:keep"}
+```{.sql data-file="aggregate_join.memory.sql:keep"}
 select
     work.person,
     sum(job.billable) as pay
@@ -1000,7 +1000,7 @@ from work inner join job
     on work.job = job.name
 group by work.person;
 ```
-```{data-file="aggregate_join.memory.out"}
+```{.text data-file="aggregate_join.memory.out"}
 | person | pay |
 |--------|-----|
 | mik    | 2.0 |
@@ -1014,12 +1014,12 @@ group by work.person;
 
 ## Left Join
 
-```{data-file="left_join.memory.sql:keep"}
+```{.sql data-file="left_join.memory.sql:keep"}
 select *
 from work left join job
     on work.job = job.name;
 ```
-```{data-file="left_join.memory.out"}
+```{.text data-file="left_join.memory.out"}
 | person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
@@ -1035,7 +1035,7 @@ from work left join job
 
 ## Aggregating Left Joins
 
-```{data-file="aggregate_left_join.memory.sql:keep"}
+```{.sql data-file="aggregate_left_join.memory.sql:keep"}
 select
     work.person,
     sum(job.billable) as pay
@@ -1043,7 +1043,7 @@ from work left join job
     on work.job = job.name
 group by work.person;
 ```
-```{data-file="aggregate_left_join.memory.out"}
+```{.text data-file="aggregate_left_join.memory.out"}
 | person | pay |
 |--------|-----|
 | mik    | 2.0 |
@@ -1055,7 +1055,7 @@ group by work.person;
 
 ## Coalescing Values
 
-```{data-file="coalesce.memory.sql:keep"}
+```{.sql data-file="coalesce.memory.sql:keep"}
 select
     work.person,
     coalesce(sum(job.billable), 0.0) as pay
@@ -1063,7 +1063,7 @@ from work left join job
     on work.job = job.name
 group by work.person;
 ```
-```{data-file="coalesce.memory.out"}
+```{.text data-file="coalesce.memory.out"}
 | person | pay |
 |--------|-----|
 | mik    | 2.0 |
@@ -1079,7 +1079,7 @@ group by work.person;
     left outer join and [right outer join](g:right_outer_join)
 -   Almost the same as cross join, but consider:
 
-```{data-file="full_outer_join.memory.sql"}
+```{.sql data-file="full_outer_join.memory.sql"}
 create table size (
     s text not null
 );
@@ -1091,7 +1091,7 @@ create table weight (
 
 select * from size full outer join weight;
 ```
-```{data-file="full_outer_join.memory.out"}
+```{.text data-file="full_outer_join.memory.out"}
 |   s   | w |
 |-------|---|
 | light |   |

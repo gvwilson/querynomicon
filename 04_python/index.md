@@ -4,7 +4,7 @@
 
 ## Querying from Python
 
-```{data-file="basic_python_query.py"}
+```{.py data-file="basic_python_query.py"}
 import sqlite3
 import sys
 
@@ -14,7 +14,7 @@ cursor = connection.execute("select count(*) from penguins;")
 rows = cursor.fetchall()
 print(rows)
 ```
-```{data-file="basic_python_query.out"}
+```{.text data-file="basic_python_query.out"}
 [(344,)]
 ```
 
@@ -26,7 +26,7 @@ print(rows)
 
 ## Incremental Fetch
 
-```{data-file="incremental_fetch.py"}
+```{.py data-file="incremental_fetch.py"}
 import sqlite3
 import sys
 
@@ -37,7 +37,7 @@ cursor = cursor.execute("select species, island from penguins limit 5;")
 while row := cursor.fetchone():
     print(row)
 ```
-```{data-file="incremental_fetch.out"}
+```{.text data-file="incremental_fetch.out"}
 ('Adelie', 'Torgersen')
 ('Adelie', 'Torgersen')
 ('Adelie', 'Torgersen')
@@ -50,7 +50,7 @@ while row := cursor.fetchone():
 
 ## Insert, Delete, and All That
 
-```{data-file="insert_delete.py"}
+```{.py data-file="insert_delete.py"}
 import sqlite3
 
 connection = sqlite3.connect(":memory:")
@@ -63,7 +63,7 @@ print("after insertion", cursor.execute("select * from example;").fetchall())
 cursor.execute("delete from example where num < 15;")
 print("after deletion", cursor.execute("select * from example;").fetchall())
 ```
-```{data-file="insert_delete.out"}
+```{.text data-file="insert_delete.out"}
 after insertion [(10,), (20,)]
 after deletion [(20,)]
 ```
@@ -72,7 +72,7 @@ after deletion [(20,)]
 
 ## Interpolating Values
 
-```{data-file="interpolate.py"}
+```{.py data-file="interpolate.py"}
 import sqlite3
 
 connection = sqlite3.connect(":memory:")
@@ -82,7 +82,7 @@ cursor.execute("create table example(num integer);")
 cursor.executemany("insert into example values (?);", [(10,), (20,)])
 print("after insertion", cursor.execute("select * from example;").fetchall())
 ```
-```{data-file="interpolate.out"}
+```{.text data-file="interpolate.out"}
 after insertion [(10,), (20,)]
 ```
 
@@ -100,7 +100,7 @@ and inserts an entry into the penguins database.
 
 ## Script Execution
 
-```{data-file="script_execution.py"}
+```{.py data-file="script_execution.py"}
 import sqlite3
 
 SETUP = """\
@@ -114,7 +114,7 @@ cursor = connection.cursor()
 cursor.executescript(SETUP)
 print("after insertion", cursor.execute("select * from example;").fetchall())
 ```
-```{data-file="script_execution.out"}
+```{.text data-file="script_execution.out"}
 after insertion [(10,), (20,)]
 ```
 
@@ -122,7 +122,7 @@ after insertion [(10,), (20,)]
 
 ## SQLite Exceptions in Python
 
-```{data-file="exceptions.py"}
+```{.py data-file="exceptions.py"}
 import sqlite3
 
 SETUP = """\
@@ -140,14 +140,14 @@ except sqlite3.Error as exc:
     print(f"SQLite exception: {exc}")
 print("after execution", cursor.execute("select * from example;").fetchall())
 ```
-```{data-file="exceptions.out"}
+```{.text data-file="exceptions.out"}
 SQLite exception: CHECK constraint failed: num > 0
 after execution [(10,)]
 ```
 
 ## Python in SQLite
 
-```{data-file="embedded_python.py"}
+```{.py data-file="embedded_python.py"}
 import sqlite3
 
 SETUP = """\
@@ -171,7 +171,7 @@ cursor.executescript(SETUP)
 for row in cursor.execute("select num, clip(num) from example;").fetchall():
     print(row)
 ```
-```{data-file="embedded_python.out"}
+```{.text data-file="embedded_python.out"}
 (-10, 0)
 (10, 10)
 (20, 20)
@@ -184,7 +184,7 @@ for row in cursor.execute("select num, clip(num) from example;").fetchall():
 
 ## Handling Dates and Times
 
-```{data-file="dates_times.py"}
+```{.py data-file="dates_times.py"}
 from datetime import date
 import sqlite3
 
@@ -223,7 +223,7 @@ cursor.executemany(
 for row in cursor.execute("select * from events;").fetchall():
     print(row)
 ```
-```{data-file="dates_times.out"}
+```{.text data-file="dates_times.out"}
 (datetime.date(2024, 1, 10), 'started tutorial')
 (datetime.date(2024, 1, 29), 'finished tutorial')
 ```
@@ -238,22 +238,22 @@ as they are being written to the database.
 
 ## SQL in Jupyter Notebooks
 
-```{data-file="install_jupysql.sh"}
+```{.sh data-file="install_jupysql.sh"}
 pip install jupysql
 ```
 
 -   And then inside the notebook:
 
-```{data-file="load_ext.text"}
+```{.text data-file="load_ext.text"}
 %load_ext sql
 ```
 
 -   Loads extension
 
-```{data-file="jupyter_connect.text"}
+```{.text data-file="jupyter_connect.text"}
 %sql sqlite:///db/penguins.db
 ```
-```{data-file="jupyter_connect.out"}
+```{.text data-file="jupyter_connect.out"}
 Connecting to 'sqlite:///data/penguins.db'
 ```
 
@@ -263,13 +263,13 @@ Connecting to 'sqlite:///data/penguins.db'
 -   Single percent sign `%sql` introduces one-line command
 -   Use double percent sign `%%sql` to indicate that the rest of the cell is SQL
 
-```{data-file="jupyter_select.text"}
+```{.text data-file="jupyter_select.text"}
 %%sql
 select species, count(*) as num
 from penguins
 group by species;
 ```
-```{data-file="jupyter_select.out"}
+```{.text data-file="jupyter_select.out"}
 Running query in 'sqlite:///data/penguins.db'
 ```
 
@@ -298,10 +298,10 @@ Running query in 'sqlite:///data/penguins.db'
 
 ## Pandas and SQL
 
-```{data-file="install_pandas.sh"}
+```{.sh data-file="install_pandas.sh"}
 pip install pandas
 ```
-```{data-file="select_pandas.py"}
+```{.py data-file="select_pandas.py"}
 import pandas as pd
 import sqlite3
 import sys
@@ -312,7 +312,7 @@ query = "select species, count(*) as num from penguins group by species;"
 df = pd.read_sql(query, connection)
 print(df)
 ```
-```{data-file="select_pandas.out"}
+```{.text data-file="select_pandas.out"}
      species  num
 0     Adelie  152
 1  Chinstrap   68
@@ -327,10 +327,10 @@ Write a command-line Python script that uses Pandas to re-create the penguins da
 
 ## Polars and SQL
 
-```{data-file="install_polars.sh"}
+```{.sh data-file="install_polars.sh"}
 pip install polars pyarrow adbc-driver-sqlite
 ```
-```{data-file="select_polars.py"}
+```{.py data-file="select_polars.py"}
 import polars as pl
 import sys
 
@@ -340,7 +340,7 @@ query = "select species, count(*) as num from penguins group by species;"
 df = pl.read_database_uri(query, uri, engine="adbc")
 print(df)
 ```
-```{data-file="select_polars.out"}
+```{.text data-file="select_polars.out"}
 shape: (3, 2)
 ┌───────────┬─────┐
 │ species   ┆ num │
@@ -365,7 +365,7 @@ Write a command-line Python script that uses Polars to re-create the penguins da
 
 -   Use [PyPika][pypika] to build queries
 
-```{data-file="builder.py"}
+```{.py data-file="builder.py"}
 from pypika import Query, Table
 import sqlite3
 import sys
@@ -380,7 +380,7 @@ cursor = connection.execute(str(query))
 for result in cursor.fetchall():
     print(result)
 ```
-```{data-file="builder.out"}
+```{.text data-file="builder.out"}
 query: SELECT "ident","building","name" FROM "department"
 ('gen', 'Chesson', 'Genetics')
 ('hist', 'Fashet Extension', 'Histology')
@@ -391,7 +391,7 @@ query: SELECT "ident","building","name" FROM "department"
 -   A [query builder](g:query_builder) creates objects representing the parts of a query
     -   Translate those objects into a SQL string for a particular dialect
 
-```{data-file="builder_relation.py"}
+```{.py data-file="builder_relation.py"}
 department = Table("department")
 staff = Table("staff")
 query = Query\
@@ -403,7 +403,7 @@ cursor = connection.execute(str(query))
 for result in cursor.fetchall():
     print(result)
 ```
-```{data-file="builder_relation.out"}
+```{.text data-file="builder_relation.out"}
 ('Divit', 'Dhaliwal', 'Fashet Extension')
 ('Indrans', 'Sridhar', 'Chesson')
 ('Pranay', 'Khanna', 'Chesson')
@@ -420,7 +420,7 @@ for result in cursor.fetchall():
 
 ## Object-Relational Mappers
 
-```{data-file="orm.py"}
+```{.py data-file="orm.py"}
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 import sys
 
@@ -438,7 +438,7 @@ with Session(engine) as session:
     for result in session.exec(statement).all():
         print(result)
 ```
-```{data-file="orm.out"}
+```{.text data-file="orm.out"}
 building='Chesson' name='Genetics' ident='gen'
 building='Fashet Extension' name='Histology' ident='hist'
 building='Chesson' name='Molecular Biology' ident='mb'
@@ -454,7 +454,7 @@ Write a command-line Python script that uses SQLModel to re-create the penguins 
 
 ## Relations with ORMs
 
-```{data-file="orm_relation.py:keep"}
+```{.py data-file="orm_relation.py:keep"}
 class Staff(SQLModel, table=True):
     ident: str = Field(default=None, primary_key=True)
     personal: str
@@ -471,7 +471,7 @@ with Session(engine) as session:
     for dept, staff in session.exec(statement):
         print(f"{dept.name}: {staff.personal} {staff.family}")
 ```
-```{data-file="orm_relation.out"}
+```{.text data-file="orm_relation.out"}
 Histology: Divit Dhaliwal
 Molecular Biology: Indrans Sridhar
 Molecular Biology: Pranay Khanna

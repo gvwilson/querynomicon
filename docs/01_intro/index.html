@@ -7,6 +7,7 @@
 <title>Introduction</title>
 <link href="../static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../static/pygments.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav>
@@ -116,11 +117,12 @@
 <figcaption>Figure 1: Concepts</figcaption>
 </figure>
 <h2 class="aside">Connecting to Database</h2>
-<pre class=""><code data-file="connect_penguins.sh">sqlite3 db/penguins.db
-</code></pre>
+<div class="codehilite"><pre class=""><span></span><code>sqlite3<span class="w"> </span>db/penguins.db
+</code></pre></div>
 <ul>
 <li>Not actually a query: starts an interactive session with the database in <code>db/penguins.db</code></li>
-<li>Alternative: provide a single query on the command line <code>sqlite3 <em>database</em> "<em>query</em>"</code></li>
+<li>Alternative: provide a single query on the command line
+    <code>sqlite3 <em>database</em> "<em>query</em>"</code></li>
 <li>Or put query in file and run <code>sqlite3 <em>database</em> &lt; <em>filename</em></code></li>
 <li>Note: the <code>penguins</code> database contains two tables<ul>
 <li><code>penguins</code> is all the <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a> data</li>

@@ -6,12 +6,12 @@
 
 -   Who doesn't calibrate?
 
-```{data-file="negate_incorrectly.memory.sql:keep"}
+```{.sql data-file="negate_incorrectly.memory.sql:keep"}
 select distinct person
 from work
 where job != 'calibrate';
 ```
-```{data-file="negate_incorrectly.memory.out"}
+```{.text data-file="negate_incorrectly.memory.out"}
 | person |
 |--------|
 | mik    |
@@ -26,12 +26,12 @@ where job != 'calibrate';
 
 ## Set Membership
 
-```{data-file="set_membership.sql:keep"}
+```{.sql data-file="set_membership.sql:keep"}
 select *
 from work
 where person not in ('mik', 'tay');
 ```
-```{data-file="set_membership.out"}
+```{.text data-file="set_membership.out"}
 | person |   job    |
 |--------|----------|
 | po     | clean    |
@@ -42,7 +42,7 @@ where person not in ('mik', 'tay');
 
 ## Subqueries
 
-```{data-file="subquery_set.sql:keep"}
+```{.sql data-file="subquery_set.sql:keep"}
 select distinct person
 from work
 where person not in (
@@ -51,7 +51,7 @@ where person not in (
     where job = 'calibrate'
 );
 ```
-```{data-file="subquery_set.out"}
+```{.text data-file="subquery_set.out"}
 | person |
 |--------|
 | po     |
@@ -68,7 +68,7 @@ where person not in (
     as long as value(s) unique for each record
 -   Uniquely identifies a particular record in a particular table
 
-```{data-file="primary_key.sql"}
+```{.sql data-file="primary_key.sql"}
 create table lab_equipment (
     size real not null,
     color text not null,
@@ -86,7 +86,7 @@ select * from lab_equipment;
 insert into lab_equipment values
 (1.5, 'green', 2);
 ```
-```{data-file="primary_key.out"}
+```{.text data-file="primary_key.out"}
 | size | color | num |
 |------|-------|-----|
 | 1.5  | blue  | 2   |
@@ -103,7 +103,7 @@ What about the `work` and `job` tables?
 
 ## Autoincrementing and Primary Keys
 
-```{data-file="autoincrement.sql"}
+```{.sql data-file="autoincrement.sql"}
 create table person (
     ident integer primary key autoincrement,
     name text not null
@@ -115,7 +115,7 @@ insert into person values
 select * from person;
 insert into person values (1, 'prevented');
 ```
-```{data-file="autoincrement.out"}
+```{.text data-file="autoincrement.out"}
 | ident | name |
 |-------|------|
 | 1     | mik  |
@@ -133,10 +133,10 @@ Runtime error near line 12: UNIQUE constraint failed: person.ident (19)
 
 ## Internal Tables {: .aside}
 
-```{data-file="sequence_table.memory.sql:keep"}
+```{.sql data-file="sequence_table.memory.sql:keep"}
 select * from sqlite_sequence;
 ```
-```{data-file="sequence_table.memory.out"}
+```{.text data-file="sequence_table.memory.out"}
 |  name  | seq |
 |--------|-----|
 | person | 3   |
@@ -154,7 +154,7 @@ the same sequence numbers are generated again?
 
 ## Altering Tables
 
-```{data-file="alter_tables.sql:keep"}
+```{.sql data-file="alter_tables.sql:keep"}
 alter table job
 add ident integer not null default -1;
 
@@ -168,7 +168,7 @@ where name = 'clean';
 
 select * from job;
 ```
-```{data-file="alter_tables.out"}
+```{.text data-file="alter_tables.out"}
 |   name    | billable | ident |
 |-----------|----------|-------|
 | calibrate | 1.5      | 1     |
@@ -198,7 +198,7 @@ select * from job;
 
 ## Creating New Tables from Old
 
-```{data-file="insert_select.sql:keep"}
+```{.sql data-file="insert_select.sql:keep"}
 create table new_work (
     person_id integer not null,
     job_id integer not null,
@@ -215,7 +215,7 @@ from
     inner join job on job.name = work.job;
 select * from new_work;
 ```
-```{data-file="insert_select.out"}
+```{.text data-file="insert_select.out"}
 | person_id | job_id |
 |-----------|--------|
 | 1         | 1      |
@@ -228,11 +228,11 @@ select * from new_work;
 
 ## Removing Tables
 
-```{data-file="drop_table.sql:keep"}
+```{.sql data-file="drop_table.sql:keep"}
 drop table work;
 alter table new_work rename to work;
 ```
-```{data-file="drop_table.out"}
+```{.text data-file="drop_table.out"}
 CREATE TABLE job (
     ident integer primary key autoincrement,
     name text not null,
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS "work" (
 
 -   Go back to the original penguins database
 
-```{data-file="compare_individual_aggregate.penguins.sql"}
+```{.sql data-file="compare_individual_aggregate.penguins.sql"}
 select body_mass_g
 from penguins
 where
@@ -284,7 +284,7 @@ where
     )
 limit 5;
 ```
-```{data-file="compare_individual_aggregate.penguins.out"}
+```{.text data-file="compare_individual_aggregate.penguins.out"}
 | body_mass_g |
 |-------------|
 | 4675.0      |
@@ -307,7 +307,7 @@ that weigh the same as the lightest penguin.
 
 ## Comparing Individual Values to Aggregates Within Groups
 
-```{data-file="compare_within_groups.penguins.sql"}
+```{.sql data-file="compare_within_groups.penguins.sql"}
 select
     penguins.species,
     penguins.body_mass_g,
@@ -323,7 +323,7 @@ from penguins inner join (
 where penguins.body_mass_g > averaged.avg_mass_g
 limit 5;
 ```
-```{data-file="compare_within_groups.penguins.out"}
+```{.text data-file="compare_within_groups.penguins.out"}
 | species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
@@ -344,7 +344,7 @@ that weigh the same as the lightest penguin of the same sex and species.
 
 ## Common Table Expressions
 
-```{data-file="common_table_expressions.penguins.sql"}
+```{.sql data-file="common_table_expressions.penguins.sql"}
 with grouped as (
     select
         species,
@@ -361,7 +361,7 @@ from penguins inner join grouped
 where penguins.body_mass_g > grouped.avg_mass_g
 limit 5;
 ```
-```{data-file="common_table_expressions.penguins.out"}
+```{.text data-file="common_table_expressions.penguins.out"}
 | species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
@@ -377,7 +377,7 @@ limit 5;
 
 ## Explaining Query Plans {: .aside}
 
-```{data-file="explain_query_plan.penguins.sql"}
+```{.sql data-file="explain_query_plan.penguins.sql"}
 explain query plan
 select
     species,
@@ -385,7 +385,7 @@ select
 from penguins
 group by species;
 ```
-```{data-file="explain_query_plan.penguins.out"}
+```{.text data-file="explain_query_plan.penguins.out"}
 QUERY PLAN
 |--SCAN penguins
 `--USE TEMP B-TREE FOR GROUP BY
@@ -404,7 +404,7 @@ that weigh the same as the lightest penguin of the same sex and species.
 
 -   Every table has a special column called `rowid`
 
-```{data-file="rowid.penguins.sql"}
+```{.sql data-file="rowid.penguins.sql"}
 select
     rowid,
     species,
@@ -412,7 +412,7 @@ select
 from penguins
 limit 5;
 ```
-```{data-file="rowid.penguins.out"}
+```{.text data-file="rowid.penguins.out"}
 | rowid | species |  island   |
 |-------|---------|-----------|
 | 1     | Adelie  | Torgersen |
@@ -443,7 +443,7 @@ To explore how row IDs behave:
 
 ## Conditionals
 
-```{data-file="if_else.penguins.sql"}
+```{.sql data-file="if_else.penguins.sql"}
 with sized_penguins as (
     select
         species,
@@ -464,7 +464,7 @@ from sized_penguins
 group by species, size
 order by species, num;
 ```
-```{data-file="if_else.penguins.out"}
+```{.text data-file="if_else.penguins.out"}
 |  species  | size  | num |
 |-----------|-------|-----|
 | Adelie    | small | 54  |
@@ -498,7 +498,7 @@ Which ones do you think actually attempt to divide by zero?
 -   What if we want small, medium, and large?
 -   Can nest `iif`, but quickly becomes unreadable
 
-```{data-file="case_when.penguins.sql"}
+```{.sql data-file="case_when.penguins.sql"}
 with sized_penguins as (
     select
         species,
@@ -519,7 +519,7 @@ from sized_penguins
 group by species, size
 order by species, num;
 ```
-```{data-file="case_when.penguins.out"}
+```{.text data-file="case_when.penguins.out"}
 |  species  |  size  | num |
 |-----------|--------|-----|
 | Adelie    | small  | 54  |
@@ -545,7 +545,7 @@ rather than a [statement](g:statement).)
 
 ## Checking a Range
 
-```{data-file="check_range.penguins.sql"}
+```{.sql data-file="check_range.penguins.sql"}
 with sized_penguins as (
     select
         species,
@@ -565,7 +565,7 @@ from sized_penguins
 group by species, size
 order by species, num;
 ```
-```{data-file="check_range.penguins.out"}
+```{.text data-file="check_range.penguins.out"}
 |  species  |   size   | num |
 |-----------|----------|-----|
 | Adelie    | abnormal | 54  |
@@ -613,10 +613,10 @@ so that it is true in both cases.
   <figcaption>Assay ER Diagram</figcaption>
 </figure>
 
-```{data-file="assay_staff.assays.sql"}
+```{.sql data-file="assay_staff.assays.sql"}
 select * from staff;
 ```
-```{data-file="assay_staff.assays.out"}
+```{.text data-file="assay_staff.assays.out"}
 | ident | personal |  family   | dept | age |
 |-------|----------|-----------|------|-----|
 | 1     | Kartik   | Gupta     |      | 46  |
@@ -643,14 +643,14 @@ Draw a table diagram and an ER diagram to represent the following database:
 
 ## Pattern Matching
 
-```{data-file="like_glob.assays.sql"}
+```{.sql data-file="like_glob.assays.sql"}
 select
     personal,
     family
 from staff
 where personal like '%ya%';
 ```
-```{data-file="like_glob.assays.out"}
+```{.text data-file="like_glob.assays.out"}
 | personal | family |
 |----------|--------|
 | Nitya    | Lal    |
@@ -667,7 +667,7 @@ Rewrite the pattern-matching query shown above using `glob`.
 
 ## Selecting First and Last Rows
 
-```{data-file="union_all.assays.sql"}
+```{.sql data-file="union_all.assays.sql"}
 select * from (
     select * from (select * from experiment order by started asc limit 5)
     union all
@@ -675,7 +675,7 @@ select * from (
 )
 order by started asc;
 ```
-```{data-file="union_all.assays.out"}
+```{.text data-file="union_all.assays.out"}
 | ident |    kind     |  started   |   ended    |
 |-------|-------------|------------|------------|
 | 17    | trial       | 2023-01-29 | 2023-01-30 |
@@ -703,7 +703,7 @@ How can you check that your query is working correctly?
 
 ## Intersection
 
-```{data-file="intersect.assays.sql"}
+```{.sql data-file="intersect.assays.sql"}
 select
     personal,
     family,
@@ -719,7 +719,7 @@ select
     age from staff
 where age < 50;
 ```
-```{data-file="intersect.assays.out"}
+```{.text data-file="intersect.assays.out"}
 | personal |  family   | dept | age |
 |----------|-----------|------|-----|
 | Indrans  | Sridhar   | mb   | 47  |
@@ -742,7 +742,7 @@ Why do you believe this?
 
 ## Exclusion
 
-```{data-file="except.assays.sql"}
+```{.sql data-file="except.assays.sql"}
 select
     personal,
     family,
@@ -758,7 +758,7 @@ except
         age from staff
     where age < 50;
 ```
-```{data-file="except.assays.out"}
+```{.text data-file="except.assays.out"}
 | personal | family | dept | age |
 |----------|--------|------|-----|
 | Pranay   | Khanna | mb   | 51  |
@@ -775,7 +775,7 @@ How can you check that your query is working correctly?
 
 ## Random Numbers and Why Not
 
-```{data-file="random_numbers.assays.sql"}
+```{.sql data-file="random_numbers.assays.sql"}
 with decorated as (
     select random() as rand,
     personal || ' ' || family as name
@@ -789,7 +789,7 @@ select
 from decorated
 where selector < 5;
 ```
-```{data-file="random_numbers.assays.out"}
+```{.text data-file="random_numbers.assays.out"}
 |         rand         | selector |      name       |
 |----------------------|----------|-----------------|
 | -5088363674211922423 | 0        | Divit Dhaliwal  |
@@ -819,7 +819,7 @@ Write a query that:
 
 ## Creating an Index
 
-```{data-file="create_use_index.sql"}
+```{.sql data-file="create_use_index.sql"}
 explain query plan
 select filename
 from plate
@@ -832,7 +832,7 @@ select filename
 from plate
 where filename like '%07%';
 ```
-```{data-file="create_use_index.out"}
+```{.text data-file="create_use_index.out"}
 QUERY PLAN
 `--SCAN plate USING COVERING INDEX sqlite_autoindex_plate_1
 QUERY PLAN
@@ -847,10 +847,10 @@ QUERY PLAN
 
 ## Generating Sequences
 
-```{data-file="generate_sequence.assays.sql"}
+```{.sql data-file="generate_sequence.assays.sql"}
 select value from generate_series(1, 5);
 ```
-```{data-file="generate_sequence.assays.out"}
+```{.text data-file="generate_sequence.assays.out"}
 | value |
 |-------|
 | 1     |
@@ -864,7 +864,7 @@ select value from generate_series(1, 5);
 
 ## Generating Sequences Based on Data
 
-```{data-file="data_range_sequence.memory.sql"}
+```{.sql data-file="data_range_sequence.memory.sql"}
 create table temp (
     num integer not null
 );
@@ -874,7 +874,7 @@ select value from generate_series (
     (select max(num) from temp)
 );
 ```
-```{data-file="data_range_sequence.memory.out"}
+```{.text data-file="data_range_sequence.memory.out"}
 | value |
 |-------|
 | 1     |
@@ -888,7 +888,7 @@ select value from generate_series (
 
 ## Generating Sequences of Dates
 
-```{data-file="date_sequence.assays.sql"}
+```{.sql data-file="date_sequence.assays.sql"}
 select date((select julianday(min(started)) from experiment) + value) as some_day
 from (
     select value from generate_series(
@@ -898,7 +898,7 @@ from (
 )
 limit 5;
 ```
-```{data-file="date_sequence.assays.out"}
+```{.text data-file="date_sequence.assays.out"}
 |  some_day  |
 |------------|
 | 2023-01-29 |
@@ -917,7 +917,7 @@ limit 5;
 
 ## Counting Experiments Started per Day Without Gaps
 
-```{data-file="experiments_per_day.assays.sql"}
+```{.sql data-file="experiments_per_day.assays.sql"}
 with
 -- complete sequence of days with 0 as placeholder for number of experiments
 all_days as (
@@ -949,7 +949,7 @@ from
     all_days left join actual_days on all_days.some_day = actual_days.started
 limit 5;
 ```
-```{data-file="experiments_per_day.assays.out"}
+```{.text data-file="experiments_per_day.assays.out"}
 |    day     | num_exp |
 |------------|---------|
 | 2023-01-29 | 1       |
@@ -966,7 +966,7 @@ What does the expression `date('now', 'start of month', '+1 month', '-1 day')` p
 
 ## Self Join
 
-```{data-file="self_join.assays.sql"}
+```{.sql data-file="self_join.assays.sql"}
 with person as (
     select
         ident,
@@ -980,7 +980,7 @@ select
 from person as left_person inner join person as right_person
 limit 10;
 ```
-```{data-file="self_join.assays.out"}
+```{.text data-file="self_join.assays.out"}
 |     name     |       name       |
 |--------------|------------------|
 | Kartik Gupta | Kartik Gupta     |
@@ -1002,7 +1002,7 @@ limit 10;
 
 ## Generating Unique Pairs
 
-```{data-file="unique_pairs.assays.sql"}
+```{.sql data-file="unique_pairs.assays.sql"}
 with person as (
     select
         ident,
@@ -1017,7 +1017,7 @@ from person as left_person inner join person as right_person
 on left_person.ident < right_person.ident
 where left_person.ident <= 4 and right_person.ident <= 4;
 ```
-```{data-file="unique_pairs.assays.out"}
+```{.text data-file="unique_pairs.assays.out"}
 |      name       |      name       |
 |-----------------|-----------------|
 | Kartik Gupta    | Divit Dhaliwal  |
@@ -1034,7 +1034,7 @@ where left_person.ident <= 4 and right_person.ident <= 4;
 
 ## Filtering Pairs
 
-```{data-file="filter_pairs.assays.sql"}
+```{.sql data-file="filter_pairs.assays.sql"}
 with
 person as (
     select
@@ -1058,7 +1058,7 @@ select
 from person as left_person inner join person as right_person join together
     on left_person.ident = left_staff and right_person.ident = right_staff;
 ```
-```{data-file="filter_pairs.assays.out"}
+```{.text data-file="filter_pairs.assays.out"}
 |    person_1     |     person_2     |
 |-----------------|------------------|
 | Kartik Gupta    | Vedika Rout      |
@@ -1080,7 +1080,7 @@ from person as left_person inner join person as right_person join together
 
 ## Existence and Correlated Subqueries
 
-```{data-file="correlated_subquery.assays.sql"}
+```{.sql data-file="correlated_subquery.assays.sql"}
 select
     name,
     building
@@ -1093,7 +1093,7 @@ where
     )
 order by name;
 ```
-```{data-file="correlated_subquery.assays.out"}
+```{.text data-file="correlated_subquery.assays.out"}
 |       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
@@ -1108,7 +1108,7 @@ order by name;
 
 ## Nonexistence
 
-```{data-file="nonexistence.assays.sql"}
+```{.sql data-file="nonexistence.assays.sql"}
 select
     name,
     building
@@ -1121,7 +1121,7 @@ where
     )
 order by name;
 ```
-```{data-file="nonexistence.assays.out"}
+```{.text data-file="nonexistence.assays.out"}
 |     name      | building |
 |---------------|----------|
 | Endocrinology | TGVH     |
@@ -1135,7 +1135,7 @@ If the query cannot be rewritten, why not?
 
 ## Avoiding Correlated Subqueries {: .aside}
 
-```{data-file="avoid_correlated_subqueries.assays.sql"}
+```{.sql data-file="avoid_correlated_subqueries.assays.sql"}
 select distinct
     department.name as name,
     department.building as building
@@ -1143,7 +1143,7 @@ from department inner join staff
     on department.ident = staff.dept
 order by name;
 ```
-```{data-file="avoid_correlated_subqueries.assays.out"}
+```{.text data-file="avoid_correlated_subqueries.assays.out"}
 |       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
@@ -1156,7 +1156,7 @@ order by name;
 
 ## Lead and Lag
 
-```{data-file="lead_lag.assays.sql"}
+```{.sql data-file="lead_lag.assays.sql"}
 with ym_num as (
     select
         strftime('%Y-%m', started) as ym,
@@ -1173,7 +1173,7 @@ select
 from ym_num
 order by ym;
 ```
-```{data-file="lead_lag.assays.out"}
+```{.text data-file="lead_lag.assays.out"}
 |   ym    | prev_num | num | next_num |
 |---------|----------|-----|----------|
 | 2023-01 |          | 2   | 5        |
@@ -1204,7 +1204,7 @@ order by ym;
 
 ## Windowing Functions
 
-```{data-file="window_functions.assays.sql"}
+```{.sql data-file="window_functions.assays.sql"}
 with ym_num as (
     select
         strftime('%Y-%m', started) as ym,
@@ -1222,7 +1222,7 @@ select
 from ym_num
 order by ym;
 ```
-```{data-file="window_functions.assays.out"}
+```{.text data-file="window_functions.assays.out"}
 |   ym    | num | num_done | completed_progress |  linear_progress   |
 |---------|-----|----------|--------------------|--------------------|
 | 2023-01 | 2   | 2        | 0.04               | 0.0769230769230769 |
@@ -1248,7 +1248,7 @@ order by ym;
 
 ## Explaining Another Query Plan {: .aside}
 
-```{data-file="explain_window_function.assays.sql"}
+```{.sql data-file="explain_window_function.assays.sql"}
 explain query plan
 with ym_num as (
     select
@@ -1265,7 +1265,7 @@ select
 from ym_num
 order by ym;
 ```
-```{data-file="explain_window_function.assays.out"}
+```{.text data-file="explain_window_function.assays.out"}
 QUERY PLAN
 |--CO-ROUTINE (subquery-3)
 |  |--CO-ROUTINE (subquery-4)
@@ -1282,7 +1282,7 @@ QUERY PLAN
 
 ## Partitioned Windows
 
-```{data-file="partition_window.assays.sql"}
+```{.sql data-file="partition_window.assays.sql"}
 with y_m_num as (
     select
         strftime('%Y', started) as year,
@@ -1300,7 +1300,7 @@ select
 from y_m_num
 order by year, month;
 ```
-```{data-file="partition_window.assays.out"}
+```{.text data-file="partition_window.assays.out"}
 | year | month | num | num_done |
 |------|-------|-----|----------|
 | 2023 | 01    | 2   | 2        |
@@ -1326,9 +1326,6 @@ order by year, month;
 Create a query that:
 
 1.  finds the unique weights of the penguins in the `penguins` database;
-
 2.  sorts them;
-
 3.  finds the difference between each successive distinct weight; and
-
 4.  counts how many times each unique difference appears.

@@ -7,6 +7,7 @@
 <title>R</title>
 <link href="../static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../static/pygments.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav>
@@ -41,9 +42,9 @@
 <h1>R</h1>
 
 <h2>Loading Libraries</h2>
-<pre class=""><code data-file="load_connect.r">library(dplyr)
-</code></pre>
-<pre class=""><code data-file="load_connect.out">## 
+<div class="codehilite"><pre class=""><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## 
 ## Attaching package: 'dplyr'
 
 ## The following objects are masked from 'package:stats':
@@ -55,7 +56,7 @@
 ##     intersect, setdiff, setequal, union
 
 ## [1] "little_penguins" "penguins"
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Use <code>dplyr</code> to create queries</li>
 <li>Database connections are coordinated by the DBI (DataBase Interface) package</li>
@@ -64,16 +65,16 @@
 <ul>
 <li>List tables with <code>dbListTables</code></li>
 </ul>
-<pre class=""><code data-file="list_tables.r">connection &lt;- DBI::dbConnect(RSQLite::SQLite(), 'data/penguins.db')
-DBI::dbListTables(connection)
-</code></pre>
-<pre class=""><code data-file="list_tables.out">## [1] "little_penguins" "penguins"
-</code></pre>
+<div class="codehilite"><pre class=""><span></span><code><span class="n">connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">DBI</span><span class="o">::</span><span class="nf">dbConnect</span><span class="p">(</span><span class="n">RSQLite</span><span class="o">::</span><span class="nf">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s">'data/penguins.db'</span><span class="p">)</span>
+<span class="n">DBI</span><span class="o">::</span><span class="nf">dbListTables</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## [1] "little_penguins" "penguins"
+</code></pre></div>
 <h2>Load Table as Dataframe</h2>
-<pre class=""><code data-file="get_table.r">penguins &lt;- dplyr::tbl(connection, 'penguins')
-penguins
-</code></pre>
-<pre class=""><code data-file="get_table.out">## # Source:   table&lt;`penguins`&gt; [?? x 7]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">tbl</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s">'penguins'</span><span class="p">)</span>
+<span class="n">penguins</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:   table&lt;`penguins`&gt; [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -89,7 +90,7 @@ penguins
 ## 10 Adelie  Torgersen           42            20.2               190        4250
 ## # ℹ more rows
 ## # ℹ 1 more variable: sex &lt;chr&gt;
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Retrieve a table with <code>tbl</code> function<ul>
 <li>It need a connection and the name of the table</li>
@@ -97,22 +98,22 @@ penguins
 </li>
 </ul>
 <h2>How Did We Get Here?</h2>
-<pre class=""><code data-file="show_query.r">penguins |&gt; 
-  dplyr::show_query()
-</code></pre>
-<pre class=""><code data-file="show_query.out">## &lt;SQL&gt;
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">show_query</span><span class="p">()</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## &lt;SQL&gt;
 ## SELECT *
 ## FROM `penguins`
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>dplyr</code> functions generate <code>SELECT</code> statements</li>
 <li><code>show_query()</code> runs the SQL <code>EXPLAIN</code> command to show the SQL query</li>
 </ul>
 <h2>Lazy Evaluation</h2>
-<pre class=""><code data-file="filter_lazy.r">penguins |&gt; 
-  filter(species == "Adelie")
-</code></pre>
-<pre class=""><code data-file="filter_lazy.out">## # Source:   SQL [?? x 7]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">species</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"Adelie"</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -128,18 +129,18 @@ penguins
 ## 10 Adelie  Torgersen           42            20.2               190        4250
 ## # ℹ more rows
 ## # ℹ 1 more variable: sex &lt;chr&gt;
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>filter</code> generates a query using <code>WHERE &lt;condition&gt;</code> </li>
 <li><code>dbplyr</code> call are lazy.</li>
 <li>The SQL query is only evaluated when it is sent to the database</li>
 <li>Running the <code>dplyr</code> call only returns a preview of the result</li>
 </ul>
-<pre class=""><code data-file="filter_collect.r">penguins |&gt; 
-  filter(species == "Adelie") |&gt; 
-  collect()
-</code></pre>
-<pre class=""><code data-file="filter_collect.out">## # A tibble: 152 × 7
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">species</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"Adelie"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">collect</span><span class="p">()</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # A tibble: 152 × 7
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 Adelie  Torgersen           39.1          18.7               181        3750
@@ -154,7 +155,7 @@ penguins
 ## 10 Adelie  Torgersen           42            20.2               190        4250
 ## # ℹ 142 more rows
 ## # ℹ 1 more variable: sex &lt;chr&gt;
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>collect</code> retrieves the complete result of the query<ul>
 <li>Note that now the table has 152 rows</li>
@@ -162,10 +163,10 @@ penguins
 </li>
 </ul>
 <h2>Selecting Columns</h2>
-<pre class=""><code data-file="select.r">penguins |&gt; 
-  select(species, island, contains('bill'))
-</code></pre>
-<pre class=""><code data-file="select.out">## # Source:   SQL [?? x 4]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">island</span><span class="p">,</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="s">'bill'</span><span class="p">))</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [?? x 4]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
@@ -180,17 +181,17 @@ penguins
 ##  9 Adelie  Torgersen           34.1          18.1
 ## 10 Adelie  Torgersen           42            20.2
 ## # ℹ more rows
-</code></pre>
+</code></pre></div>
 <ul>
 <li>R's <code>select</code> modifies the SQL <code>SELECT</code> statement</li>
 <li>Selection helpers from <code>dplyr</code> (like <code>contains</code>) work</li>
 </ul>
 <h2>Sorting</h2>
-<pre class=""><code data-file="sort.r">penguins |&gt; 
-  select(species, body_mass_g) |&gt; 
-  arrange(body_mass_g)
-</code></pre>
-<pre class=""><code data-file="sort.out">## # Source:     SQL [?? x 2]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">arrange</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:     SQL [?? x 2]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: body_mass_g
 ##    species   body_mass_g
@@ -206,7 +207,7 @@ penguins
 ##  9 Chinstrap        2900
 ## 10 Adelie           2925
 ## # ℹ more rows
-</code></pre>
+</code></pre></div>
 <ul>
 <li>With <code>arrange</code> you <code>ORDER BY</code> the data</li>
 <li>There is a <code>desc</code> function</li>
@@ -215,12 +216,12 @@ penguins
 <p>Find the lightest penguin on Dream Island by arranging the table accordingly.
 Only show the species, island, and body mass.</p>
 <h3>Solution</h3>
-<pre class=""><code data-file="ex_lightest_penguin.r">penguins |&gt; 
-  select(species, island, body_mass_g) |&gt; 
-  filter(island == 'Dream') |&gt; 
-  arrange(desc(body_mass_g))
-</code></pre>
-<pre class=""><code data-file="ex_lightest_penguin.out">## # Source:     SQL [?? x 3]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">island</span><span class="p">,</span><span class="w"> </span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">island</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'Dream'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">))</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:     SQL [?? x 3]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: desc(body_mass_g)
 ##    species   island body_mass_g
@@ -236,12 +237,12 @@ Only show the species, island, and body mass.</p>
 ##  9 Adelie    Dream         4400
 ## 10 Chinstrap Dream         4400
 ## # ℹ more rows
-</code></pre>
+</code></pre></div>
 <h2>Transforming Columns</h2>
-<pre class=""><code data-file="mutate.r">penguins |&gt; 
-  mutate(weight_kg = body_mass_g/1000)
-</code></pre>
-<pre class=""><code data-file="mutate.out">## # Source:   SQL [?? x 8]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">weight_kg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body_mass_g</span><span class="o">/</span><span class="m">1000</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [?? x 8]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -257,7 +258,7 @@ Only show the species, island, and body mass.</p>
 ## 10 Adelie  Torgersen           42            20.2               190        4250
 ## # ℹ more rows
 ## # ℹ 2 more variables: sex &lt;chr&gt;, weight_kg &lt;dbl&gt;
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>mutate</code> also modifies the <code>SELECT</code> statement<ul>
 <li>Naming the new variable works as the <code>AS</code> statement</li>
@@ -267,11 +268,11 @@ Only show the species, island, and body mass.</p>
 <li>If <code>select</code> it not present the query will return all the columns</li>
 </ul>
 <h2>Aggregating</h2>
-<pre class=""><code data-file="aggregate.r">penguins |&gt; 
-  group_by(species) |&gt; 
-  summarise(avg_body_mas = mean(body_mass_g))
-</code></pre>
-<pre class=""><code data-file="aggregate.out">## Warning: Missing values are always removed in SQL aggregation functions.
+<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">species</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">avg_body_mas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">))</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## Warning: Missing values are always removed in SQL aggregation functions.
 ## Use `na.rm = TRUE` to silence this warning
 ## This warning is displayed once every 8 hours.
 
@@ -282,7 +283,7 @@ Only show the species, island, and body mass.</p>
 ## 1 Adelie           3701.
 ## 2 Chinstrap        3733.
 ## 3 Gentoo           5076.
-</code></pre>
+</code></pre></div>
 <ul>
 <li><code>summarise</code> and <code>group_by</code> work together to generate a <code>GROUP BY</code> clause</li>
 <li><code>dplyr</code> defaults to SQL to handle missing values unless you use the <code>na.rm</code> argument in aggregation functions</li>
@@ -293,19 +294,19 @@ Only show the species, island, and body mass.</p>
 <li>Using the previous result, calculate the average ratio for each species</li>
 </ul>
 <h2>Creating a Table</h2>
-<pre class=""><code data-file="create_table.r">library(DBI)
+<div class="codehilite"><pre class=""><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">DBI</span><span class="p">)</span>
 
-another_connection &lt;- dbConnect(RSQLite::SQLite(), ':memory:')
+<span class="n">another_connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dbConnect</span><span class="p">(</span><span class="n">RSQLite</span><span class="o">::</span><span class="nf">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s">':memory:'</span><span class="p">)</span>
 
-table1 &lt;- tibble(
-  person = c('mik', 'mik', 'mik', 'po', 'po', 'tay'),
-  job = c('calibrate', 'clean', 'complain', 'clean', 'complain', 'complain')
-)
+<span class="n">table1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<span class="w">  </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">'mik'</span><span class="p">,</span><span class="w"> </span><span class="s">'mik'</span><span class="p">,</span><span class="w"> </span><span class="s">'mik'</span><span class="p">,</span><span class="w"> </span><span class="s">'po'</span><span class="p">,</span><span class="w"> </span><span class="s">'po'</span><span class="p">,</span><span class="w"> </span><span class="s">'tay'</span><span class="p">),</span>
+<span class="w">  </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">'calibrate'</span><span class="p">,</span><span class="w"> </span><span class="s">'clean'</span><span class="p">,</span><span class="w"> </span><span class="s">'complain'</span><span class="p">,</span><span class="w"> </span><span class="s">'clean'</span><span class="p">,</span><span class="w"> </span><span class="s">'complain'</span><span class="p">,</span><span class="w"> </span><span class="s">'complain'</span><span class="p">)</span>
+<span class="p">)</span>
 
-dbWriteTable(another_connection, "work", table1, row.names = FALSE, overwrite = TRUE)
+<span class="nf">dbWriteTable</span><span class="p">(</span><span class="n">another_connection</span><span class="p">,</span><span class="w"> </span><span class="s">"work"</span><span class="p">,</span><span class="w"> </span><span class="n">table1</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
-work &lt;- tbl(another_connection, "work")
-</code></pre>
+<span class="n">work</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tbl</span><span class="p">(</span><span class="n">another_connection</span><span class="p">,</span><span class="w"> </span><span class="s">"work"</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>Write, overwrite, or append a data frame to a database table with <code>dbWriteTable</code> <ul>
 <li><code>':memory:'</code> is a "path" that creates an in-memory database</li>
@@ -333,31 +334,31 @@ work &lt;- tbl(another_connection, "work")
 </tbody>
 </table>
 <h3>Solution</h3>
-<pre class=""><code data-file="ex_job_table.r">table2 &lt;- tibble(
-  name = c('calibrate', 'clean'),
-  billable = c(1.5, 0.5)
-)
+<div class="codehilite"><pre class=""><span></span><code><span class="n">table2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">'calibrate'</span><span class="p">,</span><span class="w"> </span><span class="s">'clean'</span><span class="p">),</span>
+<span class="w">  </span><span class="n">billable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
+<span class="p">)</span>
 
-dbWriteTable(another_connection, "job", table2, row.names = FALSE, overwrite = TRUE)
+<span class="nf">dbWriteTable</span><span class="p">(</span><span class="n">another_connection</span><span class="p">,</span><span class="w"> </span><span class="s">"job"</span><span class="p">,</span><span class="w"> </span><span class="n">table2</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
-job &lt;- tbl(another_connection, "job")
-</code></pre>
+<span class="n">job</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tbl</span><span class="p">(</span><span class="n">another_connection</span><span class="p">,</span><span class="w"> </span><span class="s">"job"</span><span class="p">)</span>
+</code></pre></div>
 <h2>Negation Done Wrong</h2>
 <ul>
 <li>Who doesn't calibrate?</li>
 </ul>
-<pre class=""><code data-file="negate_wrong.r">work |&gt; 
-  filter(job != 'calibrate') |&gt; 
-  distinct(person)
-</code></pre>
-<pre class=""><code data-file="negate_wrong.out">## # Source:   SQL [3 x 1]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">job</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">'calibrate'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">distinct</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [3 x 1]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person
 ##   &lt;chr&gt; 
 ## 1 mik   
 ## 2 po    
 ## 3 tay
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Similar to pure SQL, the result is wrong (Mik does calibrate)<ul>
 <li>But using subqueries with <code>dplyr</code> is not that simple</li>
@@ -365,14 +366,14 @@ job &lt;- tbl(another_connection, "job")
 </li>
 </ul>
 <h2>Literal SQL</h2>
-<pre class=""><code data-file="literal_sql.r">work |&gt; 
-  filter(!person %in% sql(
-    # subquery
-    "(SELECT DISTINCT person FROM work
-    where job = 'calibrate')"
-  )) |&gt; 
-  distinct(person) 
-</code></pre>
+<div class="codehilite"><pre class=""><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="n">person</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">sql</span><span class="p">(</span>
+<span class="w">    </span><span class="c1"># subquery</span>
+<span class="w">    </span><span class="s">"(SELECT DISTINCT person FROM work</span>
+<span class="s">    where job = 'calibrate')"</span>
+<span class="w">  </span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">distinct</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="w"> </span>
+</code></pre></div>
 <ul>
 <li>You can use literal SQL inside <code>sql</code><ul>
 <li>It returns an SQL object</li>
@@ -381,20 +382,20 @@ job &lt;- tbl(another_connection, "job")
 <li>Useful when R code is not enough to write a query</li>
 </ul>
 <h2>Joining Tables</h2>
-<pre class=""><code data-file="join.r">does_calibrate &lt;- work |&gt; 
-  filter(job == 'calibrate')
+<div class="codehilite"><pre class=""><span></span><code><span class="n">does_calibrate</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">job</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'calibrate'</span><span class="p">)</span>
 
-work |&gt; 
-  anti_join(does_calibrate, by = join_by(person)) |&gt; 
-  distinct(person) |&gt; 
-  collect() 
-</code></pre>
-<pre class=""><code data-file="join.out">## # A tibble: 2 × 1
+<span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">anti_join</span><span class="p">(</span><span class="n">does_calibrate</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">join_by</span><span class="p">(</span><span class="n">person</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">distinct</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">collect</span><span class="p">()</span><span class="w"> </span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # A tibble: 2 × 1
 ##   person
 ##   &lt;chr&gt; 
 ## 1 po    
 ## 2 tay
-</code></pre>
+</code></pre></div>
 <ul>
 <li>Joining tables with <code>dplyr</code> works as it does in SQL<ul>
 <li>The <code>by</code> argument works as the <code>ON</code> statement</li>
@@ -406,19 +407,19 @@ work |&gt;
 <h2 class="exercise">Exercise</h2>
 <p>Calculate how may hours each person worked by summing all jobs.</p>
 <h3>Solution</h3>
-<pre class=""><code data-file="ex_join.r">work |&gt; 
-  left_join(job, by = join_by(job == name)) |&gt; 
-  group_by(person) |&gt; 
-  summarise(total_hours = sum(billable))
-</code></pre>
-<pre class=""><code data-file="ex_join.out">## # Source:   SQL [3 x 2]
+<div class="codehilite"><pre class=""><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">left_join</span><span class="p">(</span><span class="n">job</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">join_by</span><span class="p">(</span><span class="n">job</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">name</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">total_hours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">billable</span><span class="p">))</span>
+</code></pre></div>
+<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [3 x 2]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person total_hours
 ##   &lt;chr&gt;        &lt;dbl&gt;
 ## 1 mik            2  
 ## 2 po             0.5
 ## 3 tay           NA
-</code></pre>
+</code></pre></div>
 </main>
 <footer>
 <div class="row">
