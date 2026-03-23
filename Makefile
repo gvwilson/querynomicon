@@ -8,8 +8,8 @@ all: commands
 
 HTML_IGNORES =
 
-## build: convert to HTML
-build:
+## site: convert to HTML
+site:
 	@mccole build
 	@touch docs/.nojekyll
 	@cd ./db && zip -r ../docs/databases.zip *.db

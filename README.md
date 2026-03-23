@@ -10,7 +10,6 @@
 ## Lessons
 
 <div id="lessons" markdown="1">
-
 1.  [Introduction](@/01_intro/): where we're going and why
 1.  [Core Features](@/02_core/): getting values from tables
 1.  [Tools](@/03_tools/): Miscellaneous things that make life easier
@@ -19,19 +18,16 @@
 1.  [R](@/06_r/): using databases from R
 1.  [PostgreSQL](@/07_psql/): client-server computing and permissions
 1.  [Conclusion](@/08_finale/): where we've been and what comes next
-
 </div>
 
 ##  Appendices
 
 <div id="appendices" markdown="1">
-
 1.  [License](@/license/)
 1.  [Code of Conduct](@/conduct/)
 1.  [Contributing](@/contributing/)
 1.  [Bibliography](@/bibliography/)
 1.  [Glossary](@/glossary/)
-
 </div>
 
 ## Acknowledgments {: #acknowledgments}

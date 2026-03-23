@@ -24,7 +24,7 @@
     --len-thin: 1px;
 
     --size-prose: 1.1rem;
-    --size-code: 0.9rem;
+    --size-code: 0.9em;
 }
 
 /* Flex grid */
@@ -159,27 +159,6 @@ div#appendices ol {
     list-style-type: upper-alpha;
 }
 
-/* Cards */
-div.card {
-    box-shadow: 0px var(--len-thick) var(--len-thick-double) 0px rgba(0,0,0,0.2);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border: solid var(--color-decorate) var(--len-thick);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding-left: var(--len-half);
-    padding-right: var(--len-half);
-    margin: var(--len-half);
-}
-
-div.card > h3 {
-    font-size: 1.3rem;
-}
-div.card > p {
-    margin-top: 0px;
-    margin-bottom: var(--len-half);
-}
 
 /* Figures */
 figure {
@@ -212,7 +191,7 @@ p.subtitle {
     font-style: italic;
 }
 
-/* Image sizing */
+/* Images */
 img.img-90 {
     width: 90%;
 }
@@ -229,6 +208,7 @@ nav {
 pre {
     background-color: var(--color-highlight);
     padding: var(--len-half);
+    overflow-x: auto;
 }
 
 /* Table */
@@ -264,33 +244,30 @@ ul {
 
 /* Callouts */
 div.callout {
-    background-color: #f1f1f1;
+    background-color: var(--color-highlight);
     font-style: italic;
 }
 div.callout > p {
     padding: var(--len-thick);
 }
 
-/* Exercise blocks */
-section.exercise {
-    background-color: #f1f1f1;
-    padding-left: var(--len-one);
-    padding-right: var(--len-half);
-    padding-top: var(--len-half);
-    margin-bottom: var(--len-half);
-    border: solid var(--len-thick) var(--color-decorate);
-    border-radius: var(--len-thick);
+/* Syllabus */
+div.syllabus {
+    background-color: var(--color-highlight);
+    font-style: italic;
 }
-section.exercise h3 {
-    font-size: 1.3em;
+div.syllabus > p {
+    padding: var(--len-thick);
+}
+
+/* Exercise blocks */
+section.exercises {
 }
 
 /* Definitions */
-
 dt:not(:first-child) {
     margin-top: var(--len-quarter);
 }
-
 dt {
     font-weight: bold;
 }

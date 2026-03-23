@@ -1,7 +1,7 @@
 [project]
 name = "querynonomicon"
 description = "databases and SQL for research programmers"
-version = "0.3.0"
+version = "0.4.0"
 requires-python = ">=3.12"
 dependencies = [
     "adbc-driver-sqlite",
@@ -9,7 +9,7 @@ dependencies = [
     "faker",
     "jupysql",
     "jupyter",
-    "mccole",
+    "mccole>=2.0.0",
     "pandas",
     "polars",
     "pyarrow",
