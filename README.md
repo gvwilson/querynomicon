@@ -7,6 +7,9 @@
 -   Download [the databases used in the examples](@/databases.zip)
 -   Download [DB Browser for SQLite](https://sqlitebrowser.org/)
 
+<div class="row" markdown="1">
+<div class="col-6" markdown="1">
+
 ## Lessons
 
 <div id="lessons" markdown="1">
@@ -20,6 +23,9 @@
 1.  [Conclusion](@/08_finale/): where we've been and what comes next
 </div>
 
+</div>
+<div class="col-6" markdown="1">
+
 ##  Appendices
 
 <div id="appendices" markdown="1">
@@ -28,6 +34,9 @@
 1.  [Contributing](@/contributing/)
 1.  [Bibliography](@/bibliography/)
 1.  [Glossary](@/glossary/)
+</div>
+
+</div>
 </div>
 
 ## Acknowledgments {: #acknowledgments}

@@ -5,51 +5,54 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Tools</title>
+<meta content="The Querynomicon" name="description"/>
 <link href="../_static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/chota.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mccole.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<nav>
-<a href="../">The Querynomicon</a>
-      ·
-      <span class="dropdown">
-<a href="#">Lessons</a>
-<span class="dropdown-content" id="nav-lessons">
-<a href="../01_intro/">Introduction</a>
-<a href="../02_core/">Core Features</a>
-<a href="../03_tools/">Tools</a>
-<a href="../04_python/">Python</a>
-<a href="../05_advanced/">Advanced Features</a>
-<a href="../06_r/">R</a>
-<a href="../07_psql/">PostgreSQL</a>
-<a href="../08_finale/">Conclusion</a>
-</span>
-</span>
-      ·
-      <span class="dropdown">
-<a href="#">Appendices</a>
-<span class="dropdown-content" id="nav-appendices">
-<a href="../license/">License</a>
-<a href="../conduct/">Code of Conduct</a>
-<a href="../contributing/">Contributing</a>
-<a href="../bibliography/">Bibliography</a>
-<a href="../glossary/">Glossary</a>
-</span>
-</span>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Site navigation" class="nav">
+<div class="nav-left">
+<a class="brand" href="../">The Querynomicon</a>
+<div class="dropdown">
+<button aria-controls="nav-lessons" aria-haspopup="true">Lessons</button>
+<ul class="dropdown-content" id="nav-lessons">
+<li><a href="../01_intro/">Introduction</a></li>
+<li><a href="../02_core/">Core Features</a></li>
+<li><a class="active" href="../03_tools/">Tools</a></li>
+<li><a href="../04_python/">Python</a></li>
+<li><a href="../05_advanced/">Advanced Features</a></li>
+<li><a href="../06_r/">R</a></li>
+<li><a href="../07_psql/">PostgreSQL</a></li>
+<li><a href="../08_finale/">Conclusion</a></li>
+</ul>
+</div>
+<div class="dropdown">
+<button aria-controls="nav-appendices" aria-haspopup="true">Appendices</button>
+<ul class="dropdown-content" id="nav-appendices">
+<li><a href="../license/">License</a></li>
+<li><a href="../conduct/">Code of Conduct</a></li>
+<li><a href="../contributing/">Contributing</a></li>
+<li><a href="../bibliography/">Bibliography</a></li>
+<li><a href="../glossary/">Glossary</a></li>
+</ul>
+</div>
+</div>
 </nav>
-<main>
+<main id="main-content">
 <h1>Tools</h1>
 <p id="terms">Terms defined: <a class="term-defined" href="../glossary/#1_to_1">1-to-1 relation</a>, <a class="term-defined" href="../glossary/#1_to_many">1-to-many relation</a>, <a class="term-defined" href="../glossary/#b_tree">B-tree</a>, <a class="term-defined" href="../glossary/#alias">alias</a>, <a class="term-defined" href="../glossary/#autoincrement">autoincrement</a>, <a class="term-defined" href="../glossary/#cte">common table expression (CTE)</a>, <a class="term-defined" href="../glossary/#correlated_subquery">correlated subquery</a>, <a class="term-defined" href="../glossary/#data_migration">data migration</a>, <a class="term-defined" href="../glossary/#er_diagram">entity-relationship diagram</a>, <a class="term-defined" href="../glossary/#expression">expression</a>, <a class="term-defined" href="../glossary/#foreign_key">foreign key</a>, <a class="term-defined" href="../glossary/#index">index</a>, <a class="term-defined" href="../glossary/#join_table">join table</a>, <a class="term-defined" href="../glossary/#many_to_many">many-to-many relation</a>, <a class="term-defined" href="../glossary/#primary_key">primary key</a>, <a class="term-defined" href="../glossary/#statement">statement</a>, <a class="term-defined" href="../glossary/#subquery">subquery</a>, <a class="term-defined" href="../glossary/#table_valued_func">table-valued function</a>, <a class="term-defined" href="../glossary/#vectorization">vectorization</a>, <a class="term-defined" href="../glossary/#window_func">window function</a></p>
 <h2>Negating Incorrectly</h2>
 <ul>
 <li>Who doesn't calibrate?</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span>
 <span class="k">where</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">'calibrate'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |
 |--------|
 | mik    |
 | po     |
@@ -62,11 +65,11 @@
 <li>We need a different approach…</li>
 </ul>
 <h2>Set Membership</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span>
 <span class="k">where</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">'mik'</span><span class="p">,</span><span class="w"> </span><span class="s1">'tay'</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |   job    |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |   job    |
 |--------|----------|
 | po     | clean    |
 | po     | complain |
@@ -75,7 +78,7 @@
 <li><code>in <em>values</em></code> and <code>not in <em>values</em></code> do exactly what you expect</li>
 </ul>
 <h2>Subqueries</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span>
 <span class="k">where</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">person</span>
@@ -83,7 +86,7 @@
 <span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'calibrate'</span>
 <span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |
 |--------|
 | po     |
 | tay    |
@@ -99,7 +102,7 @@
     as long as value(s) unique for each record</li>
 <li>Uniquely identifies a particular record in a particular table</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">lab_equipment</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">lab_equipment</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">size</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">color</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">num</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
@@ -116,7 +119,7 @@
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">lab_equipment</span><span class="w"> </span><span class="k">values</span>
 <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">'green'</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| size | color | num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| size | color | num |
 |------|-------|-----|
 | 1.5  | blue  | 2   |
 | 1.5  | green | 1   |
@@ -128,7 +131,7 @@ Runtime error near line 17: UNIQUE constraint failed: lab_equipment.size, lab_eq
 If so, what is it?
 What about the <code>work</code> and <code>job</code> tables?</p>
 <h2>Autoincrementing and Primary Keys</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">ident</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="n">autoincrement</span><span class="p">,</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
@@ -139,7 +142,7 @@ What about the <code>work</code> and <code>job</code> tables?</p>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'prevented'</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident | name |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident | name |
 |-------|------|
 | 1     | mik  |
 | 2     | po   |
@@ -157,9 +160,9 @@ Runtime error near line 12: UNIQUE constraint failed: person.ident (19)
 <li>Downside: manual queries are harder to read (who is person 17?)</li>
 </ul>
 <h2 class="aside">Internal Tables</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">sqlite_sequence</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">sqlite_sequence</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  name  | seq |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  name  | seq |
 |--------|-----|
 | person | 3   |
 </code></pre></div>
@@ -175,7 +178,7 @@ In particular,
 are you able to reset the values so that
 the same sequence numbers are generated again?</p>
 <h2>Altering Tables</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span>
 <span class="k">add</span><span class="w"> </span><span class="n">ident</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 
 <span class="k">update</span><span class="w"> </span><span class="n">job</span>
@@ -188,7 +191,7 @@ the same sequence numbers are generated again?</p>
 
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|   name    | billable | ident |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|   name    | billable | ident |
 |-----------|----------|-------|
 | calibrate | 1.5      | 1     |
 | clean     | 0.5      | 2     |
@@ -224,7 +227,7 @@ the same sequence numbers are generated again?</p>
 </li>
 </ul>
 <h2>Creating New Tables from Old</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">new_work</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">new_work</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">person_id</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">job_id</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">person_id</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span><span class="n">ident</span><span class="p">),</span>
@@ -240,7 +243,7 @@ the same sequence numbers are generated again?</p>
 <span class="w">    </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">job</span><span class="p">;</span>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">new_work</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person_id | job_id |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person_id | job_id |
 |-----------|--------|
 | 1         | 1      |
 | 1         | 2      |
@@ -251,10 +254,10 @@ the same sequence numbers are generated again?</p>
 <li>Each column refers to a record in some other table</li>
 </ul>
 <h2>Removing Tables</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">work</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">work</span><span class="p">;</span>
 <span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">new_work</span><span class="w"> </span><span class="k">rename</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">work</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>CREATE TABLE job (
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>CREATE TABLE job (
     ident integer primary key autoincrement,
     name text not null,
     billable real not null
@@ -302,7 +305,7 @@ CREATE TABLE IF NOT EXISTS "work" (
 <ul>
 <li>Go back to the original penguins database</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">body_mass_g</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">body_mass_g</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span>
 <span class="w">    </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span>
@@ -311,7 +314,7 @@ CREATE TABLE IF NOT EXISTS "work" (
 <span class="w">    </span><span class="p">)</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| body_mass_g |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| body_mass_g |
 |-------------|
 | 4675.0      |
 | 4250.0      |
@@ -332,7 +335,7 @@ CREATE TABLE IF NOT EXISTS "work" (
 <p>Use a subquery to find the number of penguins
 that weigh the same as the lightest penguin.</p>
 <h2>Comparing Individual Values to Aggregates Within Groups</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">penguins</span><span class="p">.</span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">penguins</span><span class="p">.</span><span class="n">body_mass_g</span><span class="p">,</span>
 <span class="w">    </span><span class="n">round</span><span class="p">(</span><span class="n">averaged</span><span class="p">.</span><span class="n">avg_mass_g</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_mass_g</span>
@@ -347,7 +350,7 @@ that weigh the same as the lightest penguin.</p>
 <span class="k">where</span><span class="w"> </span><span class="n">penguins</span><span class="p">.</span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">averaged</span><span class="p">.</span><span class="n">avg_mass_g</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species | body_mass_g | avg_mass_g |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
@@ -364,7 +367,7 @@ that weigh the same as the lightest penguin.</p>
 <p>Use a subquery to find the number of penguins
 that weigh the same as the lightest penguin of the same sex and species.</p>
 <h2>Common Table Expressions</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">grouped</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">grouped</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">species</span><span class="p">,</span>
 <span class="w">        </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_mass_g</span>
@@ -380,7 +383,7 @@ that weigh the same as the lightest penguin of the same sex and species.</p>
 <span class="k">where</span><span class="w"> </span><span class="n">penguins</span><span class="p">.</span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">grouped</span><span class="p">.</span><span class="n">avg_mass_g</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species | body_mass_g | avg_mass_g |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species | body_mass_g | avg_mass_g |
 |---------|-------------|------------|
 | Adelie  | 3750.0      | 3700.7     |
 | Adelie  | 3800.0      | 3700.7     |
@@ -396,14 +399,14 @@ that weigh the same as the lightest penguin of the same sex and species.</p>
 <li>Database decides how to optimize</li>
 </ul>
 <h2 class="aside">Explaining Query Plans</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
 <span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>QUERY PLAN
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>QUERY PLAN
 |--SCAN penguins
 `--USE TEMP B-TREE FOR GROUP BY
 </code></pre></div>
@@ -419,14 +422,14 @@ that weigh the same as the lightest penguin of the same sex and species.</p>
 <ul>
 <li>Every table has a special column called <code>rowid</code></li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">rowid</span><span class="p">,</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| rowid | species |  island   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| rowid | species |  island   |
 |-------|---------|-----------|
 | 1     | Adelie  | Torgersen |
 | 2     | Adelie  | Torgersen |
@@ -461,7 +464,7 @@ that weigh the same as the lightest penguin of the same sex and species.</p>
 </li>
 </ol>
 <h2>Conditionals</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">species</span><span class="p">,</span>
 <span class="w">        </span><span class="n">iif</span><span class="p">(</span>
@@ -481,7 +484,7 @@ that weigh the same as the lightest penguin of the same sex and species.</p>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="k">size</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  | size  | num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  | size  | num |
 |-----------|-------|-----|
 | Adelie    | small | 54  |
 | Adelie    | large | 97  |
@@ -514,7 +517,7 @@ Which ones do you think actually attempt to divide by zero?</p>
 <li>What if we want small, medium, and large?</li>
 <li>Can nest <code>iif</code>, but quickly becomes unreadable</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">species</span><span class="p">,</span>
 <span class="w">        </span><span class="k">case</span>
@@ -534,7 +537,7 @@ Which ones do you think actually attempt to divide by zero?</p>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="k">size</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  |  size  | num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  |  size  | num |
 |-----------|--------|-----|
 | Adelie    | small  | 54  |
 | Adelie    | medium | 97  |
@@ -556,7 +559,7 @@ rather than to the individual <code>when</code> branches.
 (This exercise shows that <code>case</code>/<code>when</code> is an <a href="../glossary/#expression">expression</a>
 rather than a <a href="../glossary/#statement">statement</a>.)</p>
 <h2>Checking a Range</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">sized_penguins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">species</span><span class="p">,</span>
 <span class="w">        </span><span class="k">case</span>
@@ -575,7 +578,7 @@ rather than a <a href="../glossary/#statement">statement</a>.)</p>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="k">size</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  |   size   | num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  |   size   | num |
 |-----------|----------|-----|
 | Adelie    | abnormal | 54  |
 | Adelie    | normal   | 97  |
@@ -596,8 +599,8 @@ so that it is true in both cases.</p>
 <table>
 <thead>
 <tr>
-<th>name</th>
-<th>purpose</th>
+<th scope="col">name</th>
+<th scope="col">purpose</th>
 </tr>
 </thead>
 <tbody>
@@ -652,9 +655,9 @@ so that it is true in both cases.</p>
 <img alt="entity-relationship diagram showing logical structure of assay database" src="tools_assays_er.svg"/>
 <figcaption>Figure 2: Assay ER Diagram</figcaption>
 </figure>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident | personal |  family   | dept | age |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident | personal |  family   | dept | age |
 |-------|----------|-----------|------|-----|
 | 1     | Kartik   | Gupta     |      | 46  |
 | 2     | Divit    | Dhaliwal  | hist | 34  |
@@ -677,13 +680,13 @@ so that it is true in both cases.</p>
 <li><code>student</code> has <code>person_id</code>, <code>section_id</code>, and <code>status</code></li>
 </ul>
 <h2>Pattern Matching</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">personal</span><span class="p">,</span>
 <span class="w">    </span><span class="n">family</span>
 <span class="k">from</span><span class="w"> </span><span class="n">staff</span>
 <span class="k">where</span><span class="w"> </span><span class="n">personal</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%ya%'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| personal | family |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| personal | family |
 |----------|--------|
 | Nitya    | Lal    |
 </code></pre></div>
@@ -698,14 +701,14 @@ so that it is true in both cases.</p>
 <h2 class="exercise">Exercise</h2>
 <p>Rewrite the pattern-matching query shown above using <code>glob</code>.</p>
 <h2>Selecting First and Last Rows</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="k">all</span>
 <span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="k">asc</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident |    kind     |  started   |   ended    |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident |    kind     |  started   |   ended    |
 |-------|-------------|------------|------------|
 | 17    | trial       | 2023-01-29 | 2023-01-30 |
 | 35    | calibration | 2023-01-30 | 2023-01-30 |
@@ -731,7 +734,7 @@ so that it is true in both cases.</p>
 in the <code>penguins</code> database.
 How can you check that your query is working correctly?</p>
 <h2>Intersection</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">personal</span><span class="p">,</span>
 <span class="w">    </span><span class="n">family</span><span class="p">,</span>
 <span class="w">    </span><span class="n">dept</span><span class="p">,</span>
@@ -746,7 +749,7 @@ How can you check that your query is working correctly?</p>
 <span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
 <span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| personal |  family   | dept | age |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| personal |  family   | dept | age |
 |----------|-----------|------|-----|
 | Indrans  | Sridhar   | mb   | 47  |
 | Ishaan   | Ramaswamy | mb   | 35  |
@@ -766,7 +769,7 @@ with one that uses <code>where</code>.
 Which query looks like it will be more efficient?
 Why do you believe this?</p>
 <h2>Exclusion</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">personal</span><span class="p">,</span>
 <span class="w">    </span><span class="n">family</span><span class="p">,</span>
 <span class="w">    </span><span class="n">dept</span><span class="p">,</span>
@@ -781,7 +784,7 @@ Why do you believe this?</p>
 <span class="w">        </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
 <span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| personal | family | dept | age |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| personal | family | dept | age |
 |----------|--------|------|-----|
 | Pranay   | Khanna | mb   | 51  |
 </code></pre></div>
@@ -796,7 +799,7 @@ Why do you believe this?</p>
 <p>Use <code>exclude</code> to find all Gentoo penguins that <em>aren't</em> male.
 How can you check that your query is working correctly?</p>
 <h2>Random Numbers and Why Not</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">random</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rand</span><span class="p">,</span>
 <span class="w">    </span><span class="n">personal</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' '</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span>
 <span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">staff</span>
@@ -809,7 +812,7 @@ How can you check that your query is working correctly?</p>
 <span class="k">from</span><span class="w"> </span><span class="n">decorated</span>
 <span class="k">where</span><span class="w"> </span><span class="n">selector</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|         rand         | selector |      name       |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|         rand         | selector |      name       |
 |----------------------|----------|-----------------|
 | -5088363674211922423 | 0        | Divit Dhaliwal  |
 | 6557666280550701355  | 1        | Indrans Sridhar |
@@ -842,7 +845,7 @@ How can you check that your query is working correctly?</p>
 </li>
 </ul>
 <h2>Creating an Index</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
 <span class="k">select</span><span class="w"> </span><span class="n">filename</span>
 <span class="k">from</span><span class="w"> </span><span class="n">plate</span>
 <span class="k">where</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%07%'</span><span class="p">;</span>
@@ -854,7 +857,7 @@ How can you check that your query is working correctly?</p>
 <span class="k">from</span><span class="w"> </span><span class="n">plate</span>
 <span class="k">where</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%07%'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>QUERY PLAN
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>QUERY PLAN
 `--SCAN plate USING COVERING INDEX sqlite_autoindex_plate_1
 QUERY PLAN
 `--SCAN plate USING COVERING INDEX plate_file
@@ -871,9 +874,9 @@ QUERY PLAN
 <li>Unlike primary keys, SQLite supports defining indexes after the fact</li>
 </ul>
 <h2>Generating Sequences</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| value |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| value |
 |-------|
 | 1     |
 | 2     |
@@ -885,7 +888,7 @@ QUERY PLAN
 <li>A (non-standard) <a href="../glossary/#table_valued_func">table-valued function</a></li>
 </ul>
 <h2>Generating Sequences Based on Data</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">num</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
@@ -894,7 +897,7 @@ QUERY PLAN
 <span class="w">    </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">max</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">temp</span><span class="p">)</span>
 <span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| value |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| value |
 |-------|
 | 1     |
 | 2     |
@@ -906,7 +909,7 @@ QUERY PLAN
 <li>Must have the parentheses around the <code>min</code> and <code>max</code> selections to keep SQLite happy</li>
 </ul>
 <h2>Generating Sequences of Dates</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="nb">date</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">julianday</span><span class="p">(</span><span class="k">min</span><span class="p">(</span><span class="n">started</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">some_day</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="nb">date</span><span class="p">((</span><span class="k">select</span><span class="w"> </span><span class="n">julianday</span><span class="p">(</span><span class="k">min</span><span class="p">(</span><span class="n">started</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">experiment</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">some_day</span>
 <span class="k">from</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span>
 <span class="w">        </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
@@ -915,7 +918,7 @@ QUERY PLAN
 <span class="p">)</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  some_day  |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  some_day  |
 |------------|
 | 2023-01-29 |
 | 2023-01-30 |
@@ -936,7 +939,7 @@ QUERY PLAN
 </li>
 </ul>
 <h2>Counting Experiments Started per Day Without Gaps</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span>
 <span class="c1">-- complete sequence of days with 0 as placeholder for number of experiments</span>
 <span class="n">all_days</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
@@ -967,7 +970,7 @@ QUERY PLAN
 <span class="w">    </span><span class="n">all_days</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">actual_days</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">all_days</span><span class="p">.</span><span class="n">some_day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual_days</span><span class="p">.</span><span class="n">started</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|    day     | num_exp |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|    day     | num_exp |
 |------------|---------|
 | 2023-01-29 | 1       |
 | 2023-01-30 | 1       |
@@ -979,7 +982,7 @@ QUERY PLAN
 <p>What does the expression <code>date('now', 'start of month', '+1 month', '-1 day')</code> produce?
 (You may find <a href="https://www.sqlite.org/lang_datefunc.html">the documentation on SQLite's date and time functions</a> helpful.)</p>
 <h2>Self Join</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">ident</span><span class="p">,</span>
 <span class="w">        </span><span class="n">personal</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' '</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span>
@@ -992,7 +995,7 @@ QUERY PLAN
 <span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_person</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_person</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|     name     |       name       |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|     name     |       name       |
 |--------------|------------------|
 | Kartik Gupta | Kartik Gupta     |
 | Kartik Gupta | Divit Dhaliwal   |
@@ -1014,7 +1017,7 @@ QUERY PLAN
 <li>Get all n^2 pairs, including person with themself</li>
 </ul>
 <h2>Generating Unique Pairs</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">ident</span><span class="p">,</span>
 <span class="w">        </span><span class="n">personal</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' '</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span>
@@ -1028,7 +1031,7 @@ QUERY PLAN
 <span class="k">on</span><span class="w"> </span><span class="n">left_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">right_person</span><span class="p">.</span><span class="n">ident</span>
 <span class="k">where</span><span class="w"> </span><span class="n">left_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">right_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|      name       |      name       |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|      name       |      name       |
 |-----------------|-----------------|
 | Kartik Gupta    | Divit Dhaliwal  |
 | Kartik Gupta    | Indrans Sridhar |
@@ -1045,7 +1048,7 @@ QUERY PLAN
 <li>Quick check: n(n-1)/2 pairs</li>
 </ul>
 <h2>Filtering Pairs</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span>
 <span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">ident</span><span class="p">,</span>
@@ -1068,7 +1071,7 @@ QUERY PLAN
 <span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_person</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_person</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">together</span>
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="n">left_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left_staff</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">right_person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right_staff</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|    person_1     |     person_2     |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|    person_1     |     person_2     |
 |-----------------|------------------|
 | Kartik Gupta    | Vedika Rout      |
 | Pranay Khanna   | Vedika Rout      |
@@ -1087,7 +1090,7 @@ QUERY PLAN
 | Pranay Khanna   | Romil Kapoor     |
 </code></pre></div>
 <h2>Existence and Correlated Subqueries</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">name</span><span class="p">,</span>
 <span class="w">    </span><span class="n">building</span>
 <span class="k">from</span><span class="w"> </span><span class="n">department</span>
@@ -1099,7 +1102,7 @@ QUERY PLAN
 <span class="w">    </span><span class="p">)</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|       name        |     building     |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
 | Histology         | Fashet Extension |
@@ -1114,7 +1117,7 @@ QUERY PLAN
 </li>
 </ul>
 <h2>Nonexistence</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">name</span><span class="p">,</span>
 <span class="w">    </span><span class="n">building</span>
 <span class="k">from</span><span class="w"> </span><span class="n">department</span>
@@ -1126,7 +1129,7 @@ QUERY PLAN
 <span class="w">    </span><span class="p">)</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|     name      | building |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|     name      | building |
 |---------------|----------|
 | Endocrinology | TGVH     |
 </code></pre></div>
@@ -1135,14 +1138,14 @@ QUERY PLAN
 If so, is your new query easier to understand?
 If the query cannot be rewritten, why not?</p>
 <h2 class="aside">Avoiding Correlated Subqueries</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
 <span class="w">    </span><span class="n">department</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
 <span class="w">    </span><span class="n">department</span><span class="p">.</span><span class="n">building</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">building</span>
 <span class="k">from</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">staff</span>
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="n">department</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">staff</span><span class="p">.</span><span class="n">dept</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|       name        |     building     |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|       name        |     building     |
 |-------------------|------------------|
 | Genetics          | Chesson          |
 | Histology         | Fashet Extension |
@@ -1153,7 +1156,7 @@ If the query cannot be rewritten, why not?</p>
 <li>Hard to find unstaffed departments without either <code>not exists</code> or <code>count</code> and a check for 0</li>
 </ul>
 <h2>Lead and Lag</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ym</span><span class="p">,</span>
 <span class="w">        </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
@@ -1169,7 +1172,7 @@ If the query cannot be rewritten, why not?</p>
 <span class="k">from</span><span class="w"> </span><span class="n">ym_num</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|   ym    | prev_num | num | next_num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|   ym    | prev_num | num | next_num |
 |---------|----------|-----|----------|
 | 2023-01 |          | 2   | 5        |
 | 2023-02 | 2        | 5   | 5        |
@@ -1202,7 +1205,7 @@ If the query cannot be rewritten, why not?</p>
 <li>It feels very ad hoc, but so does the real world</li>
 </ul>
 <h2>Windowing Functions</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ym</span><span class="p">,</span>
 <span class="w">        </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
@@ -1219,7 +1222,7 @@ If the query cannot be rewritten, why not?</p>
 <span class="k">from</span><span class="w"> </span><span class="n">ym_num</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|   ym    | num | num_done | completed_progress |  linear_progress   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|   ym    | num | num_done | completed_progress |  linear_progress   |
 |---------|-----|----------|--------------------|--------------------|
 | 2023-01 | 2   | 2        | 0.04               | 0.0769230769230769 |
 | 2023-02 | 5   | 7        | 0.14               | 0.153846153846154  |
@@ -1243,7 +1246,7 @@ If the query cannot be rewritten, why not?</p>
 <li>…and <code>linear_progress</code> is the fraction of time passed</li>
 </ul>
 <h2 class="aside">Explaining Another Query Plan</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">explain</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">plan</span>
 <span class="k">with</span><span class="w"> </span><span class="n">ym_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ym</span><span class="p">,</span>
@@ -1259,7 +1262,7 @@ If the query cannot be rewritten, why not?</p>
 <span class="k">from</span><span class="w"> </span><span class="n">ym_num</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">ym</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>QUERY PLAN
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>QUERY PLAN
 |--CO-ROUTINE (subquery-3)
 |  |--CO-ROUTINE (subquery-4)
 |  |  |--CO-ROUTINE ym_num
@@ -1274,7 +1277,7 @@ If the query cannot be rewritten, why not?</p>
 <li>Becomes useful…eventually</li>
 </ul>
 <h2>Partitioned Windows</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">y_m_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="n">y_m_num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">year</span><span class="p">,</span>
 <span class="w">        </span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%m'</span><span class="p">,</span><span class="w"> </span><span class="n">started</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">month</span><span class="p">,</span>
@@ -1291,7 +1294,7 @@ If the query cannot be rewritten, why not?</p>
 <span class="k">from</span><span class="w"> </span><span class="n">y_m_num</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| year | month | num | num_done |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| year | month | num | num_done |
 |------|-------|-----|----------|
 | 2023 | 01    | 2   | 2        |
 | 2023 | 02    | 5   | 7        |
@@ -1320,10 +1323,10 @@ If the query cannot be rewritten, why not?</p>
 <li>counts how many times each unique difference appears.</li>
 </ol>
 </main>
-<footer>
+<footer aria-label="Page navigation">
 <div class="row">
 <div class="col-3 left">
-	  ⇐ <a href="../02_core/">Core Features</a>
+<span aria-hidden="true">⇐</span> <a href="../02_core/">Core Features</a>
 </div>
 <div class="col-6 center">
 <a href="../">The Querynomicon</a>
@@ -1331,8 +1334,8 @@ If the query cannot be rewritten, why not?</p>
 	  <a href="../#acknowledgments">the authors</a>
 </div>
 <div class="col-3 right">
-<a href="../04_python/">Python</a> ⇒
-	</div>
+<a href="../04_python/">Python</a> <span aria-hidden="true">⇒</span>
+</div>
 </div>
 </footer>
 </body>

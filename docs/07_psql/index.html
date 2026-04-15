@@ -5,40 +5,43 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>PostgreSQL</title>
+<meta content="The Querynomicon" name="description"/>
 <link href="../_static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/chota.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mccole.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<nav>
-<a href="../">The Querynomicon</a>
-      ·
-      <span class="dropdown">
-<a href="#">Lessons</a>
-<span class="dropdown-content" id="nav-lessons">
-<a href="../01_intro/">Introduction</a>
-<a href="../02_core/">Core Features</a>
-<a href="../03_tools/">Tools</a>
-<a href="../04_python/">Python</a>
-<a href="../05_advanced/">Advanced Features</a>
-<a href="../06_r/">R</a>
-<a href="../07_psql/">PostgreSQL</a>
-<a href="../08_finale/">Conclusion</a>
-</span>
-</span>
-      ·
-      <span class="dropdown">
-<a href="#">Appendices</a>
-<span class="dropdown-content" id="nav-appendices">
-<a href="../license/">License</a>
-<a href="../conduct/">Code of Conduct</a>
-<a href="../contributing/">Contributing</a>
-<a href="../bibliography/">Bibliography</a>
-<a href="../glossary/">Glossary</a>
-</span>
-</span>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Site navigation" class="nav">
+<div class="nav-left">
+<a class="brand" href="../">The Querynomicon</a>
+<div class="dropdown">
+<button aria-controls="nav-lessons" aria-haspopup="true">Lessons</button>
+<ul class="dropdown-content" id="nav-lessons">
+<li><a href="../01_intro/">Introduction</a></li>
+<li><a href="../02_core/">Core Features</a></li>
+<li><a href="../03_tools/">Tools</a></li>
+<li><a href="../04_python/">Python</a></li>
+<li><a href="../05_advanced/">Advanced Features</a></li>
+<li><a href="../06_r/">R</a></li>
+<li><a class="active" href="../07_psql/">PostgreSQL</a></li>
+<li><a href="../08_finale/">Conclusion</a></li>
+</ul>
+</div>
+<div class="dropdown">
+<button aria-controls="nav-appendices" aria-haspopup="true">Appendices</button>
+<ul class="dropdown-content" id="nav-appendices">
+<li><a href="../license/">License</a></li>
+<li><a href="../conduct/">Code of Conduct</a></li>
+<li><a href="../contributing/">Contributing</a></li>
+<li><a href="../bibliography/">Bibliography</a></li>
+<li><a href="../glossary/">Glossary</a></li>
+</ul>
+</div>
+</div>
 </nav>
-<main>
+<main id="main-content">
 <h1>PostgreSQL</h1>
 <p><em>Contributed by <a href="https://kitsiosk.github.io/">Konstantinos Kitsios</a>.</em></p>
 <p id="terms">Terms defined: <a class="term-defined" href="../glossary/#client_server_db">client-server database</a>, <a class="term-defined" href="../glossary/#local_db">local database</a>, <a class="term-defined" href="../glossary/#privilege">privilege</a>, <a class="term-defined" href="../glossary/#role">role</a></p>
@@ -140,18 +143,18 @@
 <p>Run the query to see the first entries of the <code>penguins</code> table.</p>
 </li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div>
 <ul>
 <li>Count penguins:</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
 </code></pre></div>
 <h2>Running Queries in the Terminal</h2>
 <ul>
 <li>Run the command-line PostgreSQL client and tell it what database to use:</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code>psql<span class="w"> </span>-d<span class="w"> </span>penguins<span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>psql<span class="w"> </span>-d<span class="w"> </span>penguins<span class="w"> </span>
 </code></pre></div>
 <ul>
 <li>Run the queries from the previous section</li>
@@ -208,13 +211,13 @@ but not modify or delete existing records.</li>
 <p>Create role in the terminal:</p>
 </li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">penguin_reader_writer</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">penguin_reader_writer</span>
 <span class="k">with</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="s1">'reader_writer'</span><span class="p">;</span>
 </code></pre></div>
 <ul>
 <li>Grant permissions in the terminal:</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="p">,</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">penguins</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="p">,</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">to</span><span class="w"> </span><span class="n">penguin_reader_writer</span><span class="p">;</span>
 </code></pre></div>
 <h2>Verifying Privileges in PgAdmin</h2>
@@ -238,7 +241,7 @@ but not modify or delete existing records.</li>
 </li>
 <li>Run a simple query that <em>reads</em> data:</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div>
 <ul>
 <li>
@@ -248,7 +251,7 @@ but not modify or delete existing records.</li>
 <p>Now try to <em>change</em> data:</p>
 </li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">update</span><span class="w"> </span><span class="n">penguins</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">update</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">set</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Antarctica'</span>
 <span class="k">where</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'MALE'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Torgersen'</span><span class="p">;</span>
 </code></pre></div>
@@ -260,10 +263,10 @@ but not modify or delete existing records.</li>
 <p>But now try to <em>delete</em> data:</p>
 </li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">island</span><span class="o">=</span><span class="s1">'Antarctica'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">sex</span><span class="o">=</span><span class="s1">'MALE'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>psql:delete_penguins.sql:2: ERROR:  permission denied for table penguins
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>psql:delete_penguins.sql:2: ERROR:  permission denied for table penguins
 </code></pre></div>
 <ul>
 <li>Because the <code>penguin_reader_writer</code> role does not have <code>DELETE</code> privileges</li>
@@ -280,23 +283,23 @@ but not modify or delete existing records.</li>
 </li>
 <li>In the terminal:</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">revoke</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">penguins</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">revoke</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguin_reader_writer</span><span class="p">;</span>
 </code></pre></div>
 <ul>
 <li>To verify:</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">update</span><span class="w"> </span><span class="n">penguins</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">update</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">set</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Atlantis'</span>
 <span class="k">where</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'MALE'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Antarctica'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>psql:update_penguins_again.sql:3: ERROR:  permission denied for table penguins
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>psql:update_penguins_again.sql:3: ERROR:  permission denied for table penguins
 </code></pre></div>
 </main>
-<footer>
+<footer aria-label="Page navigation">
 <div class="row">
 <div class="col-3 left">
-	  ⇐ <a href="../06_r/">R</a>
+<span aria-hidden="true">⇐</span> <a href="../06_r/">R</a>
 </div>
 <div class="col-6 center">
 <a href="../">The Querynomicon</a>
@@ -304,8 +307,8 @@ but not modify or delete existing records.</li>
 	  <a href="../#acknowledgments">the authors</a>
 </div>
 <div class="col-3 right">
-<a href="../08_finale/">Conclusion</a> ⇒
-	</div>
+<a href="../08_finale/">Conclusion</a> <span aria-hidden="true">⇒</span>
+</div>
 </div>
 </footer>
 </body>

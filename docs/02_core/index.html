@@ -5,46 +5,49 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Core Features</title>
+<meta content="The Querynomicon" name="description"/>
 <link href="../_static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/chota.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mccole.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<nav>
-<a href="../">The Querynomicon</a>
-      ·
-      <span class="dropdown">
-<a href="#">Lessons</a>
-<span class="dropdown-content" id="nav-lessons">
-<a href="../01_intro/">Introduction</a>
-<a href="../02_core/">Core Features</a>
-<a href="../03_tools/">Tools</a>
-<a href="../04_python/">Python</a>
-<a href="../05_advanced/">Advanced Features</a>
-<a href="../06_r/">R</a>
-<a href="../07_psql/">PostgreSQL</a>
-<a href="../08_finale/">Conclusion</a>
-</span>
-</span>
-      ·
-      <span class="dropdown">
-<a href="#">Appendices</a>
-<span class="dropdown-content" id="nav-appendices">
-<a href="../license/">License</a>
-<a href="../conduct/">Code of Conduct</a>
-<a href="../contributing/">Contributing</a>
-<a href="../bibliography/">Bibliography</a>
-<a href="../glossary/">Glossary</a>
-</span>
-</span>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Site navigation" class="nav">
+<div class="nav-left">
+<a class="brand" href="../">The Querynomicon</a>
+<div class="dropdown">
+<button aria-controls="nav-lessons" aria-haspopup="true">Lessons</button>
+<ul class="dropdown-content" id="nav-lessons">
+<li><a href="../01_intro/">Introduction</a></li>
+<li><a class="active" href="../02_core/">Core Features</a></li>
+<li><a href="../03_tools/">Tools</a></li>
+<li><a href="../04_python/">Python</a></li>
+<li><a href="../05_advanced/">Advanced Features</a></li>
+<li><a href="../06_r/">R</a></li>
+<li><a href="../07_psql/">PostgreSQL</a></li>
+<li><a href="../08_finale/">Conclusion</a></li>
+</ul>
+</div>
+<div class="dropdown">
+<button aria-controls="nav-appendices" aria-haspopup="true">Appendices</button>
+<ul class="dropdown-content" id="nav-appendices">
+<li><a href="../license/">License</a></li>
+<li><a href="../conduct/">Code of Conduct</a></li>
+<li><a href="../contributing/">Contributing</a></li>
+<li><a href="../bibliography/">Bibliography</a></li>
+<li><a href="../glossary/">Glossary</a></li>
+</ul>
+</div>
+</div>
 </nav>
-<main>
+<main id="main-content">
 <h1>Core Features</h1>
 <p id="terms">Terms defined: <a class="term-defined" href="../glossary/#admin_command">administration command</a>, <a class="term-defined" href="../glossary/#aggregation">aggregation</a>, <a class="term-defined" href="../glossary/#aggregation_func">aggregation function</a>, <a class="term-defined" href="../glossary/#cross_join">cross join</a>, <a class="term-defined" href="../glossary/#exclusive_or">exclusive or</a>, <a class="term-defined" href="../glossary/#filter">filter</a>, <a class="term-defined" href="../glossary/#full_outer_join">full outer join</a>, <a class="term-defined" href="../glossary/#group">group</a>, <a class="term-defined" href="../glossary/#in_memory_db">in-memory database</a>, <a class="term-defined" href="../glossary/#inclusive_or">inclusive or</a>, <a class="term-defined" href="../glossary/#join">join</a>, <a class="term-defined" href="../glossary/#join_condition">join condition</a>, <a class="term-defined" href="../glossary/#left_outer_join">left outer join</a>, <a class="term-defined" href="../glossary/#null">null</a>, <a class="term-defined" href="../glossary/#query">query</a>, <a class="term-defined" href="../glossary/#right_outer_join">right outer join</a>, <a class="term-defined" href="../glossary/#ternary_logic">ternary logic</a>, <a class="term-defined" href="../glossary/#tombstone">tombstone</a></p>
 <h2>Selecting Constant</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>1
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>1
 </code></pre></div>
 <ul>
 <li><code>select</code> is a keyword</li>
@@ -53,9 +56,9 @@
 <li>Semi-colon terminator is required</li>
 </ul>
 <h2>Selecting All Values from Table</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">little_penguins</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">little_penguins</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>Gentoo|Biscoe|51.3|14.2|218.0|5300.0|MALE
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>Gentoo|Biscoe|51.3|14.2|218.0|5300.0|MALE
 Adelie|Dream|35.7|18.0|202.0|3550.0|FEMALE
 Adelie|Torgersen|36.6|17.8|185.0|3700.0|FEMALE
 Chinstrap|Dream|55.8|19.8|207.0|4000.0|MALE
@@ -73,11 +76,11 @@ Adelie|Torgersen|36.7|18.8|187.0|3800.0|FEMALE
 <li>Output format is not particularly readable</li>
 </ul>
 <h2 class="aside">Administrative Commands</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="p">.</span><span class="n">headers</span><span class="w"> </span><span class="k">on</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="p">.</span><span class="n">headers</span><span class="w"> </span><span class="k">on</span>
 <span class="p">.</span><span class="k">mode</span><span class="w"> </span><span class="n">markdown</span>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">little_penguins</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  |  island   | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g |  sex   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  |  island   | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g |  sex   |
 |-----------|-----------|----------------|---------------|-------------------|-------------|--------|
 | Gentoo    | Biscoe    | 51.3           | 14.2          | 218.0             | 5300.0      | MALE   |
 | Adelie    | Dream     | 35.7           | 18.0          | 202.0             | 3550.0      | FEMALE |
@@ -102,13 +105,13 @@ Adelie|Torgersen|36.7|18.8|187.0|3800.0|FEMALE
 <li>And as mentioned earlier, use <code>.quit</code> to quit</li>
 </ul>
 <h2>Specifying Columns</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span>
 <span class="k">from</span><span class="w"> </span><span class="n">little_penguins</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  |  island   |  sex   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  |  island   |  sex   |
 |-----------|-----------|--------|
 | Gentoo    | Biscoe    | MALE   |
 | Adelie    | Dream     | FEMALE |
@@ -130,14 +133,14 @@ Adelie|Torgersen|36.7|18.8|187.0|3800.0|FEMALE
 <li>Line breaks encouraged for readability</li>
 </ul>
 <h2>Sorting</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">little_penguins</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="k">asc</span><span class="p">,</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="k">desc</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  |  sex   |  island   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  |  sex   |  island   |
 |-----------|--------|-----------|
 | Gentoo    | MALE   | Biscoe    |
 | Gentoo    | MALE   | Biscoe    |
@@ -164,7 +167,7 @@ sorted such that the largest body mass appears first.</p>
 <ul>
 <li>Full dataset has 344 rows</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
@@ -172,7 +175,7 @@ sorted such that the largest body mass appears first.</p>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="n">island</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species |  sex   |  island   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species |  sex   |  island   |
 |---------|--------|-----------|
 | Adelie  |        | Dream     |
 | Adelie  |        | Torgersen |
@@ -190,7 +193,7 @@ sorted such that the largest body mass appears first.</p>
 <li><code>limit <em>N</em></code> specifies maximum number of rows returned by query</li>
 </ul>
 <h2>Paging Output</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
@@ -198,7 +201,7 @@ sorted such that the largest body mass appears first.</p>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="n">island</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species |  sex   |  island   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species |  sex   |  island   |
 |---------|--------|-----------|
 | Adelie  |        | Torgersen |
 | Adelie  |        | Torgersen |
@@ -217,13 +220,13 @@ sorted such that the largest body mass appears first.</p>
 <li>So this query skips the first 3 and shows the next 10</li>
 </ul>
 <h2>Removing Duplicates</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  |  sex   |  island   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  |  sex   |  island   |
 |-----------|--------|-----------|
 | Adelie    | MALE   | Torgersen |
 | Adelie    | FEMALE | Torgersen |
@@ -264,14 +267,14 @@ sorted such that the largest body mass appears first.</p>
 </li>
 </ol>
 <h2>Filtering Results</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Biscoe'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species |  sex   | island |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Adelie  | MALE   | Biscoe |
@@ -299,14 +302,14 @@ sorted such that the largest body mass appears first.</p>
 </li>
 </ol>
 <h2>Filtering with More Complex Conditions</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Biscoe'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">'MALE'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species |  sex   | island |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Gentoo  | FEMALE | Biscoe |
@@ -334,13 +337,13 @@ sorted such that the largest body mass appears first.</p>
 </li>
 </ol>
 <h2>Doing Calculations</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">flipper_length_mm</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
 <span class="w">    </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| flipper_length_mm / 10.0 | body_mass_g / 1000.0 |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| flipper_length_mm / 10.0 | body_mass_g / 1000.0 |
 |--------------------------|----------------------|
 | 18.1                     | 3.75                 |
 | 18.6                     | 3.8                  |
@@ -354,14 +357,14 @@ sorted such that the largest body mass appears first.</p>
 <li>Column name shows the calculation done</li>
 </ul>
 <h2>Renaming Columns</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">flipper_length_mm</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">flipper_cm</span><span class="p">,</span>
 <span class="w">    </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">weight_kg</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">where_found</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| flipper_cm | weight_kg | where_found |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| flipper_cm | weight_kg | where_found |
 |------------|-----------|-------------|
 | 18.1       | 3.75      | Torgersen   |
 | 18.6       | 3.8       | Torgersen   |
@@ -387,14 +390,14 @@ or look at <a href="https://sqlite.org/printf.html">the documentation for SQLite
 <figcaption>Figure 1: Selection Concepts</figcaption>
 </figure>
 <h2>Calculating with Missing Values</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">flipper_length_mm</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">flipper_cm</span><span class="p">,</span>
 <span class="w">    </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">weight_kg</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">where_found</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| flipper_cm | weight_kg | where_found |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| flipper_cm | weight_kg | where_found |
 |------------|-----------|-------------|
 | 18.1       | 3.75      | Torgersen   |
 | 18.6       | 3.8       | Torgersen   |
@@ -420,14 +423,14 @@ When might it be misleading?</p>
 <ul>
 <li>Repeated from earlier</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Biscoe'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species |  sex   | island |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Adelie  | MALE   | Biscoe |
@@ -438,14 +441,14 @@ When might it be misleading?</p>
 <ul>
 <li>If we ask for female penguins the row with the missing sex drops out</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Biscoe'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'FEMALE'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species |  sex   | island |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species |  sex   | island |
 |---------|--------|--------|
 | Adelie  | FEMALE | Biscoe |
 | Gentoo  | FEMALE | Biscoe |
@@ -454,22 +457,22 @@ When might it be misleading?</p>
 <ul>
 <li>But if we ask for penguins that <em>aren't</em> female it drops out as well</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">distinct</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">island</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Biscoe'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">'FEMALE'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species | sex  | island |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species | sex  | island |
 |---------|------|--------|
 | Adelie  | MALE | Biscoe |
 | Gentoo  | MALE | Biscoe |
 </code></pre></div>
 <h2>Ternary Logic</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| null = null |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| null = null |
 |-------------|
 |             |
 </code></pre></div>
@@ -482,28 +485,28 @@ When might it be misleading?</p>
 <table>
 <tbody>
 <tr>
-<th colspan="4">equality</th>
+<th colspan="4" scope="row">equality</th>
 </tr>
 <tr>
-<th></th>
-<th>X</th>
-<th>Y</th>
-<th>null</th>
+<th scope="row"></th>
+<th scope="row">X</th>
+<th scope="row">Y</th>
+<th scope="row">null</th>
 </tr>
 <tr>
-<th>X</th>
+<th scope="row">X</th>
 <td>true</td>
 <td>false</td>
 <td>null</td>
 </tr>
 <tr>
-<th>Y</th>
+<th scope="row">Y</th>
 <td>false</td>
 <td>true</td>
 <td>null</td>
 </tr>
 <tr>
-<th>null</th>
+<th scope="row">null</th>
 <td>null</td>
 <td>null</td>
 <td>null</td>
@@ -511,14 +514,14 @@ When might it be misleading?</p>
 </tbody>
 </table>
 <h2>Handling Null Safely</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| species | sex |  island   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| species | sex |  island   |
 |---------|-----|-----------|
 | Adelie  |     | Torgersen |
 | Adelie  |     | Torgersen |
@@ -551,10 +554,10 @@ When might it be misleading?</p>
 <figcaption>Figure 2: Missing Value Concepts</figcaption>
 </figure>
 <h2>Aggregating</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_mass</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_mass</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| total_mass |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| total_mass |
 |------------|
 | 1437000.0  |
 </code></pre></div>
@@ -564,13 +567,13 @@ When might it be misleading?</p>
 <li>Combines corresponding values from multiple rows</li>
 </ul>
 <h2>Common Aggregation Functions</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="k">max</span><span class="p">(</span><span class="n">bill_length_mm</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">longest_bill</span><span class="p">,</span>
 <span class="w">    </span><span class="k">min</span><span class="p">(</span><span class="n">flipper_length_mm</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">shortest_flipper</span><span class="p">,</span>
 <span class="w">    </span><span class="k">avg</span><span class="p">(</span><span class="n">bill_length_mm</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">bill_depth_mm</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">weird_ratio</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| longest_bill | shortest_flipper |   weird_ratio    |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| longest_bill | shortest_flipper |   weird_ratio    |
 |--------------|------------------|------------------|
 | 59.6         | 172.0            | 2.56087082530644 |
 </code></pre></div>
@@ -582,13 +585,13 @@ When might it be misleading?</p>
 <h2 class="exercise">Exercise</h2>
 <p>What is the average body mass of penguins that weight more than 3000.0 grams?</p>
 <h2>Counting</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">count_star</span><span class="p">,</span>
 <span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="n">sex</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">count_specific</span><span class="p">,</span>
 <span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">sex</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">count_distinct</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| count_star | count_specific | count_distinct |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| count_star | count_specific | count_distinct |
 |------------|----------------|----------------|
 | 344        | 333            | 2              |
 </code></pre></div>
@@ -600,11 +603,11 @@ When might it be misleading?</p>
 <h2 class="exercise">Exercise</h2>
 <p>How many different body masses are in the penguins dataset?</p>
 <h2>Grouping</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">average_mass_g</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">average_mass_g</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  average_mass_g  |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  average_mass_g  |
 |------------------|
 | 4005.55555555556 |
 | 3862.27272727273 |
@@ -616,13 +619,13 @@ When might it be misleading?</p>
 <li>But which is which?</li>
 </ul>
 <h2>Behavior of Unaggregated Columns</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">average_mass_g</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  sex   |  average_mass_g  |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  sex   |  average_mass_g  |
 |--------|------------------|
 |        | 4005.55555555556 |
 | FEMALE | 3862.27272727273 |
@@ -632,13 +635,13 @@ When might it be misleading?</p>
 <li>All rows in each group have the same value for <code>sex</code>, so no need to aggregate</li>
 </ul>
 <h2>Arbitrary Choice in Aggregation</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">body_mass_g</span><span class="w">                   </span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  sex   | body_mass_g |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  sex   | body_mass_g |
 |--------|-------------|
 |        |             |
 | FEMALE | 3800.0      |
@@ -663,14 +666,14 @@ has a blank line before the rows for female and male penguins.</p>
 <p>Write a query that shows each distinct body mass in the penguin dataset
 and the number of penguins that weigh that much.</p>
 <h2>Filtering Aggregated Values</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">average_mass_g</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span>
 <span class="k">having</span><span class="w"> </span><span class="n">average_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| sex  |  average_mass_g  |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| sex  |  average_mass_g  |
 |------|------------------|
 |      | 4005.55555555556 |
 | MALE | 4545.68452380952 |
@@ -679,14 +682,14 @@ and the number of penguins that weigh that much.</p>
 <li>Using <code>having <em>condition</em></code> instead of <code>where <em>condition</em></code> for aggregates</li>
 </ul>
 <h2>Readable Output</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">round</span><span class="p">(</span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">average_mass_g</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span>
 <span class="k">having</span><span class="w"> </span><span class="n">average_mass_g</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| sex  | average_mass_g |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| sex  | average_mass_g |
 |------|----------------|
 |      | 4005.6         |
 | MALE | 4545.7         |
@@ -695,7 +698,7 @@ and the number of penguins that weigh that much.</p>
 <li>Use <code>round(<em>value</em>, <em>decimals</em>)</code> to round off a number</li>
 </ul>
 <h2>Filtering Aggregate Inputs</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">sex</span><span class="p">,</span>
 <span class="w">    </span><span class="n">round</span><span class="p">(</span>
 <span class="w">        </span><span class="k">avg</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">(</span><span class="k">where</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4000</span><span class="p">.</span><span class="mi">0</span><span class="p">),</span>
@@ -704,7 +707,7 @@ and the number of penguins that weigh that much.</p>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  sex   | average_mass_g |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  sex   | average_mass_g |
 |--------|----------------|
 |        | 3362.5         |
 | FEMALE | 3417.3         |
@@ -725,7 +728,7 @@ Is it possible to do this using <code>where</code> instead of <code>filter</code
 <figcaption>Figure 3: Aggregation Concepts</figcaption>
 </figure>
 <h2 class="aside">Creating In-memory Database</h2>
-<div class="codehilite"><pre class=""><span></span><code>sqlite3<span class="w"> </span>:memory:
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>sqlite3<span class="w"> </span>:memory:
 </code></pre></div>
 <ul>
 <li>"Connect" to an <a href="../glossary/#in_memory_db">in-memory database</a><ul>
@@ -735,7 +738,7 @@ Is it possible to do this using <code>where</code> instead of <code>filter</code
 </li>
 </ul>
 <h2>Creating Tables</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">billable</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
@@ -762,7 +765,7 @@ Is it possible to do this using <code>where</code> instead of <code>filter</code
 <li>Use <code>work_job.db</code> from the zip file</li>
 </ul>
 <h2>Inserting Data</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">values</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">values</span>
 <span class="p">(</span><span class="s1">'calibrate'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'clean'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">values</span>
@@ -773,7 +776,7 @@ Is it possible to do this using <code>where</code> instead of <code>filter</code
 <span class="p">(</span><span class="s1">'po'</span><span class="p">,</span><span class="w"> </span><span class="s1">'complain'</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'tay'</span><span class="p">,</span><span class="w"> </span><span class="s1">'complain'</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|   name    | billable |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
 | clean     | 0.5      |
@@ -795,11 +798,11 @@ and that you can (for example) select by author name.</p>
 <p>What happens if you try to insert too many or too few values into <code>notes</code>?
 What happens if you insert a number instead of a string into the <code>note</code> field?</p>
 <h2>Updating Rows</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">update</span><span class="w"> </span><span class="k">work</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">update</span><span class="w"> </span><span class="k">work</span>
 <span class="k">set</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'tae'</span>
 <span class="k">where</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'tay'</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |    job    |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |    job    |
 |--------|-----------|
 | mik    | calibrate |
 | mik    | clean     |
@@ -815,12 +818,12 @@ What happens if you insert a number instead of a string into the <code>note</cod
 </li>
 </ul>
 <h2>Deleting Rows</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">work</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">work</span>
 <span class="k">where</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'tae'</span><span class="p">;</span>
 
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">work</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |    job    |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |    job    |
 |--------|-----------|
 | mik    | calibrate |
 | mik    | clean     |
@@ -835,7 +838,7 @@ What happens if you insert a number instead of a string into the <code>note</cod
 <p>What happens if you try to delete rows that don't exist
 (e.g., all entries in <code>work</code> that refer to <code>juna</code>)?</p>
 <h2>Backing Up</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">backup</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">backup</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">person</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">job</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
@@ -852,7 +855,7 @@ What happens if you insert a number instead of a string into the <code>note</cod
 
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">backup</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |   job    |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |   job    |
 |--------|----------|
 | tae    | complain |
 </code></pre></div>
@@ -897,10 +900,10 @@ What happens if you insert a number instead of a string into the <code>note</cod
 <figcaption>Figure 4: Data Definition and Modification Concepts</figcaption>
 </figure>
 <h2>Combining Information</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">cross</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |    job    |   name    | billable |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
 | mik    | calibrate | clean     | 0.5      |
@@ -927,11 +930,11 @@ What happens if you insert a number instead of a string into the <code>note</cod
 </li>
 </ul>
 <h2>Inner Join</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span>
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |    job    |   name    | billable |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
 | mik    | clean     | clean     | 0.5      |
@@ -950,14 +953,14 @@ What happens if you insert a number instead of a string into the <code>note</cod
 Is the shortened form easier or harder to read
 and more or less likely to cause errors?</p>
 <h2>Aggregating Joined Data</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="k">work</span><span class="p">.</span><span class="n">person</span><span class="p">,</span>
 <span class="w">    </span><span class="k">sum</span><span class="p">(</span><span class="n">job</span><span class="p">.</span><span class="n">billable</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">pay</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span>
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">person</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person | pay |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person | pay |
 |--------|-----|
 | mik    | 2.0 |
 | po     | 0.5 |
@@ -971,11 +974,11 @@ and more or less likely to cause errors?</p>
 </li>
 </ul>
 <h2>Left Join</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span>
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person |    job    |   name    | billable |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person |    job    |   name    | billable |
 |--------|-----------|-----------|----------|
 | mik    | calibrate | calibrate | 1.5      |
 | mik    | clean     | clean     | 0.5      |
@@ -989,14 +992,14 @@ and more or less likely to cause errors?</p>
 <li>Fills missing values from right table with null</li>
 </ul>
 <h2>Aggregating Left Joins</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="k">work</span><span class="p">.</span><span class="n">person</span><span class="p">,</span>
 <span class="w">    </span><span class="k">sum</span><span class="p">(</span><span class="n">job</span><span class="p">.</span><span class="n">billable</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">pay</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span>
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">person</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person | pay |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person | pay |
 |--------|-----|
 | mik    | 2.0 |
 | po     | 0.5 |
@@ -1006,14 +1009,14 @@ and more or less likely to cause errors?</p>
 <li>That's better, but we'd like to see 0 rather than a blank</li>
 </ul>
 <h2>Coalescing Values</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="k">work</span><span class="p">.</span><span class="n">person</span><span class="p">,</span>
 <span class="w">    </span><span class="k">coalesce</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">job</span><span class="p">.</span><span class="n">billable</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">pay</span>
 <span class="k">from</span><span class="w"> </span><span class="k">work</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">job</span>
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">work</span><span class="p">.</span><span class="n">person</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person | pay |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person | pay |
 |--------|-----|
 | mik    | 2.0 |
 | po     | 0.5 |
@@ -1028,7 +1031,7 @@ and more or less likely to cause errors?</p>
     left outer join and <a href="../glossary/#right_outer_join">right outer join</a></li>
 <li>Almost the same as cross join, but consider:</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">'light'</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">'heavy'</span><span class="p">);</span>
@@ -1039,7 +1042,7 @@ and more or less likely to cause errors?</p>
 
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="k">full</span><span class="w"> </span><span class="k">outer</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">weight</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|   s   | w |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|   s   | w |
 |-------|---|
 | light |   |
 | heavy |   |
@@ -1058,10 +1061,10 @@ using the SQL you have seen so far?</p>
 <figcaption>Figure 5: Join Concepts</figcaption>
 </figure>
 </main>
-<footer>
+<footer aria-label="Page navigation">
 <div class="row">
 <div class="col-3 left">
-	  ⇐ <a href="../01_intro/">Introduction</a>
+<span aria-hidden="true">⇐</span> <a href="../01_intro/">Introduction</a>
 </div>
 <div class="col-6 center">
 <a href="../">The Querynomicon</a>
@@ -1069,8 +1072,8 @@ using the SQL you have seen so far?</p>
 	  <a href="../#acknowledgments">the authors</a>
 </div>
 <div class="col-3 right">
-<a href="../03_tools/">Tools</a> ⇒
-	</div>
+<a href="../03_tools/">Tools</a> <span aria-hidden="true">⇒</span>
+</div>
 </div>
 </footer>
 </body>

@@ -5,40 +5,43 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Contributing</title>
+<meta content="The Querynomicon" name="description"/>
 <link href="../_static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/chota.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mccole.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<nav>
-<a href="../">The Querynomicon</a>
-      ·
-      <span class="dropdown">
-<a href="#">Lessons</a>
-<span class="dropdown-content" id="nav-lessons">
-<a href="../01_intro/">Introduction</a>
-<a href="../02_core/">Core Features</a>
-<a href="../03_tools/">Tools</a>
-<a href="../04_python/">Python</a>
-<a href="../05_advanced/">Advanced Features</a>
-<a href="../06_r/">R</a>
-<a href="../07_psql/">PostgreSQL</a>
-<a href="../08_finale/">Conclusion</a>
-</span>
-</span>
-      ·
-      <span class="dropdown">
-<a href="#">Appendices</a>
-<span class="dropdown-content" id="nav-appendices">
-<a href="../license/">License</a>
-<a href="../conduct/">Code of Conduct</a>
-<a href="../contributing/">Contributing</a>
-<a href="../bibliography/">Bibliography</a>
-<a href="../glossary/">Glossary</a>
-</span>
-</span>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Site navigation" class="nav">
+<div class="nav-left">
+<a class="brand" href="../">The Querynomicon</a>
+<div class="dropdown">
+<button aria-controls="nav-lessons" aria-haspopup="true">Lessons</button>
+<ul class="dropdown-content" id="nav-lessons">
+<li><a href="../01_intro/">Introduction</a></li>
+<li><a href="../02_core/">Core Features</a></li>
+<li><a href="../03_tools/">Tools</a></li>
+<li><a href="../04_python/">Python</a></li>
+<li><a href="../05_advanced/">Advanced Features</a></li>
+<li><a href="../06_r/">R</a></li>
+<li><a href="../07_psql/">PostgreSQL</a></li>
+<li><a href="../08_finale/">Conclusion</a></li>
+</ul>
+</div>
+<div class="dropdown">
+<button aria-controls="nav-appendices" aria-haspopup="true">Appendices</button>
+<ul class="dropdown-content" id="nav-appendices">
+<li><a href="../license/">License</a></li>
+<li><a href="../conduct/">Code of Conduct</a></li>
+<li><a class="active" href="../contributing/">Contributing</a></li>
+<li><a href="../bibliography/">Bibliography</a></li>
+<li><a href="../glossary/">Glossary</a></li>
+</ul>
+</div>
+</div>
 </nav>
-<main>
+<main id="main-content">
 <h1>Contributing</h1>
 <p>Contributions are very welcome.
 Please file issues or submit pull requests in our GitHub repository.
@@ -74,9 +77,9 @@ All contributors will be acknowledged.</p>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Description</th>
-<th>Color</th>
+<th scope="col">Name</th>
+<th scope="col">Description</th>
+<th scope="col">Color</th>
 </tr>
 </thead>
 <tbody>
@@ -178,10 +181,10 @@ just to get the benefits of version control.</dd>
 </li>
 </ul>
 </main>
-<footer>
+<footer aria-label="Page navigation">
 <div class="row">
 <div class="col-3 left">
-	  ⇐ <a href="../conduct/">Code of Conduct</a>
+<span aria-hidden="true">⇐</span> <a href="../conduct/">Code of Conduct</a>
 </div>
 <div class="col-6 center">
 <a href="../">The Querynomicon</a>
@@ -189,8 +192,8 @@ just to get the benefits of version control.</dd>
 	  <a href="../#acknowledgments">the authors</a>
 </div>
 <div class="col-3 right">
-<a href="../bibliography/">Bibliography</a> ⇒
-	</div>
+<a href="../bibliography/">Bibliography</a> <span aria-hidden="true">⇒</span>
+</div>
 </div>
 </footer>
 </body>

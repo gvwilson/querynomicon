@@ -5,44 +5,47 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Advanced Features</title>
+<meta content="The Querynomicon" name="description"/>
 <link href="../_static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/chota.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mccole.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<nav>
-<a href="../">The Querynomicon</a>
-      ·
-      <span class="dropdown">
-<a href="#">Lessons</a>
-<span class="dropdown-content" id="nav-lessons">
-<a href="../01_intro/">Introduction</a>
-<a href="../02_core/">Core Features</a>
-<a href="../03_tools/">Tools</a>
-<a href="../04_python/">Python</a>
-<a href="../05_advanced/">Advanced Features</a>
-<a href="../06_r/">R</a>
-<a href="../07_psql/">PostgreSQL</a>
-<a href="../08_finale/">Conclusion</a>
-</span>
-</span>
-      ·
-      <span class="dropdown">
-<a href="#">Appendices</a>
-<span class="dropdown-content" id="nav-appendices">
-<a href="../license/">License</a>
-<a href="../conduct/">Code of Conduct</a>
-<a href="../contributing/">Contributing</a>
-<a href="../bibliography/">Bibliography</a>
-<a href="../glossary/">Glossary</a>
-</span>
-</span>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Site navigation" class="nav">
+<div class="nav-left">
+<a class="brand" href="../">The Querynomicon</a>
+<div class="dropdown">
+<button aria-controls="nav-lessons" aria-haspopup="true">Lessons</button>
+<ul class="dropdown-content" id="nav-lessons">
+<li><a href="../01_intro/">Introduction</a></li>
+<li><a href="../02_core/">Core Features</a></li>
+<li><a href="../03_tools/">Tools</a></li>
+<li><a href="../04_python/">Python</a></li>
+<li><a class="active" href="../05_advanced/">Advanced Features</a></li>
+<li><a href="../06_r/">R</a></li>
+<li><a href="../07_psql/">PostgreSQL</a></li>
+<li><a href="../08_finale/">Conclusion</a></li>
+</ul>
+</div>
+<div class="dropdown">
+<button aria-controls="nav-appendices" aria-haspopup="true">Appendices</button>
+<ul class="dropdown-content" id="nav-appendices">
+<li><a href="../license/">License</a></li>
+<li><a href="../conduct/">Code of Conduct</a></li>
+<li><a href="../contributing/">Contributing</a></li>
+<li><a href="../bibliography/">Bibliography</a></li>
+<li><a href="../glossary/">Glossary</a></li>
+</ul>
+</div>
+</div>
 </nav>
-<main>
+<main id="main-content">
 <h1>Advanced Features</h1>
 <p id="terms">Terms defined: <a class="term-defined" href="../glossary/#blob">Binary Large Object (blob)</a>, <a class="term-defined" href="../glossary/#json">JavaScript Object Notation (JSON)</a>, <a class="term-defined" href="../glossary/#atomic">atomic</a>, <a class="term-defined" href="../glossary/#base_case">base case</a>, <a class="term-defined" href="../glossary/#csv">comma-separated values (CSV)</a>, <a class="term-defined" href="../glossary/#consistent">consistent</a>, <a class="term-defined" href="../glossary/#denormalization">denormalization</a>, <a class="term-defined" href="../glossary/#durable">durable</a>, <a class="term-defined" href="../glossary/#infinite_recursion">infinite recursion</a>, <a class="term-defined" href="../glossary/#isolated">isolated</a>, <a class="term-defined" href="../glossary/#materialized_view">materialized view</a>, <a class="term-defined" href="../glossary/#normal_form">normal form</a>, <a class="term-defined" href="../glossary/#path_expression">path expression</a>, <a class="term-defined" href="../glossary/#recursive_cte">recursive CTE</a>, <a class="term-defined" href="../glossary/#recursive_case">recursive case</a>, <a class="term-defined" href="../glossary/#temporary_table">temporary table</a>, <a class="term-defined" href="../glossary/#trigger">trigger</a>, <a class="term-defined" href="../glossary/#upsert">upsert</a>, <a class="term-defined" href="../glossary/#view">view</a></p>
 <h2>Blobs</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">images</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">images</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">blob</span>
 <span class="p">);</span>
@@ -59,7 +62,7 @@
 <span class="w">    </span><span class="k">length</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 <span class="k">from</span><span class="w"> </span><span class="n">images</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|    name     | length(content) |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|    name     | length(content) |
 |-------------|-----------------|
 | biohazard   | 19629           |
 | crush       | 15967           |
@@ -80,11 +83,11 @@ rather than its length.
 How intelligible is the output?
 Does using SQLite's <code>hex()</code> function make it any more readable?</p>
 <h2 class="aside">Yet Another Database</h2>
-<div class="codehilite"><pre class=""><span></span><code>sqlite3<span class="w"> </span>db/lab_log.db
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>sqlite3<span class="w"> </span>db/lab_log.db
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code><span class="p">.</span><span class="k">schema</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="p">.</span><span class="k">schema</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>CREATE TABLE sqlite_sequence(name,seq);
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>CREATE TABLE sqlite_sequence(name,seq);
 CREATE TABLE person(
        ident            integer primary key autoincrement,
        details          text not null
@@ -100,9 +103,9 @@ CREATE TABLE usage(
 );
 </code></pre></div>
 <h2>Storing JSON</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">machine</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">machine</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident |      name      |                         details                         |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident |      name      |                         details                         |
 |-------|----------------|---------------------------------------------------------|
 | 1     | WY401          | {"acquired": "2023-05-01"}                              |
 | 2     | Inphormex      | {"acquired": "2021-07-15", "refurbished": "2023-10-22"} |
@@ -122,12 +125,12 @@ CREATE TABLE usage(
 </li>
 </ul>
 <h2>Select Fields from JSON</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">details</span><span class="o">-&gt;</span><span class="s1">'$.acquired'</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">single_arrow</span><span class="p">,</span>
 <span class="w">    </span><span class="n">details</span><span class="o">-&gt;&gt;</span><span class="s1">'$.acquired'</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">double_arrow</span>
 <span class="k">from</span><span class="w"> </span><span class="n">machine</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| single_arrow | double_arrow |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| single_arrow | double_arrow |
 |--------------|--------------|
 | "2023-05-01" | 2023-05-01   |
 | "2021-07-15" | 2021-07-15   |
@@ -147,13 +150,13 @@ CREATE TABLE usage(
 <p>Write a query that selects the year from the <code>"refurbished"</code> field
 of the JSON data associated with the Inphormex plate reader.</p>
 <h2>JSON Array Access</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">ident</span><span class="p">,</span>
 <span class="w">    </span><span class="n">json_array_length</span><span class="p">(</span><span class="n">log</span><span class="o">-&gt;</span><span class="s1">'$'</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">length</span><span class="p">,</span>
 <span class="w">    </span><span class="n">log</span><span class="o">-&gt;</span><span class="s1">'$[0]'</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">first</span>
 <span class="k">from</span><span class="w"> </span><span class="k">usage</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident | length |                            first                             |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident | length |                            first                             |
 |-------|--------|--------------------------------------------------------------|
 | 1     | 4      | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
 | 2     | 5      | {"machine":"Inphormex","person":["Marianne","Richer"]}       |
@@ -171,14 +174,14 @@ of the JSON data associated with the Inphormex plate reader.</p>
 <li>Characters outside 7-bit ASCII represented as Unicode escapes</li>
 </ul>
 <h2>Unpacking JSON Arrays</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">ident</span><span class="p">,</span>
 <span class="w">    </span><span class="n">json_each</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
 <span class="w">    </span><span class="n">json_each</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">value</span>
 <span class="k">from</span><span class="w"> </span><span class="k">usage</span><span class="p">,</span><span class="w"> </span><span class="n">json_each</span><span class="p">(</span><span class="k">usage</span><span class="p">.</span><span class="n">log</span><span class="p">)</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident | key |                            value                             |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident | key |                            value                             |
 |-------|-----|--------------------------------------------------------------|
 | 1     | 0   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
 | 1     | 1   | {"machine":"Inphormex","person":["Gabrielle","Dub\u00e9"]}   |
@@ -199,13 +202,13 @@ of the JSON data associated with the Inphormex plate reader.</p>
 <p>Write a query that counts how many times each person appears
 in the first log entry associated with any piece of equipment.</p>
 <h2>Selecting the Last Element of an  Array</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">ident</span><span class="p">,</span>
 <span class="w">    </span><span class="n">log</span><span class="o">-&gt;</span><span class="s1">'$[#-1].machine'</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">final</span>
 <span class="k">from</span><span class="w"> </span><span class="k">usage</span>
 <span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident |    final     |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident |    final     |
 |-------|--------------|
 | 1     | "Inphormex"  |
 | 2     | "sterilizer" |
@@ -214,13 +217,13 @@ in the first log entry associated with any piece of equipment.</p>
 | 5     | "sterilizer" |
 </code></pre></div>
 <h2>Modifying JSON</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">ident</span><span class="p">,</span>
 <span class="w">    </span><span class="n">name</span><span class="p">,</span>
 <span class="w">    </span><span class="n">json_set</span><span class="p">(</span><span class="n">details</span><span class="p">,</span><span class="w"> </span><span class="s1">'$.sold'</span><span class="p">,</span><span class="w"> </span><span class="n">json_quote</span><span class="p">(</span><span class="s1">'2024-01-25'</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">updated</span>
 <span class="k">from</span><span class="w"> </span><span class="n">machine</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident |      name      |                           updated                            |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident |      name      |                           updated                            |
 |-------|----------------|--------------------------------------------------------------|
 | 1     | WY401          | {"acquired":"2023-05-01","sold":"2024-01-25"}                |
 | 2     | Inphormex      | {"acquired":"2021-07-15","refurbished":"2023-10-22","sold":" |
@@ -236,13 +239,13 @@ in the first log entry associated with any piece of equipment.</p>
 replace the machine names in the JSON records in <code>usage</code>
 with the corresponding machine IDs from the <code>machine</code> table.</p>
 <h2 class="aside">Refreshing the Penguins Database</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  | num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  | num |
 |-----------|-----|
 | Adelie    | 152 |
 | Chinstrap | 68  |
@@ -252,20 +255,20 @@ with the corresponding machine IDs from the <code>machine</code> table.</p>
 <li>We will restore full database after each example</li>
 </ul>
 <h2>Tombstones</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">penguins</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">add</span><span class="w"> </span><span class="n">active</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 
 <span class="k">update</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">set</span><span class="w"> </span><span class="n">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iif</span><span class="p">(</span><span class="n">species</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Adelie'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num</span>
 <span class="k">from</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">where</span><span class="w"> </span><span class="n">active</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  | num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  | num |
 |-----------|-----|
 | Chinstrap | 68  |
 | Gentoo    | 124 |
@@ -285,7 +288,7 @@ with the corresponding machine IDs from the <code>machine</code> table.</p>
 </ul>
 </li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">penguins</span><span class="p">;</span>
 <span class="p">.</span><span class="k">mode</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="n">penguins</span>
 <span class="p">.</span><span class="n">import</span><span class="w"> </span><span class="n">misc</span><span class="o">/</span><span class="n">penguins</span><span class="p">.</span><span class="n">csv</span><span class="w"> </span><span class="n">penguins</span>
 <span class="k">update</span><span class="w"> </span><span class="n">penguins</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">;</span>
@@ -301,7 +304,7 @@ with the corresponding machine IDs from the <code>machine</code> table.</p>
 created by the CSV import shown above?
 How can you correct the ones that need correcting?</p>
 <h2>Views</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">exists</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">exists</span>
 <span class="n">active_penguins</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">species</span><span class="p">,</span>
 <span class="w">    </span><span class="n">island</span><span class="p">,</span>
@@ -328,7 +331,7 @@ How can you correct the ones that need correcting?</p>
 <span class="k">from</span><span class="w"> </span><span class="n">active_penguins</span>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">species</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  species  | num |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  species  | num |
 |-----------|-----|
 | Chinstrap | 68  |
 | Gentoo    | 124 |
@@ -357,7 +360,7 @@ the second shows the total number of log entries for that machine.</p>
 <figcaption>Figure 1: Temporary Tables</figcaption>
 </figure>
 <h2 class="aside">Hours Reminder</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">billable</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
@@ -366,13 +369,13 @@ the second shows the total number of log entries for that machine.</p>
 <span class="p">(</span><span class="s1">'clean'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|   name    | billable |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
 | clean     | 0.5      |
 </code></pre></div>
 <h2>Adding Checks</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">billable</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">billable</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span>
@@ -381,7 +384,7 @@ the second shows the total number of log entries for that machine.</p>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">'reset'</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>Runtime error near line 9: CHECK constraint failed: billable &gt; 0.0 (19)
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>Runtime error near line 9: CHECK constraint failed: billable &gt; 0.0 (19)
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -413,7 +416,7 @@ the second shows the total number of log entries for that machine.</p>
 <li><a href="../glossary/#durable">Durable</a>: if change takes place, it's still there after a restart</li>
 </ul>
 <h2>Transactions</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">billable</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">billable</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span>
@@ -427,7 +430,7 @@ the second shows the total number of log entries for that machine.</p>
 
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|   name    | billable |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
 </code></pre></div>
@@ -445,7 +448,7 @@ the second shows the total number of log entries for that machine.</p>
 </li>
 </ul>
 <h2>Rollback in Constraints</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">billable</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">billable</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">conflict</span><span class="w"> </span><span class="k">rollback</span>
@@ -459,7 +462,7 @@ the second shows the total number of log entries for that machine.</p>
 
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -469,7 +472,7 @@ the second shows the total number of log entries for that machine.</p>
 <li>But first <code>insert</code> took effect</li>
 </ul>
 <h2>Rollback in Statements</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">billable</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">billable</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span>
@@ -483,7 +486,7 @@ the second shows the total number of log entries for that machine.</p>
 
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>Runtime error near line 11: CHECK constraint failed: billable &gt; 0.0 (19)
 |   name    | billable |
 |-----------|----------|
 | calibrate | 1.5      |
@@ -493,7 +496,7 @@ the second shows the total number of log entries for that machine.</p>
 <li>Action is in statement</li>
 </ul>
 <h2>Upsert</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">jobs_done</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">jobs_done</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">person</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">unique</span><span class="p">,</span>
 <span class="w">    </span><span class="n">num</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="mi">0</span>
 <span class="p">);</span>
@@ -516,7 +519,7 @@ the second shows the total number of log entries for that machine.</p>
 <span class="p">.</span><span class="n">print</span><span class="w"> </span><span class="s1">'after upsert'</span>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">jobs_done</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>after first
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>after first
 | person | num |
 |--------|-----|
 | zia    | 1   |
@@ -546,10 +549,10 @@ write a query that adds or modifies people in the <code>staff</code> table as sh
 <table>
 <thead>
 <tr>
-<th>personal</th>
-<th>family</th>
-<th>dept</th>
-<th>age</th>
+<th scope="col">personal</th>
+<th scope="col">family</th>
+<th scope="col">dept</th>
+<th scope="col">age</th>
 </tr>
 </thead>
 <tbody>
@@ -586,7 +589,7 @@ write a query that adds or modifies people in the <code>staff</code> table as sh
 </li>
 </ul>
 <h2>Creating Triggers</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="c1">-- Track hours of lab work.</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="c1">-- Track hours of lab work.</span>
 <span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">person</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">reported</span><span class="w"> </span><span class="nb">real</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">reported</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span>
@@ -628,12 +631,12 @@ write a query that adds or modifies people in the <code>staff</code> table as sh
     as <code>old.<em>column</em></code> and <code>new.<em>column</em></code></li>
 </ul>
 <h2>Trigger Not Firing</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">values</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">values</span>
 <span class="p">(</span><span class="s1">'gene'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'august'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'gene'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| person | reported |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| person | reported |
 |--------|----------|
 | gene   | 1.5      |
 | august | 0.5      |
@@ -645,11 +648,11 @@ write a query that adds or modifies people in the <code>staff</code> table as sh
 | august | 0.5   |
 </code></pre></div>
 <h2>Trigger Firing</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">values</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="k">values</span>
 <span class="p">(</span><span class="s1">'gene'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'august'</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>Runtime error near line 6: CHECK constraint failed: reported &gt;= 0.0 (19)
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>Runtime error near line 6: CHECK constraint failed: reported &gt;= 0.0 (19)
 
 | person | hours |
 |--------|-------|
@@ -670,7 +673,7 @@ write a query that adds or modifies people in the <code>staff</code> table as sh
 <p>Does your solution behave correctly when several penguins are added
 by a single <code>insert</code> statement?</p>
 <h2 class="aside">Representing Graphs</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">lineage</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">lineage</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">parent</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
 <span class="w">    </span><span class="n">child</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
@@ -683,9 +686,9 @@ by a single <code>insert</code> statement?</p>
 <span class="p">(</span><span class="s1">'Soledad'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Lourdes'</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'Lourdes'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Santiago'</span><span class="p">);</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">lineage</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">lineage</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  parent  |  child   |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  parent  |  child   |
 |----------|----------|
 | Arturo   | Clemente |
 | Darío    | Clemente |
@@ -702,7 +705,7 @@ by a single <code>insert</code> statement?</p>
 <h2 class="exercise">Exercise</h2>
 <p>Write a query that uses a self join to find every person's grandchildren.</p>
 <h2>Recursive Queries</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="k">recursive</span><span class="w"> </span><span class="n">descendent</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="k">recursive</span><span class="w"> </span><span class="n">descendent</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="s1">'Clemente'</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">person</span><span class="p">,</span>
 <span class="w">        </span><span class="mi">0</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">generations</span>
@@ -719,7 +722,7 @@ by a single <code>insert</code> statement?</p>
 <span class="w">    </span><span class="n">generations</span>
 <span class="k">from</span><span class="w"> </span><span class="n">descendent</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|  person  | generations |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|  person  | generations |
 |----------|-------------|
 | Clemente | 0           |
 | Homero   | 1           |
@@ -743,9 +746,9 @@ by a single <code>insert</code> statement?</p>
 Does this affect the result?
 Why or why not?</p>
 <h2 class="aside">Contact Tracing Database</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| ident |         name          |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| ident |         name          |
 |-------|-----------------------|
 | 1     | Juana Baeza           |
 | 2     | Agustín Rodríquez     |
@@ -763,9 +766,9 @@ Why or why not?</p>
 | 14    | Bernardo Narváez      |
 | 15    | Óscar Barrios         |
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">contact</span><span class="p">;</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">contact</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|       left        |         right         |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|       left        |         right         |
 |-------------------|-----------------------|
 | Agustín Rodríquez | Ariadna Caraballo     |
 | Agustín Rodríquez | Verónica Altamirano   |
@@ -781,7 +784,7 @@ Why or why not?</p>
 <figcaption>Figure 3: Contact Diagram</figcaption>
 </figure>
 <h2>Bidirectional Contacts</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">temporary</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">bi_contact</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">temporary</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">bi_contact</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">left</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
 <span class="w">    </span><span class="k">right</span><span class="w"> </span><span class="nb">text</span>
 <span class="p">);</span>
@@ -793,7 +796,7 @@ Why or why not?</p>
 <span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="k">right</span><span class="p">,</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">contact</span>
 <span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>| original_count |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>| original_count |
 |----------------|
 | 8              |
 
@@ -809,7 +812,7 @@ Why or why not?</p>
 <li>Duplicate information rather than writing more complicated query</li>
 </ul>
 <h2>Updating Group Identifiers</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">select</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">select</span>
 <span class="w">    </span><span class="k">left</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_name</span><span class="p">,</span>
 <span class="w">    </span><span class="k">left</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">left_ident</span><span class="p">,</span>
 <span class="w">    </span><span class="k">right</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">right_name</span><span class="p">,</span>
@@ -819,7 +822,7 @@ Why or why not?</p>
 <span class="w">    </span><span class="p">(</span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">bi_contact</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">left</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bi_contact</span><span class="p">.</span><span class="k">left</span><span class="p">)</span>
 <span class="w">    </span><span class="k">join</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">right</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">bi_contact</span><span class="p">.</span><span class="k">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">right</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|       left_name       | left_ident |      right_name       | right_ident | new_ident |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|       left_name       | left_ident |      right_name       | right_ident | new_ident |
 |-----------------------|------------|-----------------------|-------------|-----------|
 | Juana Baeza           | 1          | Micaela Laboy         | 4           | 1         |
 | Juana Baeza           | 1          | Verónica Altamirano   | 5           | 1         |
@@ -843,7 +846,7 @@ Why or why not?</p>
 <li>Doesn't keep people with no contacts</li>
 </ul>
 <h2>Recursive Labeling</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="k">with</span><span class="w"> </span><span class="k">recursive</span><span class="w"> </span><span class="n">labeled</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="k">with</span><span class="w"> </span><span class="k">recursive</span><span class="w"> </span><span class="n">labeled</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k">select</span>
 <span class="w">        </span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
 <span class="w">        </span><span class="n">person</span><span class="p">.</span><span class="n">ident</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">label</span>
@@ -863,7 +866,7 @@ Why or why not?</p>
 <span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span>
 <span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>|         name          | group_id |
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>|         name          | group_id |
 |-----------------------|----------|
 | Agustín Rodríquez     | 1        |
 | Ariadna Caraballo     | 1        |
@@ -894,10 +897,10 @@ so that you can trace its output?</p>
 <figcaption>Figure 4: Common Table Expression Concepts</figcaption>
 </figure>
 </main>
-<footer>
+<footer aria-label="Page navigation">
 <div class="row">
 <div class="col-3 left">
-	  ⇐ <a href="../04_python/">Python</a>
+<span aria-hidden="true">⇐</span> <a href="../04_python/">Python</a>
 </div>
 <div class="col-6 center">
 <a href="../">The Querynomicon</a>
@@ -905,8 +908,8 @@ so that you can trace its output?</p>
 	  <a href="../#acknowledgments">the authors</a>
 </div>
 <div class="col-3 right">
-<a href="../06_r/">R</a> ⇒
-	</div>
+<a href="../06_r/">R</a> <span aria-hidden="true">⇒</span>
+</div>
 </div>
 </footer>
 </body>

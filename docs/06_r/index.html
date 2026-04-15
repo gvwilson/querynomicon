@@ -5,46 +5,49 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>R</title>
+<meta content="The Querynomicon" name="description"/>
 <link href="../_static/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/page.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/chota.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/mccole.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<nav>
-<a href="../">The Querynomicon</a>
-      ·
-      <span class="dropdown">
-<a href="#">Lessons</a>
-<span class="dropdown-content" id="nav-lessons">
-<a href="../01_intro/">Introduction</a>
-<a href="../02_core/">Core Features</a>
-<a href="../03_tools/">Tools</a>
-<a href="../04_python/">Python</a>
-<a href="../05_advanced/">Advanced Features</a>
-<a href="../06_r/">R</a>
-<a href="../07_psql/">PostgreSQL</a>
-<a href="../08_finale/">Conclusion</a>
-</span>
-</span>
-      ·
-      <span class="dropdown">
-<a href="#">Appendices</a>
-<span class="dropdown-content" id="nav-appendices">
-<a href="../license/">License</a>
-<a href="../conduct/">Code of Conduct</a>
-<a href="../contributing/">Contributing</a>
-<a href="../bibliography/">Bibliography</a>
-<a href="../glossary/">Glossary</a>
-</span>
-</span>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Site navigation" class="nav">
+<div class="nav-left">
+<a class="brand" href="../">The Querynomicon</a>
+<div class="dropdown">
+<button aria-controls="nav-lessons" aria-haspopup="true">Lessons</button>
+<ul class="dropdown-content" id="nav-lessons">
+<li><a href="../01_intro/">Introduction</a></li>
+<li><a href="../02_core/">Core Features</a></li>
+<li><a href="../03_tools/">Tools</a></li>
+<li><a href="../04_python/">Python</a></li>
+<li><a href="../05_advanced/">Advanced Features</a></li>
+<li><a class="active" href="../06_r/">R</a></li>
+<li><a href="../07_psql/">PostgreSQL</a></li>
+<li><a href="../08_finale/">Conclusion</a></li>
+</ul>
+</div>
+<div class="dropdown">
+<button aria-controls="nav-appendices" aria-haspopup="true">Appendices</button>
+<ul class="dropdown-content" id="nav-appendices">
+<li><a href="../license/">License</a></li>
+<li><a href="../conduct/">Code of Conduct</a></li>
+<li><a href="../contributing/">Contributing</a></li>
+<li><a href="../bibliography/">Bibliography</a></li>
+<li><a href="../glossary/">Glossary</a></li>
+</ul>
+</div>
+</div>
 </nav>
-<main>
+<main id="main-content">
 <h1>R</h1>
 
 <h2>Loading Libraries</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## 
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## 
 ## Attaching package: 'dplyr'
 
 ## The following objects are masked from 'package:stats':
@@ -65,16 +68,16 @@
 <ul>
 <li>List tables with <code>dbListTables</code></li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">DBI</span><span class="o">::</span><span class="nf">dbConnect</span><span class="p">(</span><span class="n">RSQLite</span><span class="o">::</span><span class="nf">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s">'data/penguins.db'</span><span class="p">)</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">DBI</span><span class="o">::</span><span class="nf">dbConnect</span><span class="p">(</span><span class="n">RSQLite</span><span class="o">::</span><span class="nf">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s">'data/penguins.db'</span><span class="p">)</span>
 <span class="n">DBI</span><span class="o">::</span><span class="nf">dbListTables</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## [1] "little_penguins" "penguins"
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## [1] "little_penguins" "penguins"
 </code></pre></div>
 <h2>Load Table as Dataframe</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">tbl</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s">'penguins'</span><span class="p">)</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">tbl</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="s">'penguins'</span><span class="p">)</span>
 <span class="n">penguins</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:   table&lt;`penguins`&gt; [?? x 7]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:   table&lt;`penguins`&gt; [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -98,10 +101,10 @@
 </li>
 </ul>
 <h2>How Did We Get Here?</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">show_query</span><span class="p">()</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## &lt;SQL&gt;
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## &lt;SQL&gt;
 ## SELECT *
 ## FROM `penguins`
 </code></pre></div>
@@ -110,10 +113,10 @@
 <li><code>show_query()</code> runs the SQL <code>EXPLAIN</code> command to show the SQL query</li>
 </ul>
 <h2>Lazy Evaluation</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">species</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"Adelie"</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [?? x 7]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:   SQL [?? x 7]
 ## # Database: sqlite 3.45.2 [/Users/tut/data/penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -136,11 +139,11 @@
 <li>The SQL query is only evaluated when it is sent to the database</li>
 <li>Running the <code>dplyr</code> call only returns a preview of the result</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">species</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"Adelie"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">collect</span><span class="p">()</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # A tibble: 152 × 7
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # A tibble: 152 × 7
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 Adelie  Torgersen           39.1          18.7               181        3750
@@ -163,10 +166,10 @@
 </li>
 </ul>
 <h2>Selecting Columns</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">island</span><span class="p">,</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="s">'bill'</span><span class="p">))</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [?? x 4]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:   SQL [?? x 4]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
@@ -187,11 +190,11 @@
 <li>Selection helpers from <code>dplyr</code> (like <code>contains</code>) work</li>
 </ul>
 <h2>Sorting</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">arrange</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:     SQL [?? x 2]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:     SQL [?? x 2]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: body_mass_g
 ##    species   body_mass_g
@@ -216,12 +219,12 @@
 <p>Find the lightest penguin on Dream Island by arranging the table accordingly.
 Only show the species, island, and body mass.</p>
 <h3>Solution</h3>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">island</span><span class="p">,</span><span class="w"> </span><span class="n">body_mass_g</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">island</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'Dream'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">))</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:     SQL [?? x 3]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:     SQL [?? x 3]
 ## # Database:   sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ## # Ordered by: desc(body_mass_g)
 ##    species   island body_mass_g
@@ -239,10 +242,10 @@ Only show the species, island, and body mass.</p>
 ## # ℹ more rows
 </code></pre></div>
 <h2>Transforming Columns</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">weight_kg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body_mass_g</span><span class="o">/</span><span class="m">1000</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [?? x 8]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:   SQL [?? x 8]
 ## # Database: sqlite 3.45.2 [C:\Users\tonin\Documents\Courses\r-sql\data\penguins.db]
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
@@ -268,11 +271,11 @@ Only show the species, island, and body mass.</p>
 <li>If <code>select</code> it not present the query will return all the columns</li>
 </ul>
 <h2>Aggregating</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">penguins</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">species</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">avg_body_mas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">body_mass_g</span><span class="p">))</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## Warning: Missing values are always removed in SQL aggregation functions.
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## Warning: Missing values are always removed in SQL aggregation functions.
 ## Use `na.rm = TRUE` to silence this warning
 ## This warning is displayed once every 8 hours.
 
@@ -294,7 +297,7 @@ Only show the species, island, and body mass.</p>
 <li>Using the previous result, calculate the average ratio for each species</li>
 </ul>
 <h2>Creating a Table</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">DBI</span><span class="p">)</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">DBI</span><span class="p">)</span>
 
 <span class="n">another_connection</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dbConnect</span><span class="p">(</span><span class="n">RSQLite</span><span class="o">::</span><span class="nf">SQLite</span><span class="p">(),</span><span class="w"> </span><span class="s">':memory:'</span><span class="p">)</span>
 
@@ -318,8 +321,8 @@ Only show the species, island, and body mass.</p>
 <table>
 <thead>
 <tr>
-<th>name</th>
-<th>billable</th>
+<th scope="col">name</th>
+<th scope="col">billable</th>
 </tr>
 </thead>
 <tbody>
@@ -334,7 +337,7 @@ Only show the species, island, and body mass.</p>
 </tbody>
 </table>
 <h3>Solution</h3>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">table2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">table2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
 <span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">'calibrate'</span><span class="p">,</span><span class="w"> </span><span class="s">'clean'</span><span class="p">),</span>
 <span class="w">  </span><span class="n">billable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
 <span class="p">)</span>
@@ -347,11 +350,11 @@ Only show the species, island, and body mass.</p>
 <ul>
 <li>Who doesn't calibrate?</li>
 </ul>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">job</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">'calibrate'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">distinct</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [3 x 1]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:   SQL [3 x 1]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person
 ##   &lt;chr&gt; 
@@ -366,7 +369,7 @@ Only show the species, island, and body mass.</p>
 </li>
 </ul>
 <h2>Literal SQL</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="n">person</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">sql</span><span class="p">(</span>
 <span class="w">    </span><span class="c1"># subquery</span>
 <span class="w">    </span><span class="s">"(SELECT DISTINCT person FROM work</span>
@@ -382,7 +385,7 @@ Only show the species, island, and body mass.</p>
 <li>Useful when R code is not enough to write a query</li>
 </ul>
 <h2>Joining Tables</h2>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">does_calibrate</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">does_calibrate</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">job</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'calibrate'</span><span class="p">)</span>
 
 <span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
@@ -390,7 +393,7 @@ Only show the species, island, and body mass.</p>
 <span class="w">  </span><span class="nf">distinct</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">collect</span><span class="p">()</span><span class="w"> </span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # A tibble: 2 × 1
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # A tibble: 2 × 1
 ##   person
 ##   &lt;chr&gt; 
 ## 1 po    
@@ -407,12 +410,12 @@ Only show the species, island, and body mass.</p>
 <h2 class="exercise">Exercise</h2>
 <p>Calculate how may hours each person worked by summing all jobs.</p>
 <h3>Solution</h3>
-<div class="codehilite"><pre class=""><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code><span class="n">work</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">left_join</span><span class="p">(</span><span class="n">job</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">join_by</span><span class="p">(</span><span class="n">job</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">name</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 <span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="n">total_hours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">billable</span><span class="p">))</span>
 </code></pre></div>
-<div class="codehilite"><pre class=""><span></span><code>## # Source:   SQL [3 x 2]
+<div class="codehilite"><pre class="" tabindex="0"><span></span><code>## # Source:   SQL [3 x 2]
 ## # Database: sqlite 3.45.2 [:memory:]
 ##   person total_hours
 ##   &lt;chr&gt;        &lt;dbl&gt;
@@ -421,10 +424,10 @@ Only show the species, island, and body mass.</p>
 ## 3 tay           NA
 </code></pre></div>
 </main>
-<footer>
+<footer aria-label="Page navigation">
 <div class="row">
 <div class="col-3 left">
-	  ⇐ <a href="../05_advanced/">Advanced Features</a>
+<span aria-hidden="true">⇐</span> <a href="../05_advanced/">Advanced Features</a>
 </div>
 <div class="col-6 center">
 <a href="../">The Querynomicon</a>
@@ -432,8 +435,8 @@ Only show the species, island, and body mass.</p>
 	  <a href="../#acknowledgments">the authors</a>
 </div>
 <div class="col-3 right">
-<a href="../07_psql/">PostgreSQL</a> ⇒
-	</div>
+<a href="../07_psql/">PostgreSQL</a> <span aria-hidden="true">⇒</span>
+</div>
 </div>
 </footer>
 </body>
