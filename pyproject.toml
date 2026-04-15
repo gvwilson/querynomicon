@@ -9,7 +9,7 @@ dependencies = [
     "faker",
     "jupysql",
     "jupyter",
-    "mccole>=2.3.0",
+    "mccole>=2.13.1",
     "pandas",
     "polars",
     "pyarrow",
@@ -35,7 +35,6 @@ skips = [
     "bin/**",
     "db/**",
     "docs/**",
-    "extras/**",
     "uv.lock"
 ]
 
